@@ -10,7 +10,7 @@ namespace Fusion102
 	public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks 
 	{
 		private NetworkRunner _runner;
-
+        private CameraController camControl;
 		private void OnGUI()
 		{
 			if (_runner == null)
@@ -52,7 +52,14 @@ namespace Fusion102
 				Vector3 spawnPosition = new Vector3((player.RawEncoded%runner.Config.Simulation.DefaultPlayers)*1,5,0);
 				NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
 				_spawnedCharacters.Add(player, networkPlayerObject);
+                camControl = networkPlayerObject.GetComponentInChildren<CameraController>();
 			}
+			// if(player == runner.LocalPlayer)
+			// {
+			// 	NetworkObject networkObject = runner.GetPlayerObject(player);
+			// 	camControl = networkObject.GetComponentInChildren<CameraController>();
+			// 	//????
+			// }
 		}
 
 		public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -63,26 +70,22 @@ namespace Fusion102
 				_spawnedCharacters.Remove(player);
 			}
 		}
-
 		public void OnInput(NetworkRunner runner, NetworkInput input)
 		{
-			var data = new NetworkInputData();
-
-			if (Input.GetKey(KeyCode.W))
-				data.direction += Vector3.forward;
-
-			if (Input.GetKey(KeyCode.S))
-				data.direction += Vector3.back;
-
-			if (Input.GetKey(KeyCode.A))
-				data.direction += Vector3.left;
-
-			if (Input.GetKey(KeyCode.D))
-				data.direction += Vector3.right;
-			
-			input.Set(data);
+			// 자료 참고해서 아래 코드를 handler로 분리하고 .local을 사용해서 조인시 각자 켐컨트롤 설정, 그 값을 호스트에게 전달
+            var data = new Fusion102.NetworkInputData();
+            Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));    // 이동 입력 값으로 moveInput 벡터
+            bool isMove = (moveInput.magnitude != 0);
+            data.isMove = isMove;
+            if (isMove)
+            {
+                data.moveDir = camControl.getMoveDir(moveInput);
+            }
+            // for animation
+            data.walkOn = Input.GetButton("Walk");
+            // send data to host
+            input.Set(data);
 		}
-		
 		public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
 		public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
 		public void OnConnectedToServer(NetworkRunner runner) { }
