@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy B
       objectReference: {fileID: 0}
+    - target: {fileID: 3320669544841490502, guid: 057d865aeaa438443927c436487f9683, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057d865aeaa438443927c436487f9683, type: 3}
 --- !u!1 &93871961 stripped
@@ -325,10 +329,14 @@ PrefabInstance:
     - target: {fileID: -6251796076780685766, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
       propertyPath: meleeArea
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1500869347}
     - target: {fileID: 328409505970683906, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
       propertyPath: m_Name
       value: Enemy A
+      objectReference: {fileID: 0}
+    - target: {fileID: 328409505970683906, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4462523135328065168, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
       propertyPath: m_RootOrder
@@ -734,6 +742,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
   m_PrefabInstance: {fileID: 3132167054652666864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1500869347 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2121269645575286600, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
+  m_PrefabInstance: {fileID: 492296983}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1545332611
 GameObject:

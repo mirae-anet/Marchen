@@ -42,7 +42,7 @@ public class PlayerMain : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        /* 나중에 플레이어 무기 코드 작성하면 이 코드 활성화
+        
         else if (other.tag == "EnemyBullet")
         {
             if (!isDamage)
@@ -56,7 +56,6 @@ public class PlayerMain : MonoBehaviour
                 StartCoroutine(OnDamage());
             }
         }
-        */
     }
     
     IEnumerator OnDamage()
