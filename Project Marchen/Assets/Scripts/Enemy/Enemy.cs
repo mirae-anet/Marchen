@@ -5,7 +5,11 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public enum Type {A, B, C};
+=======
+    public enum Type {A, B};
+>>>>>>> Stashed changes
     public Type enemyType;
     public int maxHealth;
     public int curHealth;
@@ -46,7 +50,34 @@ public class Enemy : MonoBehaviour
         FreezeVelocity();
         Targeting();
     }
+<<<<<<< Updated upstream
 
+=======
+    /* 나중에 플레이어 무기 코드 작성하면 이 코드 활성화
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Melee")  // 근접 공격
+        {
+            Weapon weapon = other.GetComponent<Weapon>();
+            curHealth -= weapon.damage;
+            Vector3 reactVec = transform.position - other.transform.position;
+
+            StartCoroutine(OnDamage(reactVec));
+        }
+
+        else if (other.tag == "Bullet")  // 원거리 공격
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            curHealth -= bullet.damage;
+            Vector3 reactVec = transform.position - other.transform.position;
+
+            Destroy(other.gameObject);
+
+            StartCoroutine(OnDamage(reactVec));
+        }
+    }
+    */
+>>>>>>> Stashed changes
     void ChaseStart()
     {
         isChase = true;
@@ -75,11 +106,14 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.B:
+<<<<<<< Updated upstream
                 targetRadius = 1f;
                 targetRange = 12f;
                 break;
 
             case Type.C:
+=======
+>>>>>>> Stashed changes
                 targetRadius = 0.5f;
                 targetRange = 25f;
                 break;
@@ -93,9 +127,13 @@ public class Enemy : MonoBehaviour
                                   LayerMask.GetMask("Player"));
 
         if (rayHits.Length > 0 && !isAttack)
+<<<<<<< Updated upstream
         {
             StartCoroutine(Attack());
         }
+=======
+            StartCoroutine(Attack());
+>>>>>>> Stashed changes
     }
 
     IEnumerator Attack()
@@ -117,6 +155,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.B:
+<<<<<<< Updated upstream
                 yield return new WaitForSeconds(0.1f);
                 rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
                 meleeArea.enabled = true;
@@ -129,6 +168,8 @@ public class Enemy : MonoBehaviour
                 break;
 
             case Type.C:
+=======
+>>>>>>> Stashed changes
                 yield return new WaitForSeconds(0.5f);
                 GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
@@ -143,4 +184,40 @@ public class Enemy : MonoBehaviour
         isAttack = false;
         anim.SetBool("isAttack", false);
     }
+<<<<<<< Updated upstream
+=======
+    /* 나중에 플레이어 무기 코드 작성하면 이 코드 활성화
+    IEnumerator OnDamage(Vector3 reactVec)
+    {
+        mat.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+
+        if (curHealth > 0)
+        {
+            mat.color = Color.white;  // 몬스터의 원래 색깔로 변경
+
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 2, ForceMode.Impulse);
+        }
+
+        else
+        {
+            mat.color = Color.gray;  // 몬스터가 죽으면 회색으로 변경
+            gameObject.layer = 10;
+
+            isChase = false;
+            nav.enabled = false;
+
+            anim.SetTrigger("doDie");
+
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+
+            Destroy(gameObject, 3);  // 3초 뒤에 삭제
+        }
+    }
+    */
+>>>>>>> Stashed changes
 }

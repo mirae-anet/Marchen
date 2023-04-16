@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+<<<<<<< Updated upstream
     public enum Type {Ammo, Coin, Grenade, Heart, Weapon};
+=======
+    public enum Type {Heart};
+>>>>>>> Stashed changes
     public Type type;
     public int value;
 
