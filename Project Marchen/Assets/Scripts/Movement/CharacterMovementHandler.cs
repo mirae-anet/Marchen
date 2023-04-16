@@ -21,7 +21,7 @@ public class CharacterMovementHandler : NetworkBehaviour
     }
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;       
     }
     private void Update()
