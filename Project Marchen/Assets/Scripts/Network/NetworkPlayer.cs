@@ -16,9 +16,23 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         if(Object.HasInputAuthority)
         {
             Local = this;
+            //Disable main camera
+            Camera.main.gameObject.SetActive(false);
+
             Debug.Log("Spawned local player");
         }
-        else{Debug.Log("Spawned remote player");}
+        else
+        {
+            //Disable the camera if we are not the local player
+            Camera localCamera = GetComponentInChildren<Camera>();
+            localCamera.enabled = false;
+
+            //Only 1 audio listener is allowednin the scene so disable remote players audio listener
+            AudioListener audioListener = GetComponentInChildren<AudioListener>();
+            audioListener.enabled = false;
+
+            Debug.Log("Spawned remote player");
+        }
     }
 
     public void PlayerLeft(PlayerRef player)
