@@ -107,8 +107,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.3
-  m_Height: 4
+  m_Radius: 1.2
+  m_Height: 4.27
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &1101619816091193609
@@ -726,8 +726,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 5222162813979601657}
-  moveSpeed: 20
   onVelo: 1
+  moveSpeed: 20
+  jumpPower: 40
+  dodgePower: 20
+  doubleTapTime: 0.2
+  raySize: {x: 1.8, y: 0.6, z: 1.8}
 --- !u!1 &5639462940654645468
 GameObject:
   m_ObjectHideFlags: 0
