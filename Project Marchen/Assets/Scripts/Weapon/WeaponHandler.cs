@@ -21,6 +21,7 @@ public class WeaponHandler : NetworkBehaviour
         
     }
 
+    //FixedUpdateNetwork에서 게임 오브젝트에 영향을 주거나 컴포넌트를 이용하는 작업은 InputAuthority가 있는 local에서 처리하는듯.
     public override void FixedUpdateNetwork()
     {
         //Get the input from the network
@@ -31,6 +32,7 @@ public class WeaponHandler : NetworkBehaviour
         }
     }
 
+    //local only
     void Fire(Vector3 aimForwardVector)
     {
         //Limit fire rate
@@ -43,7 +45,7 @@ public class WeaponHandler : NetworkBehaviour
         
     }
 
-    //host only
+    //loacl only
     IEnumerator FireEffect()
     {
         isFiring = true;
@@ -56,6 +58,7 @@ public class WeaponHandler : NetworkBehaviour
     }
 
     //The fuction called with [Networked(...)] must be static.
+    //everyone
     static void OnFireChanged(Changed<WeaponHandler> changed)
     {
         Debug.Log($"{Time.time} OnFiredChaged value {changed.Behaviour.isFiring}");
@@ -71,9 +74,12 @@ public class WeaponHandler : NetworkBehaviour
         }
     }
 
+    // 다른 사람들에게도 보이게
     void OnFireRemote()
     {
-        if(!Object.HasInputAuthority) 
+        if(!Object.HasInputAuthority)
+        {
             fireParticleSystem.Play();
+        }
     }
 }
