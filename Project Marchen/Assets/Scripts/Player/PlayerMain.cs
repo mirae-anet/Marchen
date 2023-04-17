@@ -9,12 +9,13 @@ public class PlayerMain : MonoBehaviour
 
     bool isDamage;
 
-
+    Rigidbody rigid;
     MeshRenderer[] meshs;
     GameObject nearObject;
 
     void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
     }
 
@@ -49,9 +50,16 @@ public class PlayerMain : MonoBehaviour
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 health -= enemyBullet.damage;
+                
+                if (other != null && other.GetComponent<Rigidbody>() != null)
+                {
+                    Vector3 dirVec = (transform.position - other.transform.position).normalized;
 
-                if (other.GetComponent<Rigidbody>() != null)
+                    rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+                    rigid.AddForce(dirVec.normalized * 50f, ForceMode.Impulse);
+
                     Destroy(other.gameObject);
+                }
 
                 StartCoroutine(OnDamage());
             }
