@@ -55,8 +55,8 @@ public class PlayerMain : MonoBehaviour
                 {
                     Vector3 dirVec = (transform.position - other.transform.position).normalized;
 
-                    rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
-                    rigid.AddForce(dirVec.normalized * 50f, ForceMode.Impulse);
+                    rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
+                    rigid.AddForce(dirVec * 10f, ForceMode.Impulse);
 
                     Destroy(other.gameObject);
                 }
@@ -73,11 +73,16 @@ public class PlayerMain : MonoBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
 
         isDamage = false;
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+    }
+
+    public bool getIsHit()
+    {
+        return isDamage;
     }
 }

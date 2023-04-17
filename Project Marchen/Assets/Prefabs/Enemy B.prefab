@@ -82,7 +82,7 @@ MonoBehaviour:
   curHealth: 200
   target: {fileID: 0}
   meleeArea: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
   isChase: 0
   isAttack: 0
 --- !u!195 &-7203190204246124608
@@ -245,3 +245,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
   m_PrefabInstance: {fileID: 5779840721249975049}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6698954167970170456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+  m_PrefabInstance: {fileID: 5779840721249975049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &93871962
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698954167970170456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d4db915a4b54e1142ac3be45f3aeffad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
