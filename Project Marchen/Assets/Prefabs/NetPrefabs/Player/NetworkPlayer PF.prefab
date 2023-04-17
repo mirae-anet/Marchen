@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 8507553157266342457}
   - component: {fileID: 9061902636817628115}
   - component: {fileID: 6441630219631003985}
+  - component: {fileID: 8697239627248929451}
   m_Layer: 0
   m_Name: NetworkPlayer PF
   m_TagString: Untagged
@@ -460,6 +461,7 @@ MonoBehaviour:
   - {fileID: 3244430199428988799}
   - {fileID: 8507553157266342457}
   - {fileID: 9061902636817628115}
+  - {fileID: 8697239627248929451}
   SimulationBehaviours: []
 --- !u!143 &7103081422859609055
 CharacterController:
@@ -541,6 +543,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5bc4a046f9b456796fe2254ce82324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8697239627248929451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ecc5457b9154fa2ae09f4a98a96cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  _isFiring: 0
+  fireParticleSystem: {fileID: 4212274977753670993}
+  coolTime: 0.15
 --- !u!1 &3706017666956517793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,5 +1638,10 @@ PrefabInstance:
 --- !u!4 &2016992661595866501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 362219081622703843, guid: fc9c47ef068abce44afbb23a75a3d1c0, type: 3}
+  m_PrefabInstance: {fileID: 2232396140593056614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4212274977753670993 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2634062280194960951, guid: fc9c47ef068abce44afbb23a75a3d1c0, type: 3}
   m_PrefabInstance: {fileID: 2232396140593056614}
   m_PrefabAsset: {fileID: 0}

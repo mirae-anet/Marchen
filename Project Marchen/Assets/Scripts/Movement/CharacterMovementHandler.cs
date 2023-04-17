@@ -36,7 +36,7 @@ public class CharacterMovementHandler : NetworkBehaviour
             networkCharacterControllerPrototypeCustom.Move(moveDirection);
 
             //Jump after move
-            if(networkInputData.isJumpPressed)
+            if(networkInputData.isJumpButtonPressed)
             {
                 networkCharacterControllerPrototypeCustom.Jump();
             }
