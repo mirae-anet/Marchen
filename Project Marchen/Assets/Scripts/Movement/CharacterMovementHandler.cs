@@ -28,6 +28,8 @@ public class CharacterMovementHandler : NetworkBehaviour
             //마우스 상하 움직임은 무시
             Quaternion rotation = transform.rotation;
             rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
+            transform.rotation = rotation;
+
 
             //move
             Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
