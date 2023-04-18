@@ -7,10 +7,14 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
     bool isJumpButtonPressed = false;
+    bool isFireButtonPressed = false;
+
+    //other components
+    LocalCameraHandler localCameraHandler;
     CharacterMovementHandler characterMovementHandler;
     private void Awake()
     {
-        // 호스트에게 공유되지 않는 클라이언트의 view 움직임
+        localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
         characterMovementHandler = GetComponent<CharacterMovementHandler>();
     }
     void Start()
@@ -20,30 +24,43 @@ public class CharacterInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //호스트에서는 실행x
+        if(!characterMovementHandler.Object.HasInputAuthority){return;} 
+
         //view input
         viewInputVector.x = Input.GetAxis("Mouse X");
         viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
-        // 호스트에게 공유되지 않는 클라이언트의 view 움직임
-        characterMovementHandler.SetViewInputVector(viewInputVector);
 
         //Move input
         moveInputVector.x = Input.GetAxis("Horizontal");
         moveInputVector.y = Input.GetAxis("Vertical");
 
         //jump
-        isJumpButtonPressed = Input.GetButtonDown("Jump");
+        if(Input.GetButtonDown("Jump"))
+            isJumpButtonPressed = true;
+        //fire
+        if(Input.GetButtonDown("Fire1"))
+            isFireButtonPressed = true;
 
+        //Set view
+        localCameraHandler.SetViewInputVector(viewInputVector); //수정? localCameraHandler로 변경?
     }
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();
 
-        //view data
-        networkInputData.rotationInput = viewInputVector.x; //only x
+        //Aim data
+        networkInputData.aimForwardVector = localCameraHandler.transform.forward;
         //move data
         networkInputData.movementInput = moveInputVector;
         //Jump data
-        networkInputData.isJumpPressed = isJumpButtonPressed;
+        networkInputData.isJumpButtonPressed = isJumpButtonPressed;
+        //Fire data
+        networkInputData.isFireButtonPressed = isFireButtonPressed;
+
+        //Reset variables now that we have read their status
+        isJumpButtonPressed = false;
+        isFireButtonPressed = false;
 
         return networkInputData;
     }

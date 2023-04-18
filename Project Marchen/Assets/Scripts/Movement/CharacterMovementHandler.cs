@@ -5,39 +5,31 @@ using Fusion;
 
 public class CharacterMovementHandler : NetworkBehaviour
 {
-    Vector2 viewInput;
-
-    //Rotation
-    float cameraRotationX = 0; //카메라 상하
-
     //other components
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    Camera localCamera; 
 
     private void Awake()
     {
         networkCharacterControllerPrototypeCustom = GetComponent<NetworkCharacterControllerPrototypeCustom>();
-        localCamera = GetComponentInChildren<Camera>();
     }
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;       
     }
-    private void Update()
-    {
-        //카메라 상하 움직임은 로컬에서 처리
-        cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;   
-        cameraRotationX = Mathf.Clamp(cameraRotationX, -90, 90); //위 아래 모가지 한계선
-        localCamera.transform.localRotation = Quaternion.Euler(cameraRotationX, 0, 0); //x축 기준으로 카메라 회전?
-    }
     public override void FixedUpdateNetwork()
     {
         //get NetworkInputData from Client
         if(GetInput(out NetworkInputData networkInputData))
         {
-            //Rotate the view
-            networkCharacterControllerPrototypeCustom.Rotate(networkInputData.rotationInput); //Rotate method 구현해야함.
+            //Rotate the transform according to the client aim vector
+            transform.forward = networkInputData.aimForwardVector;
+            //Cancel out rotation on X axis as we don't want our character to tilt
+            //마우스 상하 움직임은 무시
+            Quaternion rotation = transform.rotation;
+            rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
+            transform.rotation = rotation;
+
 
             //move
             Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
@@ -46,16 +38,21 @@ public class CharacterMovementHandler : NetworkBehaviour
             networkCharacterControllerPrototypeCustom.Move(moveDirection);
 
             //Jump after move
-            if(networkInputData.isJumpPressed)
+            if(networkInputData.isJumpButtonPressed)
             {
                 networkCharacterControllerPrototypeCustom.Jump();
             }
 
+            //Check if we've fallen off the world
+            CheckFallRespawn();
+
         }
     }
-
-    public void SetViewInputVector(Vector2 viewInput)
+    void CheckFallRespawn()
     {
-        this.viewInput = viewInput;
+        if(transform.position.y < -12)
+        {
+            transform.position = Utils.GetRandomSpawnPoint();
+        }
     }
 }
