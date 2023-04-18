@@ -10,6 +10,8 @@ public class WeaponHandler : NetworkBehaviour
     public bool isFiring {get; set;}
 
     public ParticleSystem fireParticleSystem;
+    public Transform aimPoint;
+    public LayerMask collisionLayer;
     
     float lastTimeFired = 0;
 
@@ -40,6 +42,31 @@ public class WeaponHandler : NetworkBehaviour
             return;
         //유니티에서 코루틴은 실행을 일시 중단하고 나중에 중단한 지점부터 다시 실행할 수 있는 특별한 종류의 함수입니다.
         StartCoroutine(FireEffect());
+
+        //발사 위치, 발사 방향, 발사 거리, 발사한 사람, 적중한 히트박스 정보, 상호작용할 레이어 마스크, 옵션: physic object도 포함한다.(벽에 숨거나 등)
+        Runner.LagCompensation.Raycast(aimPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IncludePhysX);
+
+        //for debuging
+        float hitDistance = 100;
+        bool isHitOtherPlayer = false;
+
+        if(hitinfo.Distance > 0)
+            hitDistance = hitinfo.Distance;
+        
+        if(hitinfo.Hitbox != null) // hit hitbox
+        {
+            Debug.Log($"{Time.time} {transform.name} hit hitbox {hitinfo.Hitbox.transform.root.name}");
+            isHitOtherPlayer = true;
+        }
+        else if(hitinfo.Collider != null) // hit physX collider
+        {
+            Debug.Log($"{Time.time} {transform.name} hit PhysX collider {hitinfo.Collider.transform.root.name}");
+        }
+
+        //debug
+        if(isHitOtherPlayer)
+            Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.red, 1);
+        else Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.green, 1);
 
         lastTimeFired = Time.time;
         

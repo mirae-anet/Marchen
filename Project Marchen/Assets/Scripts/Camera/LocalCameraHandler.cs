@@ -42,7 +42,6 @@ public class LocalCameraHandler : MonoBehaviour
             return;
         }
         //Move the camera to the position of the player
-        // localCamera.transform.position = new Vector3(cameraAnchorPoint.position.x, cameraAnchorPoint.position.y + 6, cameraAnchorPoint.position.z - 20);
         localCamera.transform.position = cameraAnchorPoint.position;
         //Calculate rotation
         cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
