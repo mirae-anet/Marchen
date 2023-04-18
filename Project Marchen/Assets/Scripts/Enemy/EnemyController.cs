@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    EnemyMain enemyMain;
+    private EnemyMain enemyMain;
 
     void Awake()
     {
