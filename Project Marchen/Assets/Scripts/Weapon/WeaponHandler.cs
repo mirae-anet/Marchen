@@ -18,14 +18,25 @@ public class WeaponHandler : NetworkBehaviour
     [SerializeField]
     float coolTime = 0.15f;
 
+    //other component
+    HPHandler hpHandler;
+
+    private void Awake()
+    {
+        hpHandler = GetComponent<HPHandler>();
+    }
     void Start()
     {
         
     }
 
-    //FixedUpdateNetwork에서 게임 오브젝트에 영향을 주거나 컴포넌트를 이용하는 작업은 InputAuthority가 있는 local에서 처리하는듯.
+    //client는 InputAuthority를 가지고 server는 StateAuthority를 가진다.
+    //FixedUpdateNetwork에서 값을 변경하려면 StateAuthority가 필요한 듯?
     public override void FixedUpdateNetwork()
     {
+        if(hpHandler.isDead)
+            return;
+        
         //Get the input from the network
         if(GetInput(out NetworkInputData networkInputData))
         {
@@ -56,6 +67,12 @@ public class WeaponHandler : NetworkBehaviour
         if(hitinfo.Hitbox != null) // hit hitbox
         {
             Debug.Log($"{Time.time} {transform.name} hit hitbox {hitinfo.Hitbox.transform.root.name}");
+
+            // if you can change the value of the other players.
+            //일반적으로 서버가 상태 권한을 가지고 있으며, 클라이언트는 그에 따라 상태를 갱신합니다.
+            if(Object.HasStateAuthority)
+                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage();
+
             isHitOtherPlayer = true;
         }
         else if(hitinfo.Collider != null) // hit physX collider
@@ -88,7 +105,7 @@ public class WeaponHandler : NetworkBehaviour
     //everyone
     static void OnFireChanged(Changed<WeaponHandler> changed)
     {
-        Debug.Log($"{Time.time} OnFiredChaged value {changed.Behaviour.isFiring}");
+        //Debug.Log($"{Time.time} OnFiredChaged value {changed.Behaviour.isFiring}");
         bool isFiringCurrent = changed.Behaviour.isFiring; //isFiring이 아닌 changed.Behaviour.isFiring으로 접근
 
         //Load the old value
