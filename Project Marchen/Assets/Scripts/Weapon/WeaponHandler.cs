@@ -32,12 +32,14 @@ public class WeaponHandler : NetworkBehaviour
 
     //client는 InputAuthority를 가지고 server는 StateAuthority를 가진다.
     //FixedUpdateNetwork에서 값을 변경하려면 StateAuthority가 필요한 듯?
+    //FixedUpdateNetwork는 실행시간을 동기화하는듯. 동작이나 값을 동기화하려면 별도의 방법을 추가적으로 사용해야 한다. ex) RPC, [Networked], Base.~~~ 등
     public override void FixedUpdateNetwork()
     {
         if(hpHandler.isDead)
             return;
         
         //Get the input from the network
+        //inputAuthority가 있는 클라이언트와 전달 받은 서버만 실행한다.
         if(GetInput(out NetworkInputData networkInputData))
         {
             if(networkInputData.isFireButtonPressed)
@@ -45,13 +47,13 @@ public class WeaponHandler : NetworkBehaviour
         }
     }
 
-    //local only
     void Fire(Vector3 aimForwardVector)
     {
         //Limit fire rate
         if(Time.time - lastTimeFired < coolTime)
             return;
         //유니티에서 코루틴은 실행을 일시 중단하고 나중에 중단한 지점부터 다시 실행할 수 있는 특별한 종류의 함수입니다.
+        //inputAuthority가 있는 클라이언트와 전달 받은 서버만 실행한다.
         StartCoroutine(FireEffect());
 
         //발사 위치, 발사 방향, 발사 거리, 발사한 사람, 적중한 히트박스 정보, 상호작용할 레이어 마스크, 옵션: physic object도 포함한다.(벽에 숨거나 등)
@@ -89,7 +91,6 @@ public class WeaponHandler : NetworkBehaviour
         
     }
 
-    //loacl only
     IEnumerator FireEffect()
     {
         isFiring = true;
@@ -102,7 +103,7 @@ public class WeaponHandler : NetworkBehaviour
     }
 
     //The fuction called with [Networked(...)] must be static.
-    //everyone
+    //Networked된 variable를 수정한 StateAuthority를 가진 Server 빼고 모두 다 실행한다. InputAuthority를 가진고 있어도 실행한다.
     static void OnFireChanged(Changed<WeaponHandler> changed)
     {
         //Debug.Log($"{Time.time} OnFiredChaged value {changed.Behaviour.isFiring}");
@@ -123,7 +124,7 @@ public class WeaponHandler : NetworkBehaviour
     {
         if(!Object.HasInputAuthority)
         {
-            fireParticleSystem.Play();
+            // fireParticleSystem.Play();
         }
     }
 }
