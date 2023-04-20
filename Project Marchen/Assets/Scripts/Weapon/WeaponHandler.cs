@@ -104,7 +104,7 @@ public class WeaponHandler : NetworkBehaviour
     }
 
     //The fuction called with [Networked(...)] must be static.
-    //everyone
+    //Networked된 variable를 수정한 StateAuthority를 가진 Server 빼고 모두 다 실행한다. InputAuthority를 가진고 있어도 실행한다.
     static void OnFireChanged(Changed<WeaponHandler> changed)
     {
         //Debug.Log($"{Time.time} OnFiredChaged value {changed.Behaviour.isFiring}");
