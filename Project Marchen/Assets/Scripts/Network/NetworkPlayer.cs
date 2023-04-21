@@ -25,6 +25,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             Camera.main.gameObject.SetActive(false);
 
             //set nickname
+            //key(PlayerNickname)에 해당하는 문자열을 preference에서 가져온다.
             RPC_SetNickName(PlayerPrefs.GetString("PlayerNickname"));
 
             Debug.Log("Spawned local player");
