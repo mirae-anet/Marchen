@@ -10,8 +10,22 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public TextMeshProUGUI playerNickNameTM;
     public static NetworkPlayer Local {get; set;}
 
+
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
+
+    bool isPublicJoinMessageSent = false;
+
+    public LocalCameraHandler localCameraHandler;
+    public GameObject localUI;
+
+    //other components
+    NetworkInGameMessages networkInGameMessages;
+
+    private void Awake() 
+    {
+        networkInGameMessages = GetComponent<NetworkInGameMessages>();    
+    }
     void Start()
     {
         
@@ -40,6 +54,9 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             AudioListener audioListener = GetComponentInChildren<AudioListener>();
             audioListener.enabled = false;
 
+            //Disable UI in the PlayerUICanvas
+            localUI.SetActive(false);
+
             Debug.Log("Spawned remote player");
         }
         transform.name = $"P_{Object.Id}";
@@ -47,10 +64,11 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public void PlayerLeft(PlayerRef player)
     {
+        if(Object.HasStateAuthority)
+            networkInGameMessages.SendInGameRPCMessage(nickName.ToString(), "left");
+
         if(player == Object.InputAuthority)
-        {
             Runner.Despawn(Object);
-        }
     }
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
@@ -69,5 +87,11 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"[RPC] SetNickName {nickName}");
         this.nickName = nickName;
+
+        if(!isPublicJoinMessageSent)
+        {
+            networkInGameMessages.SendInGameRPCMessage(nickName, "joined");
+            isPublicJoinMessageSent = true;
+        }
     }
 }

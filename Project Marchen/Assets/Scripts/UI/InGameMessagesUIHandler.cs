@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InGameMessagesHandler : MonoBehaviour
+public class InGameMessagesUIHandler : MonoBehaviour
 {
     public TextMeshProUGUI[] textMeshProUGUIs;
     Queue messageQueue = new Queue();
