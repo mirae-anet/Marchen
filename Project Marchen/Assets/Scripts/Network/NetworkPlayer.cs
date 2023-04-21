@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using TMPro;
 
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
+    public TextMeshProUGUI playerNickNameTM;
     public static NetworkPlayer Local {get; set;}
+
+    [Networked(OnChanged = nameof(OnNickNameChanged))]
+    public NetworkString<_16> nickName{get; set;} //최대 16자
     void Start()
     {
         
@@ -42,5 +47,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         {
             Runner.Despawn(Object);
         }
+    }
+    //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
+    static void OnNickNameChanged(Changed<NetworkPlayer> changed)
+    {
+        Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.nickName}");
+        changed.Behaviour.OnNickNameChanged();
+    }
+    private void OnNickNameChanged()
+    {
+        Debug.Log($"Nickname changed for player to {nickName} for player {gameObject.name}");
+        playerNickNameTM.text = nickName.ToString();
     }
 }
