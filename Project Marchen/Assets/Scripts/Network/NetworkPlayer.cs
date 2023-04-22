@@ -59,13 +59,24 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             Debug.Log("Spawned remote player");
         }
+
+        Runner.SetPlayerObject(Object.InputAuthority, Object);
+
         transform.name = $"P_{Object.Id}";
     }
 
     public void PlayerLeft(PlayerRef player)
     {
         if(Object.HasStateAuthority)
-            networkInGameMessages.SendInGameRPCMessage(nickName.ToString(), "left");
+        {
+            //서버로 하여금 떠나간 플레이어에 해당하는 아바타만 "left" 메시지 발송
+            if(Runner.TryGetPlayerObject(player, out NetworkObject playerLeftNetworkObject))
+            {
+                if(playerLeftNetworkObject == Object)
+                    //RPC message를 보내기 전에 아바타가 despawn되는 경우 메시지가 누락될 수 있어서.
+                    Local.GetComponent<NetworkInGameMessages>().SendInGameRPCMessage(playerLeftNetworkObject.GetComponent<NetworkPlayer>().nickName.ToString(), "left");
+            }
+        }
 
         if(player == Object.InputAuthority)
             Runner.Despawn(Object);
