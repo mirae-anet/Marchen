@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 5007183508175799158}
   - component: {fileID: 4258583138256722164}
   - component: {fileID: 1091201027375121388}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WorldSpaceCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,6 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   playerNickNameTM: {fileID: 7928563024512991462}
+  playerModel: {fileID: 4563216276530025217}
   _nickName:
     _length: 0
     _data:
@@ -1309,7 +1310,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4095
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1744,7 +1745,7 @@ GameObject:
   - component: {fileID: 7211689544752237859}
   - component: {fileID: 6159432197713760581}
   - component: {fileID: 7928563024512991462}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PlayerNickNameText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2079,7 +2080,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.3
+  m_Radius: 1.1
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
