@@ -20,10 +20,12 @@ public class WeaponHandler : NetworkBehaviour
 
     //other component
     HPHandler hpHandler;
+    NetworkPlayer networkPlayer;
 
     private void Awake()
     {
         hpHandler = GetComponent<HPHandler>();
+        networkPlayer = GetComponent<NetworkPlayer>();
     }
     void Start()
     {
@@ -73,7 +75,7 @@ public class WeaponHandler : NetworkBehaviour
             // if you can change the value of the other players.
             //일반적으로 서버가 상태 권한을 가지고 있으며, 클라이언트는 그에 따라 상태를 갱신합니다.
             if(Object.HasStateAuthority)
-                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage();
+                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString());
 
             isHitOtherPlayer = true;
         }
