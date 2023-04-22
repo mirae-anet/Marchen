@@ -58,8 +58,11 @@ public class WeaponHandler : NetworkBehaviour
         //inputAuthority가 있는 클라이언트와 전달 받은 서버만 실행한다.
         StartCoroutine(FireEffect());
 
-        //발사 위치, 발사 방향, 발사 거리, 발사한 사람, 적중한 히트박스 정보, 상호작용할 레이어 마스크, 옵션: physic object도 포함한다.(벽에 숨거나 등)
+        //발사 위치, 발사 방향, 발사 거리, 발사한 사람, 적중한 히트박스 정보, 상호작용할 레이어 마스크, 옵션
+        //옵션: physic object도 포함한다.(벽에 숨거나 등)
         Runner.LagCompensation.Raycast(aimPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IncludePhysX);
+        //옵션 : 자기자신은 무시
+        // Runner.LagCompensation.Raycast(aimPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IgnoreInputAuthority);
 
         //for debuging
         float hitDistance = 100;
@@ -75,7 +78,13 @@ public class WeaponHandler : NetworkBehaviour
             // if you can change the value of the other players.
             //일반적으로 서버가 상태 권한을 가지고 있으며, 클라이언트는 그에 따라 상태를 갱신합니다.
             if(Object.HasStateAuthority)
+            {
+                //공격한 사람과 맞은 사람이 같다면 return
+                if(Object.InputAuthority == hitinfo.Hitbox.Root.GetComponent<NetworkObject>().InputAuthority)
+                    return;
+                //아니면 데미지
                 hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString());
+            }
 
             isHitOtherPlayer = true;
         }
