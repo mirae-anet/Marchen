@@ -59,8 +59,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             //Detach camera if enabled
             localCameraHandler.transform.parent = null;
 
-            //key(PlayerNickname)에 해당하는 문자열을 preference에서 가져온다.
-            RPC_SetNickName(PlayerPrefs.GetString("PlayerNickname"));
+            RPC_SetNickName(GameManager.instance.playerNickName);
 
             Debug.Log("Spawned local player");
         }

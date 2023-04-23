@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     byte[] connectionToken;
+    public Vector2 cameraViewRotation = Vector2.zero; //For host migration
+    public string playerNickName = "";
 
     private void Awake()
     {

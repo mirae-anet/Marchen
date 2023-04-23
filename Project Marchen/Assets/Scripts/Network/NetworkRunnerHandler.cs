@@ -98,10 +98,18 @@ public class NetworkRunnerHandler : MonoBehaviour
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
 
+                    //Copy HP states
+                    if(resumeNetworkObject.TryGetBehaviour<HPHandler>(out var oldHPHandler))
+                    {
+                        HPHandler newHPHandler = newNetworkObject.GetComponent<HPHandler>();
+                        newHPHandler.CopyStateFrom(oldHPHandler);
+                        newHPHandler.skipSettingStartValues = true;
+                    }
+
                     //Map the connection token with the new Network player
                     if(resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
                     {
-                        //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 작성.
+                        //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 새로 작성.
                         FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
                     }
                 });

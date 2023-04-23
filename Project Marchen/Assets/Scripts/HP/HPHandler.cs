@@ -21,6 +21,7 @@ public class HPHandler : NetworkBehaviour
 
     public GameObject playerModel;
     public GameObject deathGameObjectPrefab;
+    public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
     HitboxRoot hitboxRoot;
@@ -37,13 +38,14 @@ public class HPHandler : NetworkBehaviour
     }
     void Start()
     {
-        HP = startingHP;
-        isDead = false;
+        if(!skipSettingStartValues){
+            HP = startingHP;
+            isDead = false;
+        }
 
         defaultMeshBodyColor = bodyMeshRenderer.material.color;
 
         isInitialized = true;
-
     }
 
     IEnumerator OnHitCO()
