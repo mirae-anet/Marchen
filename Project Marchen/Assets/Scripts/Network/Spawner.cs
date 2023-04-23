@@ -108,6 +108,24 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
+    public void OnHostMigrationCleanUp()
+    {
+        Debug.Log("Spawner OnHostMigrationCleanUp started");
+
+        foreach(KeyValuePair<int, NetworkPlayer> entry in mapTokenIDWithNetworkPlayer)
+        {
+            NetworkObject networkObjectDictionary = entry.Value.GetComponent<NetworkObject>();
+            if(networkObjectDictionary.InputAuthority.IsNone)
+            {
+                Debug.Log($"{Time.time} Found player that has not reconnected. Despawning {entry.Value.nickName}");
+                networkObjectDictionary.Runner.Despawn(networkObjectDictionary);
+            }
+        }
+
+        Debug.Log("Spawner OnHostMigrationCleanUp completed");
+
+    }
+
     //not use
     public void OnConnectedToServer(NetworkRunner runner){Debug.Log("OnConnectServer");}
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason){Debug.Log("OnConnectFailed");}

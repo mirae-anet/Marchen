@@ -107,8 +107,14 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
         }
+        StartCoroutine(CleanUpHostMigrationCO());
 
         Debug.Log($"HostMigrationResum completed");
+    }
 
+    IEnumerator CleanUpHostMigrationCO()
+    {
+        yield return new WaitForSeconds(5.0f);
+        FindObjectOfType<Spawner>().OnHostMigrationCleanUp();
     }
 }
