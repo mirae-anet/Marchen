@@ -9,19 +9,73 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField]
     NetworkPlayer playerPrefab;
+    
+    //Mapping between Token ID and Re-created Players
+    Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
+
+    //other components
     CharacterInputHandler characterInputHandler;
+
+    private void Awake()
+    {
+        mapTokenIDWithNetworkPlayer = new Dictionary<int, NetworkPlayer>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
+    int GetPlayerToken(NetworkRunner runner, PlayerRef player) 
+    {
+        if(runner.LocalPlayer == player) // 접속한 플레이어가 본인인 경우 
+        {
+            //Just use the local Player Connection Token
+            return ConnectionTokenUtils.HashToken(GameManager.instance.GetConnectionToken());
+        }    
+        else // remote player
+        {
+            // Get the Connection Token stored when the Client connects to this Host
+            var token = runner.GetPlayerConnectionToken(player); // remote player의 Connection token을 받아온다
+            if(token!=null)
+                return ConnectionTokenUtils.HashToken(token);
+            Debug.LogError($"GetPlayerTokens returned invalid token");
+            return 0;
+        }
+    }
+
+    //Host migration 때 처음에 맵을 생성하기 위해서 필요함
+    public void SetConnectionTokenMapping(int token, NetworkPlayer networkPlayer)
+    {
+        mapTokenIDWithNetworkPlayer.Add(token, networkPlayer);
+    }
+
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if(runner.IsServer)
         {
-            Debug.Log("OnPlayerJoined we are server. Spawning player");
-            runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player);
+            //Get the token for the player
+            int playerToken = GetPlayerToken(runner, player);
+            Debug.Log($"OnPlayerJoined we are server. Connection token {playerToken}");
+
+            // Check if the token is already recorded by the server. 재접속
+            if(mapTokenIDWithNetworkPlayer.TryGetValue(playerToken, out NetworkPlayer networkPlayer))
+            {
+                Debug.Log($"Found old connection token for token {playerToken}. Assigning controlls to that player");
+                networkPlayer.GetComponent<NetworkObject>().AssignInputAuthority(player);
+            }
+            else
+            {
+                Debug.Log($"Spawning new player for connection token {playerToken}");
+                NetworkPlayer spawnedNetworkPlayer = runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player);
+
+                //Store the mapping between playerToken and the spawned network player
+                mapTokenIDWithNetworkPlayer[playerToken] = spawnedNetworkPlayer;
+
+                //Store the token for the player
+                spawnedNetworkPlayer.token = playerToken;
+            }
         }
         else Debug.Log("OnPlayerJoined");
     }

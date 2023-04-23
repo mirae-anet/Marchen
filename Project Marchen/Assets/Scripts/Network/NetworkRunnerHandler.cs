@@ -19,7 +19,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         networkRunner.name = "Network runner";
 
         // 자동으로 방 입장. 호스트, 클라이언트 자동 설정
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient, NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
+        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
 
         Debug.Log($"Server NetworkRunner started.");
     }
@@ -47,7 +47,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         return sceneManager;
     }
 
-    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
+    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, byte[] connectionToken, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
     {
         var sceneManager = GetSceneManager(runner);
 
@@ -59,7 +59,8 @@ public class NetworkRunnerHandler : MonoBehaviour
             Scene = scene,
             SessionName = "TestRoom",
             Initialized = initialized,
-            SceneManager = sceneManager
+            SceneManager = sceneManager,
+            ConnectionToken = connectionToken,
         });
     }
 
@@ -77,7 +78,8 @@ public class NetworkRunnerHandler : MonoBehaviour
             // Initialized = initialized,
             SceneManager = sceneManager,
             HostMigrationToken = hostMigrationToken, //contain all necessary info to restart the runner.
-            HostMigrationResume = HostMigrationResume //this will be invoked to resume the simulation
+            HostMigrationResume = HostMigrationResume, //this will be invoked to resume the simulation
+            ConnectionToken = GameManager.instance.GetConnectionToken()
         });
     }
 
@@ -95,6 +97,13 @@ public class NetworkRunnerHandler : MonoBehaviour
                 runner.Spawn(resumeNetworkObject, position: characterController.ReadPosition(), characterController.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
+
+                    //Map the connection token with the new Network player
+                    if(resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
+                    {
+                        //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 작성.
+                        FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
+                    }
                 });
             }
         }
