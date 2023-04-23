@@ -6,7 +6,7 @@ public class LocalCameraHandler : MonoBehaviour
 {
     public Transform cameraAnchorPoint;
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    Camera localCamera;
+    public Camera localCamera;
 
     //Input
     Vector2 viewInput;
@@ -24,11 +24,6 @@ public class LocalCameraHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Detach Camera if enabled
-        if(localCamera.enabled)
-        {
-            localCamera.transform.parent = null; //body 움직임에서 카메라 분리
-        }
     }
 
     void LateUpdate()
