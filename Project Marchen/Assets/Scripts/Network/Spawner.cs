@@ -41,14 +41,28 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    {
+        Debug.Log("OnHostMigration");
+
+        //shut down the current runner
+        await runner.Shutdown(shutdownReason: ShutdownReason.HostMigration);
+
+        //find the network runner handler and start the host migration
+        FindObjectOfType<NetworkRunnerHandler>().StartHostMigration(hostMigrationToken);
+
+    }
+
     //not use
     public void OnConnectedToServer(NetworkRunner runner){Debug.Log("OnConnectServer");}
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason){Debug.Log("OnConnectFailed");}
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token){Debug.Log("OnConnectRequest");}
     public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data){Debug.Log("OnCustomAuthenticationResponse");}
     public void OnDisconnectedFromServer(NetworkRunner runner){Debug.Log("OnDisconnectedFromServer");}
-    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken){Debug.Log("OnHostMigration");}
-    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input){Debug.Log("OnInputMissing");}
+    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
+    {
+        // Debug.Log("OnInputMissing");
+    }
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data){Debug.Log("OnReliableDataReceived");}
     public void OnSceneLoadDone(NetworkRunner runner){Debug.Log("OnSceneLoadDone");}
     public void OnSceneLoadStart(NetworkRunner runner){Debug.Log("OnSceneLoadStart");}

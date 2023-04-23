@@ -24,16 +24,33 @@ public class NetworkRunnerHandler : MonoBehaviour
         Debug.Log($"Server NetworkRunner started.");
     }
 
-    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
+    public void StartHostMigration(HostMigrationToken hostMigrationToken)
+    {
+        networkRunner = Instantiate(networkRunnerPrefab);
+        networkRunner.name = "Network runner - Migrated";
+
+        var clientTask = InitializeNetworkRunnerHostMigration(networkRunner, hostMigrationToken);
+
+        Debug.Log($"Host migration started.");
+    }
+
+    INetworkSceneManager GetSceneManager(NetworkRunner runner)
     {
         //check if there are any unity objs that we need to consider. 
         var sceneManager = runner.GetComponents(typeof(MonoBehaviour)).OfType<INetworkSceneManager>().FirstOrDefault();
-
         if(sceneManager == null)
         {
             //Handel networked objects that already exits in the scene
             sceneManager = runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
         }
+
+        return sceneManager;
+    }
+
+    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
+    {
+        var sceneManager = GetSceneManager(runner);
+
         runner.ProvideInput = true;
         
         return runner.StartGame(new StartGameArgs{
@@ -44,5 +61,45 @@ public class NetworkRunnerHandler : MonoBehaviour
             Initialized = initialized,
             SceneManager = sceneManager
         });
+    }
+
+    protected virtual Task InitializeNetworkRunnerHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    {
+        var sceneManager = GetSceneManager(runner);
+
+        runner.ProvideInput = true;
+        
+        return runner.StartGame(new StartGameArgs{
+            // GameMode = gameMode,
+            // Address = address,
+            // Scene = scene,
+            // SessionName = "TestRoom",
+            // Initialized = initialized,
+            SceneManager = sceneManager,
+            HostMigrationToken = hostMigrationToken, //contain all necessary info to restart the runner.
+            HostMigrationResume = HostMigrationResume //this will be invoked to resume the simulation
+        });
+    }
+
+    //resume simulation
+    void HostMigrationResume(NetworkRunner runner)
+    {
+        Debug.Log($"HostMigrationResum started");
+
+        //Get a reference for for each Network object from the old host
+        foreach(var resumeNetworkObject in runner.GetResumeSnapshotNetworkObjects())
+        {
+            //Grab all the player objects, they have a NetworkCharacterControllerPrototypeCustom
+            if(resumeNetworkObject.TryGetBehaviour<NetworkCharacterControllerPrototypeCustom>(out var characterController))
+            {
+                runner.Spawn(resumeNetworkObject, position: characterController.ReadPosition(), characterController.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                });
+            }
+        }
+
+        Debug.Log($"HostMigrationResum completed");
+
     }
 }

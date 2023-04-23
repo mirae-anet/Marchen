@@ -55,7 +55,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             Camera localCamera = GetComponentInChildren<Camera>();
             localCamera.enabled = false;
 
-            //Only 1 audio listener is allowednin the scene so disable remote players audio listener
+            //Only 1 audio listener is allowed in the scene so disable remote players audio listener
             AudioListener audioListener = GetComponentInChildren<AudioListener>();
             audioListener.enabled = false;
 
