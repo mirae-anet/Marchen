@@ -50,15 +50,17 @@ public class PlayerMain : MonoBehaviour
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
                 health -= enemyBullet.damage;
-                
-                if (other != null && other.GetComponent<Rigidbody>() != null)
+
+                //if (other != null && other.GetComponent<Rigidbody>() != null)
+                if (other != null)
                 {
                     Vector3 dirVec = (transform.position - other.transform.position).normalized;
 
                     rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
                     rigid.AddForce(dirVec * 10f, ForceMode.Impulse);
 
-                    Destroy(other.gameObject);
+                    if (other.GetComponent<Rigidbody>() != null)
+                        Destroy(other.gameObject);
                 }
 
                 StartCoroutine(OnDamage());
