@@ -732,6 +732,7 @@ MonoBehaviour:
     _length: 0
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _token: 0
   localCameraHandler: {fileID: 5800475708437018925}
   localUI: {fileID: 6410614357387345707}
 --- !u!114 &8591404573529759849
@@ -857,13 +858,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _isFiring: 0
+  grenadePrefab: {fileID: 3434440108562403677, guid: 87600141023ee42d79b49d57ce844dee, type: 3}
   fireParticleSystem: {fileID: 4212274977753670993}
   aimPoint: {fileID: 6459894363992460278}
+  anchorPoint: {fileID: 6459894363992460278}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1025
+  _isFiring: 0
   coolTime: 0.15
+  ThrowForce: 50
 --- !u!114 &4381579702224905231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +906,7 @@ MonoBehaviour:
   bodyMeshRenderer: {fileID: 3630884761259051947}
   playerModel: {fileID: 4323213110611308241}
   deathGameObjectPrefab: {fileID: 4817986840635846212, guid: 4459901c4f4924cb2a32fc3863c006a6, type: 3}
+  skipSettingStartValues: 0
 --- !u!114 &4539011877122390087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,6 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraAnchorPoint: {fileID: 6459894363992460278}
+  localCamera: {fileID: 0}
 --- !u!1 &5606971812738584282
 GameObject:
   m_ObjectHideFlags: 0

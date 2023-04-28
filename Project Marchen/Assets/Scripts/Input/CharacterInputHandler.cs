@@ -8,6 +8,7 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 viewInputVector = Vector2.zero;
     bool isJumpButtonPressed = false;
     bool isFireButtonPressed = false;
+    bool isGrenadeFireButtonPressed = false;
 
     //other components
     LocalCameraHandler localCameraHandler;
@@ -43,6 +44,10 @@ public class CharacterInputHandler : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
             isFireButtonPressed = true;
 
+        //Grenade fire
+        if(Input.GetKeyDown(KeyCode.G))
+            isGrenadeFireButtonPressed = true;
+
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector); //수정? localCameraHandler로 변경?
     }
@@ -58,10 +63,13 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.isJumpButtonPressed = isJumpButtonPressed;
         //Fire data
         networkInputData.isFireButtonPressed = isFireButtonPressed;
+        //Grenade data
+        networkInputData.isGrenadeFireButtonPressed = isGrenadeFireButtonPressed;
 
         //Reset variables now that we have read their status
         isJumpButtonPressed = false;
         isFireButtonPressed = false;
+        isGrenadeFireButtonPressed = false;
 
         return networkInputData;
     }

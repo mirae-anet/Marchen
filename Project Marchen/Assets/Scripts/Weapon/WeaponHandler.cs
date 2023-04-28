@@ -5,18 +5,31 @@ using Fusion;
 
 public class WeaponHandler : NetworkBehaviour
 {
-    //모두에게 공유되는 변수
-    [Networked(OnChanged = nameof(OnFireChanged))] //값의 변화 -> 호출할 함수
-    public bool isFiring {get; set;}
-
+    [Header("Prefabs")]
+    public GrenadeHandler grenadePrefab;
+    [Header("Effects")]
     public ParticleSystem fireParticleSystem;
-    public Transform aimPoint;
+    [Header("Aim")]
+    public Transform aimPoint; //카메라
+
+    [Header("Collision")]
     public LayerMask collisionLayer;
     
+    //모두에게 공유되는 변수
+    [Networked(OnChanged = nameof(OnFireChanged))] //값의 변화 -> 호출할 함수
+
+    public bool isFiring {get; set;}
+
     float lastTimeFired = 0;
 
+    [Header("Weapon settings")]
     [SerializeField]
     float coolTime = 0.15f;
+    [SerializeField]
+    float ThrowForce = 50f;
+
+    //Timing (grenade)
+    TickTimer grenadeFireDelay = TickTimer.None;
 
     //other component
     HPHandler hpHandler;
@@ -46,6 +59,8 @@ public class WeaponHandler : NetworkBehaviour
         {
             if(networkInputData.isFireButtonPressed)
                 Fire(networkInputData.aimForwardVector);
+            if(networkInputData.isGrenadeFireButtonPressed)
+                FireGrenade(networkInputData.aimForwardVector);
         }
     }
 
@@ -99,7 +114,7 @@ public class WeaponHandler : NetworkBehaviour
         else Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.green, 1);
 
         lastTimeFired = Time.time;
-        
+
     }
 
     IEnumerator FireEffect()
@@ -138,6 +153,21 @@ public class WeaponHandler : NetworkBehaviour
         {
             // Debug.Log($"{Time.time} OnFireRemote");
             fireParticleSystem.Play();
+        }
+    }
+
+    void FireGrenade(Vector3 aimFowardVector)
+    {
+        //Check that we have not recently fired a grenade.
+        if(grenadeFireDelay.ExpiredOrNotRunning(Runner))
+        {
+            Runner.Spawn(grenadePrefab, transform.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedGrenade) =>
+            {
+                spawnedGrenade.GetComponent<GrenadeHandler>().Throw(aimFowardVector * ThrowForce, Object.InputAuthority, networkPlayer.nickName.ToString());
+            });
+
+            //Start a new timer to avoid grenade spamming.
+            grenadeFireDelay = TickTimer.CreateFromSeconds(Runner, 1.0f);
         }
     }
 }
