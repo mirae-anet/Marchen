@@ -14,6 +14,10 @@ public class WeaponHandler : NetworkBehaviour
 
     [Header("Collision")]
     public LayerMask collisionLayer;
+
+    [Header("Gun damage")]
+    [SerializeField]
+    byte damageAmount;
     
     //모두에게 공유되는 변수
     [Networked(OnChanged = nameof(OnFireChanged))] //값의 변화 -> 호출할 함수
@@ -98,7 +102,7 @@ public class WeaponHandler : NetworkBehaviour
                 if(Object.InputAuthority == hitinfo.Hitbox.Root.GetComponent<NetworkObject>().InputAuthority)
                     return;
                 //아니면 데미지
-                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString());
+                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount);
             }
 
             isHitOtherPlayer = true;
