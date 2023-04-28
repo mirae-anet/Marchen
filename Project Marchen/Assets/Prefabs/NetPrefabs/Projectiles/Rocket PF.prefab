@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3057452113544747963}
   - component: {fileID: 4022378076095591641}
   - component: {fileID: 3332799877945621899}
+  - component: {fileID: 8918648989251392150}
   m_Layer: 0
   m_Name: Rocket PF
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3332799877945621899}
+  - {fileID: 8918648989251392150}
   SimulationBehaviours: []
 --- !u!114 &3332799877945621899
 MonoBehaviour:
@@ -86,6 +88,25 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &8918648989251392150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057452113544747960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f377c07cc224fb2a40e01153756cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  explosionParticleSystemPrefab: {fileID: 3024599546387762972, guid: 6179f8d129e784088a23d3cf7b4c364a, type: 3}
+  checkForImpactPoint: {fileID: 3057452114419623282}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 1025
+  damageAmount: 100
 --- !u!1 &3057452113947476012
 GameObject:
   m_ObjectHideFlags: 0

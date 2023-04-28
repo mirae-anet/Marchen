@@ -7,6 +7,8 @@ public class WeaponHandler : NetworkBehaviour
 {
     [Header("Prefabs")]
     public GrenadeHandler grenadePrefab;
+    public RocketHandler rocketPrefab;
+
     [Header("Effects")]
     public ParticleSystem fireParticleSystem;
     [Header("Aim")]
@@ -28,21 +30,28 @@ public class WeaponHandler : NetworkBehaviour
 
     [Header("Weapon settings")]
     [SerializeField]
-    float coolTime = 0.15f;
+    float gunCoolTime = 0.15f;
+    [SerializeField]
+    float grenadeCoolTime = 2.0f;
+    [SerializeField]
+    float rocketCoolTime = 2.0f;
     [SerializeField]
     float ThrowForce = 50f;
 
     //Timing (grenade)
     TickTimer grenadeFireDelay = TickTimer.None;
+    TickTimer rocketFireDelay = TickTimer.None;
 
     //other component
     HPHandler hpHandler;
     NetworkPlayer networkPlayer;
+    NetworkObject networkObject;
 
     private void Awake()
     {
         hpHandler = GetComponent<HPHandler>();
         networkPlayer = GetComponent<NetworkPlayer>();
+        networkObject = GetComponent<NetworkObject>();
     }
     void Start()
     {
@@ -65,13 +74,15 @@ public class WeaponHandler : NetworkBehaviour
                 Fire(networkInputData.aimForwardVector);
             if(networkInputData.isGrenadeFireButtonPressed)
                 FireGrenade(networkInputData.aimForwardVector);
+            if(networkInputData.isRocketLauncherFireButtonPressed)
+                FireRocket(networkInputData.aimForwardVector);
         }
     }
 
     void Fire(Vector3 aimForwardVector)
     {
         //Limit fire rate
-        if(Time.time - lastTimeFired < coolTime)
+        if(Time.time - lastTimeFired < gunCoolTime)
             return;
         //유니티에서 코루틴은 실행을 일시 중단하고 나중에 중단한 지점부터 다시 실행할 수 있는 특별한 종류의 함수입니다.
         //inputAuthority가 있는 클라이언트와 전달 받은 서버만 실행한다.
@@ -171,7 +182,21 @@ public class WeaponHandler : NetworkBehaviour
             });
 
             //Start a new timer to avoid grenade spamming.
-            grenadeFireDelay = TickTimer.CreateFromSeconds(Runner, 1.0f);
+            grenadeFireDelay = TickTimer.CreateFromSeconds(Runner, grenadeCoolTime);
+        }
+    }
+    void FireRocket(Vector3 aimFowardVector)
+    {
+        //Check that we have not recently fired a rocket.
+        if(rocketFireDelay.ExpiredOrNotRunning(Runner))
+        {
+            Runner.Spawn(rocketPrefab, transform.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedRocket) =>
+            {
+                spawnedRocket.GetComponent<RocketHandler>().Fire(Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
+            });
+
+            //Start a new timer to avoid rocket spamming.
+            rocketFireDelay = TickTimer.CreateFromSeconds(Runner, rocketCoolTime);
         }
     }
 }

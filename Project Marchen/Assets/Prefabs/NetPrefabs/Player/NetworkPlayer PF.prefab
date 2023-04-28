@@ -859,6 +859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   grenadePrefab: {fileID: 3434440108562403677, guid: 87600141023ee42d79b49d57ce844dee, type: 3}
+  rocketPrefab: {fileID: 8918648989251392150, guid: 665432a20ad694544a0401dd46afdc96, type: 3}
   fireParticleSystem: {fileID: 4212274977753670993}
   aimPoint: {fileID: 6459894363992460278}
   collisionLayer:
@@ -866,7 +867,9 @@ MonoBehaviour:
     m_Bits: 1025
   damageAmount: 1
   _isFiring: 0
-  coolTime: 0.15
+  gunCoolTime: 0.15
+  grenadeCoolTime: 2
+  rocketCoolTime: 2
   ThrowForce: 50
 --- !u!114 &4381579702224905231
 MonoBehaviour:
