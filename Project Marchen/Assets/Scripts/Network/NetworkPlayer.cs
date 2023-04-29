@@ -10,6 +10,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public TextMeshProUGUI playerNickNameTM;
     public static NetworkPlayer Local {get; set;}
     public Transform playerModel;
+    public Transform nickNameUI;
 
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
@@ -41,6 +42,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             //Sets the layer of the local players model
             //자신의 닉네임은 안 보이도록 레이어를 변경
             Utils.SetRenderLayerInChildren(playerModel, LayerMask.NameToLayer("LocalPlayerModel"));
+            Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera
             if(Camera.main != null)

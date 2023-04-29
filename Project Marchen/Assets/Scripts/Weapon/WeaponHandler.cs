@@ -11,8 +11,10 @@ public class WeaponHandler : NetworkBehaviour
 
     [Header("Effects")]
     public ParticleSystem fireParticleSystem;
-    [Header("Aim")]
-    public Transform aimPoint; //카메라
+
+    [Header("Anchor Point")]
+    [SerializeField]
+    Transform bodyAnchorPoint;
 
     [Header("Collision")]
     public LayerMask collisionLayer;
@@ -90,9 +92,10 @@ public class WeaponHandler : NetworkBehaviour
 
         //발사 위치, 발사 방향, 발사 거리, 발사한 사람, 적중한 히트박스 정보, 상호작용할 레이어 마스크, 옵션
         //옵션: physic object도 포함한다.(벽에 숨거나 등)
-        Runner.LagCompensation.Raycast(aimPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IncludePhysX);
+        // Runner.LagCompensation.Raycast(bodyAnchorPoint.position + aimForwardVector * 1.5f, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IncludePhysX);
+        Runner.LagCompensation.Raycast(bodyAnchorPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IncludePhysX);
         //옵션 : 자기자신은 무시
-        // Runner.LagCompensation.Raycast(aimPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IgnoreInputAuthority);
+        // Runner.LagCompensation.Raycast(bodyAnchorPoint.position, aimForwardVector, 100, Object.InputAuthority, out var hitinfo, collisionLayer, HitOptions.IgnoreInputAuthority);
 
         //for debuging
         float hitDistance = 100;
@@ -125,8 +128,8 @@ public class WeaponHandler : NetworkBehaviour
 
         //debug
         if(isHitOtherPlayer)
-            Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.red, 1);
-        else Debug.DrawRay(aimPoint.position, aimForwardVector * hitDistance, Color.green, 1);
+            Debug.DrawRay(bodyAnchorPoint.position, aimForwardVector * hitDistance, Color.red, 1);
+        else Debug.DrawRay(bodyAnchorPoint.position, aimForwardVector * hitDistance, Color.green, 1);
 
         lastTimeFired = Time.time;
 
@@ -176,9 +179,10 @@ public class WeaponHandler : NetworkBehaviour
         //Check that we have not recently fired a grenade.
         if(grenadeFireDelay.ExpiredOrNotRunning(Runner))
         {
-            Runner.Spawn(grenadePrefab, transform.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedGrenade) =>
+            Runner.Spawn(grenadePrefab, bodyAnchorPoint.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedGrenade) =>
             {
                 spawnedGrenade.GetComponent<GrenadeHandler>().Throw(aimFowardVector * ThrowForce, Object.InputAuthority, networkPlayer.nickName.ToString());
+                Debug.Log("${Time.time} {networkPlayer.nickName} throw grenade");
             });
 
             //Start a new timer to avoid grenade spamming.
@@ -190,7 +194,7 @@ public class WeaponHandler : NetworkBehaviour
         //Check that we have not recently fired a rocket.
         if(rocketFireDelay.ExpiredOrNotRunning(Runner))
         {
-            Runner.Spawn(rocketPrefab, transform.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedRocket) =>
+            Runner.Spawn(rocketPrefab, bodyAnchorPoint.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedRocket) =>
             {
                 spawnedRocket.GetComponent<RocketHandler>().Fire(Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
             });

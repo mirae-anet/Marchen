@@ -46,7 +46,7 @@ public class CharacterMovementHandler : NetworkBehaviour
         {
 
             //Rotate the transform according to the client aim vector
-            transform.forward = networkInputData.aimForwardVector;
+            transform.forward = networkInputData.lookForwardVector;
             //Cancel out rotation on X axis as we don't want our character to tilt
             //마우스 상하 움직임은 무시
             Quaternion rotation = transform.rotation;

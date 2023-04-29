@@ -43,6 +43,7 @@ public class RocketHandler : NetworkBehaviour
         
         networkObject = GetComponent<NetworkObject>();
 
+        Debug.Log("${Time.time} {firedByPlayerName} fire rocket");
         maxLiveDurationTickTimer = TickTimer.CreateFromSeconds(Runner, 10);
     }
 

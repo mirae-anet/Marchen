@@ -60,8 +60,10 @@ public class CharacterInputHandler : MonoBehaviour
     {
         NetworkInputData networkInputData = new NetworkInputData();
 
+        //look data
+        networkInputData.lookForwardVector = localCameraHandler.transform.forward;
         //Aim data
-        networkInputData.aimForwardVector = localCameraHandler.transform.forward;
+        networkInputData.aimForwardVector = localCameraHandler.getAimForwardVector();
         //move data
         networkInputData.movementInput = moveInputVector;
         //Jump data
