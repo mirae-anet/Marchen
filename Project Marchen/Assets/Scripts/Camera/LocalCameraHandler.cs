@@ -93,17 +93,17 @@ public class LocalCameraHandler : MonoBehaviour
         Vector3 hitPoint;
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerMask))
+        if(Physics.Raycast(transform.position + transform.forward.normalized * 22 , transform.forward, out hit, maxDistance, layerMask))
         {
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position + transform.forward.normalized * 22, transform.forward * hit.distance, Color.yellow);
             hitPoint = hit.point;
             aimForwardVector = hitPoint - bodyAnchorPoint.position;
         }
         else
         {
             // hit nothing. 바라보고있는 방향의 maxDistance의 좌표
-            Debug.DrawRay(transform.position, transform.forward.normalized * maxDistance, Color.yellow);
-            hitPoint = transform.position + transform.forward.normalized * maxDistance;
+            Debug.DrawRay(transform.position + transform.forward.normalized * 22, transform.forward.normalized * maxDistance, Color.yellow);
+            hitPoint = transform.position + transform.forward.normalized * (maxDistance+22);
             aimForwardVector = hitPoint - bodyAnchorPoint.position;
         }
         aimForwardVector = aimForwardVector.normalized;
