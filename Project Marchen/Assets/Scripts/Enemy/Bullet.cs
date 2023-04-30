@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int damage;
-    public bool isMelee;
+    [Header("설정")]
+    public bool isMelee = false;
+    [Range(1f, 30f)]
+    public int damage = 10;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -17,5 +19,10 @@ public class Bullet : MonoBehaviour
     {
         if (!isMelee && other.gameObject.tag == "Wall")
             Destroy(gameObject);
+    }
+
+    public int getDamage()
+    {
+        return damage;
     }
 }
