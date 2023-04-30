@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
-    public int health;
-    public int maxHealth;
+    private Rigidbody rigid;
+    private MeshRenderer[] meshs;
+    private GameObject nearObject;
 
-    bool isDamage;
+    private bool isDamage;
 
-    Rigidbody rigid;
-    MeshRenderer[] meshs;
-    GameObject nearObject;
-
+    // 인스펙터
+    [Header("설정")]
+    [Range(1f, 100f)]
+    public int health = 100;
+    [Range(1f, 100f)]
+    public int maxHealth = 100;
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -30,20 +34,17 @@ public class PlayerMain : MonoBehaviour
         {
             Item item = other.GetComponent<Item>();
 
-            switch (item.type)
+            switch (item.getType())
             {
                 case Item.Type.Heart:
-                    health += item.value;
-
+                    health += item.getValue();
                     if (health > maxHealth)
                         health = maxHealth;
-
                     break;
             }
 
             Destroy(other.gameObject);
         }
-        
         else if (other.tag == "EnemyBullet")
         {
             if (!isDamage)
