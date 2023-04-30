@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private CameraController camControl;
+    private PlayerMain playerMain;
 
     private bool isMove;
     private bool isJump;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         camControl = GetComponentInChildren<CameraController>();
+        playerMain = GetComponent<PlayerMain>();
     }
     
     void Update()
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge) // 회피 중 이동 제한
+        if (isDodge || playerMain.getIsHit()) // 회피 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
