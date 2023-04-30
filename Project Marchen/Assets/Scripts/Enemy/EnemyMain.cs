@@ -136,7 +136,8 @@ public class EnemyMain : MonoBehaviour
 
             case Type.B:
                 yield return new WaitForSeconds(0.5f);
-                GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+                //GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+                GameObject instantBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
