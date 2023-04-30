@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5222162813979601657}
   - component: {fileID: 7244274303372394927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,9 +661,9 @@ GameObject:
   - component: {fileID: 5318821609316634605}
   - component: {fileID: 7244274303372394925}
   - component: {fileID: 7244274303372394926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,6 +713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7772ae5634f3b794fa7bb1f62e5a03b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
 --- !u!114 &7244274303372394926
 MonoBehaviour:
   m_ObjectHideFlags: 0
