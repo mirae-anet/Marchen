@@ -6,7 +6,7 @@ public class LocalCameraHandler : MonoBehaviour
 {
     public Transform cameraAnchorPoint;
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    Camera localCamera;
+    public Camera localCamera;
 
     //Input
     Vector2 viewInput;
@@ -24,11 +24,8 @@ public class LocalCameraHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Detach Camera if enabled
-        if(localCamera.enabled)
-        {
-            localCamera.transform.parent = null; //body 움직임에서 카메라 분리
-        }
+        cameraRotationX = GameManager.instance.cameraViewRotation.x;
+        cameraRotationY = GameManager.instance.cameraViewRotation.y;
     }
 
     void LateUpdate()
@@ -42,7 +39,6 @@ public class LocalCameraHandler : MonoBehaviour
             return;
         }
         //Move the camera to the position of the player
-        // localCamera.transform.position = new Vector3(cameraAnchorPoint.position.x, cameraAnchorPoint.position.y + 6, cameraAnchorPoint.position.z - 20);
         localCamera.transform.position = cameraAnchorPoint.position;
         //Calculate rotation
         cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
@@ -55,5 +51,15 @@ public class LocalCameraHandler : MonoBehaviour
     public void SetViewInputVector(Vector2 viewInput)
     {
         this.viewInput = viewInput;
+    }
+
+    private void OnDestroy()
+    {
+        //when localCamera was disabled
+        if(cameraRotationX != 0 && cameraRotationY != 0)         
+        {
+            GameManager.instance.cameraViewRotation.x = cameraRotationX;
+            GameManager.instance.cameraViewRotation.y = cameraRotationY;
+        }
     }
 }
