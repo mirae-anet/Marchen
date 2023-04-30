@@ -11,6 +11,11 @@ public class SessionListUIHandler : MonoBehaviour
     public GameObject sessionItemListPrefab;
     public VerticalLayoutGroup verticalLayoutGroup;
 
+
+    private void Awake()
+    {
+        ClearList();
+    }
     public void ClearList()
     {
         //모든 레이아웃 자식 삭제
@@ -33,13 +38,25 @@ public class SessionListUIHandler : MonoBehaviour
 
     }
 
-    private void AddedSessionInfoListUIItem_OnJoimSession(SessionInfo obj)
+    private void AddedSessionInfoListUIItem_OnJoimSession(SessionInfo sessionInfo)
     {
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
+
+        networkRunnerHandler.JoinGame(sessionInfo);
+
+        MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
+        mainMenuUIHandler.OnjoiningServer();
+    }
+
+    public void OnNoSessionsFound()
+    {
+        ClearList();
         statusText.text = "No game session found";
         statusText.gameObject.SetActive(true);
     }
     public void OnLookingForGameSessions()
     {
+        ClearList();
         statusText.text = "Looking for game sessions";
         statusText.gameObject.SetActive(true);
     }

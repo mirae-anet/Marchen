@@ -46,9 +46,11 @@ public class MainMenuUIHandler : MonoBehaviour
 
         networkRunnerHandler.OnJoinLobby();
 
-        HideAllPanels();
+        HideAllPanels(); 
 
         sessionBrowserPanel.gameObject.SetActive(true);
+
+        FindObjectOfType<SessionListUIHandler>(true).OnLookingForGameSessions();
     }
 
     public void OnCreateNewGameClicked()
@@ -64,6 +66,13 @@ public class MainMenuUIHandler : MonoBehaviour
 
         networkRunnerHandler.CreateGame(sessionNameInputField.text, "TestScene(network)");
 
+        HideAllPanels();
+
+        statusPanel.gameObject.SetActive(true);
+    }
+
+    public void OnjoiningServer()
+    {
         HideAllPanels();
 
         statusPanel.gameObject.SetActive(true);
