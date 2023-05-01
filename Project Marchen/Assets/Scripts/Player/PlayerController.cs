@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.getIsHit()) // 회피 중 이동 제한
+        if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge)
+        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit())
         {
             isJump = true;
 
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge)
+        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit())
         {
             isDodge = true;
             dodgeDir = moveDir; // 회피 방향 기억
