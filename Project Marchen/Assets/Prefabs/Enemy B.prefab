@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2062362018885022397}
   - component: {fileID: -5025989515052022538}
   - component: {fileID: -5449209661034368636}
-  - component: {fileID: 994849947371516910}
   - component: {fileID: -7203190204246124608}
+  - component: {fileID: 994849947371516910}
+  - component: {fileID: 7723078686095487547}
   m_Layer: 8
   m_Name: Enemy B
   m_TagString: Enemy
@@ -65,26 +66,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &994849947371516910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320669544841490502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 1
-  maxHealth: 200
-  curHealth: 200
-  target: {fileID: 0}
-  meleeArea: {fileID: 0}
-  bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
-  isChase: 0
-  isAttack: 0
 --- !u!195 &-7203190204246124608
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -107,6 +88,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &994849947371516910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320669544841490502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 1
+  maxHealth: 200
+  curHealth: 200
+--- !u!114 &7723078686095487547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320669544841490502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30030de1cdc0f5e4eb8a3cc183aa49ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  meleeArea: {fileID: 0}
+  bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
 --- !u!1001 &5779840721249975049
 PrefabInstance:
   m_ObjectHideFlags: 0
