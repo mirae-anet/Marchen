@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool isMove;
     private bool isJump;
     private bool isDodge;
+    private bool isAttack;
 
     private Vector3 moveDir;
     private Vector3 dodgeDir;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool walkInput;
     private bool jumpInput;
     private bool dodgeInput;
+    private bool attackInput;
 
     // 인스펙터
     [Header("오브젝트 연결")]
@@ -37,8 +39,6 @@ public class PlayerController : MonoBehaviour
     public float jumpPower = 30f;
     [Range(1f, 100f)]
     public float dodgePower = 50f;
-    [Range(0.0f, 1f)]
-    public float doubleTapTime = 0.2f;
     public Vector3 raySize = new Vector3(1.8f, 0.6f, 1.8f);
 
     void Awake()
@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         PlayerJump();
         PlayerDodge();
+
+        PlayerAttack();
     }
 
     private void GetInput()
@@ -69,6 +71,8 @@ public class PlayerController : MonoBehaviour
         walkInput = Input.GetButton("Walk");
         jumpInput = Input.GetButtonDown("Jump");
         dodgeInput = Input.GetButtonDown("Dodge");
+
+        attackInput = Input.GetButtonDown("Fire1");
     }
 
     private void GroundCheck()
@@ -151,6 +155,24 @@ public class PlayerController : MonoBehaviour
         isDodge = false;
     }
     
+    private void PlayerAttack()
+    {
+        if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
+        {
+            isAttack = true;
+            playerMain.GetWeaponMain().Attack();
+            anim.SetTrigger("doSwing");
+
+            StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
+        }
+    }
+
+    IEnumerator AttackCoolTime(float second)
+    {
+        yield return new WaitForSeconds(second);
+        isAttack = false;
+    }
+
     private void OnDrawGizmos()
     {
         feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);

@@ -7,6 +7,7 @@ public class PlayerMain : MonoBehaviour
     private Rigidbody rigid;
     private MeshRenderer[] meshs;
     private GameObject nearObject;
+    private WeaponMain weaponMain;
 
     private bool isDamage;
 
@@ -39,11 +40,13 @@ public class PlayerMain : MonoBehaviour
             case Type.Hammer:
                 weapons[0].SetActive(true);
                 weapons[1].SetActive(false);
+                weaponMain = weapons[0].GetComponent<WeaponMain>();
                 break;
 
             case Type.Gun:
                 weapons[0].SetActive(false);
                 weapons[1].SetActive(true);
+                weaponMain = weapons[1].GetComponent<WeaponMain>();
                 break;
         }
     }
@@ -107,5 +110,10 @@ public class PlayerMain : MonoBehaviour
     public bool getIsHit()
     {
         return isDamage;
+    }
+
+    public WeaponMain GetWeaponMain()
+    {
+        return weaponMain;
     }
 }
