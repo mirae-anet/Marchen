@@ -6,6 +6,7 @@ public class CharacterInputHandler : MonoBehaviour
 {
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
+    bool isMove = false;
     bool isJumpButtonPressed = false;
     bool isFireButtonPressed = false;
     bool isGrenadeFireButtonPressed = false;
@@ -32,11 +33,14 @@ public class CharacterInputHandler : MonoBehaviour
 
         //view input
         viewInputVector.x = Input.GetAxis("Mouse X");
-        viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
+        viewInputVector.y = Input.GetAxis("Mouse Y"); //new
+        // viewInputVector.y = Input.GetAxis("Mouse Y") * -1; //Invert the mouse look
 
         //Move input
         moveInputVector.x = Input.GetAxis("Horizontal");
         moveInputVector.y = Input.GetAxis("Vertical");
+        if(moveInputVector.magnitude != 0)
+            isMove = true; // moveInput의 길이로 입력 판정
 
         //jump
         if(Input.GetButtonDown("Jump"))
@@ -61,11 +65,16 @@ public class CharacterInputHandler : MonoBehaviour
         NetworkInputData networkInputData = new NetworkInputData();
 
         //look data
-        networkInputData.lookForwardVector = localCameraHandler.transform.forward;
+        // networkInputData.lookForwardVector = localCameraHandler.transform.forward; //old
+        //move data
+        // networkInputData.movementInput = moveInputVector; //old
+
+        //move data
+        networkInputData.isMove = isMove;
+        //moveDir
+        networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
         networkInputData.aimForwardVector = localCameraHandler.getAimForwardVector();
-        //move data
-        networkInputData.movementInput = moveInputVector;
         //Jump data
         networkInputData.isJumpButtonPressed = isJumpButtonPressed;
         //Fire data
@@ -76,6 +85,7 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.isRocketLauncherFireButtonPressed = isRocketLauncherFireButtonPressed;
 
         //Reset variables now that we have read their status
+        isMove = false;
         isJumpButtonPressed = false;
         isFireButtonPressed = false;
         isGrenadeFireButtonPressed = false;

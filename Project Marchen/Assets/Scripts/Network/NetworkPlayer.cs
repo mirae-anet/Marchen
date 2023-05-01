@@ -53,13 +53,14 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             audioListener.enabled = true;
             
             //Enable the local camera
-            localCameraHandler.localCamera.enabled = true;
+            // localCameraHandler.localCamera.enabled = true;
+            localCameraHandler.localCameraEnable(true);
 
             //Enable UI for local player
             localUI.SetActive(true);
 
             //Detach camera if enabled
-            localCameraHandler.transform.parent = null;
+            // localCameraHandler.transform.parent = null;
 
             RPC_SetNickName(GameManager.instance.playerNickName);
 
@@ -68,7 +69,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         else
         {
             //Disable the camera if we are not the local player
-            localCameraHandler.localCamera.enabled = false;
+            // localCameraHandler.localCamera.enabled = false;
+            localCameraHandler.localCameraEnable(false);
 
             //Disable UI in the PlayerUICanvas
             localUI.SetActive(false);
@@ -104,7 +106,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
     {
-        Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.nickName}");
+        Debug.Log($"{Time.time} OnNickNameChanged value {changed.Behaviour.nickName}");
         changed.Behaviour.OnNickNameChanged();
     }
     private void OnNickNameChanged()

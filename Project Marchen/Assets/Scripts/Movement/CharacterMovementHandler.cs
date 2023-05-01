@@ -8,6 +8,8 @@ public class CharacterMovementHandler : NetworkBehaviour
     bool isRespawnRequested = false;
 
     //other components
+    [SerializeField]
+    private Transform playerBody;
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     HPHandler hpHandler;
     NetworkInGameMessages networkInGameMessages;
@@ -27,7 +29,6 @@ public class CharacterMovementHandler : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        // if(Object.HasInputAuthority)
         if(Object.HasStateAuthority)
         {
             if(isRespawnRequested)
@@ -44,7 +45,33 @@ public class CharacterMovementHandler : NetworkBehaviour
         //get NetworkInputData from Client
         if(GetInput(out NetworkInputData networkInputData))
         {
+            // if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
+            //     return;
 
+            //new
+            if(networkInputData.isMove )
+            {
+                playerBody.forward = networkInputData.moveDir;
+                //rigidBody 필요
+                networkCharacterControllerPrototypeCustom.Move(networkInputData.moveDir);
+            }
+
+            if(networkInputData.isFireButtonPressed || networkInputData.isGrenadeFireButtonPressed || networkInputData.isRocketLauncherFireButtonPressed)
+            {
+                //공격 시 playerBody.forward 방향 전환 필요.
+            }
+
+            //Jump after move
+            if(networkInputData.isJumpButtonPressed)
+            {
+                networkCharacterControllerPrototypeCustom.Jump();
+            }
+
+            //Check if we've fallen off the world
+            CheckFallRespawn();
+
+            //old
+            /**
             //Rotate the transform according to the client aim vector
             transform.forward = networkInputData.lookForwardVector;
             //Cancel out rotation on X axis as we don't want our character to tilt
@@ -53,9 +80,9 @@ public class CharacterMovementHandler : NetworkBehaviour
             rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
             transform.rotation = rotation;
 
-            //move
-            Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
-            moveDirection.Normalize();
+            // //move
+            // Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
+            // moveDirection.Normalize(); //경록이 moveDir과 일치
 
             networkCharacterControllerPrototypeCustom.Move(moveDirection);
 
@@ -67,7 +94,7 @@ public class CharacterMovementHandler : NetworkBehaviour
 
             //Check if we've fallen off the world
             CheckFallRespawn();
-
+            **/
         }
     }
 
