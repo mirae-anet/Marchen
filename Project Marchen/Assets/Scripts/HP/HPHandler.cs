@@ -16,8 +16,8 @@ public class HPHandler : NetworkBehaviour
 
     public Color uiOnHitColor;
     public Image uiOnHitImage;
-    public MeshRenderer bodyMeshRenderer;
-    Color defaultMeshBodyColor;
+    // public MeshRenderer bodyMeshRenderer;
+    // Color defaultMeshBodyColor;
 
     public GameObject playerModel;
     public GameObject deathGameObjectPrefab;
@@ -43,7 +43,7 @@ public class HPHandler : NetworkBehaviour
             isDead = false;
         }
 
-        defaultMeshBodyColor = bodyMeshRenderer.material.color;
+        // defaultMeshBodyColor = bodyMeshRenderer.material.color;
 
         isInitialized = true;
     }
@@ -51,14 +51,14 @@ public class HPHandler : NetworkBehaviour
     IEnumerator OnHitCO()
     {
         // 피격시 효과
-        bodyMeshRenderer.material.color = Color.red;
+        // bodyMeshRenderer.material.color = Color.red;
         if(Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
         yield return new WaitForSeconds(0.2f);
 
         //정상화
-        bodyMeshRenderer.material.color = defaultMeshBodyColor;
+        // bodyMeshRenderer.material.color = defaultMeshBodyColor;
         if(Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
     }
