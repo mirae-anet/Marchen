@@ -31,7 +31,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             networkRunner.name = "Network runner";
 
             // 자동으로 방 입장. 호스트, 클라이언트 자동 설정
-            if(SceneManager.GetActiveScene().name != "TestMultiMenu")//추가
+            if(SceneManager.GetActiveScene().name != "Lobby")//추가
             {
                 var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient,"TestSession" ,GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
 
