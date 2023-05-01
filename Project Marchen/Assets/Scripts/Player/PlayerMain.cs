@@ -10,8 +10,15 @@ public class PlayerMain : MonoBehaviour
 
     private bool isDamage;
 
+    public enum Type { Hammer, Gun };
+
     // 인스펙터
+    [Header("오브젝트 연결")]
+    [SerializeField]
+    private GameObject[] weapons;
+
     [Header("설정")]
+    public Type weaponType;
     [Range(1f, 100f)]
     public int health = 100;
     [Range(1f, 100f)]
@@ -21,11 +28,24 @@ public class PlayerMain : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+
+        WeaponEquip();
     }
 
-    void Update()
+    void WeaponEquip()
     {
-        
+        switch (weaponType)
+        {
+            case Type.Hammer:
+                weapons[0].SetActive(true);
+                weapons[1].SetActive(false);
+                break;
+
+            case Type.Gun:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(true);
+                break;
+        }
     }
 
     void OnTriggerEnter(Collider other)
