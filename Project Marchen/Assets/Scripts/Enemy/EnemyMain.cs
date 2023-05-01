@@ -10,7 +10,7 @@ public class EnemyMain : MonoBehaviour
     private Material mat;
     private Animator anim;
 
-    public enum Type { A, B };
+    public enum Type { Melee, Range };
 
     [Header("설정")]
     public Type enemyType;

@@ -61,12 +61,12 @@ public class EnemyController : MonoBehaviour
 
         switch (enemyMain.getEnemyType())
         {
-            case EnemyMain.Type.A:
+            case EnemyMain.Type.Melee:
                 targetRadius = 1.5f;
                 targetRange = 3f;
                 break;
 
-            case EnemyMain.Type.B:
+            case EnemyMain.Type.Range:
                 targetRadius = 0.5f;
                 targetRange = 25f;
                 break;
@@ -97,7 +97,7 @@ public class EnemyController : MonoBehaviour
 
         switch (enemyMain.getEnemyType())
         {
-            case EnemyMain.Type.A:
+            case EnemyMain.Type.Melee:
                 yield return new WaitForSeconds(0.2f);
                 meleeArea.enabled = true;
 
@@ -107,7 +107,7 @@ public class EnemyController : MonoBehaviour
                 yield return new WaitForSeconds(1f);
                 break;
 
-            case EnemyMain.Type.B:
+            case EnemyMain.Type.Range:
                 yield return new WaitForSeconds(0.5f);
                 //GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 GameObject instantBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), transform.rotation);
