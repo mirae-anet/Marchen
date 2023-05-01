@@ -15,10 +15,14 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     //other components
     CharacterInputHandler characterInputHandler;
+    //추가
+    SessionListUIHandler sessionListUIHandler;
 
     private void Awake()
     {
         mapTokenIDWithNetworkPlayer = new Dictionary<int, NetworkPlayer>();
+
+        sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true);
     }
 
     // Start is called before the first frame update
@@ -139,7 +143,27 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data){Debug.Log("OnReliableDataReceived");}
     public void OnSceneLoadDone(NetworkRunner runner){Debug.Log("OnSceneLoadDone");}
     public void OnSceneLoadStart(NetworkRunner runner){Debug.Log("OnSceneLoadStart");}
-    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList){Debug.Log("OnSessionListUpdated");}
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+    {
+        if (sessionListUIHandler == null)
+            return;
+
+        if(sessionList.Count==0)
+        {
+            sessionListUIHandler.OnNoSessionsFound();
+        }else
+        {
+            sessionListUIHandler.ClearList();
+            foreach(SessionInfo sessionInfo in sessionList)
+            {
+                sessionListUIHandler.AddToList(sessionInfo);
+                Debug.Log($"Found session {sessionInfo.Name} playerCount {sessionInfo.PlayerCount}");
+            }
+        }
+        
+        
+        Debug.Log("OnSessionListUpdated");
+    }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason){Debug.Log("OnShutdown");}
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message){Debug.Log("OnUserSimulationMessage");}
 }
