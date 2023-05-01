@@ -5,9 +5,9 @@ using Fusion;
 
 public struct NetworkInputData : INetworkInput
 {
-    // public Vector2 movementInput;
     // public Vector3 lookForwardVector; //old
-    public NetworkBool isMove;
+    public Vector2 movementInput;
+    // public NetworkBool isMove;
     public Vector3 moveDir;
     // public NetworkBool isJump;
     // public NetworkBool isDodge;

@@ -39,8 +39,9 @@ public class CharacterInputHandler : MonoBehaviour
         //Move input
         moveInputVector.x = Input.GetAxis("Horizontal");
         moveInputVector.y = Input.GetAxis("Vertical");
-        if(moveInputVector.magnitude != 0)
-            isMove = true; // moveInput의 길이로 입력 판정
+        // if(moveInputVector.magnitude != 0) // bug!!!!! 처음에 zero로 초기화 하면 버그발생           
+        // if(moveInputVector.x != 0 || moveInputVector.y != 0)           
+            // isMove = true; 
 
         //jump
         if(Input.GetButtonDown("Jump"))
@@ -67,10 +68,10 @@ public class CharacterInputHandler : MonoBehaviour
         //look data
         // networkInputData.lookForwardVector = localCameraHandler.transform.forward; //old
         //move data
-        // networkInputData.movementInput = moveInputVector; //old
+        networkInputData.movementInput = moveInputVector;
 
         //move data
-        networkInputData.isMove = isMove;
+        // networkInputData.isMove = isMove;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
@@ -85,7 +86,7 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.isRocketLauncherFireButtonPressed = isRocketLauncherFireButtonPressed;
 
         //Reset variables now that we have read their status
-        isMove = false;
+        // isMove = false;
         isJumpButtonPressed = false;
         isFireButtonPressed = false;
         isGrenadeFireButtonPressed = false;

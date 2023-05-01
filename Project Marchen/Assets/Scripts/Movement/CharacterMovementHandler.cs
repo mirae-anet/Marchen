@@ -6,10 +6,14 @@ using Fusion;
 public class CharacterMovementHandler : NetworkBehaviour
 {
     bool isRespawnRequested = false;
+    private bool isMove;
 
     //other components
+    [Header("Rotate")]
     [SerializeField]
-    private Transform playerBody;
+    private Transform playerModel;
+    // [SerializeField]
+    // private Transform playerBody;
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     HPHandler hpHandler;
     NetworkInGameMessages networkInGameMessages;
@@ -24,6 +28,7 @@ public class CharacterMovementHandler : NetworkBehaviour
     }
     void Start()
     {
+        isMove = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;       
     }
@@ -45,21 +50,34 @@ public class CharacterMovementHandler : NetworkBehaviour
         //get NetworkInputData from Client
         if(GetInput(out NetworkInputData networkInputData))
         {
+
             // if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
             //     return;
 
-            //new
-            if(networkInputData.isMove )
+            if(networkInputData.movementInput.x != 0.0f || networkInputData.movementInput.y != 0f)
             {
-                playerBody.forward = networkInputData.moveDir;
+                isMove = true;
+                Debug.Log($"OnCharacterMovementHandler movementInput is {networkInputData.movementInput}");
+                Debug.Log($"OnCharacterMovementHandler isMove is {isMove}");
+            }
+
+            //new
+            if(isMove)
+            {
+                if(networkInputData.moveDir != null)
+                {
+                    Debug.Log($"OnCharacterMovementHandler moveDir is {networkInputData.moveDir}");
+                    playerModel.forward = networkInputData.moveDir;
+                }
+                // playerBody.forward = networkInputData.moveDir;
                 //rigidBody 필요
                 networkCharacterControllerPrototypeCustom.Move(networkInputData.moveDir);
             }
 
-            if(networkInputData.isFireButtonPressed || networkInputData.isGrenadeFireButtonPressed || networkInputData.isRocketLauncherFireButtonPressed)
-            {
-                //공격 시 playerBody.forward 방향 전환 필요.
-            }
+            // if(networkInputData.isFireButtonPressed || networkInputData.isGrenadeFireButtonPressed || networkInputData.isRocketLauncherFireButtonPressed)
+            // {
+            //     //공격 시 playerBody.forward 방향 전환 필요.
+            // }
 
             //Jump after move
             if(networkInputData.isJumpButtonPressed)

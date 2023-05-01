@@ -27,11 +27,12 @@ public class LocalCameraHandler : MonoBehaviour
     //other component
     NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     CharacterMovementHandler characterMovementHandler;
+
+    [SerializeField]
     private Camera localCamera;
 
     void Awake()
     {
-      localCamera = GetComponentInChildren<Camera>();  
       networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
       characterMovementHandler = GetComponentInParent<CharacterMovementHandler>();
     }
@@ -59,6 +60,10 @@ public class LocalCameraHandler : MonoBehaviour
             return;
         }
         //new
+
+        //Move the cameraArm to the position of the player
+        // transform.position = cameraAnchorPoint.position;
+
         cameraRotationX = viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
         cameraRotationY = viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.rotationSpeed;
         Vector3 camAngle = transform.rotation.eulerAngles;    // 카메라 위치 값을 오일러 각으로 변환
