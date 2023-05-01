@@ -50,7 +50,7 @@ public class PlayerMain : MonoBehaviour
             if (!isDamage)
             {
                 Bullet enemyBullet = other.GetComponent<Bullet>();
-                health -= enemyBullet.damage;
+                health -= enemyBullet.getDamage();
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
