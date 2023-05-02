@@ -11,19 +11,14 @@ public class CharacterMovementHandler : NetworkBehaviour
     //other components
     [Header("Rotate")]
     [SerializeField]
-    private Transform playerModel;
-    // [SerializeField]
-    // // private Transform playerBody;
-    // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    NetworkPlayerController networkPlayerController;
+    // NetworkPlayerController networkPlayerController;
     HPHandler hpHandler;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
-        // networkCharacterControllerPrototypeCustom = GetComponent<NetworkCharacterControllerPrototypeCustom>();
-        networkPlayerController = GetComponent<NetworkPlayerController>();
+        // networkyerController = GetComponent<NetworkPlayerController>();
         hpHandler = GetComponent<HPHandler>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
@@ -54,7 +49,8 @@ public class CharacterMovementHandler : NetworkBehaviour
             if(!Object.HasStateAuthority)
                 return;
 
-            if(!isControllerEnable)
+            /*
+            if(!isControllerEnable) //죽은 경우
                 return;
             
             // 입력값 저장
@@ -67,6 +63,7 @@ public class CharacterMovementHandler : NetworkBehaviour
             networkPlayerController.PlayerMove();
             networkPlayerController.PlayerJump();
             networkPlayerController.PlayerDodge();
+            */
             
             //Check if we've fallen off the world
             CheckFallRespawn();
@@ -106,5 +103,9 @@ public class CharacterMovementHandler : NetworkBehaviour
     {
         // networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
         isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
     }
 }

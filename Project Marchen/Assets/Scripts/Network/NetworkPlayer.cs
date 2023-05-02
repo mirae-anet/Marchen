@@ -60,7 +60,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             localUI.SetActive(true);
 
             //Detach camera if enabled
-            // localCameraHandler.transform.parent = null;
+            localCameraHandler.transform.parent = null;
 
             RPC_SetNickName(GameManager.instance.playerNickName);
 
