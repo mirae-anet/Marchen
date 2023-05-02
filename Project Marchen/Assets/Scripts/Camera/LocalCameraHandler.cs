@@ -10,8 +10,8 @@ public class LocalCameraHandler : MonoBehaviour
     private float cameraSpeed = 200f;
 
     [Header("Anchor Point")]
-    // [SerializeField]
-    // Transform cameraAnchorPoint;
+    [SerializeField]
+    Transform cameraAnchorPoint;
     [SerializeField]
     Transform bodyAnchorPoint;
 
@@ -53,7 +53,9 @@ public class LocalCameraHandler : MonoBehaviour
     private void Update()
     {
         //조종하는 사람만 실행
-        if(!characterMovementHandler.Object.HasInputAuthority){return;} 
+        if(characterMovementHandler.Object != null)
+            if(!characterMovementHandler.Object.HasInputAuthority)
+                return;
         
         setAimForwardVector();
     }
@@ -67,7 +69,7 @@ public class LocalCameraHandler : MonoBehaviour
         //new
 
         //Move the cameraArm to the position of the player
-        // transform.position = cameraAnchorPoint.position;
+        transform.position = cameraAnchorPoint.position;
 
         cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
         cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
