@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class LocalCameraHandler : MonoBehaviour
 {
+    [Header("설정")]
+    [Range(100f, 500f)]
+    [SerializeField]
+    private float cameraSpeed = 200f;
+
     [Header("Anchor Point")]
     // [SerializeField]
     // Transform cameraAnchorPoint;
@@ -25,7 +30,7 @@ public class LocalCameraHandler : MonoBehaviour
     float cameraRotationY = 0;
 
     //other component
-    NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
+    // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     CharacterMovementHandler characterMovementHandler;
 
     [SerializeField]
@@ -33,7 +38,7 @@ public class LocalCameraHandler : MonoBehaviour
 
     void Awake()
     {
-      networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
+    //   networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
       characterMovementHandler = GetComponentInParent<CharacterMovementHandler>();
     }
 
@@ -64,8 +69,8 @@ public class LocalCameraHandler : MonoBehaviour
         //Move the cameraArm to the position of the player
         // transform.position = cameraAnchorPoint.position;
 
-        cameraRotationX = viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
-        cameraRotationY = viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.rotationSpeed;
+        cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
+        cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
         Vector3 camAngle = transform.rotation.eulerAngles;    // 카메라 위치 값을 오일러 각으로 변환
 
         float x = camAngle.x - cameraRotationX;

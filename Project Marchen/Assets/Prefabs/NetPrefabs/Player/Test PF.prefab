@@ -1152,16 +1152,16 @@ GameObject:
   - component: {fileID: 4980385288277362890}
   - component: {fileID: 3244430199428988799}
   - component: {fileID: 8591404573529759849}
-  - component: {fileID: 7103081422859609055}
-  - component: {fileID: 8507553157266342457}
   - component: {fileID: 9061902636817628115}
   - component: {fileID: 6441630219631003985}
   - component: {fileID: 8697239627248929451}
   - component: {fileID: 4381579702224905231}
   - component: {fileID: 3549005068747928253}
   - component: {fileID: 4539011877122390087}
+  - component: {fileID: 2940614669891650209}
+  - component: {fileID: 3151836074117985339}
   m_Layer: 6
-  m_Name: CameraOkay PF
+  m_Name: Test PF
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1226,72 +1226,17 @@ MonoBehaviour:
   AoiPositionSource: {fileID: 0}
   Flags: 2305
   NetworkGuid:
-    RawGuidValue: 3695a62e9540d4ab2877fb0e9fb21b1e
+    RawGuidValue: 3ad547f53e3e1488594d5746b8ebcd3e
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3244430199428988799}
-  - {fileID: 8507553157266342457}
   - {fileID: 9061902636817628115}
   - {fileID: 8697239627248929451}
   - {fileID: 4381579702224905231}
   - {fileID: 3549005068747928253}
   - {fileID: 4539011877122390087}
+  - {fileID: 3151836074117985339}
   SimulationBehaviours: []
---- !u!143 &7103081422859609055
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597645375552586582}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8507553157266342457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597645375552586582}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90e0bcc1269c429599837f79e16c5c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  InterpolationSpace: 0
-  InterpolationTarget: {fileID: 6640970328589365237}
-  InterpolateErrorCorrection: 1
-  InterpolatedErrorCorrectionSettings:
-    MinRate: 3.3
-    MaxRate: 10
-    PosBlendStart: 0.25
-    PosBlendEnd: 1
-    PosMinCorrection: 0.025
-    PosTeleportDistance: 2
-    RotBlendStart: 0.1
-    RotBlendEnd: 0.5
-    RotTeleportRadians: 1.5
-  UseLegacySharedModeInterpolation: 0
-  TargetInterpolationDelay: 0.03
-  gravity: -20
-  jumpImpulse: 8
-  acceleration: 50
-  braking: 30
-  maxSpeed: 10
-  rotationSpeed: 400
-  viewUpDownRotationSpeed: 400
-  _IsGrounded: 0
-  _Velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &9061902636817628115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,6 +1340,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+--- !u!54 &2940614669891650209
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &3151836074117985339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1710889294, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 1971543424177856303}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
 --- !u!1 &3706017666956517793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,6 +2000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235f6da7e89e41379b70e09575c184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSpeed: 2
   bodyAnchorPoint: {fileID: 7081180801289539154}
   layerMask:
     serializedVersion: 2
@@ -2547,6 +2537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235f6da7e89e41379b70e09575c184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSpeed: 200
   bodyAnchorPoint: {fileID: 7081180801289539154}
   layerMask:
     serializedVersion: 2

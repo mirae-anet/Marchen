@@ -6,29 +6,28 @@ using Fusion;
 public class CharacterMovementHandler : NetworkBehaviour
 {
     bool isRespawnRequested = false;
-    private bool isMove;
+    bool isControllerEnable = true;
 
     //other components
     [Header("Rotate")]
     [SerializeField]
     private Transform playerModel;
     // [SerializeField]
-    // private Transform playerBody;
-    NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
+    // // private Transform playerBody;
+    // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     HPHandler hpHandler;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
-        networkCharacterControllerPrototypeCustom = GetComponent<NetworkCharacterControllerPrototypeCustom>();
+        // networkCharacterControllerPrototypeCustom = GetComponent<NetworkCharacterControllerPrototypeCustom>();
         hpHandler = GetComponent<HPHandler>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
     }
     void Start()
     {
-        isMove = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;       
     }
@@ -51,6 +50,8 @@ public class CharacterMovementHandler : NetworkBehaviour
         if(GetInput(out NetworkInputData networkInputData))
         {
 
+            if(!isControllerEnable)
+                return;
             // if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
             //     return;
 
@@ -60,20 +61,16 @@ public class CharacterMovementHandler : NetworkBehaviour
                 Debug.Log($"moveDir is {networkInputData.moveDir}");
                 playerModel.forward = networkInputData.moveDir;
                 // playerBody.forward = networkInputData.moveDir;
+                // networkCharacterControllerPrototypeCustom.Move(networkInputData.moveDir);
                 //rigidBody 필요
-                networkCharacterControllerPrototypeCustom.Move(networkInputData.moveDir);
+
+
             }
 
             // if(networkInputData.isFireButtonPressed || networkInputData.isGrenadeFireButtonPressed || networkInputData.isRocketLauncherFireButtonPressed)
             // {
             //     //공격 시 playerBody.forward 방향 전환 필요.
             // }
-
-            //Jump after move
-            if(networkInputData.isJumpButtonPressed)
-            {
-                networkCharacterControllerPrototypeCustom.Jump();
-            }
 
             //Check if we've fallen off the world
             CheckFallRespawn();
@@ -113,7 +110,8 @@ public class CharacterMovementHandler : NetworkBehaviour
 
     void Respawn()
     {
-        networkCharacterControllerPrototypeCustom.TeleportToPosition(Utils.GetRandomSpawnPoint());
+        // networkCharacterControllerPrototypeCustom.TeleportToPosition(Utils.GetRandomSpawnPoint());
+        transform.position = Utils.GetRandomSpawnPoint();
         hpHandler.OnRespawned();
         isRespawnRequested = false;
     }
@@ -135,6 +133,7 @@ public class CharacterMovementHandler : NetworkBehaviour
 
     public void SetCharacterControllerEnabled(bool isEnabled)
     {
-        networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
+        // networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
+        isControllerEnable = isEnabled;
     }
 }
