@@ -78,7 +78,8 @@ public class NetworkPlayerController : NetworkBehaviour
             if (rayHit.distance < 1.0f)
             {
                 isJump = false;
-                anim.SetBool("isJump", false);
+                // anim.SetBool("isJump", false);
+                RPC_animatonSetBool("isJump", false);
                 //Debug.Log("착지");
             }
         }
@@ -91,7 +92,8 @@ public class NetworkPlayerController : NetworkBehaviour
 
         if (isMove)
         {
-            playerModel.forward = moveDir;       // 카메라 고정
+            // playerModel.forward = moveDir; animatonSetBool      // 카메라 고정
+            RPC_LookForward(moveDir);
 
             float walkSpeed = (walkInput ? 0.3f : 1f); // 걷기면 속도 0.3배
 
@@ -100,8 +102,10 @@ public class NetworkPlayerController : NetworkBehaviour
         else
             rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f); // 미끄러짐 방지
 
-        anim.SetBool("isRun", isMove);     // true일 때 걷는 애니메이션, false일 때 대기 애니메이션
-        anim.SetBool("isWalk", walkInput); // isMove, walkOn 둘 다 True 일 때는 걷기
+        // anim.SetBool("isRun", isMove);     // true일 때 걷는 애니메이션, false일 때 대기 애니메이션
+        RPC_animatonSetBool("isRun", isMove);
+        // anim.SetBool("isWalk", walkInput); // isMove, walkOn 둘 다 True 일 때는 걷기
+        RPC_animatonSetBool("isWalk", walkInput);
     }
 
     public void PlayerJump()
@@ -112,8 +116,10 @@ public class NetworkPlayerController : NetworkBehaviour
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-            anim.SetBool("isJump", true);
-            anim.SetTrigger("doJump");
+            // anim.SetBool("isJump", true);
+            RPC_animatonSetBool("isJump", true);
+            // anim.SetTrigger("doJump");
+            RPC_animatonSetTrigger("doJump");
         }
     }
 
@@ -126,7 +132,8 @@ public class NetworkPlayerController : NetworkBehaviour
             
             rigid.AddForce(dodgeDir.normalized * dodgePower, ForceMode.Impulse);
 
-            anim.SetTrigger("doDodge");
+            // anim.SetTrigger("doDodge");
+            RPC_animatonSetTrigger("doDodge");
 
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
@@ -138,6 +145,24 @@ public class NetworkPlayerController : NetworkBehaviour
         isDodge = false;
     }
     
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_LookForward(Vector3 moveDir)
+    {
+        playerModel.forward = moveDir;
+    }
+
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_animatonSetBool(string action, bool isDone)
+    {
+        anim.SetBool(action, isDone);
+        // anim.SetTrigger("doJump");
+    }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_animatonSetTrigger(string action)
+    {
+        anim.SetTrigger(action);
+    }
+
     /*
     private void OnDrawGizmos()
     {
