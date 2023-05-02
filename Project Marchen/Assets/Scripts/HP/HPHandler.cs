@@ -11,6 +11,7 @@ public class HPHandler : NetworkBehaviour
     [Networked(OnChanged = nameof(OnStateChanged))]
     public bool isDead {get; set;}
 
+    bool isDamage = false;
     bool isInitialized = false;
     const byte startingHP = 5;
 
@@ -24,6 +25,7 @@ public class HPHandler : NetworkBehaviour
     public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
+    private MeshRenderer[] meshs;
     HitboxRoot hitboxRoot;
     CharacterMovementHandler characterMovementHandler;
     NetworkInGameMessages networkInGameMessages;
@@ -31,6 +33,7 @@ public class HPHandler : NetworkBehaviour
 
     private void Awake()
     {
+        meshs = GetComponentsInChildren<MeshRenderer>();
         characterMovementHandler = GetComponent<CharacterMovementHandler>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
@@ -51,16 +54,27 @@ public class HPHandler : NetworkBehaviour
     IEnumerator OnHitCO()
     {
         // 피격시 효과
-        // bodyMeshRenderer.material.color = Color.red;
+        isDamage = true;
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.yellow;
+
         if(Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
         yield return new WaitForSeconds(0.2f);
 
-        //정상화
-        // bodyMeshRenderer.material.color = defaultMeshBodyColor;
+        //화면 정상화
         if(Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
+
+        yield return new WaitForSeconds(0.4f);
+
+        //아바타 정상화
+        isDamage = false;
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.white;
     }
 
     IEnumerator ServerReviveCO()
@@ -157,4 +171,8 @@ public class HPHandler : NetworkBehaviour
         isDead = false;
     }
 
+    public bool getIsHit()
+    {
+        return isDamage;
+    }
 }

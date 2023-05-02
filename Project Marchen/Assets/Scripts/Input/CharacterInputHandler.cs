@@ -7,7 +7,9 @@ public class CharacterInputHandler : MonoBehaviour
     Vector2 moveInputVector = Vector2.zero;
     Vector2 viewInputVector = Vector2.zero;
     bool isMove = false;
-    bool isJumpButtonPressed = false;
+    bool walkInput = false;
+    bool jumpInput = false;
+    bool dodgeInput = false;
     bool isFireButtonPressed = false;
     bool isGrenadeFireButtonPressed = false;
     bool isRocketLauncherFireButtonPressed = false;
@@ -42,9 +44,13 @@ public class CharacterInputHandler : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // 이동 입력 벡터
         isMove = (moveInput.magnitude != 0); // moveInput의 길이로 입력 판정
 
-        //jump
         if(Input.GetButtonDown("Jump"))
-            isJumpButtonPressed = true;
+            jumpInput = true;
+        if(Input.GetButtonDown("Walk"))
+            walkInput = true;
+        if(Input.GetButtonDown("Dodge"))
+            dodgeInput = true;
+
         //fire
         if(Input.GetButtonDown("Fire1"))
             isFireButtonPressed = true;
@@ -59,24 +65,24 @@ public class CharacterInputHandler : MonoBehaviour
 
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector); 
+
     }
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();
 
-        //look data
-        // networkInputData.lookForwardVector = localCameraHandler.transform.forward; //old
-        //move data
-        // networkInputData.movementInput = moveInputVector;
-
         //move data
         networkInputData.isMove = isMove;
+        //Jump data
+        networkInputData.jumpInput = jumpInput;
+        //walk data
+        networkInputData.walkInput = walkInput;
+        //dodge data
+        networkInputData.dodgeInput = dodgeInput;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
         networkInputData.aimForwardVector = localCameraHandler.getAimForwardVector();
-        //Jump data
-        networkInputData.isJumpButtonPressed = isJumpButtonPressed;
         //Fire data
         networkInputData.isFireButtonPressed = isFireButtonPressed;
         //Grenade data
@@ -86,7 +92,9 @@ public class CharacterInputHandler : MonoBehaviour
 
         //Reset variables now that we have read their status
         // isMove = false;
-        isJumpButtonPressed = false;
+        jumpInput = false;
+        walkInput = false;
+        dodgeInput = false;
         isFireButtonPressed = false;
         isGrenadeFireButtonPressed = false;
         isRocketLauncherFireButtonPressed = false;

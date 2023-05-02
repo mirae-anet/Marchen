@@ -1152,7 +1152,6 @@ GameObject:
   - component: {fileID: 4980385288277362890}
   - component: {fileID: 3244430199428988799}
   - component: {fileID: 8591404573529759849}
-  - component: {fileID: 9061902636817628115}
   - component: {fileID: 6441630219631003985}
   - component: {fileID: 8697239627248929451}
   - component: {fileID: 4381579702224905231}
@@ -1160,6 +1159,8 @@ GameObject:
   - component: {fileID: 4539011877122390087}
   - component: {fileID: 2940614669891650209}
   - component: {fileID: 3151836074117985339}
+  - component: {fileID: 9061902636817628115}
+  - component: {fileID: 4797138551789220831}
   m_Layer: 6
   m_Name: Test PF
   m_TagString: Player
@@ -1230,27 +1231,14 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3244430199428988799}
-  - {fileID: 9061902636817628115}
   - {fileID: 8697239627248929451}
   - {fileID: 4381579702224905231}
   - {fileID: 3549005068747928253}
   - {fileID: 4539011877122390087}
   - {fileID: 3151836074117985339}
+  - {fileID: 9061902636817628115}
+  - {fileID: 4797138551789220831}
   SimulationBehaviours: []
---- !u!114 &9061902636817628115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597645375552586582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f4a6c96385a4bec8657c6939a8c4ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  playerModel: {fileID: 1971543424177856303}
 --- !u!114 &6441630219631003985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,6 +1372,40 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &9061902636817628115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f4a6c96385a4bec8657c6939a8c4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  playerModel: {fileID: 1971543424177856303}
+--- !u!114 &4797138551789220831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1265c0c092f46c791f8bda06105834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  playerBody: {fileID: 6640970328589365237}
+  playerModel: {fileID: 1971543424177856303}
+  moveSpeed: 20
+  jumpPower: 40
+  dodgePower: 20
+  doubleTapTime: 0.2
+  raySize: {x: 1.8, y: 0.6, z: 1.8}
 --- !u!1 &3706017666956517793
 GameObject:
   m_ObjectHideFlags: 0
