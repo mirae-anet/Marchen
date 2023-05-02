@@ -54,21 +54,11 @@ public class CharacterMovementHandler : NetworkBehaviour
             // if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
             //     return;
 
-            if(networkInputData.movementInput.x != 0.0f || networkInputData.movementInput.y != 0f)
-            {
-                isMove = true;
-                Debug.Log($"OnCharacterMovementHandler movementInput is {networkInputData.movementInput}");
-                Debug.Log($"OnCharacterMovementHandler isMove is {isMove}");
-            }
-
             //new
-            if(isMove)
+            if(networkInputData.isMove)
             {
-                if(networkInputData.moveDir != null)
-                {
-                    Debug.Log($"OnCharacterMovementHandler moveDir is {networkInputData.moveDir}");
-                    playerModel.forward = networkInputData.moveDir;
-                }
+                Debug.Log($"moveDir is {networkInputData.moveDir}");
+                playerModel.forward = networkInputData.moveDir;
                 // playerBody.forward = networkInputData.moveDir;
                 //rigidBody 필요
                 networkCharacterControllerPrototypeCustom.Move(networkInputData.moveDir);

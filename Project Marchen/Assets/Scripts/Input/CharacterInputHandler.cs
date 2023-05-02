@@ -39,9 +39,8 @@ public class CharacterInputHandler : MonoBehaviour
         //Move input
         moveInputVector.x = Input.GetAxis("Horizontal");
         moveInputVector.y = Input.GetAxis("Vertical");
-        // if(moveInputVector.magnitude != 0) // bug!!!!! 처음에 zero로 초기화 하면 버그발생           
-        // if(moveInputVector.x != 0 || moveInputVector.y != 0)           
-            // isMove = true; 
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // 이동 입력 벡터
+        isMove = (moveInput.magnitude != 0); // moveInput의 길이로 입력 판정
 
         //jump
         if(Input.GetButtonDown("Jump"))
@@ -68,10 +67,10 @@ public class CharacterInputHandler : MonoBehaviour
         //look data
         // networkInputData.lookForwardVector = localCameraHandler.transform.forward; //old
         //move data
-        networkInputData.movementInput = moveInputVector;
+        // networkInputData.movementInput = moveInputVector;
 
         //move data
-        // networkInputData.isMove = isMove;
+        networkInputData.isMove = isMove;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
