@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &260612724006229707
+--- !u!1 &4913221015397472281
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3381649361039713535}
-  - component: {fileID: 1203105506529680193}
-  - component: {fileID: 4754702165877367354}
+  - component: {fileID: 4913221015397472279}
+  - component: {fileID: 4913221015397472280}
   m_Layer: 0
-  m_Name: NetworkRunner PF
+  m_Name: NetworkRunnerHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3381649361039713535
+--- !u!4 &4913221015397472279
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260612724006229707}
+  m_GameObject: {fileID: 4913221015397472281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,28 +32,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1203105506529680193
+--- !u!114 &4913221015397472280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260612724006229707}
+  m_GameObject: {fileID: 4913221015397472281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1199893898, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Script: {fileID: 11500000, guid: d2fe839d3206a4974b19fb983a53cb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4754702165877367354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260612724006229707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a7eac39f71d4c1d9636148e742b929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3244430199428988799, guid: 3ad547f53e3e1488594d5746b8ebcd3e, type: 3}
+  networkRunnerPrefab: {fileID: 1203105506529680193, guid: fc6279e9a2cc24785924efb1838756bb, type: 3}
