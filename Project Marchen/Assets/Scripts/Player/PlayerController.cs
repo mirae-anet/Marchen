@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerAttack();
 
-        Debug.Log(isAttack);
+        
     }
 
     private void GetInput()
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y + 0.3f, playerBody.position.z);
+        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
         if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
         {
