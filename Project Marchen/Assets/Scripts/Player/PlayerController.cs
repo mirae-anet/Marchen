@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
         PlayerDodge();
 
         PlayerAttack();
+
+        Debug.Log(isAttack);
     }
 
     private void GetInput()
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
+        feetpos = new Vector3(playerBody.position.x, playerBody.position.y + 0.3f, playerBody.position.z);
 
         if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
         {
@@ -95,8 +97,14 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.getIsHit()) // 회피, 피격 중 이동 제한
             return;
+
+        if (isAttack)
+        {
+            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f); // 미끄러짐 방지
+            return;
+        }
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
         
@@ -136,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit())
+        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isDodge = true;
             dodgeDir = moveDir; // 회피 방향 기억
