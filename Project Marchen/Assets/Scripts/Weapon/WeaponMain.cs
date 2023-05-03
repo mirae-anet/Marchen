@@ -17,7 +17,7 @@ public class WeaponMain : MonoBehaviour
     [Range(1f, 100f)]
     public int damage = 25;
     [Range(0f, 5f)]
-    public float delay = 0.4f;
+    public float delay = 0.35f;
 
     public void Attack()
     {
@@ -30,14 +30,14 @@ public class WeaponMain : MonoBehaviour
 
     IEnumerator Swing()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.08f);
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
         trailEffect.enabled = false;
     }
 

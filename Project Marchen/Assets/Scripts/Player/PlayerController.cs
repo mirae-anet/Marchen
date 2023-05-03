@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttack;
 
     private Vector3 moveDir;
-    private Vector3 dodgeDir;
+    private Vector3 saveDir;
     private Vector3 feetpos;
 
     // 입력값 저장 변수
@@ -97,14 +97,8 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.getIsHit()) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.getIsHit() || isAttack) // 회피, 피격 중 이동 제한
             return;
-
-        if (isAttack)
-        {
-            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f); // 미끄러짐 방지
-            return;
-        }
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
         
@@ -131,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit())
+        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isJump = true;
 
@@ -147,9 +141,9 @@ public class PlayerController : MonoBehaviour
         if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isDodge = true;
-            dodgeDir = moveDir; // 회피 방향 기억
-            
-            rigid.AddForce(dodgeDir.normalized * dodgePower, ForceMode.Impulse);
+
+            saveDir = moveDir; // 회피 방향 기억
+            rigid.AddForce(saveDir.normalized * dodgePower, ForceMode.Impulse);
 
             anim.SetTrigger("doDodge");
 
@@ -168,16 +162,26 @@ public class PlayerController : MonoBehaviour
         if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
         {
             isAttack = true;
-            playerMain.GetWeaponMain().Attack();
-            anim.SetTrigger("doSwing");
+            saveDir = moveDir; // 회피 방향 기억
 
             StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
         }
     }
 
-    IEnumerator AttackCoolTime(float second)
+    IEnumerator AttackCoolTime(float coolTime)
     {
-        yield return new WaitForSeconds(second);
+        // 선딜레이
+        rigid.velocity = new Vector3((saveDir * moveSpeed).x , rigid.velocity.y, (saveDir * moveSpeed).z);
+        anim.SetBool("isRun", true);
+
+        yield return new WaitForSeconds(0.3f);
+
+        rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
+        playerMain.GetWeaponMain().Attack();
+        anim.SetTrigger("doSwing");
+
+        yield return new WaitForSeconds(coolTime);
+
         isAttack = false;
     }
 
