@@ -9,7 +9,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
     public TextMeshProUGUI playerNickNameTM;
     public static NetworkPlayer Local {get; set;}
-    public Transform playerModel;
+    public Transform playerBody;
+    public Transform nickNameUI;
 
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
@@ -40,7 +41,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             //Sets the layer of the local players model
             //자신의 닉네임은 안 보이도록 레이어를 변경
-            Utils.SetRenderLayerInChildren(playerModel, LayerMask.NameToLayer("LocalPlayerModel"));
+            Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
+            Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera
             if(Camera.main != null)
@@ -51,7 +53,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             audioListener.enabled = true;
             
             //Enable the local camera
-            localCameraHandler.localCamera.enabled = true;
+            // localCameraHandler.localCamera.enabled = true;
+            localCameraHandler.localCameraEnable(true);
 
             //Enable UI for local player
             localUI.SetActive(true);
@@ -66,7 +69,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         else
         {
             //Disable the camera if we are not the local player
-            localCameraHandler.localCamera.enabled = false;
+            // localCameraHandler.localCamera.enabled = false;
+            localCameraHandler.localCameraEnable(false);
 
             //Disable UI in the PlayerUICanvas
             localUI.SetActive(false);
@@ -102,7 +106,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
     {
-        Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.nickName}");
+        Debug.Log($"{Time.time} OnNickNameChanged value {changed.Behaviour.nickName}");
         changed.Behaviour.OnNickNameChanged();
     }
     private void OnNickNameChanged()
