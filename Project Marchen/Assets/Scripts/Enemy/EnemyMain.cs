@@ -24,32 +24,33 @@ public class EnemyMain : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         mat = GetComponentInChildren<MeshRenderer>().material;
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        //if (other.tag == "Melee")  // 근접 공격
-        //{
-        //    Weapon weapon = other.GetComponent<Weapon>();
-        //    curHealth -= weapon.damage;
-        //    Vector3 reactVec = transform.position - other.transform.position;
+        if (other.tag == "PlayerAttack")  // 근접 공격
+        {
+            WeaponMain weaponMain = other.GetComponent<WeaponMain>();
+            curHealth -= weaponMain.damage;
+            Vector3 reactDir = transform.position - other.transform.position;
 
-        //    StartCoroutine(OnDamage(reactVec));
-        //}
+            StartCoroutine(OnDamage(reactDir));
+        }
 
-        //else if (other.tag == "Bullet")  // 원거리 공격
-        //{
-        //    Bullet bullet = other.GetComponent<Bullet>();
-        //    curHealth -= bullet.damage;
-        //    Vector3 reactVec = transform.position - other.transform.position;
+        else if (other.tag == "PlayerBullet")  // 원거리 공격
+        {
+            BulletMain bulletMain = other.GetComponent<BulletMain>();
+            curHealth -= bulletMain.damage;
+            Vector3 reactDir = transform.position - other.transform.position;
 
-        //    Destroy(other.gameObject);
+            Destroy(other.gameObject);
 
-        //    StartCoroutine(OnDamage(reactVec));
-        //}
+            StartCoroutine(OnDamage(reactDir));
+        }
     }
 
-    IEnumerator OnDamage(Vector3 reactVec)
+    IEnumerator OnDamage(Vector3 reactDir)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
@@ -58,9 +59,9 @@ public class EnemyMain : MonoBehaviour
         {
             mat.color = Color.white;  // 몬스터의 원래 색깔로 변경
 
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 2, ForceMode.Impulse);
+            reactDir = reactDir.normalized;
+            reactDir += Vector3.up;
+            rigid.AddForce(reactDir * 2, ForceMode.Impulse);
         }
 
         else
@@ -73,9 +74,9 @@ public class EnemyMain : MonoBehaviour
 
             anim.SetTrigger("doDie");
 
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
+            reactDir = reactDir.normalized;
+            reactDir += Vector3.up;
+            rigid.AddForce(reactDir * 5, ForceMode.Impulse);
 
             Destroy(gameObject, 3);  // 3초 뒤에 삭제
         }

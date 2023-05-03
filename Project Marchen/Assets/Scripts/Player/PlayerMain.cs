@@ -68,20 +68,20 @@ public class PlayerMain : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        else if (other.tag == "EnemyBullet")
+        else if (other.tag == "EnemyAttack" || other.tag == "EnemyBullet")
         {
             if (!isDamage)
             {
-                Bullet enemyBullet = other.GetComponent<Bullet>();
+                BulletMain enemyBullet = other.GetComponent<BulletMain>();
                 health -= enemyBullet.getDamage();
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
                 {
-                    Vector3 dirVec = (transform.position - other.transform.position).normalized;
+                    Vector3 reactDir = (transform.position - other.transform.position).normalized;
 
                     rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
-                    rigid.AddForce(dirVec * 10f, ForceMode.Impulse);
+                    rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
 
                     if (other.GetComponent<Rigidbody>() != null)
                         Destroy(other.gameObject);
