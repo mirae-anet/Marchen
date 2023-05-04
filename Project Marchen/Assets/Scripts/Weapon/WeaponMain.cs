@@ -19,12 +19,22 @@ public class WeaponMain : MonoBehaviour
     [Range(0f, 5f)]
     public float delay = 0.35f;
 
+    public Transform bulletPos;
+    public Transform bulletCasePos;
+    public GameObject bullet;
+    public GameObject bulletCase;
+
     public void Attack()
     {
         if (type == Type.Melee)
         {
             StopCoroutine("Swing");
             StartCoroutine("Swing");
+        }
+
+        else if (type == Type.Range)
+        {
+            StartCoroutine("Shot");
         }
     }
 
@@ -39,6 +49,21 @@ public class WeaponMain : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
         trailEffect.enabled = false;
+    }
+
+    IEnumerator Shot()
+    {
+        GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+        Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+        bulletRigid.velocity = bulletPos.forward * 50;
+        
+        yield return null;
+
+        GameObject instantCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
+        Rigidbody caseRigid = instantCase.GetComponent<Rigidbody>();
+        Vector3 caseVec = bulletCasePos.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
+        caseRigid.AddForce(caseVec, ForceMode.Impulse);
+        caseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
     }
 
     public float getDelay()

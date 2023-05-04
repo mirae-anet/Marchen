@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigid;
     private CameraController camControl;
     private PlayerMain playerMain;
+    private WeaponMain weaponMain;
 
     private bool isMove;
     private bool isJump;
@@ -62,9 +63,7 @@ public class PlayerController : MonoBehaviour
         PlayerJump();
         PlayerDodge();
 
-        PlayerAttack();
-
-        
+        PlayerAttack(); 
     }
 
     private void GetInput()
@@ -178,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
         rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
         playerMain.GetWeaponMain().Attack();
-        anim.SetTrigger("doSwing");
+        anim.SetTrigger(weaponMain.type == WeaponMain.Type.Melee ? "doSwing" : "doShot");
 
         yield return new WaitForSeconds(coolTime);
 
