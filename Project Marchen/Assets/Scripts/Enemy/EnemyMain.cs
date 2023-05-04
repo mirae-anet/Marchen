@@ -83,6 +83,7 @@ public class EnemyMain : MonoBehaviour
         gameObject.layer = 10;  // 슈퍼 아머
         mat.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
+        rigid.velocity = Vector3.zero;
         enemyController.setIsChase(false);
 
         anim.SetTrigger("doDie");
