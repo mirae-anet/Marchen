@@ -10,7 +10,6 @@ public class AgrroPulling : MonoBehaviour
         {
             Transform player = target.GetComponent<Transform>();
             gameObject.GetComponentInParent<EnemyController>().SetTarget(player);
-            gameObject.GetComponentInParent<EnemyController>().ChaseStart();
 
             gameObject.SetActive(false);
         }

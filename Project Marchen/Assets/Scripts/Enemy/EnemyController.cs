@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
 
     private bool isChase = false;
     private bool isAttack = false;
+    private bool isAggro = false;
 
     [Header("오브젝트 연결")]   
     [SerializeField]
@@ -30,7 +31,7 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isChase) // 논어그로
+        if (!isAggro) // 논어그로
         {
             EnemyMove();
         }
@@ -45,7 +46,7 @@ public class EnemyController : MonoBehaviour
     void EnemyMove()
     {
         // 랜덤 이동
-        anim.SetBool("isWalk", false);
+        //anim.SetBool("isWalk", false);
     }
 
     void FreezeVelocity()
@@ -128,8 +129,9 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
-    public void ChaseStart()
+    IEnumerator ChaseStart()
     {
+        yield return new WaitForSeconds(0.5f);
         isChase = true;
         anim.SetBool("isWalk", true);
     }
@@ -137,6 +139,9 @@ public class EnemyController : MonoBehaviour
     public void SetTarget(Transform transform)
     {
         target = transform;
+        isAggro = true;
+
+        StartCoroutine(ChaseStart());
     }
 
     public void setIsChase(bool bol)
