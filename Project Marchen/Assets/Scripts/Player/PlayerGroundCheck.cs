@@ -6,7 +6,7 @@ public class PlayerGroundCheck : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ground" && other.tag == "Wall")
+        if (other.tag == "Ground" || other.tag == "Wall")
         {
             gameObject.GetComponentInParent<PlayerController>().setIsGrounded(true);
         }
