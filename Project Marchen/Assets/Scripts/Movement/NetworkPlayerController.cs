@@ -61,7 +61,7 @@ public class NetworkPlayerController : NetworkBehaviour
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
-        Debug.Log($"{isJump}");
+        // Debug.Log($"{isJump}");
 
         if(Object.HasInputAuthority)
         {

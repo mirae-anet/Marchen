@@ -45,8 +45,7 @@ public class LocalCameraHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraRotationX = GameManager.instance.cameraViewRotation.x;
-        cameraRotationY = GameManager.instance.cameraViewRotation.y;
+        transform.forward = GameManager.instance.cameraViewRotation;
         aimForwardVector = bodyAnchorPoint.forward;
     }
 
@@ -109,11 +108,7 @@ public class LocalCameraHandler : MonoBehaviour
     private void OnDestroy()
     {
         //when localCamera was disabled
-        if(cameraRotationX != 0 && cameraRotationY != 0)         
-        {
-            GameManager.instance.cameraViewRotation.x = cameraRotationX;
-            GameManager.instance.cameraViewRotation.y = cameraRotationY;
-        }
+        GameManager.instance.cameraViewRotation = transform.forward;
     }
     public Vector3 getMoveDir(Vector2 moveInputVector)
     {
