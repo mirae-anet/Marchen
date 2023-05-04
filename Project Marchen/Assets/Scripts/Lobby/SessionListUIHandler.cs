@@ -34,11 +34,11 @@ public class SessionListUIHandler : MonoBehaviour
         addedSessionInfoListUIItem.SetInformation(sessionInfo);
 
         //연결
-        addedSessionInfoListUIItem.onJoimSession += AddedSessionInfoListUIItem_OnJoimSession;
+        addedSessionInfoListUIItem.onJoinSession += AddedSessionInfoListUIItem_OnJoinSession;
 
     }
 
-    private void AddedSessionInfoListUIItem_OnJoimSession(SessionInfo sessionInfo)
+    private void AddedSessionInfoListUIItem_OnJoinSession(SessionInfo sessionInfo)
     {
         NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
 
