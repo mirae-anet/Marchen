@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
+    private Animator anim;
     private Rigidbody rigid;
     private MeshRenderer[] meshs;
     private GameObject nearObject;
     private WeaponMain weaponMain;
 
-    private bool isDamage;
+    private bool isDamage = false;
+    private bool isDead = false;
 
     public enum Type { Hammer, Gun };
 
     // 인스펙터
     [Header("오브젝트 연결")]
+    [SerializeField]
+    private GameObject playerBody;
     [SerializeField]
     private GameObject[] weapons;
 
@@ -27,6 +31,7 @@ public class PlayerMain : MonoBehaviour
     
     void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
 
@@ -105,11 +110,26 @@ public class PlayerMain : MonoBehaviour
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+
+        if (health <= 0)
+            OnDie();
+    }
+
+    void OnDie()
+    {
+        playerBody.layer = 10;
+        anim.SetTrigger("doDie");
+        isDead = true;
     }
 
     public bool getIsHit()
     {
         return isDamage;
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
     }
 
     public WeaponMain GetWeaponMain()

@@ -63,7 +63,6 @@ public class EnemyMain : MonoBehaviour
             reactDir += Vector3.up;
             rigid.AddForce(reactDir * 2, ForceMode.Impulse);
         }
-
         else
         {
             mat.color = Color.gray;  // 몬스터가 죽으면 회색으로 변경
