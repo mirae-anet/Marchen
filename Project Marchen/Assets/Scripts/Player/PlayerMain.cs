@@ -117,8 +117,10 @@ public class PlayerMain : MonoBehaviour
 
     void OnDie()
     {
-        playerBody.layer = 10;
+        playerBody.layer = 10; // 슈퍼아머
+        rigid.velocity = Vector3.zero;
         anim.SetTrigger("doDie");
+
         isDead = true;
     }
 
