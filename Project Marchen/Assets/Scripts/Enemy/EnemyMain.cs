@@ -36,8 +36,8 @@ public class EnemyMain : MonoBehaviour
             Vector3 reactDir = transform.position - other.transform.position;
 
             // 트랜스폼 제대로 연결
-            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
-
+            enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경
+            //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
             StartCoroutine(OnDamage(reactDir));
         }
 

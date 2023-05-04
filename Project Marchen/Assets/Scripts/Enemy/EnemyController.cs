@@ -62,7 +62,6 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Think(float worry)
     {
-        Debug.Log(gameObject.name);
         yield return new WaitForSeconds(worry);     // 고민
         moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
         transform.Rotate(0, moveDir, 0);
