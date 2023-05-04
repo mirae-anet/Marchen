@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletMain : MonoBehaviour
 {
     [Header("설정")]
     public bool isMelee = false;

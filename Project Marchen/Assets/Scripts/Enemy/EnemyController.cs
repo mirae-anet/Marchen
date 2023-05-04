@@ -9,14 +9,16 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rigid;
     private NavMeshAgent nav;
     private Animator anim;
+    private Transform target;
 
-    private bool isChase;
-    private bool isAttack;
+    private bool isChase = false;
+    private bool isAttack = false;
 
-    [Header("오브젝트 연결")]
-    public Transform target;
-    public BoxCollider meleeArea;
-    public GameObject bullet;
+    [Header("오브젝트 연결")]   
+    [SerializeField]
+    private BoxCollider meleeArea;
+    [SerializeField]
+    private GameObject bullet;
 
     void Awake()
     {
@@ -24,23 +26,26 @@ public class EnemyController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-
-        Invoke("ChaseStart", 2);
-    }
-
-    void Update()
-    {
-        if (nav.enabled)
-        {
-            nav.SetDestination(target.position);
-            nav.isStopped = !isChase;
-        }
     }
 
     void FixedUpdate()
     {
-        FreezeVelocity();
-        Targeting();
+        if (!isChase) // 논어그로
+        {
+            EnemyMove();
+        }
+        else // 어그로 풀링
+        {
+            FreezeVelocity();
+            EnemyChase();
+            Aiming();
+        }
+    }
+
+    void EnemyMove()
+    {
+        // 랜덤 이동
+        anim.SetBool("isWalk", false);
     }
 
     void FreezeVelocity()
@@ -52,19 +57,28 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Targeting()
+    void EnemyChase()
+    {
+        if (nav.enabled)
+        {
+            nav.SetDestination(target.position);
+            nav.isStopped = !isChase;
+        }
+    }
+
+    void Aiming()
     {
         float targetRadius = 0;
         float targetRange = 0;
 
         switch (enemyMain.getEnemyType())
         {
-            case EnemyMain.Type.A:
+            case EnemyMain.Type.Melee:
                 targetRadius = 1.5f;
                 targetRange = 3f;
                 break;
 
-            case EnemyMain.Type.B:
+            case EnemyMain.Type.Range:
                 targetRadius = 0.5f;
                 targetRange = 25f;
                 break;
@@ -81,12 +95,6 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(Attack());
     }
 
-    void ChaseStart()
-    {
-        isChase = true;
-        anim.SetBool("isWalk", true);
-    }
-
     IEnumerator Attack()
     {
         isChase = false;
@@ -95,7 +103,7 @@ public class EnemyController : MonoBehaviour
 
         switch (enemyMain.getEnemyType())
         {
-            case EnemyMain.Type.A:
+            case EnemyMain.Type.Melee:
                 yield return new WaitForSeconds(0.2f);
                 meleeArea.enabled = true;
 
@@ -105,15 +113,13 @@ public class EnemyController : MonoBehaviour
                 yield return new WaitForSeconds(1f);
                 break;
 
-            case EnemyMain.Type.B:
+            case EnemyMain.Type.Range:
                 yield return new WaitForSeconds(0.5f);
-                //GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 GameObject instantBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
                 yield return new WaitForSeconds(2f);
-
                 break;
         }
 
@@ -122,13 +128,20 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
+    public void ChaseStart()
+    {
+        isChase = true;
+        anim.SetBool("isWalk", true);
+    }
+
+    public void SetTarget(Transform transform)
+    {
+        target = transform;
+    }
+
     public void setIsChase(bool bol)
     {
         isChase = bol;
-    }
-
-    public void setNavEnabled(bool bol)
-    {
         nav.enabled = bol;
     }
 }

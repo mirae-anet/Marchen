@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
+    private Animator anim;
     private Rigidbody rigid;
     private MeshRenderer[] meshs;
     private GameObject nearObject;
+    private WeaponMain weaponMain;
 
-    private bool isDamage;
+    private bool isDamage = false;
+    private bool isDead = false;
+
+    public enum Type { Hammer, Gun };
 
     // 인스펙터
+    [Header("오브젝트 연결")]
+    [SerializeField]
+    private GameObject playerBody;
+    [SerializeField]
+    private GameObject[] weapons;
+
     [Header("설정")]
+    public Type weaponType;
     [Range(1f, 100f)]
     public int health = 100;
     [Range(1f, 100f)]
@@ -19,13 +31,29 @@ public class PlayerMain : MonoBehaviour
     
     void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+
+        WeaponEquip();
     }
 
-    void Update()
+    void WeaponEquip()
     {
-        
+        switch (weaponType)
+        {
+            case Type.Hammer:
+                weapons[0].SetActive(true);
+                weapons[1].SetActive(false);
+                weaponMain = weapons[0].GetComponent<WeaponMain>();
+                break;
+
+            case Type.Gun:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(true);
+                weaponMain = weapons[1].GetComponent<WeaponMain>();
+                break;
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -45,20 +73,20 @@ public class PlayerMain : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        else if (other.tag == "EnemyBullet")
+        else if (other.tag == "EnemyAttack" || other.tag == "EnemyBullet")
         {
             if (!isDamage)
             {
-                Bullet enemyBullet = other.GetComponent<Bullet>();
+                BulletMain enemyBullet = other.GetComponent<BulletMain>();
                 health -= enemyBullet.getDamage();
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
                 {
-                    Vector3 dirVec = (transform.position - other.transform.position).normalized;
+                    Vector3 reactDir = (transform.position - other.transform.position).normalized;
 
                     rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
-                    rigid.AddForce(dirVec * 10f, ForceMode.Impulse);
+                    rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
 
                     if (other.GetComponent<Rigidbody>() != null)
                         Destroy(other.gameObject);
@@ -82,10 +110,32 @@ public class PlayerMain : MonoBehaviour
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+
+        if (health <= 0)
+            OnDie();
+    }
+
+    void OnDie()
+    {
+        playerBody.layer = 10; // 슈퍼아머
+        rigid.velocity = Vector3.zero;
+        anim.SetTrigger("doDie");
+
+        isDead = true;
     }
 
     public bool getIsHit()
     {
         return isDamage;
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
+    }
+
+    public WeaponMain GetWeaponMain()
+    {
+        return weaponMain;
     }
 }

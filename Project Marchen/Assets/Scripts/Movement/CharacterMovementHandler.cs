@@ -6,16 +6,19 @@ using Fusion;
 public class CharacterMovementHandler : NetworkBehaviour
 {
     bool isRespawnRequested = false;
+    bool isControllerEnable = true;
 
     //other components
-    NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
+    [Header("Rotate")]
+    [SerializeField]
+    // NetworkPlayerController networkPlayerController;
     HPHandler hpHandler;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
-        networkCharacterControllerPrototypeCustom = GetComponent<NetworkCharacterControllerPrototypeCustom>();
+        // networkyerController = GetComponent<NetworkPlayerController>();
         hpHandler = GetComponent<HPHandler>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
@@ -27,7 +30,6 @@ public class CharacterMovementHandler : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        // if(Object.HasInputAuthority)
         if(Object.HasStateAuthority)
         {
             if(isRespawnRequested)
@@ -44,27 +46,25 @@ public class CharacterMovementHandler : NetworkBehaviour
         //get NetworkInputData from Client
         if(GetInput(out NetworkInputData networkInputData))
         {
+            if(!Object.HasStateAuthority)
+                return;
 
-            //Rotate the transform according to the client aim vector
-            transform.forward = networkInputData.aimForwardVector;
-            //Cancel out rotation on X axis as we don't want our character to tilt
-            //마우스 상하 움직임은 무시
-            Quaternion rotation = transform.rotation;
-            rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, rotation.eulerAngles.z);
-            transform.rotation = rotation;
-
-            //move
-            Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
-            moveDirection.Normalize();
-
-            networkCharacterControllerPrototypeCustom.Move(moveDirection);
-
-            //Jump after move
-            if(networkInputData.isJumpButtonPressed)
-            {
-                networkCharacterControllerPrototypeCustom.Jump();
-            }
-
+            /*
+            if(!isControllerEnable) //죽은 경우
+                return;
+            
+            // 입력값 저장
+            networkPlayerController.SetInput(networkInputData);
+    
+            // 바닥 체크
+            networkPlayerController.GroundCheck();
+    
+            // 플레이어 조작
+            networkPlayerController.PlayerMove();
+            networkPlayerController.PlayerJump();
+            networkPlayerController.PlayerDodge();
+            */
+            
             //Check if we've fallen off the world
             CheckFallRespawn();
 
@@ -78,7 +78,8 @@ public class CharacterMovementHandler : NetworkBehaviour
 
     void Respawn()
     {
-        networkCharacterControllerPrototypeCustom.TeleportToPosition(Utils.GetRandomSpawnPoint());
+        // networkCharacterControllerPrototypeCustom.TeleportToPosition(Utils.GetRandomSpawnPoint());
+        transform.position = Utils.GetRandomSpawnPoint();
         hpHandler.OnRespawned();
         isRespawnRequested = false;
     }
@@ -100,6 +101,11 @@ public class CharacterMovementHandler : NetworkBehaviour
 
     public void SetCharacterControllerEnabled(bool isEnabled)
     {
-        networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
+        // networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
+        isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
     }
 }
