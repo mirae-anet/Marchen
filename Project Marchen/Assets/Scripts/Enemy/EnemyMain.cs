@@ -35,6 +35,8 @@ public class EnemyMain : MonoBehaviour
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
+            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
+
             StartCoroutine(OnDamage(reactDir));
         }
 
@@ -44,7 +46,8 @@ public class EnemyMain : MonoBehaviour
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            Destroy(other.gameObject);
+            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
+            Destroy(other.gameObject); // 피격된 불릿 파괴
 
             StartCoroutine(OnDamage(reactDir));
         }
@@ -55,30 +58,34 @@ public class EnemyMain : MonoBehaviour
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
+        mat.color = Color.white; // 몬스터의 원래 색깔로 변경
+
         if (curHealth > 0)
         {
-            mat.color = Color.white;  // 몬스터의 원래 색깔로 변경
-
             reactDir = reactDir.normalized;
             reactDir += Vector3.up;
             rigid.AddForce(reactDir * 2, ForceMode.Impulse);
         }
         else
         {
-            mat.color = Color.gray;  // 몬스터가 죽으면 회색으로 변경
-            gameObject.layer = 10;
-
-            enemyController.setIsChase(false);
-            enemyController.setNavEnabled(false);
-
-            anim.SetTrigger("doDie");
-
             reactDir = reactDir.normalized;
             reactDir += Vector3.up;
             rigid.AddForce(reactDir * 5, ForceMode.Impulse);
 
-            Destroy(gameObject, 3);  // 3초 뒤에 삭제
+            OnDie();
         }
+    }
+
+    void OnDie()
+    {
+        gameObject.layer = 10;  // 슈퍼 아머
+        mat.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
+
+        enemyController.setIsChase(false);
+
+        anim.SetTrigger("doDie");
+
+        Destroy(gameObject, 3); // 3초 뒤에 삭제
     }
 
     public Type getEnemyType()
