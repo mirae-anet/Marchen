@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isJump;
     private bool isDodge;
     private bool isAttack;
+    private bool isReload;
 
     private Vector3 moveDir;
     private Vector3 saveDir;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     private bool dodgeInput;
     private bool attackInput;
+    private bool reloadInput;
 
     // 인스펙터
     [Header("오브젝트 연결")]
@@ -63,7 +65,8 @@ public class PlayerController : MonoBehaviour
         PlayerJump();
         PlayerDodge();
 
-        PlayerAttack(); 
+        PlayerAttack();
+        Reload();
     }
 
     private void GetInput()
@@ -74,6 +77,7 @@ public class PlayerController : MonoBehaviour
         dodgeInput = Input.GetButtonDown("Dodge");
 
         attackInput = Input.GetButtonDown("Fire1");
+        reloadInput = Input.GetButtonDown("Reload");
     }
 
     private void GroundCheck()
@@ -165,6 +169,32 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
         }
+    }
+
+    private void Reload()
+    {
+        if (weaponMain == null)
+            return;
+
+        if (weaponMain.type == WeaponMain.Type.Melee)
+            return;
+
+        //if (ammo == 0)  // 총알이 0개일 때
+        //return;
+
+        if (reloadInput && !isJump && !isDodge && !isAttack)
+        {
+            anim.SetTrigger("doReload");
+            isReload = true;
+
+            Invoke("ReloadOut", 0.5f);
+        }
+    }
+
+    private void ReloadOut()
+    {
+        weaponMain.curAmmo = weaponMain.maxAmmo;
+        isReload = false;
     }
 
     IEnumerator AttackCoolTime(float coolTime)

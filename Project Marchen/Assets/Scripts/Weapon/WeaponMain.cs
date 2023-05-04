@@ -19,6 +19,9 @@ public class WeaponMain : MonoBehaviour
     [Range(0f, 5f)]
     public float delay = 0.35f;
 
+    public int maxAmmo;
+    public int curAmmo;
+
     public Transform bulletPos;
     public Transform bulletCasePos;
     public GameObject bullet;
@@ -32,8 +35,9 @@ public class WeaponMain : MonoBehaviour
             StartCoroutine("Swing");
         }
 
-        else if (type == Type.Range)
+        else if (type == Type.Range && curAmmo > 0)
         {
+            curAmmo--;
             StartCoroutine("Shot");
         }
     }
