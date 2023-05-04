@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (playerMain.getIsDead())
+            return;
+
         // 입력값 저장
         GetInput();
 
@@ -63,8 +66,6 @@ public class PlayerController : MonoBehaviour
         PlayerDodge();
 
         PlayerAttack();
-
-        
     }
 
     private void GetInput()
