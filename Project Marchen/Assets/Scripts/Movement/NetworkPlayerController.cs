@@ -61,6 +61,7 @@ public class NetworkPlayerController : NetworkBehaviour
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
+        Debug.Log($"{isJump}");
 
         if(Object.HasInputAuthority)
         {
@@ -85,8 +86,8 @@ public class NetworkPlayerController : NetworkBehaviour
 
     public void GroundCheck()
     {
-        if (rigid.velocity.y > 0) // 추락이 아닐 때
-            return;
+        // if (rigid.velocity.y > 0) // 추락이 아닐 때
+        //     return;
 
         feetpos = new Vector3(playerBody.position.x, playerBody.position.y+0.3f, playerBody.position.z);
 
