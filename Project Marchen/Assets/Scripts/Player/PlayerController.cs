@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         camControl = GetComponentInChildren<CameraController>();
         playerMain = GetComponent<PlayerMain>();
+        weaponMain = GetComponentInChildren<WeaponMain>();
     }
     
     void Update()
