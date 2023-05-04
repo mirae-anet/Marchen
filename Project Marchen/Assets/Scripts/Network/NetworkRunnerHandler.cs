@@ -133,7 +133,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
         }
-        StartCoroutine(CleanUpHostMigrationCO());
+        runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex);
 
         Debug.Log($"HostMigrationResum completed");
     }
@@ -181,5 +181,6 @@ public class NetworkRunnerHandler : MonoBehaviour
         Debug.Log($"Join session {sessionInfo.Name}");
 
         var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex,null);
+
     }
 }
