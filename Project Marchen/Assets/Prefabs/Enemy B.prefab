@@ -110,7 +110,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &-5449209661034368636
 BoxCollider:
@@ -176,6 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 0}
   bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
+  moveDis: 3
+  moveSpeed: 5
 --- !u!1001 &5779840721249975049
 PrefabInstance:
   m_ObjectHideFlags: 0

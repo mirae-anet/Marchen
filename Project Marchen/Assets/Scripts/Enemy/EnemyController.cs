@@ -15,11 +15,18 @@ public class EnemyController : MonoBehaviour
     private bool isAttack = false;
     private bool isAggro = false;
 
+    private int moveDir = 0;
+    private int isMove = 0;
+
     [Header("오브젝트 연결")]   
     [SerializeField]
     private BoxCollider meleeArea;
     [SerializeField]
     private GameObject bullet;
+
+    [Header("설정")]
+    public float moveDis = 3f;
+    public float moveSpeed = 5f;
 
     void Awake()
     {
@@ -27,6 +34,11 @@ public class EnemyController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+    }
+
+    void Start()
+    {
+        StartCoroutine(Think(Random.Range(0.5f, 4f))); // 논어그로
     }
 
     void FixedUpdate()
@@ -45,8 +57,33 @@ public class EnemyController : MonoBehaviour
 
     void EnemyMove()
     {
-        // 랜덤 이동
-        //anim.SetBool("isWalk", false);
+        rigid.velocity = transform.forward * moveSpeed * isMove;
+    }
+
+    IEnumerator Think(float worry)
+    {
+        Debug.Log(gameObject.name);
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
+        anim.SetBool("isWalk", false);
+
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = -180;                             // 되돌아감
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
+        anim.SetBool("isWalk", false);
+
+        StartCoroutine(Think(Random.Range(0.5f, 4f)));
     }
 
     void FreezeVelocity()
@@ -141,6 +178,7 @@ public class EnemyController : MonoBehaviour
         target = transform;
         isAggro = true;
 
+        StopAllCoroutines();
         StartCoroutine(ChaseStart());
     }
 
