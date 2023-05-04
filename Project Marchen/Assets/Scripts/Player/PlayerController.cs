@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -101,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.getIsHit() || isAttack) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.getIsHit() || isAttack || isReload) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
@@ -179,22 +180,25 @@ public class PlayerController : MonoBehaviour
 
         if (weaponMain.type == WeaponMain.Type.Melee)
             return;
-
-        //if (ammo == 0)  // 총알이 0개일 때
-        //return;
-
+        /*
+        if (ammo == 0)  // 총알이 0개일 때
+            return;
+        */
         if (reloadInput && !isJump && !isDodge && !isAttack)
         {
             anim.SetTrigger("doReload");
             isReload = true;
 
-            Invoke("ReloadOut", 0.5f);
+            Invoke("ReloadOut", 2f);
         }
     }
 
     private void ReloadOut()
     {
-        weaponMain.curAmmo = weaponMain.maxAmmo;
+        //int reAmmo = reAmmo < weaponMain.maxAmmo ? ammo : weaponMain.maxAmmo;
+        //weaponMain.curAmmo = reAmmo;
+
+        //ammo -= reAmmo;
         isReload = false;
     }
 
