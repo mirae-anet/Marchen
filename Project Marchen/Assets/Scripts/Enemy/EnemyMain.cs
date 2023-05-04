@@ -35,7 +35,6 @@ public class EnemyMain : MonoBehaviour
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            // 트랜스폼 제대로 연결
             enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경
             //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
             StartCoroutine(OnDamage(reactDir));
@@ -47,8 +46,7 @@ public class EnemyMain : MonoBehaviour
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            // 불릿이니까 안됨ㅋㅋ 불릿에 쏜 사람 데이터 갖고 가야댐
-            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
+            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 타겟 변경
             Destroy(other.gameObject); // 피격된 불릿 파괴
 
             StartCoroutine(OnDamage(reactDir));

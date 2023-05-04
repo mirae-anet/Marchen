@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private BoxCollider meleeArea;
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private GameObject agrroPulling;
 
     [Header("설정")]
     public float moveDis = 3f;
@@ -50,6 +52,7 @@ public class EnemyController : MonoBehaviour
         else // 어그로 풀링
         {
             FreezeVelocity();
+            TargetisAlive();
             EnemyChase();
             Aiming();
         }
@@ -91,6 +94,24 @@ public class EnemyController : MonoBehaviour
         {
             rigid.velocity = Vector3.zero;
             rigid.angularVelocity = Vector3.zero;
+        }
+    }
+
+    void TargetisAlive()
+    {
+        //Debug.Log(target.parent.gameObject.ToString());
+        if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead())
+        {
+            rigid.velocity = Vector3.zero;
+
+            anim.SetBool("isWalk", false);
+            anim.SetBool("isAttack", false);
+
+            setIsChase(false);
+            agrroPulling.SetActive(true);
+            isAggro = false;
+
+            StartCoroutine(Think(Random.Range(0.5f, 4f)));
         }
     }
 
@@ -156,6 +177,8 @@ public class EnemyController : MonoBehaviour
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
+                instantBullet.GetComponent<BulletMain>().setParent(transform);
+
                 yield return new WaitForSeconds(2f);
                 break;
         }
@@ -176,6 +199,8 @@ public class EnemyController : MonoBehaviour
     {
         target = transform;
         isAggro = true;
+
+        setIsChase(true);
 
         StopAllCoroutines();
         StartCoroutine(ChaseStart());

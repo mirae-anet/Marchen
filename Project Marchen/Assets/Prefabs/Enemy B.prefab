@@ -139,7 +139,7 @@ NavMeshAgent:
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 480
-  m_StoppingDistance: 10
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 0}
   bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
+  agrroPulling: {fileID: 424008714869244661}
   moveDis: 3
   moveSpeed: 5
 --- !u!1001 &5779840721249975049

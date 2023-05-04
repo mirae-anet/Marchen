@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgrroPulling : MonoBehaviour
+public class AggroPulling : MonoBehaviour
 {
     private void OnTriggerEnter(Collider target)
     {
