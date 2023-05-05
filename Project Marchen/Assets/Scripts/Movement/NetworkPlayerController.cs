@@ -8,7 +8,7 @@ public class NetworkPlayerController : NetworkBehaviour
 {
 
     private bool isMove = false;
-    public bool isJump;
+    private bool isJump;
     private bool isDodge;
 
     private Vector3 moveDir;
@@ -89,26 +89,13 @@ public class NetworkPlayerController : NetworkBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y+0.3f, playerBody.position.z);
+        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
-        //local화 가능? 가능할 듯 update를 이용해서 hasInputAuthority확인 후에 계산하고 networked로 동기화하기
-        if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 2f, LayerMask.GetMask("Ground")))
+        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.identity, LayerMask.GetMask("Ground"));
+
+        if(colliders.Length > 0)
         {
-            if (rayHit.distance < 1.0f)
-            {
-                isJump = false;
-                // if(Object.HasInputAuthority)
-                    // anim.SetBool("isJump", false);
-                // anim.SetBool("isJump", false);
-                // RPC_animatonSetBool("isJump", false);
-                //Debug.Log("착지");
-            }
-            else
-            {
-                isJump = true;
-                // if(Object.HasInputAuthority)
-                //     anim.SetBool("isJump", true);
-            }
+            isJump = false;
         }
         else
         {

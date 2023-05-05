@@ -133,6 +133,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
         }
+        StartCoroutine(CleanUpHostMigrationCO());
+
         runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex);
 
         Debug.Log($"HostMigrationResum completed");
