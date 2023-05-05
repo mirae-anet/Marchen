@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletMain : MonoBehaviour
 {
+    public Transform parentObject;
+
     [Header("설정")]
     public bool isMelee = false;
     [Range(1f, 30f)]
@@ -24,5 +26,16 @@ public class BulletMain : MonoBehaviour
     public int getDamage()
     {
         return damage;
+    }
+
+    public void setParent(Transform transform)
+    {
+        parentObject = transform;
+        //Debug.Log(parentObject.name);
+    }
+
+    public Transform getParent()
+    { 
+        return parentObject;
     }
 }

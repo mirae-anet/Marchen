@@ -79,6 +79,7 @@ public class PlayerMain : MonoBehaviour
             {
                 BulletMain enemyBullet = other.GetComponent<BulletMain>();
                 health -= enemyBullet.getDamage();
+                //Debug.Log(other.GetComponent<BulletMain>().getParent());
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
@@ -99,6 +100,9 @@ public class PlayerMain : MonoBehaviour
     
     IEnumerator OnDamage()
     {
+        if (health <= 0)
+            OnDie();
+
         isDamage = true;
 
         foreach (MeshRenderer mesh in meshs)
@@ -110,13 +114,11 @@ public class PlayerMain : MonoBehaviour
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
-
-        if (health <= 0)
-            OnDie();
     }
 
     void OnDie()
     {
+        gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
         playerBody.layer = 10; // 슈퍼아머
         rigid.velocity = Vector3.zero;
         anim.SetTrigger("doDie");

@@ -13,12 +13,22 @@ public class EnemyController : MonoBehaviour
 
     private bool isChase = false;
     private bool isAttack = false;
+    private bool isAggro = false;
+
+    private int moveDir = 0;
+    private int isMove = 0;
 
     [Header("오브젝트 연결")]   
     [SerializeField]
     private BoxCollider meleeArea;
     [SerializeField]
     private GameObject bullet;
+    [SerializeField]
+    private GameObject agrroPulling;
+
+    [Header("설정")]
+    public float moveDis = 3f;
+    public float moveSpeed = 5f;
 
     void Awake()
     {
@@ -28,15 +38,21 @@ public class EnemyController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+    void Start()
+    {
+        StartCoroutine(Think(Random.Range(0.5f, 4f))); // 논어그로
+    }
+
     void FixedUpdate()
     {
-        if (!isChase) // 논어그로
+        if (!isAggro) // 논어그로
         {
             EnemyMove();
         }
         else // 어그로 풀링
         {
             FreezeVelocity();
+            TargetisAlive();
             EnemyChase();
             Aiming();
         }
@@ -44,8 +60,32 @@ public class EnemyController : MonoBehaviour
 
     void EnemyMove()
     {
-        // 랜덤 이동
+        rigid.velocity = transform.forward * moveSpeed * isMove;
+    }
+
+    IEnumerator Think(float worry)
+    {
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
         anim.SetBool("isWalk", false);
+
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = -180;                             // 되돌아감
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
+        anim.SetBool("isWalk", false);
+
+        StartCoroutine(Think(Random.Range(0.5f, 4f)));
     }
 
     void FreezeVelocity()
@@ -54,6 +94,24 @@ public class EnemyController : MonoBehaviour
         {
             rigid.velocity = Vector3.zero;
             rigid.angularVelocity = Vector3.zero;
+        }
+    }
+
+    void TargetisAlive()
+    {
+        //Debug.Log(target.parent.gameObject.ToString());
+        if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead())
+        {
+            rigid.velocity = Vector3.zero;
+
+            anim.SetBool("isWalk", false);
+            anim.SetBool("isAttack", false);
+
+            setIsChase(false);
+            agrroPulling.SetActive(true);
+            isAggro = false;
+
+            StartCoroutine(Think(Random.Range(0.5f, 4f)));
         }
     }
 
@@ -119,6 +177,8 @@ public class EnemyController : MonoBehaviour
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
+                instantBullet.GetComponent<BulletMain>().setParent(transform);
+
                 yield return new WaitForSeconds(2f);
                 break;
         }
@@ -128,8 +188,9 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
-    public void ChaseStart()
+    IEnumerator ChaseStart()
     {
+        yield return new WaitForSeconds(0.5f);
         isChase = true;
         anim.SetBool("isWalk", true);
     }
@@ -137,6 +198,12 @@ public class EnemyController : MonoBehaviour
     public void SetTarget(Transform transform)
     {
         target = transform;
+        isAggro = true;
+
+        setIsChase(true);
+
+        StopAllCoroutines();
+        StartCoroutine(ChaseStart());
     }
 
     public void setIsChase(bool bol)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgrroPulling : MonoBehaviour
+public class AggroPulling : MonoBehaviour
 {
     private void OnTriggerEnter(Collider target)
     {
@@ -10,7 +10,6 @@ public class AgrroPulling : MonoBehaviour
         {
             Transform player = target.GetComponent<Transform>();
             gameObject.GetComponentInParent<EnemyController>().SetTarget(player);
-            gameObject.GetComponentInParent<EnemyController>().ChaseStart();
 
             gameObject.SetActive(false);
         }

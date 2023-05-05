@@ -35,8 +35,8 @@ public class EnemyMain : MonoBehaviour
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
-
+            enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경
+            //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
             StartCoroutine(OnDamage(reactDir));
         }
 
@@ -46,7 +46,7 @@ public class EnemyMain : MonoBehaviour
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            enemyController.SetTarget(other.GetComponentInParent<Transform>()); // 타겟 변경
+            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 타겟 변경
             Destroy(other.gameObject); // 피격된 불릿 파괴
 
             StartCoroutine(OnDamage(reactDir));
@@ -81,6 +81,7 @@ public class EnemyMain : MonoBehaviour
         gameObject.layer = 10;  // 슈퍼 아머
         mat.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
+        rigid.velocity = Vector3.zero;
         enemyController.setIsChase(false);
 
         anim.SetTrigger("doDie");

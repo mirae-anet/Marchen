@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3cb606223af5a4e8c243e4b3670b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 0}
   isMelee: 1
   damage: 10
 --- !u!1 &328409505970683906
@@ -171,7 +172,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &-3011365480092548001
 BoxCollider:
@@ -200,7 +201,7 @@ NavMeshAgent:
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -237,6 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 2121269645575286600}
   bullet: {fileID: 0}
+  agrroPulling: {fileID: 761726246}
+  moveDis: 3
+  moveSpeed: 5
 --- !u!1001 &4830895522237710593
 PrefabInstance:
   m_ObjectHideFlags: 0
