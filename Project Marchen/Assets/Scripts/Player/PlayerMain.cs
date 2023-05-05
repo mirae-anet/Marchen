@@ -89,7 +89,7 @@ public class PlayerMain : MonoBehaviour
                     rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
                     rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
 
-                    if (other.GetComponent<Rigidbody>() != null)
+                    if (other.GetComponent<Rigidbody>() != null) // Bullet 이면 해당 오브젝트 파괴
                         Destroy(other.gameObject);
                 }
 
@@ -120,8 +120,9 @@ public class PlayerMain : MonoBehaviour
     {
         gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
         playerBody.layer = 10; // 슈퍼아머
-        rigid.velocity = Vector3.zero;
         anim.SetTrigger("doDie");
+
+        rigid.velocity = Vector3.zero;
 
         isDead = true;
     }

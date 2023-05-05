@@ -99,12 +99,13 @@ public class EnemyController : MonoBehaviour
 
     void TargetisAlive()
     {
+        //Debug.Log(target.ToString());
         if (target == null) // 타겟이 없으면
         {
             TargetOff();
             return;
         }
-        else if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead()) // 타겟이 죽으면
+        else if (target.gameObject.GetComponent<PlayerMain>().getIsDead()) // 타겟이 죽으면
         {
             TargetOff();
             return;
@@ -191,7 +192,7 @@ public class EnemyController : MonoBehaviour
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
-                instantBullet.GetComponent<BulletMain>().setParent(transform);
+                instantBullet.GetComponent<BulletMain>().setParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
                 break;

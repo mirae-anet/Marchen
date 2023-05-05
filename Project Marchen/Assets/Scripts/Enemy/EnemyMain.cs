@@ -35,7 +35,7 @@ public class EnemyMain : MonoBehaviour
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경
+            enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
             //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
             StartCoroutine(OnDamage(reactDir));
         }
@@ -46,7 +46,7 @@ public class EnemyMain : MonoBehaviour
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 타겟 변경
+            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
             Destroy(other.gameObject); // 피격된 불릿 파괴
 
             StartCoroutine(OnDamage(reactDir));
