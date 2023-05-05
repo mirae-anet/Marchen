@@ -7,6 +7,7 @@ using Fusion;
 public class NetworkPlayerController : NetworkBehaviour
 {
 
+    private bool isControllerEnable = true;
     private bool isMove = false;
     private bool isJump;
     private bool isDodge;
@@ -46,14 +47,12 @@ public class NetworkPlayerController : NetworkBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private HPHandler hpHandler;
-    private CharacterMovementHandler characterMovementHandler;
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -71,7 +70,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
         if(GetInput(out NetworkInputData networkInputData))
         {
-            if(!characterMovementHandler.GetCharacterControllerEnabled())
+            if(!isControllerEnable)
                 return;
 
             // 입력값 저장
@@ -88,6 +87,10 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
+        if (isDodge)
+            return;
+        // if (isAttack)
+        //     return;
 
         feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
@@ -205,6 +208,15 @@ public class NetworkPlayerController : NetworkBehaviour
     private void RPC_animatonSetTrigger(string action)
     {
         anim.SetTrigger(action);
+    }
+
+    public void SetCharacterControllerEnabled(bool isEnabled)
+    {
+        isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
     }
 
     /*
