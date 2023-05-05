@@ -31,7 +31,7 @@ public class LocalCameraHandler : MonoBehaviour
 
     //other component
     // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
-    CharacterMovementHandler characterMovementHandler;
+    CharacterRespawnHandler characterRespawnHandler;
 
     [SerializeField]
     private Camera localCamera;
@@ -39,22 +39,21 @@ public class LocalCameraHandler : MonoBehaviour
     void Awake()
     {
     //   networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
-      characterMovementHandler = GetComponentInParent<CharacterMovementHandler>();
+      characterRespawnHandler = GetComponentInParent<CharacterRespawnHandler>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraRotationX = GameManager.instance.cameraViewRotation.x;
-        cameraRotationY = GameManager.instance.cameraViewRotation.y;
+        transform.forward = GameManager.instance.cameraViewRotation;
         aimForwardVector = bodyAnchorPoint.forward;
     }
 
     private void Update()
     {
         //조종하는 사람만 실행
-        if(characterMovementHandler.Object != null)
-            if(!characterMovementHandler.Object.HasInputAuthority)
+        if(characterRespawnHandler.Object != null)
+            if(!characterRespawnHandler.Object.HasInputAuthority)
                 return;
         
         setAimForwardVector();
@@ -109,11 +108,7 @@ public class LocalCameraHandler : MonoBehaviour
     private void OnDestroy()
     {
         //when localCamera was disabled
-        if(cameraRotationX != 0 && cameraRotationY != 0)         
-        {
-            GameManager.instance.cameraViewRotation.x = cameraRotationX;
-            GameManager.instance.cameraViewRotation.y = cameraRotationY;
-        }
+        GameManager.instance.cameraViewRotation = transform.forward;
     }
     public Vector3 getMoveDir(Vector2 moveInputVector)
     {

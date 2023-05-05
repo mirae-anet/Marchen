@@ -16,11 +16,11 @@ public class CharacterInputHandler : MonoBehaviour
 
     //other components
     LocalCameraHandler localCameraHandler;
-    CharacterMovementHandler characterMovementHandler;
+    NetworkPlayerController networkPlayerController;
     private void Awake()
     {
         localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
+        networkPlayerController = GetComponent<NetworkPlayerController>();
     }
     void Start()
     {
@@ -31,7 +31,7 @@ public class CharacterInputHandler : MonoBehaviour
     {
         //호스트에서는 실행x
         //일반적으로 플레이어가 직접 조작하는 캐릭터의 입력을 처리하는 경우 클라이언트가 입력 권한을 가지게 됩니다.
-        if(!characterMovementHandler.Object.HasInputAuthority){return;} 
+        if(!networkPlayerController.Object.HasInputAuthority){return;} 
 
         //view input
         viewInputVector.x = Input.GetAxis("Mouse X");

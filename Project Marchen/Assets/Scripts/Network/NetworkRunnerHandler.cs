@@ -110,7 +110,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         foreach(var resumeNetworkObject in runner.GetResumeSnapshotNetworkObjects())
         {
             //Grab all the player objects, they have a NetworkCharacterControllerPrototypeCustom
-            if(resumeNetworkObject.TryGetBehaviour<NetworkCharacterControllerPrototypeCustom>(out var characterController))
+            if(resumeNetworkObject.TryGetBehaviour<NetworkRigidbody>(out var characterController))
             {
                 runner.Spawn(resumeNetworkObject, position: characterController.ReadPosition(), characterController.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
                 {
@@ -133,6 +133,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
         }
+        StartCoroutine(CleanUpHostMigrationCO());
+
         runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex);
 
         Debug.Log($"HostMigrationResum completed");
