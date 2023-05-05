@@ -15,17 +15,18 @@ public class SessionInfoListUIItem : MonoBehaviour
 
     SessionInfo sessionInfo;
 
-    public event Action<SessionInfo> onJoimSession;
+    public event Action<SessionInfo> onJoinSession;
 
     public void SetInformation(SessionInfo sessionInfo)
     {
         this.sessionInfo = sessionInfo;
         sessionNameText.text = sessionInfo.Name;
-        playerCountText.text = $"{sessionInfo.PlayerCount.ToString()}/{sessionInfo.MaxPlayers.ToString()}";
+        int MaxPlayer = 4;
+        playerCountText.text = $"{sessionInfo.PlayerCount.ToString()}/{(MaxPlayer).ToString()}";
 
         bool isJoinButtonActive = true;
 
-        if (sessionInfo.PlayerCount >= sessionInfo.MaxPlayers)
+        if (sessionInfo.PlayerCount >= MaxPlayer)
             isJoinButtonActive = false;
 
         joinButton.gameObject.SetActive(isJoinButtonActive);
@@ -33,6 +34,6 @@ public class SessionInfoListUIItem : MonoBehaviour
 
     public void OnClick()
     {
-        onJoimSession?.Invoke(sessionInfo); // null이 아닌경우에 invoke호출
+        onJoinSession?.Invoke(sessionInfo); // null이 아닌경우에 invoke호출
     }
 }
