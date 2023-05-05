@@ -99,20 +99,34 @@ public class EnemyController : MonoBehaviour
 
     void TargetisAlive()
     {
-        //Debug.Log(target.parent.gameObject.ToString());
-        if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead())
+        if (target == null) // 타겟이 없으면
         {
-            rigid.velocity = Vector3.zero;
-
-            anim.SetBool("isWalk", false);
-            anim.SetBool("isAttack", false);
-
-            setIsChase(false);
-            agrroPulling.SetActive(true);
-            isAggro = false;
-
-            StartCoroutine(Think(Random.Range(0.5f, 4f)));
+            TargetOff();
+            return;
         }
+        else if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead()) // 타겟이 죽으면
+        {
+            TargetOff();
+            return;
+        }
+        else // 타겟이 있고 살아 있다면
+            return;
+
+        //Debug.Log(target.parent.gameObject.ToString());
+    }
+
+    void TargetOff()
+    {
+        rigid.velocity = Vector3.zero;
+
+        anim.SetBool("isWalk", false);
+        anim.SetBool("isAttack", false);
+
+        setIsChase(false);
+        agrroPulling.SetActive(true);
+        isAggro = false;
+
+        StartCoroutine(Think(Random.Range(0.5f, 4f)));
     }
 
     void EnemyChase()
