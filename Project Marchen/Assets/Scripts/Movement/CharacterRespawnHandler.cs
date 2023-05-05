@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class CharacterMovementHandler : NetworkBehaviour
+// public class CharacterMovementHandler : NetworkBehaviour
+public class CharacterRespawnHandler : NetworkBehaviour
 {
     bool isRespawnRequested = false;
-    bool isControllerEnable = true;
 
     //other components
     [Header("Rotate")]
@@ -49,23 +49,6 @@ public class CharacterMovementHandler : NetworkBehaviour
             if(!Object.HasStateAuthority)
                 return;
 
-            /*
-            if(!isControllerEnable) //죽은 경우
-                return;
-            
-            // 입력값 저장
-            networkPlayerController.SetInput(networkInputData);
-    
-            // 바닥 체크
-            networkPlayerController.GroundCheck();
-    
-            // 플레이어 조작
-            networkPlayerController.PlayerMove();
-            networkPlayerController.PlayerJump();
-            networkPlayerController.PlayerDodge();
-            */
-            
-            //Check if we've fallen off the world
             CheckFallRespawn();
 
         }
@@ -78,7 +61,6 @@ public class CharacterMovementHandler : NetworkBehaviour
 
     void Respawn()
     {
-        // networkCharacterControllerPrototypeCustom.TeleportToPosition(Utils.GetRandomSpawnPoint());
         transform.position = Utils.GetRandomSpawnPoint();
         hpHandler.OnRespawned();
         isRespawnRequested = false;
@@ -97,15 +79,5 @@ public class CharacterMovementHandler : NetworkBehaviour
                 Respawn();
             }
         }
-    }
-
-    public void SetCharacterControllerEnabled(bool isEnabled)
-    {
-        // networkCharacterControllerPrototypeCustom.Controller.enabled = isEnabled;
-        isControllerEnable = isEnabled;
-    }
-    public bool GetCharacterControllerEnabled()
-    {
-        return isControllerEnable;
     }
 }
