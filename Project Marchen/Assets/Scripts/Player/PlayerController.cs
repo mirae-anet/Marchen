@@ -10,19 +10,21 @@ public class PlayerController : MonoBehaviour
     private CameraController camControl;
     private PlayerMain playerMain;
 
-    private bool isMove;
-    private bool isJump;
-    private bool isDodge;
+    private bool isMove = false;
+    private bool isJump = false;
+    private bool isDodge = false;
+    private bool isAttack = false;
+    private bool isGrounded = false;
 
     private Vector3 moveDir;
-    private Vector3 dodgeDir;
-    private Vector3 feetpos;
+    private Vector3 saveDir;
 
     // 입력값 저장 변수
     private Vector2 moveInput;
     private bool walkInput;
     private bool jumpInput;
     private bool dodgeInput;
+    private bool attackInput;
 
     // 인스펙터
     [Header("오브젝트 연결")]
@@ -37,8 +39,6 @@ public class PlayerController : MonoBehaviour
     public float jumpPower = 30f;
     [Range(1f, 100f)]
     public float dodgePower = 50f;
-    [Range(0.0f, 1f)]
-    public float doubleTapTime = 0.2f;
     public Vector3 raySize = new Vector3(1.8f, 0.6f, 1.8f);
 
     void Awake()
@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (playerMain.getIsDead())
+            return;
+
         // 입력값 저장
         GetInput();
 
@@ -61,6 +64,8 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         PlayerJump();
         PlayerDodge();
+
+        PlayerAttack();
     }
 
     private void GetInput()
@@ -69,6 +74,8 @@ public class PlayerController : MonoBehaviour
         walkInput = Input.GetButton("Walk");
         jumpInput = Input.GetButtonDown("Jump");
         dodgeInput = Input.GetButtonDown("Dodge");
+
+        attackInput = Input.GetButtonDown("Fire1");
     }
 
     private void GroundCheck()
@@ -76,22 +83,17 @@ public class PlayerController : MonoBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
+        if (isGrounded)
         {
-            if (rayHit.distance < 1.0f)
-            {
-                isJump = false;
-                anim.SetBool("isJump", false);
-                //Debug.Log("착지");
-            }
+            isJump = false;
+            anim.SetBool("isJump", false);
+            //Debug.Log("착지");
         }
     }
 
     private void PlayerMove()
     {
-        if (isDodge && !playerMain.getIsHit()) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.getIsHit() || isAttack) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
@@ -119,9 +121,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit())
+        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isJump = true;
+            isGrounded = false;
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -132,12 +135,12 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit())
+        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isDodge = true;
-            dodgeDir = moveDir; // 회피 방향 기억
-            
-            rigid.AddForce(dodgeDir.normalized * dodgePower, ForceMode.Impulse);
+
+            saveDir = moveDir; // 회피 방향 기억
+            rigid.AddForce(saveDir.normalized * dodgePower, ForceMode.Impulse);
 
             anim.SetTrigger("doDodge");
 
@@ -151,11 +154,36 @@ public class PlayerController : MonoBehaviour
         isDodge = false;
     }
     
-    private void OnDrawGizmos()
+    private void PlayerAttack()
     {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
+        if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
+        {
+            isAttack = true;
+            saveDir = moveDir; // 회피 방향 기억
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
+            StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
+        }
+    }
+
+    IEnumerator AttackCoolTime(float coolTime)
+    {
+        // 선딜레이
+        rigid.velocity = new Vector3((saveDir * moveSpeed).x , rigid.velocity.y, (saveDir * moveSpeed).z);
+        anim.SetBool("isRun", true);
+
+        yield return new WaitForSeconds(0.3f);
+
+        rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
+        playerMain.GetWeaponMain().Attack();
+        anim.SetTrigger("doSwing");
+
+        yield return new WaitForSeconds(coolTime);
+
+        isAttack = false;
+    }
+
+    public void setIsGrounded(bool bol)
+    {
+        isGrounded = bol;
     }
 }

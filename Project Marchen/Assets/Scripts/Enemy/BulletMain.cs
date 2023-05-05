@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletMain : MonoBehaviour
 {
+    public Transform parentObject;
+
     [Header("설정")]
     public bool isMelee = false;
     [Range(1f, 30f)]
@@ -24,5 +26,16 @@ public class Bullet : MonoBehaviour
     public int getDamage()
     {
         return damage;
+    }
+
+    public void setParent(Transform transform)
+    {
+        parentObject = transform;
+        //Debug.Log(parentObject.name);
+    }
+
+    public Transform getParent()
+    { 
+        return parentObject;
     }
 }

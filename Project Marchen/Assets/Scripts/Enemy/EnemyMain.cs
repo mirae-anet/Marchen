@@ -10,7 +10,7 @@ public class EnemyMain : MonoBehaviour
     private Material mat;
     private Animator anim;
 
-    public enum Type { A, B };
+    public enum Type { Melee, Range };
 
     [Header("설정")]
     public Type enemyType;
@@ -24,61 +24,69 @@ public class EnemyMain : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         mat = GetComponentInChildren<MeshRenderer>().material;
         rigid = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        //if (other.tag == "Melee")  // 근접 공격
-        //{
-        //    Weapon weapon = other.GetComponent<Weapon>();
-        //    curHealth -= weapon.damage;
-        //    Vector3 reactVec = transform.position - other.transform.position;
+        if (other.tag == "PlayerAttack")  // 근접 공격
+        {
+            WeaponMain weaponMain = other.GetComponent<WeaponMain>();
+            curHealth -= weaponMain.damage;
+            Vector3 reactDir = transform.position - other.transform.position;
 
-        //    StartCoroutine(OnDamage(reactVec));
-        //}
+            enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경
+            //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
+            StartCoroutine(OnDamage(reactDir));
+        }
 
-        //else if (other.tag == "Bullet")  // 원거리 공격
-        //{
-        //    Bullet bullet = other.GetComponent<Bullet>();
-        //    curHealth -= bullet.damage;
-        //    Vector3 reactVec = transform.position - other.transform.position;
+        else if (other.tag == "PlayerBullet")  // 원거리 공격
+        {
+            BulletMain bulletMain = other.GetComponent<BulletMain>();
+            curHealth -= bulletMain.damage;
+            Vector3 reactDir = transform.position - other.transform.position;
 
-        //    Destroy(other.gameObject);
+            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 타겟 변경
+            Destroy(other.gameObject); // 피격된 불릿 파괴
 
-        //    StartCoroutine(OnDamage(reactVec));
-        //}
+            StartCoroutine(OnDamage(reactDir));
+        }
     }
 
-    IEnumerator OnDamage(Vector3 reactVec)
+    IEnumerator OnDamage(Vector3 reactDir)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
 
+        mat.color = Color.white; // 몬스터의 원래 색깔로 변경
+
         if (curHealth > 0)
         {
-            mat.color = Color.white;  // 몬스터의 원래 색깔로 변경
-
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 2, ForceMode.Impulse);
+            reactDir = reactDir.normalized;
+            reactDir += Vector3.up;
+            rigid.AddForce(reactDir * 2, ForceMode.Impulse);
         }
-
         else
         {
-            mat.color = Color.gray;  // 몬스터가 죽으면 회색으로 변경
-            gameObject.layer = 10;
+            reactDir = reactDir.normalized;
+            reactDir += Vector3.up;
+            rigid.AddForce(reactDir * 5, ForceMode.Impulse);
 
-            enemyController.setIsChase(false);
-            enemyController.setNavEnabled(false);
-
-            anim.SetTrigger("doDie");
-
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5, ForceMode.Impulse);
-
-            Destroy(gameObject, 3);  // 3초 뒤에 삭제
+            OnDie();
         }
+    }
+
+    void OnDie()
+    {
+        gameObject.layer = 10;  // 슈퍼 아머
+        mat.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
+
+        rigid.velocity = Vector3.zero;
+        enemyController.setIsChase(false);
+
+        anim.SetTrigger("doDie");
+
+        Destroy(gameObject, 3); // 3초 뒤에 삭제
     }
 
     public Type getEnemyType()
