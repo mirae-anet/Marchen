@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigid;
     private CameraController camControl;
     private PlayerMain playerMain;
-    private WeaponMain weaponMain;
+    private PlayerAttack playerAttack;
 
     private bool isMove = false;
     private bool isJump = false;
     private bool isDodge = false;
     private bool isAttack = false;
+    private bool isReload = false;
     private bool isGrounded = false;
-    private bool isReload;
 
     private Vector3 moveDir;
     private Vector3 saveDir;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         camControl = GetComponentInChildren<CameraController>();
         playerMain = GetComponent<PlayerMain>();
-        weaponMain = GetComponentInChildren<WeaponMain>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
     
     void Update()
@@ -72,9 +72,7 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         PlayerJump();
         PlayerDodge();
-
         PlayerAttack();
-        Reload();
     }
 
     private void GetInput()
@@ -169,60 +167,24 @@ public class PlayerController : MonoBehaviour
         if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
         {
             isAttack = true;
-            saveDir = moveDir; // 회피 방향 기억
+            saveDir = moveDir; // 공격 방향 기억
 
-            StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
+            playerAttack.DoAttack(saveDir);
         }
-    }
-
-    private void Reload()
-    {
-        if (weaponMain == null)
-            return;
-
-        if (weaponMain.type == WeaponMain.Type.Melee)
-            return;
-        /*
-        if (ammo == 0)  // 총알이 0개일 때
-            return;
-        */
-        if (reloadInput && !isJump && !isDodge && !isAttack)
-        {
-            anim.SetTrigger("doReload");
-            isReload = true;
-
-            Invoke("ReloadOut", 2f);
-        }
-    }
-
-    private void ReloadOut()
-    {
-        //int reAmmo = reAmmo < weaponMain.maxAmmo ? ammo : weaponMain.maxAmmo;
-        //weaponMain.curAmmo = reAmmo;
-
-        //ammo -= reAmmo;
-        isReload = false;
-    }
-
-    IEnumerator AttackCoolTime(float coolTime)
-    {
-        // 선딜레이
-        rigid.velocity = new Vector3((saveDir * moveSpeed).x , rigid.velocity.y, (saveDir * moveSpeed).z);
-        anim.SetBool("isRun", true);
-
-        yield return new WaitForSeconds(0.3f);
-
-        rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
-        playerMain.GetWeaponMain().Attack();
-        anim.SetTrigger(weaponMain.type == WeaponMain.Type.Melee ? "doSwing" : "doShot");
-
-        yield return new WaitForSeconds(coolTime);
-
-        isAttack = false;
     }
 
     public void setIsGrounded(bool bol)
     {
         isGrounded = bol;
+    }
+
+    public void setIsAttack(bool bol)
+    {
+        isAttack = bol;
+    }
+
+    public bool getActive()
+    {
+        return isJump || isDodge || isAttack; // 하나라도 작동하면 false
     }
 }

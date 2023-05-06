@@ -34,7 +34,6 @@ public class WeaponMain : MonoBehaviour
             StopCoroutine("Swing");
             StartCoroutine("Swing");
         }
-
         else if (type == Type.Range && curAmmo > 0)
         {
             curAmmo--;
@@ -73,5 +72,10 @@ public class WeaponMain : MonoBehaviour
     public float getDelay()
     {
         return delay;
+    }
+
+    public Type GetWeaponType()
+    {
+        return type;
     }
 }
