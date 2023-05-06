@@ -27,14 +27,16 @@ public class HPHandler : NetworkBehaviour
     //other components
     private MeshRenderer[] meshs;
     HitboxRoot hitboxRoot;
-    CharacterMovementHandler characterMovementHandler;
+    CharacterRespawnHandler characterRespawnHandler;
+    NetworkPlayerController networkPlayerController;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
         meshs = GetComponentsInChildren<MeshRenderer>();
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
+        characterRespawnHandler = GetComponent<CharacterRespawnHandler>();
+        networkPlayerController = GetComponent<NetworkPlayerController>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
@@ -81,7 +83,7 @@ public class HPHandler : NetworkBehaviour
     {
         Debug.Log($"{Time.time} ServerRevive");
         yield return new WaitForSeconds(2.0f);
-        characterMovementHandler.RequestRespawn();
+        characterRespawnHandler.RequestRespawn();
     }
 
     //Function only called on the server
@@ -148,7 +150,7 @@ public class HPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} OnDeath");
         playerModel.gameObject.SetActive(false);
         hitboxRoot.HitboxRootActive = false; //죽고나서는 데미지 안 들어감
-        characterMovementHandler.SetCharacterControllerEnabled(false);
+        networkPlayerController.SetCharacterControllerEnabled(false);
 
         Instantiate(deathGameObjectPrefab, transform.position, Quaternion.identity);
     }
@@ -162,7 +164,7 @@ public class HPHandler : NetworkBehaviour
 
         playerModel.gameObject.SetActive(true);
         hitboxRoot.HitboxRootActive = true;
-        characterMovementHandler.SetCharacterControllerEnabled(true);
+        networkPlayerController.SetCharacterControllerEnabled(true);
     }
 
     public void OnRespawned()

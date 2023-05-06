@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-// using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
-// using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,14 +9,26 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rigid;
     private NavMeshAgent nav;
     private Animator anim;
+    private Transform target;
 
-    private bool isChase;
-    private bool isAttack;
+    private bool isChase = false;
+    private bool isAttack = false;
+    private bool isAggro = false;
 
-    [Header("오브젝트 연결")]
-    public Transform target;
-    public BoxCollider meleeArea;
-    public GameObject bullet;
+    private int moveDir = 0;
+    private int isMove = 0;
+
+    [Header("오브젝트 연결")]   
+    [SerializeField]
+    private BoxCollider meleeArea;
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private GameObject agrroPulling;
+
+    [Header("설정")]
+    public float moveDis = 3f;
+    public float moveSpeed = 5f;
 
     void Awake()
     {
@@ -26,23 +36,56 @@ public class EnemyController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-
-        Invoke("ChaseStart", 2);
     }
 
-    void Update()
+    void Start()
     {
-        if (nav.enabled)
-        {
-            nav.SetDestination(target.position);
-            nav.isStopped = !isChase;
-        }
+        StartCoroutine(Think(Random.Range(0.5f, 4f))); // 논어그로
     }
 
     void FixedUpdate()
     {
-        FreezeVelocity();
-        Targeting();
+        if (!isAggro) // 논어그로
+        {
+            EnemyMove();
+        }
+        else // 어그로 풀링
+        {
+            FreezeVelocity();
+            TargetisAlive();
+            EnemyChase();
+            Aiming();
+        }
+    }
+
+    void EnemyMove()
+    {
+        rigid.velocity = transform.forward * moveSpeed * isMove;
+    }
+
+    IEnumerator Think(float worry)
+    {
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
+        anim.SetBool("isWalk", false);
+
+        yield return new WaitForSeconds(worry);     // 고민
+        moveDir = -180;                             // 되돌아감
+        transform.Rotate(0, moveDir, 0);
+        isMove = 1;
+        anim.SetBool("isWalk", true);
+
+        yield return new WaitForSeconds(moveDis);   // 일정 거리 까지
+        isMove = 0;                                 // 멈춤
+        anim.SetBool("isWalk", false);
+
+        StartCoroutine(Think(Random.Range(0.5f, 4f)));
     }
 
     void FreezeVelocity()
@@ -54,7 +97,34 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Targeting()
+    void TargetisAlive()
+    {
+        //Debug.Log(target.parent.gameObject.ToString());
+        if (target.parent.gameObject.GetComponent<PlayerMain>().getIsDead())
+        {
+            rigid.velocity = Vector3.zero;
+
+            anim.SetBool("isWalk", false);
+            anim.SetBool("isAttack", false);
+
+            setIsChase(false);
+            agrroPulling.SetActive(true);
+            isAggro = false;
+
+            StartCoroutine(Think(Random.Range(0.5f, 4f)));
+        }
+    }
+
+    void EnemyChase()
+    {
+        if (nav.enabled)
+        {
+            nav.SetDestination(target.position);
+            nav.isStopped = !isChase;
+        }
+    }
+
+    void Aiming()
     {
         float targetRadius = 0;
         float targetRange = 0;
@@ -83,12 +153,6 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(Attack());
     }
 
-    void ChaseStart()
-    {
-        isChase = true;
-        anim.SetBool("isWalk", true);
-    }
-
     IEnumerator Attack()
     {
         isChase = false;
@@ -109,13 +173,13 @@ public class EnemyController : MonoBehaviour
 
             case EnemyMain.Type.Range:
                 yield return new WaitForSeconds(0.5f);
-                //GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
                 GameObject instantBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), transform.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
-                yield return new WaitForSeconds(2f);
+                instantBullet.GetComponent<BulletMain>().setParent(transform);
 
+                yield return new WaitForSeconds(2f);
                 break;
         }
 
@@ -124,13 +188,27 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
+    IEnumerator ChaseStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isChase = true;
+        anim.SetBool("isWalk", true);
+    }
+
+    public void SetTarget(Transform transform)
+    {
+        target = transform;
+        isAggro = true;
+
+        setIsChase(true);
+
+        StopAllCoroutines();
+        StartCoroutine(ChaseStart());
+    }
+
     public void setIsChase(bool bol)
     {
         isChase = bol;
-    }
-
-    public void setNavEnabled(bool bol)
-    {
         nav.enabled = bol;
     }
 }

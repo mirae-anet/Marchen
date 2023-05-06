@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
+    private Animator anim;
     private Rigidbody rigid;
     private MeshRenderer[] meshs;
     private GameObject nearObject;
     private WeaponMain weaponMain;
 
-    private bool isDamage;
+    private bool isDamage = false;
+    private bool isDead = false;
 
     public enum Type { Hammer, Gun };
 
     // 인스펙터
     [Header("오브젝트 연결")]
+    [SerializeField]
+    private GameObject playerBody;
     [SerializeField]
     private GameObject[] weapons;
 
@@ -27,6 +31,7 @@ public class PlayerMain : MonoBehaviour
     
     void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
 
@@ -74,6 +79,7 @@ public class PlayerMain : MonoBehaviour
             {
                 BulletMain enemyBullet = other.GetComponent<BulletMain>();
                 health -= enemyBullet.getDamage();
+                //Debug.Log(other.GetComponent<BulletMain>().getParent());
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
@@ -94,6 +100,9 @@ public class PlayerMain : MonoBehaviour
     
     IEnumerator OnDamage()
     {
+        if (health <= 0)
+            OnDie();
+
         isDamage = true;
 
         foreach (MeshRenderer mesh in meshs)
@@ -107,9 +116,24 @@ public class PlayerMain : MonoBehaviour
             mesh.material.color = Color.white;
     }
 
+    void OnDie()
+    {
+        gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
+        playerBody.layer = 10; // 슈퍼아머
+        rigid.velocity = Vector3.zero;
+        anim.SetTrigger("doDie");
+
+        isDead = true;
+    }
+
     public bool getIsHit()
     {
         return isDamage;
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
     }
 
     public WeaponMain GetWeaponMain()

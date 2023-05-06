@@ -17,10 +17,14 @@ public class PlayerController : MonoBehaviour
     private bool isDodge;
     private bool isAttack;
     private bool isReload;
+    private bool isMove = false;
+    private bool isJump = false;
+    private bool isDodge = false;
+    private bool isAttack = false;
+    private bool isGrounded = false;
 
     private Vector3 moveDir;
     private Vector3 saveDir;
-    private Vector3 feetpos;
 
     // 입력값 저장 변수
     private Vector2 moveInput;
@@ -56,6 +60,9 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (playerMain.getIsDead())
+            return;
+
         // 입력값 저장
         GetInput();
 
@@ -87,16 +94,11 @@ public class PlayerController : MonoBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
+        if (isGrounded)
         {
-            if (rayHit.distance < 1.0f)
-            {
-                isJump = false;
-                anim.SetBool("isJump", false);
-                //Debug.Log("착지");
-            }
+            isJump = false;
+            anim.SetBool("isJump", false);
+            //Debug.Log("착지");
         }
     }
 
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour
         if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit() && !isAttack)
         {
             isJump = true;
+            isGrounded = false;
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -219,11 +222,8 @@ public class PlayerController : MonoBehaviour
         isAttack = false;
     }
 
-    private void OnDrawGizmos()
+    public void setIsGrounded(bool bol)
     {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
+        isGrounded = bol;
     }
 }
