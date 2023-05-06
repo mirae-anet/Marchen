@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Think(Random.Range(0.5f, 4f))); // 논어그로
+        StartCoroutine("Think", (Random.Range(0.5f, 4f))); // 논어그로
     }
 
     void FixedUpdate()
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
         isMove = 0;                                 // 멈춤
         anim.SetBool("isWalk", false);
 
-        StartCoroutine(Think(Random.Range(0.5f, 4f)));
+        StartCoroutine("Think", (Random.Range(0.5f, 4f)));
     }
 
     void FreezeVelocity()
@@ -127,7 +127,7 @@ public class EnemyController : MonoBehaviour
         agrroPulling.SetActive(true);
         isAggro = false;
 
-        StartCoroutine(Think(Random.Range(0.5f, 4f)));
+        StartCoroutine("Think", (Random.Range(0.5f, 4f)));
     }
 
     void EnemyChase()
@@ -195,6 +195,7 @@ public class EnemyController : MonoBehaviour
                 instantBullet.GetComponent<BulletMain>().setParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
+                Debug.Log("Attack End");
                 break;
         }
 
@@ -217,7 +218,8 @@ public class EnemyController : MonoBehaviour
 
         setIsChase(true);
 
-        StopAllCoroutines();
+        Debug.Log(gameObject.name + " target reset");
+        StopCoroutine("Think");
         StartCoroutine(ChaseStart());
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class EnemyMain : MonoBehaviour
     private EnemyController enemyController;
     private Rigidbody rigid;
     private BoxCollider boxCollider;
-    private Material mat;
+    private MeshRenderer[] meshs;
     private Animator anim;
 
     public enum Type { Melee, Range };
@@ -22,7 +23,7 @@ public class EnemyMain : MonoBehaviour
     void Awake()
     {
         enemyController = GetComponent<EnemyController>();
-        mat = GetComponentInChildren<MeshRenderer>().material;
+        meshs = GetComponentsInChildren<MeshRenderer>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -55,10 +56,13 @@ public class EnemyMain : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactDir)
     {
-        mat.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        Debug.Log(gameObject.name + " Hit!");
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.red;
 
-        mat.color = Color.white; // 몬스터의 원래 색깔로 변경
+        yield return new WaitForSeconds(0.1f);
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
 
         if (curHealth > 0)
         {
@@ -79,7 +83,8 @@ public class EnemyMain : MonoBehaviour
     void OnDie()
     {
         gameObject.layer = 10;  // 슈퍼 아머
-        mat.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
         rigid.velocity = Vector3.zero;
         enemyController.setIsChase(false);
