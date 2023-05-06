@@ -52,7 +52,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (playerMain.getIsDead())
+        {
+            rigid.velocity = Vector3.zero;
             return;
+        }
 
         // 입력값 저장
         GetInput();
