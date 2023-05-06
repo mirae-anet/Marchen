@@ -12,16 +12,12 @@ public class PlayerController : MonoBehaviour
     private PlayerMain playerMain;
     private WeaponMain weaponMain;
 
-    private bool isMove;
-    private bool isJump;
-    private bool isDodge;
-    private bool isAttack;
-    private bool isReload;
     private bool isMove = false;
     private bool isJump = false;
     private bool isDodge = false;
     private bool isAttack = false;
     private bool isGrounded = false;
+    private bool isReload;
 
     private Vector3 moveDir;
     private Vector3 saveDir;
