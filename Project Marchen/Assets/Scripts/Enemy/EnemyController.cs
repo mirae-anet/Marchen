@@ -58,12 +58,40 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void EnemyMove()
+    // --------------------------- 타겟 관련 ------------------------
+    public void SetTarget(Transform transform) // 타겟 (재)설정
     {
-        rigid.velocity = transform.forward * moveSpeed * isMove;
+        target = transform;
+        isAggro = true;
+
+        setIsChase(true);
+
+        Debug.Log(gameObject.name + " target reset");
+        StopCoroutine("Think");
+        StartCoroutine(ChaseStart());
     }
 
-    IEnumerator Think(float worry)
+    void TargetOff() // 타겟 해제
+    {
+        rigid.velocity = Vector3.zero;
+
+        anim.SetBool("isWalk", false);
+        anim.SetBool("isAttack", false);
+
+        setIsChase(false);
+        agrroPulling.SetActive(true);
+        isAggro = false;
+
+        StartCoroutine("Think", (Random.Range(0.5f, 4f)));
+    }
+
+    // --------------------------- 논 어그로 ------------------------
+    void EnemyMove() // 어그로 아닐 때 이동
+    {
+        rigid.velocity = transform.forward * moveSpeed * isMove; // moveSpeed는 지정, isMove는 Think()에서 결정
+    }
+
+    IEnumerator Think(float worry) // 어그로 아닐 때 이동 결정하는 함수
     {
         yield return new WaitForSeconds(worry);     // 고민
         moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
@@ -88,6 +116,14 @@ public class EnemyController : MonoBehaviour
         StartCoroutine("Think", (Random.Range(0.5f, 4f)));
     }
 
+    // --------------------------- 어그로 풀링 ------------------------
+    IEnumerator ChaseStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isChase = true;
+        anim.SetBool("isWalk", true);
+    }
+
     void FreezeVelocity()
     {
         if (isChase)
@@ -97,7 +133,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void TargetisAlive()
+    void TargetisAlive() // 타겟 죽는거 확인
     {
         //Debug.Log(target.ToString());
         if (target == null) // 타겟이 없으면
@@ -116,20 +152,6 @@ public class EnemyController : MonoBehaviour
         //Debug.Log(target.parent.gameObject.ToString());
     }
 
-    void TargetOff()
-    {
-        rigid.velocity = Vector3.zero;
-
-        anim.SetBool("isWalk", false);
-        anim.SetBool("isAttack", false);
-
-        setIsChase(false);
-        agrroPulling.SetActive(true);
-        isAggro = false;
-
-        StartCoroutine("Think", (Random.Range(0.5f, 4f)));
-    }
-
     void EnemyChase()
     {
         if (nav.enabled)
@@ -139,7 +161,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Aiming()
+    void Aiming() // 레이캐스트로 플레이어 위치 특정
     {
         float targetRadius = 0;
         float targetRange = 0;
@@ -195,7 +217,7 @@ public class EnemyController : MonoBehaviour
                 instantBullet.GetComponent<BulletMain>().setParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
-                Debug.Log("Attack End");
+                Debug.Log(gameObject.name + " Attack End");
                 break;
         }
 
@@ -204,25 +226,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
-    IEnumerator ChaseStart()
-    {
-        yield return new WaitForSeconds(0.5f);
-        isChase = true;
-        anim.SetBool("isWalk", true);
-    }
-
-    public void SetTarget(Transform transform)
-    {
-        target = transform;
-        isAggro = true;
-
-        setIsChase(true);
-
-        Debug.Log(gameObject.name + " target reset");
-        StopCoroutine("Think");
-        StartCoroutine(ChaseStart());
-    }
-
+    // --------------------------- 외부 참조 함수 ------------------------
     public void setIsChase(bool bol)
     {
         isChase = bol;
