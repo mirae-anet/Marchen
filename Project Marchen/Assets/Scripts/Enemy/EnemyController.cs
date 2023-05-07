@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private Transform target;
 
     private bool isChase = false;
+    private bool isHit = false;
     private bool isAttack = false;
     private bool isAggro = false;
 
@@ -64,7 +66,7 @@ public class EnemyController : MonoBehaviour
         target = transform;
         isAggro = true;
 
-        SetIsChase(true);
+        SetIsNavEnabled(true);
 
         Debug.Log(gameObject.name + " target reset");
         StopCoroutine("Think");
@@ -78,7 +80,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", false);
 
-        SetIsChase(false);
+        SetIsNavEnabled(false);
         agrroPulling.SetActive(true);
         isAggro = false;
 
@@ -154,11 +156,11 @@ public class EnemyController : MonoBehaviour
 
     void EnemyChase()
     {
-        if (nav.enabled)
-        {
-            nav.SetDestination(target.position);
-            nav.isStopped = !isChase;
-        }
+        if (!nav.enabled)
+            return;
+
+        nav.SetDestination(target.position);
+        nav.isStopped = !isChase || isHit;
     }
 
     void Aiming() // 레이캐스트로 플레이어 위치 특정
@@ -227,9 +229,19 @@ public class EnemyController : MonoBehaviour
     }
 
     // --------------------------- 외부 참조 함수 ------------------------
-    public void SetIsChase(bool bol)
+    public void SetIsNavEnabled(bool bol)
     {
         isChase = bol;
         nav.enabled = bol;
+    }
+
+    public void SetIsChase(bool bol)
+    {
+        isChase = bol;
+    }
+
+    public void setIsHit(bool bol)
+    {
+        isHit = bol;
     }
 }

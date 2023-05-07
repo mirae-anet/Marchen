@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
 
     private bool isReload = false;
     private bool isAttack = false;
+    private bool isRange = false;
 
     private bool attackInput;
     private bool reloadInput;
@@ -59,6 +60,9 @@ public class PlayerAttack : MonoBehaviour
         }
 
         weaponDelay = weaponMain.GetDelay();
+
+        if (weaponMain.GetWeaponType() == WeaponMain.Type.Range)
+            isRange = true;
     }
 
     public void DoAttack(Vector3 attackDir)
@@ -66,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(AttackCoolTime(attackDir));
     }
 
-    IEnumerator AttackCoolTime(Vector3 Dir)
+    IEnumerator AttackCoolTime(Vector3 dir)
     {
         // 선딜레이
         //rigid.velocity = new Vector3((saveDir * moveSpeed).x, rigid.velocity.y, (saveDir * moveSpeed).z);
@@ -75,8 +79,9 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         //rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
+        playerController.SetForward(dir);
         weaponMain.Attack();
-        anim.SetTrigger(weaponMain.GetWeaponType() == WeaponMain.Type.Melee ? "doSwing" : "doShot");
+        anim.SetTrigger(!isRange ? "doSwing" : "doShot");
 
         yield return new WaitForSeconds(weaponDelay);
 

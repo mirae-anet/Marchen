@@ -57,12 +57,10 @@ public class EnemyMain : MonoBehaviour
     IEnumerator OnDamage(Vector3 reactDir)
     {
         Debug.Log(gameObject.name + " Hit!");
+        enemyController.setIsHit(true);
+
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
-
-        yield return new WaitForSeconds(0.1f);
-        foreach (MeshRenderer mesh in meshs)
-            mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
 
         if (curHealth > 0)
         {
@@ -78,6 +76,13 @@ public class EnemyMain : MonoBehaviour
 
             OnDie();
         }
+
+        yield return new WaitForSeconds(2f);
+
+        enemyController.setIsHit(false);
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
     }
 
     void OnDie()
@@ -87,7 +92,7 @@ public class EnemyMain : MonoBehaviour
             mesh.material.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
         rigid.velocity = Vector3.zero;
-        enemyController.SetIsChase(false);
+        enemyController.SetIsNavEnabled(false);
 
         anim.SetTrigger("doDie");
 

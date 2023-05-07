@@ -111,7 +111,8 @@ public class PlayerController : MonoBehaviour
             moveDir = camControl.GetMoveDir(moveInput);
 
             //playerBody.forward = lookForward; // 캐릭터 고정
-            playerBody.forward = moveDir;       // 카메라 고정
+            //playerBody.forward = moveDir;       // 카메라 고정
+            SetForward(moveDir);
 
             float walkSpeed = (walkInput ? 0.3f : 1f); // 걷기면 속도 0.3배
 
@@ -167,7 +168,8 @@ public class PlayerController : MonoBehaviour
         if (attackInput && !isAttack && !isDodge && !playerMain.GetIsHit())
         {
             isAttack = true;
-            saveDir = moveDir; // 공격 방향 기억
+            saveDir = camControl.gameObject.transform.forward; // 공격 방향 기억.
+            saveDir.y = 0;
 
             playerAttack.DoAttack(saveDir);
         }
@@ -186,5 +188,10 @@ public class PlayerController : MonoBehaviour
     public bool GetActive()
     {
         return isJump || isDodge || isAttack; // 하나라도 작동하면 false
+    }
+
+    public void SetForward(Vector3 dir)
+    {
+        playerBody.forward = dir;
     }
 }

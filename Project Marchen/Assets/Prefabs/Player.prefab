@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &260547050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260547051}
+  m_Layer: 0
+  m_Name: Case Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260547051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260547050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.07, y: 1.034, z: -0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3805233040095242856}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833522134
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +89,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034c181e493a2b343b3f678674cf9a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1076927524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076927525}
+  m_Layer: 6
+  m_Name: Bullet Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1076927525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076927524}
+  m_LocalRotation: {x: -0.00000011920926, y: -0.000000021073419, z: 0.00000007375697, w: 1}
+  m_LocalPosition: {x: 1, y: 2.5000005, z: 1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3132167054475281599}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306833796
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +802,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3132167053579309939}
+  - {fileID: 1076927525}
   m_Father: {fileID: 2577960378990956296}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -945,6 +1008,7 @@ GameObject:
   - component: {fileID: 5318821609316634605}
   - component: {fileID: 7244274303372394925}
   - component: {fileID: 7244274303372394926}
+  - component: {fileID: 712826196}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -999,10 +1063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 817683348258018908}
-  weapons:
-  - {fileID: 4161920610945938502}
-  - {fileID: 4577126054602518738}
-  weaponType: 0
   health: 100
   maxHealth: 100
 --- !u!114 &7244274303372394926
@@ -1023,6 +1083,22 @@ MonoBehaviour:
   jumpPower: 40
   dodgePower: 20
   raySize: {x: 1.8, y: 0.6, z: 1.8}
+--- !u!114 &712826196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318821609316634604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9fa2de4a4b8674a82437a919192b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 4161920610945938502}
+  - {fileID: 4577126054602518738}
+  weaponType: 1
 --- !u!1 &5639462940654645468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,9 +1781,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 0}
   trailEffect: {fileID: 0}
+  bulletPos: {fileID: 1076927525}
+  bulletCasePos: {fileID: 260547051}
+  bullet: {fileID: 5182839842949675550, guid: 9d0c0b3eeb543994192eff4610559561, type: 3}
+  bulletCase: {fileID: 8019862414519829217, guid: 98c9c6c317c1c2c4da9fc513039872e5, type: 3}
   type: 1
   damage: 25
   delay: 0.4
+  maxAmmo: 30
+  curAmmo: 30
 --- !u!1001 &3132167053944144519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1721,7 +1803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_TagString
@@ -1810,6 +1892,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 6462555733986666708}
   trailEffect: {fileID: 4303368616322040587}
+  bulletPos: {fileID: 0}
+  bulletCasePos: {fileID: 0}
+  bullet: {fileID: 0}
+  bulletCase: {fileID: 0}
   type: 0
   damage: 25
   delay: 0.4
+  maxAmmo: 30
+  curAmmo: 30

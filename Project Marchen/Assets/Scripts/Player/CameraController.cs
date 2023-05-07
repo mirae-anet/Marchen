@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private Vector3 lookForward;
+    private Vector3 lookRight;
+    private Vector3 moveDir;
+
     //[Header("오브젝트 연결")]
     //[SerializeField]
     //private GameObject player;
@@ -49,10 +53,10 @@ public class CameraController : MonoBehaviour
 
     public Vector3 GetMoveDir(Vector2 moveInput)
     {
-        Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
-        Vector3 lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;       // 좌우 방향 저장
+        lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
+        lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;       // 좌우 방향 저장
 
-        Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x); // 바라보는 방향 기준 이동 방향
+        moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x); // 바라보는 방향 기준 이동 방향
 
         return moveDir;
     }

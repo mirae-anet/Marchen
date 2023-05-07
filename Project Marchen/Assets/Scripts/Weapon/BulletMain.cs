@@ -19,9 +19,7 @@ public class BulletMain : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Wall")
-        {
             Destroy(gameObject);
-        }
             
     }
 
