@@ -11,6 +11,8 @@ public class EnemyMain : MonoBehaviour
     private MeshRenderer[] meshs;
     private Animator anim;
 
+    private bool isDead = false;
+
     public enum Type { Melee, Range };
 
     [Header("설정")]
@@ -19,6 +21,8 @@ public class EnemyMain : MonoBehaviour
     public int maxHealth = 100;
     [Range(1f, 1000f)]
     public int curHealth = 100;
+    [Range(0f, 5f)]
+    public float knockbackForce = 0.3f;
 
     void Awake()
     {
@@ -37,6 +41,7 @@ public class EnemyMain : MonoBehaviour
             BulletMain bulletMain = collision.gameObject.GetComponent<BulletMain>();
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - collision.transform.position;
+            reactDir.y = 0f;
 
             enemyController.SetTarget(collision.gameObject.GetComponent<BulletMain>().GetParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
             Destroy(collision.gameObject); // 피격된 불릿 파괴
@@ -54,10 +59,11 @@ public class EnemyMain : MonoBehaviour
             WeaponMain weaponMain = other.GetComponent<WeaponMain>();
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
+            reactDir.y = 0f;
 
             enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
             //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
-            StartCoroutine(OnDamage(reactDir));
+            StartCoroutine("OnDamage", reactDir);
         }
     }
 
@@ -67,25 +73,30 @@ public class EnemyMain : MonoBehaviour
         enemyController.setIsHit(true);
         anim.SetBool("isWalk", false);
 
+        transform.position += reactDir * knockbackForce;
+
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
 
-        if (curHealth <= 0)
-            OnDie();
-
         yield return new WaitForSeconds(0.3f);
 
+        if (curHealth <= 0)
+            OnDie();
+        else
+        {
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
+            gameObject.layer = 8;  // 슈퍼 아머 해제
+        }
+
         enemyController.setIsHit(false);
-
-        foreach (MeshRenderer mesh in meshs)
-            mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
-
-        gameObject.layer = 8;  // 슈퍼 아머 해제
     }
 
     void OnDie()
     {
         gameObject.layer = 10;  // 슈퍼 아머
+        isDead = true;
+
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
@@ -100,5 +111,10 @@ public class EnemyMain : MonoBehaviour
     public Type GetEnemyType()
     {
         return enemyType;
+    }
+
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }

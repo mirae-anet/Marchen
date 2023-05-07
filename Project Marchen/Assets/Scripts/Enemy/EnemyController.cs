@@ -48,6 +48,9 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (enemyMain.GetIsDead())
+            return;
+
         if (!isAggro) // 논어그로
         {
             EnemyMove();
@@ -193,8 +196,6 @@ public class EnemyController : MonoBehaviour
 
         if (rayHits.Length > 0 && !isAttack && !isHit)
             StartCoroutine("Attack");
-
-
     }
 
     IEnumerator Attack()
