@@ -28,6 +28,23 @@ public class EnemyMain : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlayerBullet")  // 원거리 공격
+        {
+            gameObject.layer = 10;  // 슈퍼 아머
+
+            BulletMain bulletMain = collision.gameObject.GetComponent<BulletMain>();
+            curHealth -= bulletMain.damage;
+            Vector3 reactDir = transform.position - collision.transform.position;
+
+            enemyController.SetTarget(collision.gameObject.GetComponent<BulletMain>().GetParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
+            Destroy(collision.gameObject); // 피격된 불릿 파괴
+
+            StartCoroutine(OnDamage(reactDir));
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PlayerAttack")  // 근접 공격
@@ -43,19 +60,6 @@ public class EnemyMain : MonoBehaviour
             StartCoroutine(OnDamage(reactDir));
         }
 
-        else if (other.tag == "PlayerBullet")  // 원거리 공격
-        {
-            gameObject.layer = 10;  // 슈퍼 아머
-
-            BulletMain bulletMain = other.GetComponent<BulletMain>();
-            curHealth -= bulletMain.damage;
-            Vector3 reactDir = transform.position - other.transform.position;
-
-            enemyController.SetTarget(other.GetComponent<BulletMain>().GetParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
-            Destroy(other.gameObject); // 피격된 불릿 파괴
-
-            StartCoroutine(OnDamage(reactDir));
-        }
     }
 
     IEnumerator OnDamage(Vector3 reactDir)

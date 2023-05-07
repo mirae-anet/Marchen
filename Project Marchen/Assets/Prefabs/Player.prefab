@@ -1098,7 +1098,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 4161920610945938502}
   - {fileID: 4577126054602518738}
-  weaponType: 1
+  weaponType: 0
 --- !u!1 &5639462940654645468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,7 +1803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_TagString
@@ -1876,7 +1876,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 4, z: 4}
+  m_Size: {x: 8, y: 8, z: 8}
   m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &6433830069848896021
 MonoBehaviour:
