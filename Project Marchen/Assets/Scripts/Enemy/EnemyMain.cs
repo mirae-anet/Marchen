@@ -32,6 +32,8 @@ public class EnemyMain : MonoBehaviour
     {
         if (other.tag == "PlayerAttack")  // 근접 공격
         {
+            gameObject.layer = 10;  // 슈퍼 아머
+
             WeaponMain weaponMain = other.GetComponent<WeaponMain>();
             curHealth -= weaponMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
@@ -43,6 +45,8 @@ public class EnemyMain : MonoBehaviour
 
         else if (other.tag == "PlayerBullet")  // 원거리 공격
         {
+            gameObject.layer = 10;  // 슈퍼 아머
+
             BulletMain bulletMain = other.GetComponent<BulletMain>();
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
@@ -83,6 +87,8 @@ public class EnemyMain : MonoBehaviour
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
+
+        gameObject.layer = 8;  // 슈퍼 아머
     }
 
     void OnDie()
