@@ -79,9 +79,17 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         //rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
-        playerController.SetForward(dir);
+        if (isRange)
+        {
+            playerController.SetForward(dir);
+            anim.SetTrigger("doShot");
+        }
+        else
+        {
+            anim.SetTrigger("doSwing");
+        }
+        
         weaponMain.Attack();
-        anim.SetTrigger(!isRange ? "doSwing" : "doShot");
 
         yield return new WaitForSeconds(weaponDelay);
 
