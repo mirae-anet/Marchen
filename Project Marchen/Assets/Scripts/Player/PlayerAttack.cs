@@ -5,19 +5,12 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator anim;
-    private Rigidbody rigid;
     private PlayerController playerController;
     private WeaponMain weaponMain;
 
-    private bool isReload = false;
-    private bool isAttack = false;
     private bool isRange = false;
 
-    private bool attackInput;
-    private bool reloadInput;
-
     private float weaponDelay;
-    private int ammo;
 
     public enum Type { Hammer, Gun };
 
@@ -32,13 +25,7 @@ public class PlayerAttack : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         anim = GetComponentInChildren<Animator>();
-        rigid = GetComponent<Rigidbody>();
         WeaponEquip();
-    }
-
-    void Update()
-    {
-        Reload();
     }
 
     void WeaponEquip()
@@ -66,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void DoAttack(Vector3 camDir)
     {
-        StartCoroutine(AttackCoolTime(camDir));
+        StartCoroutine("AttackCoolTime", camDir);
     }
 
     IEnumerator AttackCoolTime(Vector3 camDir)
@@ -88,33 +75,28 @@ public class PlayerAttack : MonoBehaviour
         playerController.SetIsAttack(false);
     }
 
-    private void Reload()
+    public void DoReload()
     {
-        if (weaponMain == null)
-            return;
-
         if (weaponMain.type == WeaponMain.Type.Melee)
             return;
+        
+        anim.SetTrigger("doReload");
+        playerController.SetIsReload(true);
 
-        if (ammo == 0)  // 총알이 0개일 때
-            return;
-
-        if (reloadInput && !playerController.GetActiveJDA())
-        {
-            anim.SetTrigger("doReload");
-            isReload = true;
-
-            Invoke("ReloadOut", 2f);
-        }
+        StartCoroutine("ReloadOut", 0.8f);
     }
 
-    private void ReloadOut()
+    IEnumerator ReloadOut(float time)
     {
-        int reAmmo = ammo < weaponMain.maxAmmo ? ammo : weaponMain.GetMaxAmmo();
-        weaponMain.SetCurAmmo(reAmmo);
+        yield return new WaitForSeconds(time);
 
-        ammo -= reAmmo;
-        isReload = false;
+        weaponMain.SetCurAmmo(weaponMain.GetMaxAmmo());
+        playerController.SetIsReload(false);
     }
 
+    public void StopReload()
+    {
+        StopCoroutine("ReloadOut");
+        playerController.SetIsReload(false);
+    }
 }
