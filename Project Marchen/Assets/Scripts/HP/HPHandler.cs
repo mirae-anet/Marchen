@@ -21,7 +21,7 @@ public class HPHandler : NetworkBehaviour
     // Color defaultMeshBodyColor;
 
     public GameObject playerModel;
-    public GameObject deathGameObjectPrefab;
+    // public GameObject deathGameObjectPrefab;
     public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
@@ -31,10 +31,14 @@ public class HPHandler : NetworkBehaviour
     NetworkPlayerController networkPlayerController;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
+    Animator anim;
+    Rigidbody rigid;
 
     private void Awake()
     {
         meshs = GetComponentsInChildren<MeshRenderer>();
+        anim = GetComponentInChildren<Animator>();
+        rigid = GetComponent<Rigidbody>();
         characterRespawnHandler = GetComponent<CharacterRespawnHandler>();
         networkPlayerController = GetComponent<NetworkPlayerController>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
@@ -78,11 +82,19 @@ public class HPHandler : NetworkBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
     }
+    IEnumerator OnDeadCO()
+    {
+        anim.SetTrigger("doDie");
+
+        yield return new WaitForSeconds(2.0f);
+
+        playerModel.gameObject.SetActive(false);
+    }
 
     IEnumerator ServerReviveCO()
     {
         Debug.Log($"{Time.time} ServerRevive");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.5f);
         characterRespawnHandler.RequestRespawn();
     }
 
@@ -106,7 +118,6 @@ public class HPHandler : NetworkBehaviour
             networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
             Debug.Log($"{Time.time} {transform.name} died");
             isDead = true;
-            StartCoroutine(ServerReviveCO());
         }
     }
 
@@ -148,11 +159,18 @@ public class HPHandler : NetworkBehaviour
     private void OnDeath()
     {
         Debug.Log($"{Time.time} OnDeath");
-        playerModel.gameObject.SetActive(false);
-        hitboxRoot.HitboxRootActive = false; //죽고나서는 데미지 안 들어감
-        networkPlayerController.SetCharacterControllerEnabled(false);
+        StartCoroutine(OnDeadCO());
 
-        Instantiate(deathGameObjectPrefab, transform.position, Quaternion.identity);
+        if(Object.HasStateAuthority)
+        {
+            gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
+            rigid.velocity = Vector3.zero;
+            rigid.isKinematic = true;
+            rigid.detectCollisions = false;
+            hitboxRoot.HitboxRootActive = false; //죽고나서는 데미지 안 들어감
+            networkPlayerController.SetCharacterControllerEnabled(false);
+            StartCoroutine(ServerReviveCO());
+        }
     }
 
     private void OnRevive()
@@ -162,8 +180,10 @@ public class HPHandler : NetworkBehaviour
         if(Object.HasInputAuthority)
             uiOnHitImage.color = new Color(0,0,0,0);
 
-        playerModel.gameObject.SetActive(true);
+        rigid.isKinematic = false;
+        rigid.detectCollisions = true;
         hitboxRoot.HitboxRootActive = true;
+        playerModel.gameObject.SetActive(true);
         networkPlayerController.SetCharacterControllerEnabled(true);
     }
 
