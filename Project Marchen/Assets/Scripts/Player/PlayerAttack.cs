@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     private bool reloadInput;
 
     private float weaponDelay;
+    private int ammo;
 
     public enum Type { Hammer, Gun };
 
@@ -57,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
                 break;
         }
 
-        weaponDelay = weaponMain.getDelay();
+        weaponDelay = weaponMain.GetDelay();
     }
 
     public void DoAttack(Vector3 attackDir)
@@ -79,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
 
         yield return new WaitForSeconds(weaponDelay);
 
-        playerController.setIsAttack(false);
+        playerController.SetIsAttack(false);
     }
 
     private void Reload()
@@ -89,11 +90,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (weaponMain.type == WeaponMain.Type.Melee)
             return;
-        /*
+
         if (ammo == 0)  // 총알이 0개일 때
             return;
-        */
-        if (reloadInput && !playerController.getActive())
+
+        if (reloadInput && !playerController.GetActive())
         {
             anim.SetTrigger("doReload");
             isReload = true;
@@ -104,10 +105,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void ReloadOut()
     {
-        //int reAmmo = reAmmo < weaponMain.maxAmmo ? ammo : weaponMain.maxAmmo;
-        //weaponMain.curAmmo = reAmmo;
+        int reAmmo = ammo < weaponMain.maxAmmo ? ammo : weaponMain.GetMaxAmmo();
+        weaponMain.SetCurAmmo(reAmmo);
 
-        //ammo -= reAmmo;
+        ammo -= reAmmo;
         isReload = false;
     }
 

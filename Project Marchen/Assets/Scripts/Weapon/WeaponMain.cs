@@ -11,6 +11,14 @@ public class WeaponMain : MonoBehaviour
     private BoxCollider meleeArea;
     [SerializeField]
     private TrailRenderer trailEffect;
+    [SerializeField]
+    private Transform bulletPos;
+    [SerializeField]
+    private Transform bulletCasePos;
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private GameObject bulletCase;
 
     [Header("설정")]
     public Type type;
@@ -18,14 +26,10 @@ public class WeaponMain : MonoBehaviour
     public int damage = 25;
     [Range(0f, 5f)]
     public float delay = 0.35f;
-
-    public int maxAmmo;
-    public int curAmmo;
-
-    public Transform bulletPos;
-    public Transform bulletCasePos;
-    public GameObject bullet;
-    public GameObject bulletCase;
+    [Range(1, 100)]
+    public int maxAmmo = 30;
+    [Range(0, 100)]
+    public int curAmmo = 30;
 
     public void Attack()
     {
@@ -69,7 +73,7 @@ public class WeaponMain : MonoBehaviour
         caseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
     }
 
-    public float getDelay()
+    public float GetDelay()
     {
         return delay;
     }
@@ -77,5 +81,15 @@ public class WeaponMain : MonoBehaviour
     public Type GetWeaponType()
     {
         return type;
+    }
+
+    public int GetMaxAmmo()
+    {
+        return maxAmmo;
+    }
+
+    public void SetCurAmmo(int ammo)
+    {
+        curAmmo = ammo;
     }
 }

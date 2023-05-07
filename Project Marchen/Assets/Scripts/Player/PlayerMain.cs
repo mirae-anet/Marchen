@@ -52,7 +52,7 @@ public class PlayerMain : MonoBehaviour
             if (!isDamage)
             {
                 BulletMain enemyBullet = other.GetComponent<BulletMain>();
-                health -= enemyBullet.getDamage();
+                health -= enemyBullet.GetDamage();
                 //Debug.Log(other.GetComponent<BulletMain>().getParent());
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
@@ -101,12 +101,12 @@ public class PlayerMain : MonoBehaviour
         isDead = true;
     }
 
-    public bool getIsHit()
+    public bool GetIsHit()
     {
         return isDamage;
     }
 
-    public bool getIsDead()
+    public bool GetIsDead()
     {
         return isDead;
     }

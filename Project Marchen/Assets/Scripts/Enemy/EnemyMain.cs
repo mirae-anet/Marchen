@@ -47,7 +47,7 @@ public class EnemyMain : MonoBehaviour
             curHealth -= bulletMain.damage;
             Vector3 reactDir = transform.position - other.transform.position;
 
-            enemyController.SetTarget(other.GetComponent<BulletMain>().getParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
+            enemyController.SetTarget(other.GetComponent<BulletMain>().GetParent()); // 발사한 객체로 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
             Destroy(other.gameObject); // 피격된 불릿 파괴
 
             StartCoroutine(OnDamage(reactDir));
@@ -87,14 +87,14 @@ public class EnemyMain : MonoBehaviour
             mesh.material.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
         rigid.velocity = Vector3.zero;
-        enemyController.setIsChase(false);
+        enemyController.SetIsChase(false);
 
         anim.SetTrigger("doDie");
 
         Destroy(gameObject, 3); // 3초 뒤에 삭제
     }
 
-    public Type getEnemyType()
+    public Type GetEnemyType()
     {
         return enemyType;
     }

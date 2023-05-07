@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (playerMain.getIsDead())
+        if (playerMain.GetIsDead())
         {
             rigid.velocity = Vector3.zero;
             return;
@@ -101,14 +101,14 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.getIsHit() || isAttack || isReload) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.GetIsHit() || isAttack || isReload) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
         
         if (isMove)
         {
-            moveDir = camControl.getMoveDir(moveInput);
+            moveDir = camControl.GetMoveDir(moveInput);
 
             //playerBody.forward = lookForward; // 캐릭터 고정
             playerBody.forward = moveDir;       // 카메라 고정
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit() && !isAttack)
+        if (jumpInput && !isJump && !isDodge && !playerMain.GetIsHit() && !isAttack)
         {
             isJump = true;
             isGrounded = false;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit() && !isAttack)
+        if (dodgeInput && isMove && !isDodge && !playerMain.GetIsHit() && !isAttack)
         {
             isDodge = true;
 
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
     
     private void PlayerAttack()
     {
-        if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
+        if (attackInput && !isAttack && !isDodge && !playerMain.GetIsHit())
         {
             isAttack = true;
             saveDir = moveDir; // 공격 방향 기억
@@ -173,17 +173,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void setIsGrounded(bool bol)
+    public void SetIsGrounded(bool bol)
     {
         isGrounded = bol;
     }
 
-    public void setIsAttack(bool bol)
+    public void SetIsAttack(bool bol)
     {
         isAttack = bol;
     }
 
-    public bool getActive()
+    public bool GetActive()
     {
         return isJump || isDodge || isAttack; // 하나라도 작동하면 false
     }

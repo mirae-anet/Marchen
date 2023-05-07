@@ -8,7 +8,7 @@ public class PlayerGroundCheck : MonoBehaviour
     {
         if (other.tag == "Ground" || other.tag == "Wall")
         {
-            gameObject.GetComponentInParent<PlayerController>().setIsGrounded(true);
+            gameObject.GetComponentInParent<PlayerController>().SetIsGrounded(true);
         }
     }
 }

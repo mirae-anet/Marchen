@@ -79,7 +79,7 @@ namespace Fusion102
             data.isMove = isMove;
             if (isMove)
             {
-                data.moveDir = camControl.getMoveDir(moveInput);
+                data.moveDir = camControl.GetMoveDir(moveInput);
             }
             // for animation
             data.walkOn = Input.GetButton("Walk");

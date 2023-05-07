@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
         target = transform;
         isAggro = true;
 
-        setIsChase(true);
+        SetIsChase(true);
 
         Debug.Log(gameObject.name + " target reset");
         StopCoroutine("Think");
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", false);
 
-        setIsChase(false);
+        SetIsChase(false);
         agrroPulling.SetActive(true);
         isAggro = false;
 
@@ -141,7 +141,7 @@ public class EnemyController : MonoBehaviour
             TargetOff();
             return;
         }
-        else if (target.gameObject.GetComponent<PlayerMain>().getIsDead()) // 타겟이 죽으면
+        else if (target.gameObject.GetComponent<PlayerMain>().GetIsDead()) // 타겟이 죽으면
         {
             TargetOff();
             return;
@@ -166,7 +166,7 @@ public class EnemyController : MonoBehaviour
         float targetRadius = 0;
         float targetRange = 0;
 
-        switch (enemyMain.getEnemyType())
+        switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
                 targetRadius = 1.5f;
@@ -196,7 +196,7 @@ public class EnemyController : MonoBehaviour
         isAttack = true;
         anim.SetBool("isAttack", true);
 
-        switch (enemyMain.getEnemyType())
+        switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
                 yield return new WaitForSeconds(0.2f);
@@ -214,7 +214,7 @@ public class EnemyController : MonoBehaviour
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
-                instantBullet.GetComponent<BulletMain>().setParent(transform); // Buller에 발사한 객체 정보 저장
+                instantBullet.GetComponent<BulletMain>().SetParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
                 Debug.Log(gameObject.name + " Attack End");
@@ -227,7 +227,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // --------------------------- 외부 참조 함수 ------------------------
-    public void setIsChase(bool bol)
+    public void SetIsChase(bool bol)
     {
         isChase = bol;
         nav.enabled = bol;
