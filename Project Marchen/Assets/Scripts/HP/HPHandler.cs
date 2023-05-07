@@ -11,27 +11,32 @@ public class HPHandler : NetworkBehaviour
     [Networked(OnChanged = nameof(OnStateChanged))]
     public bool isDead {get; set;}
 
+    bool isDamage = false;
     bool isInitialized = false;
     const byte startingHP = 5;
 
     public Color uiOnHitColor;
     public Image uiOnHitImage;
-    public MeshRenderer bodyMeshRenderer;
-    Color defaultMeshBodyColor;
+    // public MeshRenderer bodyMeshRenderer;
+    // Color defaultMeshBodyColor;
 
     public GameObject playerModel;
     public GameObject deathGameObjectPrefab;
     public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
+    private MeshRenderer[] meshs;
     HitboxRoot hitboxRoot;
-    CharacterMovementHandler characterMovementHandler;
+    CharacterRespawnHandler characterRespawnHandler;
+    NetworkPlayerController networkPlayerController;
     NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
+        meshs = GetComponentsInChildren<MeshRenderer>();
+        characterRespawnHandler = GetComponent<CharacterRespawnHandler>();
+        networkPlayerController = GetComponent<NetworkPlayerController>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
@@ -43,7 +48,7 @@ public class HPHandler : NetworkBehaviour
             isDead = false;
         }
 
-        defaultMeshBodyColor = bodyMeshRenderer.material.color;
+        // defaultMeshBodyColor = bodyMeshRenderer.material.color;
 
         isInitialized = true;
     }
@@ -51,32 +56,47 @@ public class HPHandler : NetworkBehaviour
     IEnumerator OnHitCO()
     {
         // 피격시 효과
-        bodyMeshRenderer.material.color = Color.red;
+        isDamage = true;
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.yellow;
+
         if(Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
         yield return new WaitForSeconds(0.2f);
 
-        //정상화
-        bodyMeshRenderer.material.color = defaultMeshBodyColor;
+        //화면 정상화
         if(Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
+
+        yield return new WaitForSeconds(0.4f);
+
+        //아바타 정상화
+        isDamage = false;
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.white;
     }
 
     IEnumerator ServerReviveCO()
     {
         Debug.Log($"{Time.time} ServerRevive");
         yield return new WaitForSeconds(2.0f);
-        characterMovementHandler.RequestRespawn();
+        characterRespawnHandler.RequestRespawn();
     }
 
     //Function only called on the server
-    public void OnTakeDamage(string damageCausedByPlayerNickname)
+    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount)
     {
         //only take damage while alive
         if(isDead)
             return;
-        HP -= 1;
+
+        //Ensure that we cannot flip the byte as it can't handle minus values.
+        if(damageAmount > HP)
+            damageAmount = HP;
+        HP -= damageAmount;
 
         Debug.Log($"{Time.time} {transform.name} took damage got {HP} left");
 
@@ -130,7 +150,7 @@ public class HPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} OnDeath");
         playerModel.gameObject.SetActive(false);
         hitboxRoot.HitboxRootActive = false; //죽고나서는 데미지 안 들어감
-        characterMovementHandler.SetCharacterControllerEnabled(false);
+        networkPlayerController.SetCharacterControllerEnabled(false);
 
         Instantiate(deathGameObjectPrefab, transform.position, Quaternion.identity);
     }
@@ -144,7 +164,7 @@ public class HPHandler : NetworkBehaviour
 
         playerModel.gameObject.SetActive(true);
         hitboxRoot.HitboxRootActive = true;
-        characterMovementHandler.SetCharacterControllerEnabled(true);
+        networkPlayerController.SetCharacterControllerEnabled(true);
     }
 
     public void OnRespawned()
@@ -153,4 +173,8 @@ public class HPHandler : NetworkBehaviour
         isDead = false;
     }
 
+    public bool getIsHit()
+    {
+        return isDamage;
+    }
 }
