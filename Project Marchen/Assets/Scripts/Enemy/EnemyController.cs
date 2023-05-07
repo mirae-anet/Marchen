@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     [Header("설정")]
     public float moveDis = 3f;
     public float moveSpeed = 5f;
+    public bool attackCancel = true;
 
     void Awake()
     {
@@ -57,6 +58,7 @@ public class EnemyController : MonoBehaviour
             TargetisAlive();
             EnemyChase();
             Aiming();
+            AttackCancel();
         }
     }
 
@@ -121,7 +123,7 @@ public class EnemyController : MonoBehaviour
     // --------------------------- 어그로 풀링 ------------------------
     IEnumerator ChaseStart()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         isChase = true;
         anim.SetBool("isWalk", true);
     }
@@ -188,8 +190,10 @@ public class EnemyController : MonoBehaviour
                                   targetRange,                  // 방향으로 부터 거리
                                   LayerMask.GetMask("Player")); // 레이어 특정
 
-        if (rayHits.Length > 0 && !isAttack)
-            StartCoroutine(Attack());
+        if (rayHits.Length > 0 && !isAttack && !isHit)
+            StartCoroutine("Attack");
+
+
     }
 
     IEnumerator Attack()
@@ -221,13 +225,31 @@ public class EnemyController : MonoBehaviour
                 instantBullet.GetComponent<BulletMain>().SetParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
-                Debug.Log(gameObject.name + " Attack End");
                 break;
         }
 
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttack", false);
+    }
+
+    void AttackCancel()
+    {
+        if (!attackCancel)
+            return;
+
+        if (isHit)
+        {
+            StopCoroutine("Attack");
+
+            isChase = true;
+            isAttack = false;
+
+            anim.SetBool("isAttack", false);
+
+            if (meleeArea != null)
+                meleeArea.enabled = false;
+        }
     }
 
     // --------------------------- 외부 참조 함수 ------------------------

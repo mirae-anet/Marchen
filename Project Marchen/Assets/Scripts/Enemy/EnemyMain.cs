@@ -65,6 +65,7 @@ public class EnemyMain : MonoBehaviour
     {
         Debug.Log(gameObject.name + " Hit!");
         enemyController.setIsHit(true);
+        anim.SetBool("isWalk", false);
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
@@ -84,7 +85,7 @@ public class EnemyMain : MonoBehaviour
             OnDie();
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
 
         enemyController.setIsHit(false);
 
