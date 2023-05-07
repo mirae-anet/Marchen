@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class EnemyController : MonoBehaviour
 {
     private EnemyMain enemyMain;
-    private Rigidbody rigid;
+    //private Rigidbody rigid;
     private NavMeshAgent nav;
     private Animator anim;
     private Transform target;
@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         enemyMain = GetComponent<EnemyMain>();
-        rigid = GetComponent<Rigidbody>();
+        //rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
         }
         else // 어그로 풀링
         {
-            FreezeVelocity();
+            //FreezeVelocity();
             TargetisAlive();
             EnemyChase();
             Aiming();
@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour
 
     void TargetOff() // 타겟 해제
     {
-        rigid.velocity = Vector3.zero;
+        //rigid.velocity = Vector3.zero;
 
         anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", false);
@@ -92,7 +92,8 @@ public class EnemyController : MonoBehaviour
     // --------------------------- 논 어그로 ------------------------
     void EnemyMove() // 어그로 아닐 때 이동
     {
-        rigid.velocity = transform.forward * moveSpeed * isMove; // moveSpeed는 지정, isMove는 Think()에서 결정
+        transform.position += transform.forward* moveSpeed * isMove * Time.deltaTime;
+        //rigid.velocity = transform.forward * moveSpeed * isMove; // moveSpeed는 지정, isMove는 Think()에서 결정
     }
 
     IEnumerator Think(float worry) // 어그로 아닐 때 이동 결정하는 함수
@@ -128,14 +129,14 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isWalk", true);
     }
 
-    void FreezeVelocity()
-    {
-        if (isChase)
-        {
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-        }
-    }
+    //void FreezeVelocity()
+    //{
+    //    if (isChase)
+    //    {
+    //        rigid.velocity = Vector3.zero;
+    //        rigid.angularVelocity = Vector3.zero;
+    //    }
+    //}
 
     void TargetisAlive() // 타겟 죽는거 확인
     {
