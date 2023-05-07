@@ -28,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
     [Header("설정")]
     public Type weaponType;
 
-
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -65,23 +64,16 @@ public class PlayerAttack : MonoBehaviour
             isRange = true;
     }
 
-    public void DoAttack(Vector3 attackDir)
+    public void DoAttack(Vector3 camDir)
     {
-        StartCoroutine(AttackCoolTime(attackDir));
+        StartCoroutine(AttackCoolTime(camDir));
     }
 
-    IEnumerator AttackCoolTime(Vector3 dir)
+    IEnumerator AttackCoolTime(Vector3 camDir)
     {
-        // 선딜레이
-        //rigid.velocity = new Vector3((saveDir * moveSpeed).x, rigid.velocity.y, (saveDir * moveSpeed).z);
-        anim.SetBool("isRun", true);
-
-        yield return new WaitForSeconds(0.3f);
-
-        //rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
         if (isRange)
         {
-            playerController.SetForward(dir);
+            playerController.SetForward(camDir);
             anim.SetTrigger("doShot");
         }
         else
@@ -107,7 +99,7 @@ public class PlayerAttack : MonoBehaviour
         if (ammo == 0)  // 총알이 0개일 때
             return;
 
-        if (reloadInput && !playerController.GetActive())
+        if (reloadInput && !playerController.GetActiveJDA())
         {
             anim.SetTrigger("doReload");
             isReload = true;

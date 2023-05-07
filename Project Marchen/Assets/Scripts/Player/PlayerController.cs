@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.GetIsHit() || isAttack || isReload) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.GetIsHit()) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
             moveDir = camControl.GetMoveDir(moveInput);
 
             //playerBody.forward = lookForward; // 캐릭터 고정
-            //playerBody.forward = moveDir;       // 카메라 고정
+            //playerBody.forward = moveDir;     // 카메라 고정
             SetForward(moveDir);
 
             float walkSpeed = (walkInput ? 0.3f : 1f); // 걷기면 속도 0.3배
@@ -167,11 +167,12 @@ public class PlayerController : MonoBehaviour
     {
         if (attackInput && !isAttack && !isDodge && !playerMain.GetIsHit())
         {
-            isAttack = true;
-            saveDir = camControl.gameObject.transform.forward; // 공격 방향 기억.
+            SetIsAttack(true);
+            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
+            saveDir = camControl.gameObject.transform.forward; // 카메라 방향 기억
             saveDir.y = 0;
 
-            playerAttack.DoAttack(saveDir);
+            playerAttack.DoAttack(saveDir); // 카메라 방향
         }
     }
 
@@ -185,7 +186,7 @@ public class PlayerController : MonoBehaviour
         isAttack = bol;
     }
 
-    public bool GetActive()
+    public bool GetActiveJDA()
     {
         return isJump || isDodge || isAttack; // 하나라도 작동하면 false
     }

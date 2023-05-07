@@ -8,7 +8,7 @@ public class WeaponMain : MonoBehaviour
 
     [Header("오브젝트 연결")]
     [SerializeField]
-    private BoxCollider meleeArea;
+    private SphereCollider meleeArea;
     [SerializeField]
     private TrailRenderer trailEffect;
     [SerializeField]
@@ -47,14 +47,14 @@ public class WeaponMain : MonoBehaviour
 
     IEnumerator Swing()
     {
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.2f);
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         trailEffect.enabled = false;
     }
 
