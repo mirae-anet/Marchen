@@ -13,15 +13,12 @@ public class HPHandler : NetworkBehaviour
 
     bool isDamage = false;
     bool isInitialized = false;
-    const byte startingHP = 5;
+    const byte startingHP = 100;
 
     public Color uiOnHitColor;
     public Image uiOnHitImage;
-    // public MeshRenderer bodyMeshRenderer;
-    // Color defaultMeshBodyColor;
 
     public GameObject playerModel;
-    // public GameObject deathGameObjectPrefab;
     public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
@@ -99,10 +96,40 @@ public class HPHandler : NetworkBehaviour
     }
 
     //Function only called on the server
+    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount, Vector3 AttackPostion)
+    {
+        //only take damage while alive
+        if(isDead)
+            return;
+        if(isDamage)
+            return;
+
+        //Ensure that we cannot flip the byte as it can't handle minus values.
+        if(damageAmount > HP)
+            damageAmount = HP;
+        HP -= damageAmount;
+
+        Debug.Log($"{Time.time} {transform.name} took damage got {HP} left");
+
+        //player died
+        if(HP <= 0)
+        {
+            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
+            Debug.Log($"{Time.time} {transform.name} died");
+            isDead = true;
+        }
+        else
+        {
+            KnockBack(AttackPostion);
+        }
+    }
+    //method overload
     public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount)
     {
         //only take damage while alive
         if(isDead)
+            return;
+        if(isDamage)
             return;
 
         //Ensure that we cannot flip the byte as it can't handle minus values.
@@ -196,5 +223,13 @@ public class HPHandler : NetworkBehaviour
     public bool getIsHit()
     {
         return isDamage;
+    }
+
+    public void KnockBack(Vector3 AttackPostion)
+    {
+        Vector3 reactDir = (transform.position - AttackPostion).normalized;
+
+        rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
+        rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
     }
 }
