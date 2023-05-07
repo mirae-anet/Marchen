@@ -59,7 +59,6 @@ public class EnemyMain : MonoBehaviour
             //Debug.Log(other.GetComponentInParent<Transform>().root.ToString());
             StartCoroutine(OnDamage(reactDir));
         }
-
     }
 
     IEnumerator OnDamage(Vector3 reactDir)

@@ -196,6 +196,8 @@ public class EnemyController : MonoBehaviour
     {
         isChase = false;
         isAttack = true;
+
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("isAttack", true);
 
         switch (enemyMain.GetEnemyType())
