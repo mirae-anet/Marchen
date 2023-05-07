@@ -208,7 +208,7 @@ public class EnemyController : MonoBehaviour
         switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.5f);
                 meleeArea.enabled = true;
 
                 yield return new WaitForSeconds(1f);
