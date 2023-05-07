@@ -10,7 +10,6 @@ public class HPHandler : NetworkBehaviour
 
     [Networked(OnChanged = nameof(OnStateChanged))]
     public bool isDead {get; set;}
-
     bool isDamage = false;
     bool isInitialized = false;
     const byte startingHP = 100;
@@ -49,9 +48,18 @@ public class HPHandler : NetworkBehaviour
             isDead = false;
         }
 
-        // defaultMeshBodyColor = bodyMeshRenderer.material.color;
-
         isInitialized = true;
+    }
+
+    IEnumerator OnHealCO()
+    {
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.green;
+
+        yield return new WaitForSeconds(0.6f);
+
+        foreach (MeshRenderer mesh in meshs)
+            mesh.material.color = Color.white;
     }
 
     IEnumerator OnHitCO()
@@ -148,6 +156,24 @@ public class HPHandler : NetworkBehaviour
         }
     }
 
+    public void OnHeal(byte HealAmount)
+    {
+        if(!Object.HasStateAuthority)
+            return;
+        //only take damage while alive
+        if(isDead)
+            return;
+
+        //Ensure that we cannot flip the byte as it can't handle minus values
+        if(HealAmount > startingHP - HP)
+            HealAmount = (byte)(startingHP - HP);
+        HP += HealAmount;
+
+        RPC_OnHPIncreased();
+
+        Debug.Log($"{Time.time} {transform.name} healed got {HP} left");
+    }
+
     static void OnHPChanged(Changed<HPHandler> changed)
     {
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
@@ -159,6 +185,14 @@ public class HPHandler : NetworkBehaviour
 
         if(newHP < oldHP)
             changed.Behaviour.OnHPReduced();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_OnHPIncreased()
+    {
+        if(!isInitialized)
+            return;
+        StartCoroutine(OnHealCO());
     }
 
     private void OnHPReduced()
