@@ -1197,7 +1197,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 4161920610945938502}
   - {fileID: 4577126054602518738}
-  weaponType: 0
+  weaponType: 1
 --- !u!1 &5639462940654645468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,8 +2007,8 @@ MonoBehaviour:
   bullet: {fileID: 5182839842949675550, guid: 9d0c0b3eeb543994192eff4610559561, type: 3}
   bulletCase: {fileID: 8019862414519829217, guid: 98c9c6c317c1c2c4da9fc513039872e5, type: 3}
   type: 1
-  damage: 25
-  delay: 0.4
+  damage: 5
+  delay: 0.5
   maxAmmo: 30
   curAmmo: 30
 --- !u!1001 &3132167053944144519
@@ -2024,7 +2024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: 57652dd625f67a846a30341ce47fa35f, type: 3}
       propertyPath: m_TagString

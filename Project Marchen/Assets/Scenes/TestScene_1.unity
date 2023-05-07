@@ -3540,6 +3540,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
+      propertyPath: weaponType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3583,6 +3587,14 @@ PrefabInstance:
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4161920610945938502, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937090089299596377, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
+      propertyPath: delay
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5318821609316634604, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_Name
