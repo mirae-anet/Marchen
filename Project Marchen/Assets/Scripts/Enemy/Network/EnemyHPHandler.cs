@@ -5,10 +5,18 @@ using Fusion;
 
 public class EnemyHPHandler : NetworkBehaviour
 {
+    public bool skipSettingStartValues = false;
+
+    // [Networked(OnChanged = nameof(OnHPChanged))]
+    // byte HP {get; set;}
+    //
+
     public NetworkObject enemySpawner;
     void Start()
     {
-        
+        if(!skipSettingStartValues){
+            // HP = startingHP;
+        }
     }
 
     // Update is called once per frame

@@ -109,14 +109,14 @@ public class NetworkRunnerHandler : MonoBehaviour
         //Get a reference for for each Network object from the old host
         foreach(var resumeNetworkObject in runner.GetResumeSnapshotNetworkObjects())
         {
-            //Grab all the player objects, they have a NetworkCharacterControllerPrototypeCustom
-            if(resumeNetworkObject.TryGetBehaviour<NetworkRigidbody>(out var characterController))
+            //Grab all the player objects, they have a NetworkRigidBody
+            if(resumeNetworkObject.TryGetBehaviour<NetworkRigidbody>(out var oldRigidBody))
             {
-                runner.Spawn(resumeNetworkObject, position: characterController.ReadPosition(), characterController.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
+                runner.Spawn(resumeNetworkObject, position: oldRigidBody.ReadPosition(), oldRigidBody.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
 
-                    //Copy HP states
+                    //Copy HP state
                     if(resumeNetworkObject.TryGetBehaviour<HPHandler>(out var oldHPHandler))
                     {
                         HPHandler newHPHandler = newNetworkObject.GetComponent<HPHandler>();
@@ -129,6 +129,26 @@ public class NetworkRunnerHandler : MonoBehaviour
                     {
                         //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 새로 작성.
                         FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
+                    }
+                });
+            }
+            else if(resumeNetworkObject.TryGetBehaviour<NetworkTransform>(out var oldTransform))
+            {
+                if(resumeNetworkObject.TryGetBehaviour<GrenadeHandler>(out var oldGrenade))
+                    continue;
+                if(resumeNetworkObject.TryGetBehaviour<RocketHandler>(out var oldRocket))
+                    continue;
+                // if(resumeNetworkObject.TryGetBehaviour<RocketHandler>(out var oldRocket))
+                //     continue;
+                runner.Spawn(resumeNetworkObject, position: oldTransform.ReadPosition(), oldTransform.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    //Copy Enemy HP state
+                    if(resumeNetworkObject.TryGetBehaviour<EnemyHPHandler>(out var oldHPHandler))
+                    {
+                        EnemyHPHandler newHPHandler = newNetworkObject.GetComponent<EnemyHPHandler>();
+                        newHPHandler.CopyStateFrom(oldHPHandler);
+                        newHPHandler.skipSettingStartValues = true;
                     }
                 });
             }
