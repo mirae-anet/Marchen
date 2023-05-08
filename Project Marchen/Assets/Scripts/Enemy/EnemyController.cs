@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
     private EnemyMain enemyMain;
-    private Rigidbody rigid;
+    //private Rigidbody rigid;
     private NavMeshAgent nav;
     private Animator anim;
     private Transform target;
 
     private bool isChase = false;
+    private bool isHit = false;
     private bool isAttack = false;
     private bool isAggro = false;
 
@@ -29,11 +31,12 @@ public class EnemyController : MonoBehaviour
     [Header("설정")]
     public float moveDis = 3f;
     public float moveSpeed = 5f;
+    public bool attackCancel = true;
 
     void Awake()
     {
         enemyMain = GetComponent<EnemyMain>();
-        rigid = GetComponent<Rigidbody>();
+        //rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -45,16 +48,20 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (enemyMain.GetIsDead())
+            return;
+
         if (!isAggro) // 논어그로
         {
             EnemyMove();
         }
         else // 어그로 풀링
         {
-            FreezeVelocity();
+            //FreezeVelocity();
             TargetisAlive();
             EnemyChase();
             Aiming();
+            AttackCancel();
         }
     }
 
@@ -64,7 +71,7 @@ public class EnemyController : MonoBehaviour
         target = transform;
         isAggro = true;
 
-        setIsChase(true);
+        SetIsNavEnabled(true);
 
         Debug.Log(gameObject.name + " target reset");
         StopCoroutine("Think");
@@ -73,12 +80,12 @@ public class EnemyController : MonoBehaviour
 
     void TargetOff() // 타겟 해제
     {
-        rigid.velocity = Vector3.zero;
+        //rigid.velocity = Vector3.zero;
 
         anim.SetBool("isWalk", false);
         anim.SetBool("isAttack", false);
 
-        setIsChase(false);
+        SetIsNavEnabled(false);
         agrroPulling.SetActive(true);
         isAggro = false;
 
@@ -88,7 +95,8 @@ public class EnemyController : MonoBehaviour
     // --------------------------- 논 어그로 ------------------------
     void EnemyMove() // 어그로 아닐 때 이동
     {
-        rigid.velocity = transform.forward * moveSpeed * isMove; // moveSpeed는 지정, isMove는 Think()에서 결정
+        transform.position += transform.forward* moveSpeed * isMove * Time.deltaTime;
+        //rigid.velocity = transform.forward * moveSpeed * isMove; // moveSpeed는 지정, isMove는 Think()에서 결정
     }
 
     IEnumerator Think(float worry) // 어그로 아닐 때 이동 결정하는 함수
@@ -119,19 +127,19 @@ public class EnemyController : MonoBehaviour
     // --------------------------- 어그로 풀링 ------------------------
     IEnumerator ChaseStart()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         isChase = true;
         anim.SetBool("isWalk", true);
     }
 
-    void FreezeVelocity()
-    {
-        if (isChase)
-        {
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
-        }
-    }
+    //void FreezeVelocity()
+    //{
+    //    if (isChase)
+    //    {
+    //        rigid.velocity = Vector3.zero;
+    //        rigid.angularVelocity = Vector3.zero;
+    //    }
+    //}
 
     void TargetisAlive() // 타겟 죽는거 확인
     {
@@ -141,7 +149,7 @@ public class EnemyController : MonoBehaviour
             TargetOff();
             return;
         }
-        else if (target.gameObject.GetComponent<PlayerMain>().getIsDead()) // 타겟이 죽으면
+        else if (target.gameObject.GetComponent<PlayerMain>().GetIsDead()) // 타겟이 죽으면
         {
             TargetOff();
             return;
@@ -154,11 +162,11 @@ public class EnemyController : MonoBehaviour
 
     void EnemyChase()
     {
-        if (nav.enabled)
-        {
-            nav.SetDestination(target.position);
-            nav.isStopped = !isChase;
-        }
+        if (!nav.enabled)
+            return;
+
+        nav.SetDestination(target.position);
+        nav.isStopped = !isChase || isHit;
     }
 
     void Aiming() // 레이캐스트로 플레이어 위치 특정
@@ -166,7 +174,7 @@ public class EnemyController : MonoBehaviour
         float targetRadius = 0;
         float targetRange = 0;
 
-        switch (enemyMain.getEnemyType())
+        switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
                 targetRadius = 1.5f;
@@ -186,20 +194,22 @@ public class EnemyController : MonoBehaviour
                                   targetRange,                  // 방향으로 부터 거리
                                   LayerMask.GetMask("Player")); // 레이어 특정
 
-        if (rayHits.Length > 0 && !isAttack)
-            StartCoroutine(Attack());
+        if (rayHits.Length > 0 && !isAttack && !isHit)
+            StartCoroutine("Attack");
     }
 
     IEnumerator Attack()
     {
         isChase = false;
         isAttack = true;
+
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("isAttack", true);
 
-        switch (enemyMain.getEnemyType())
+        switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.5f);
                 meleeArea.enabled = true;
 
                 yield return new WaitForSeconds(1f);
@@ -214,10 +224,9 @@ public class EnemyController : MonoBehaviour
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
-                instantBullet.GetComponent<BulletMain>().setParent(transform); // Buller에 발사한 객체 정보 저장
+                instantBullet.GetComponent<BulletMain>().SetParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
-                Debug.Log(gameObject.name + " Attack End");
                 break;
         }
 
@@ -226,10 +235,39 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("isAttack", false);
     }
 
+    void AttackCancel()
+    {
+        if (!attackCancel)
+            return;
+
+        if (isHit)
+        {
+            StopCoroutine("Attack");
+
+            isChase = true;
+            isAttack = false;
+
+            anim.SetBool("isAttack", false);
+
+            if (meleeArea != null)
+                meleeArea.enabled = false;
+        }
+    }
+
     // --------------------------- 외부 참조 함수 ------------------------
-    public void setIsChase(bool bol)
+    public void SetIsNavEnabled(bool bol)
     {
         isChase = bol;
         nav.enabled = bol;
+    }
+
+    public void SetIsChase(bool bol)
+    {
+        isChase = bol;
+    }
+
+    public void setIsHit(bool bol)
+    {
+        isHit = bol;
     }
 }

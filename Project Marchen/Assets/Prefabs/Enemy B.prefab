@@ -67,7 +67,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062362018885022397}
-  - component: {fileID: -5025989515052022538}
   - component: {fileID: -5449209661034368636}
   - component: {fileID: -7203190204246124608}
   - component: {fileID: 994849947371516910}
@@ -96,22 +95,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &-5025989515052022538
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320669544841490502}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!65 &-5449209661034368636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,6 +162,7 @@ MonoBehaviour:
   agrroPulling: {fileID: 424008714869244661}
   moveDis: 3
   moveSpeed: 5
+  attackCancel: 1
 --- !u!1001 &5779840721249975049
 PrefabInstance:
   m_ObjectHideFlags: 0
