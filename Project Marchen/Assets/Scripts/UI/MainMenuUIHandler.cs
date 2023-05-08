@@ -77,4 +77,11 @@ public class MainMenuUIHandler : MonoBehaviour
 
         statusPanel.gameObject.SetActive(true);
     }
+
+    public void GoBackSession()
+    {
+        HideAllPanels();
+
+        sessionBrowserPanel.gameObject.SetActive(true);
+    }
 }
