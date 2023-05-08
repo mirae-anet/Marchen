@@ -19,6 +19,7 @@ public class EnemyHPHandler : NetworkBehaviour
 
     private void OnDestroy() 
     {
-        enemySpawner.GetComponent<EnemySpawnHandler>().SetTimer();    
+        if(enemySpawner != null)
+            enemySpawner.GetComponent<EnemySpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
     }
 }

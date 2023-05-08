@@ -32,7 +32,7 @@ public class HeartHandler : NetworkBehaviour
 
         if(networkRunner.IsServer)
         {
-            Debug.Log($"Heart OnTriggerEnter : {other.tag}");
+            // Debug.Log($"Heart OnTriggerEnter : {other.tag}");
     
             if (other.tag == "Player")
             {

@@ -49,6 +49,7 @@ public class EnemySpawnHandler : NetworkBehaviour
     {
         EnemyHPHandler spawnedEnemy = networkRunner.Spawn(enemyPrefab, anchorPoint.position, Quaternion.identity);
         spawnedEnemy.enemySpawner = Object;
+        Runner.SetPlayerObject(Object.StateAuthority, spawnedEnemy.Object);
         Debug.Log($"spawn item");
         spawnAble = false;
     }
