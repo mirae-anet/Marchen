@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 5007183508175799158}
   - component: {fileID: 4258583138256722164}
   - component: {fileID: 1091201027375121388}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: WorldSpaceCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 8201
-  damageAmount: 1
+  damageAmount: 10
   _isFiring: 0
   gunCoolTime: 0.15
   grenadeCoolTime: 2
@@ -1311,10 +1311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   _isDead: 0
-  uiOnHitColor: {r: 1, g: 0, b: 0, a: 0.078431375}
+  uiOnHitColor: {r: 1, g: 0, b: 0, a: 0.05882353}
   uiOnHitImage: {fileID: 3802945920268722317}
   playerModel: {fileID: 4323213110611308241}
-  deathGameObjectPrefab: {fileID: 4817986840635846212, guid: 4459901c4f4924cb2a32fc3863c006a6, type: 3}
   skipSettingStartValues: 0
 --- !u!114 &4539011877122390087
 MonoBehaviour:
@@ -1680,9 +1679,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1971543424177856303}
   - component: {fileID: 8314418852809699902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2793,7 +2792,7 @@ GameObject:
   - component: {fileID: 7211689544752237859}
   - component: {fileID: 6159432197713760581}
   - component: {fileID: 7928563024512991462}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PlayerNickNameText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
