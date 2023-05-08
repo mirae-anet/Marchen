@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private Vector3 lookForward;
+    private Vector3 lookRight;
+    private Vector3 moveDir;
+
     //[Header("오브젝트 연결")]
     //[SerializeField]
     //private GameObject player;
@@ -19,11 +23,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        cameraRotation();
-        //cameraMove();
+        CameraRotation();
+        //CameraMove();
     }
 
-    private void cameraRotation()
+    private void CameraRotation()
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X") * cameraSpeed, Input.GetAxis("Mouse Y") * cameraSpeed);   // 마우스 움직임
         Vector3 camAngle = transform.rotation.eulerAngles;    // 카메라 위치 값을 오일러 각으로 변환
@@ -42,17 +46,17 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x, camAngle.z);    // 새 회전 값
     }
 
-    //private void cameraMove()
+    //private void CameraMove()
     //{
     //    transform.position = player.transform.position;
     //}
 
-    public Vector3 getMoveDir(Vector2 moveInput)
+    public Vector3 GetMoveDir(Vector2 moveInput)
     {
-        Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
-        Vector3 lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;       // 좌우 방향 저장
+        lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
+        lookRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;       // 좌우 방향 저장
 
-        Vector3 moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x); // 바라보는 방향 기준 이동 방향
+        moveDir = (lookForward * moveInput.y) + (lookRight * moveInput.x); // 바라보는 방향 기준 이동 방향
 
         return moveDir;
     }

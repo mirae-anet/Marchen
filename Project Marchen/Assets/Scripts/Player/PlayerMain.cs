@@ -8,22 +8,16 @@ public class PlayerMain : MonoBehaviour
     private Rigidbody rigid;
     private MeshRenderer[] meshs;
     private GameObject nearObject;
-    private WeaponMain weaponMain;
 
     private bool isDamage = false;
     private bool isDead = false;
-
-    public enum Type { Hammer, Gun };
 
     // 인스펙터
     [Header("오브젝트 연결")]
     [SerializeField]
     private GameObject playerBody;
-    [SerializeField]
-    private GameObject[] weapons;
 
     [Header("설정")]
-    public Type weaponType;
     [Range(1f, 100f)]
     public int health = 100;
     [Range(1f, 100f)]
@@ -34,26 +28,6 @@ public class PlayerMain : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         meshs = GetComponentsInChildren<MeshRenderer>();
-
-        WeaponEquip();
-    }
-
-    void WeaponEquip()
-    {
-        switch (weaponType)
-        {
-            case Type.Hammer:
-                weapons[0].SetActive(true);
-                weapons[1].SetActive(false);
-                weaponMain = weapons[0].GetComponent<WeaponMain>();
-                break;
-
-            case Type.Gun:
-                weapons[0].SetActive(false);
-                weapons[1].SetActive(true);
-                weaponMain = weapons[1].GetComponent<WeaponMain>();
-                break;
-        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -78,7 +52,7 @@ public class PlayerMain : MonoBehaviour
             if (!isDamage)
             {
                 BulletMain enemyBullet = other.GetComponent<BulletMain>();
-                health -= enemyBullet.getDamage();
+                health -= enemyBullet.GetDamage();
                 //Debug.Log(other.GetComponent<BulletMain>().getParent());
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
@@ -127,18 +101,13 @@ public class PlayerMain : MonoBehaviour
         isDead = true;
     }
 
-    public bool getIsHit()
+    public bool GetIsHit()
     {
         return isDamage;
     }
 
-    public bool getIsDead()
+    public bool GetIsDead()
     {
         return isDead;
-    }
-
-    public WeaponMain GetWeaponMain()
-    {
-        return weaponMain;
     }
 }
