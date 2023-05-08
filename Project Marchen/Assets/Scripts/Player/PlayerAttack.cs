@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -60,6 +61,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if (isRange)
         {
+            if (weaponMain.GetCurAmmo() == 0)
+            {
+                playerController.SetIsAttack(false);
+                DoReload();
+                yield break;
+            }
+
             playerController.SetForward(camDir);
             anim.SetTrigger("doShot");
         }

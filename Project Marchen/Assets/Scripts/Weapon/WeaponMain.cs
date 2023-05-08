@@ -89,6 +89,11 @@ public class WeaponMain : MonoBehaviour
         return maxAmmo;
     }
 
+    public int GetCurAmmo()
+    {
+        return curAmmo;
+    }
+
     public void SetCurAmmo(int ammo)
     {
         curAmmo = ammo;
