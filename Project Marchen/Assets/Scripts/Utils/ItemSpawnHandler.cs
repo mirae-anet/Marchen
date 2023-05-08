@@ -18,10 +18,10 @@ public class ItemSpawnHandler : NetworkBehaviour
 
     void Start()
     {
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-        if(networkRunner != null && networkRunner.IsServer)
+        if(TryGetBehaviour<NetworkRunner>(out NetworkRunner networkRunner))
         {
-            SpawnItem(networkRunner);
+            if(networkRunner.IsServer)
+                SpawnItem(networkRunner);
         }
     }
 

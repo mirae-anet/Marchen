@@ -41,7 +41,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             //Sets the layer of the local players model
             //자신의 닉네임은 안 보이도록 레이어를 변경
-            // Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
+            Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
             Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera

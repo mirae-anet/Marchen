@@ -13,6 +13,9 @@ TagManager:
   - Wall
   - Ground
   - IgnoreLayerChange
+  - AoE
+  - OutLine
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -27,11 +30,11 @@ TagManager:
   - SuperArmor
   - Item
   - GroundCheck
-  - NetworkHitBox
-  - IgnoreLayerChange
+  - PlayerHitBox
+  - EnemyHitBox
   - LocalPlayerModel
   - IgnoreCamera
-  - 
+  - IgnoreLayerChange
   - 
   - 
   - 
