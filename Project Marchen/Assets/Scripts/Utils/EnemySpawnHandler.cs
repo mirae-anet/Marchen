@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class ItemSpawnHandler : NetworkBehaviour
+public class EnemySpawnHandler : NetworkBehaviour
 {
     [Header("설정")]
     [SerializeField]
     private float delayTime;
     [SerializeField]
-    private HeartHandler itemPrefab;
+    private EnemyHPHandler enemyPrefab;
     [SerializeField]
     private Transform anchorPoint;
     private bool spawnAble = true;
@@ -21,7 +21,7 @@ public class ItemSpawnHandler : NetworkBehaviour
         if(TryGetBehaviour<NetworkRunner>(out NetworkRunner networkRunner))
         {
             if(networkRunner.IsServer)
-                SpawnItem(networkRunner);
+                SpawnEnemy(networkRunner);
         }
     }
 
@@ -43,12 +43,12 @@ public class ItemSpawnHandler : NetworkBehaviour
             return;
 
         if(respawnDelay.ExpiredOrNotRunning(networkRunner))
-            SpawnItem(networkRunner);
+            SpawnEnemy(networkRunner);
     }
-    private void SpawnItem(NetworkRunner networkRunner)
+    private void SpawnEnemy(NetworkRunner networkRunner)
     {
-        HeartHandler spawnedItem = networkRunner.Spawn(itemPrefab, anchorPoint.position, Quaternion.identity);
-        spawnedItem.itemSpawner = Object;
+        EnemyHPHandler spawnedEnemy = networkRunner.Spawn(enemyPrefab, anchorPoint.position, Quaternion.identity);
+        spawnedEnemy.enemySpawner = Object;
         Debug.Log($"spawn item");
         spawnAble = false;
     }
