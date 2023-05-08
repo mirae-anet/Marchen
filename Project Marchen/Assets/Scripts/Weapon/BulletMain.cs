@@ -10,6 +10,17 @@ public class BulletMain : MonoBehaviour
     [Range(1f, 30f)]
     public int damage = 10;
 
+    private void Start()
+    {
+        StartCoroutine(BulletDestroy(6f));
+    }
+
+    IEnumerator BulletDestroy(float second)
+    {
+        yield return new WaitForSeconds(second);
+        Destroy(gameObject);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")

@@ -8,7 +8,7 @@ public class WeaponMain : MonoBehaviour
 
     [Header("오브젝트 연결")]
     [SerializeField]
-    private BoxCollider meleeArea;
+    private SphereCollider meleeArea;
     [SerializeField]
     private TrailRenderer trailEffect;
     [SerializeField]
@@ -35,7 +35,6 @@ public class WeaponMain : MonoBehaviour
     {
         if (type == Type.Melee)
         {
-            StopCoroutine("Swing");
             StartCoroutine("Swing");
         }
         else if (type == Type.Range && curAmmo > 0)
@@ -47,14 +46,14 @@ public class WeaponMain : MonoBehaviour
 
     IEnumerator Swing()
     {
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(0.2f);
         meleeArea.enabled = true;
         trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         trailEffect.enabled = false;
     }
 
@@ -62,12 +61,14 @@ public class WeaponMain : MonoBehaviour
     {
         GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+
         bulletRigid.velocity = bulletPos.forward * 50;
         
         yield return null;
 
         GameObject instantCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
         Rigidbody caseRigid = instantCase.GetComponent<Rigidbody>();
+
         Vector3 caseVec = bulletCasePos.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
         caseRigid.AddForce(caseVec, ForceMode.Impulse);
         caseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
@@ -86,6 +87,11 @@ public class WeaponMain : MonoBehaviour
     public int GetMaxAmmo()
     {
         return maxAmmo;
+    }
+
+    public int GetCurAmmo()
+    {
+        return curAmmo;
     }
 
     public void SetCurAmmo(int ammo)
