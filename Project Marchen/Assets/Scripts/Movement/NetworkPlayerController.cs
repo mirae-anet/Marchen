@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Fusion;
 
 public class NetworkPlayerController : NetworkBehaviour
@@ -48,6 +49,11 @@ public class NetworkPlayerController : NetworkBehaviour
     private HPHandler hpHandler;
     private CharacterMovementHandler characterMovementHandler;
 
+
+    //패널
+    public GameObject escPanel;
+
+
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -80,6 +86,9 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerMove();
             PlayerJump();
             PlayerDodge();
+
+            //Esc메뉴
+            EscMenu();
         }
     }
 
@@ -187,6 +196,26 @@ public class NetworkPlayerController : NetworkBehaviour
 
             isDodge = true;
             StartCoroutine(PlayerDodgeOut(0.5f));
+        }
+    }
+
+    public void EscMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            
+            if (escPanel.activeSelf)
+            {
+                Cursor.visible = true;
+                escPanel.SetActive(false);
+                
+            }
+            else
+            {
+                Cursor.visible = false;
+                escPanel.SetActive(true);
+
+            }
         }
     }
 
