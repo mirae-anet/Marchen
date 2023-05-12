@@ -9,6 +9,8 @@ public class BulletMain : MonoBehaviour
     [Header("설정")]
     [Range(1f, 30f)]
     public int damage = 10;
+    public bool isMelee;
+    public bool isRock;
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class BulletMain : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
+        if (!isRock && collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
             Destroy(gameObject, 1);
     }
 
