@@ -218,15 +218,4 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         return isControllerEnable;
     }
-
-    /*
-    private void OnDrawGizmos()
-    {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
-    }
-    */
-
 }

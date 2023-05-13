@@ -99,6 +99,7 @@ public class EnemyHPHandler : NetworkBehaviour
         else
         {
             KnockBack(AttackPostion);
+            // enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
         }
     }
     static void OnStateChanged(Changed<EnemyHPHandler> changed)
@@ -116,6 +117,7 @@ public class EnemyHPHandler : NetworkBehaviour
     private void OnDeath()
     {
         Debug.Log($"{Time.time} OnDeath");
+        hitboxRoot.HitboxRootActive = false;
         StartCoroutine(OnDeadCO());
     }
 
