@@ -132,29 +132,6 @@ public class HPHandler : NetworkBehaviour
         }
     }
     //method overload
-    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount)
-    {
-        //only take damage while alive
-        if(isDead)
-            return;
-        if(isDamage)
-            return;
-
-        //Ensure that we cannot flip the byte as it can't handle minus values.
-        if(damageAmount > HP)
-            damageAmount = HP;
-        HP -= damageAmount;
-
-        Debug.Log($"{Time.time} {transform.name} took damage got {HP} left");
-
-        //player died
-        if(HP <= 0)
-        {
-            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
-            Debug.Log($"{Time.time} {transform.name} died");
-            isDead = true;
-        }
-    }
 
     public void OnHeal(byte HealAmount)
     {

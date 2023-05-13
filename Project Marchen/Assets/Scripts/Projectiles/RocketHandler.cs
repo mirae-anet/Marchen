@@ -84,9 +84,10 @@ public class RocketHandler : NetworkBehaviour
                 //Deal damage to anything within the hit radius
                 for(int i = 0; i < hitCount; i++)
                 {
-                    HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
-                    if(hpHandler != null)
-                        hpHandler.OnTakeDamage(firedByPlayerName, damageAmount, checkForImpactPoint.position);
+                    EnemyHPHandler enemyHpHandler = hits[i].Hitbox.transform.root.GetComponent<EnemyHPHandler>();
+
+                    if(enemyHpHandler != null)
+                        enemyHpHandler.OnTakeDamage(firedByPlayerName, damageAmount, checkForImpactPoint.position);
                 }
 
                 Runner.Despawn(networkObject);

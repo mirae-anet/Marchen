@@ -18,10 +18,12 @@ public class NetworkEnemyController : NetworkBehaviour
 
     //other component
     private Animator anim;
+    private EnemyHPHandler enemyHPHandler;
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        enemyHPHandler = GetComponent<EnemyHPHandler>();
     }
     void Start()
     {
@@ -35,8 +37,8 @@ public class NetworkEnemyController : NetworkBehaviour
         if(!Object.HasStateAuthority)
             return;
 
-        // if (enemyMain.GetIsDead())
-        //     return;
+        if (enemyHPHandler.GetIsDead())
+            return;
 
         if (!isAggro) // 논어그로
         {

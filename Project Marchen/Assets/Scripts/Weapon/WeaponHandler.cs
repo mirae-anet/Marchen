@@ -105,7 +105,7 @@ public class WeaponHandler : NetworkBehaviour
                 if(Object.InputAuthority == hitinfo.Hitbox.Root.GetComponent<NetworkObject>().InputAuthority)
                     return;
                 //아니면 데미지
-                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount);
+                hitinfo.Hitbox.transform.root.GetComponent<EnemyHPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount, transform.position);
             }
 
             isHitOtherPlayer = true;
