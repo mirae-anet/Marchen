@@ -183,4 +183,15 @@ public class NetworkRunnerHandler : MonoBehaviour
         var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex,null);
 
     }
+
+    public void OutSession()
+    {
+        NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
+        networkRunnerInScene.Shutdown();
+    }
+
+    public void quitSession()
+    {
+        Application.Quit();
+    }
 }

@@ -155,13 +155,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: d2fe839d3206a4974b19fb983a53cb24, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 7399247783730883673}
+        m_TargetAssemblyTypeName: EscHandler, Assembly-CSharp
+        m_MethodName: OutGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3855,6 +3855,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5593644573398602237, guid: 9a3e7fc0afb14d44bae17e75a08145a0, type: 3}
   m_PrefabInstance: {fileID: 1537853728321728214}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7399247783730883673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6410614357387345707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60895c111e658c745ba5344139551631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2232396140593056614
 PrefabInstance:
   m_ObjectHideFlags: 0
