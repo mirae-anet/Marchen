@@ -7,15 +7,15 @@ public class EnemyHPHandler : NetworkBehaviour
 {
     public bool skipSettingStartValues = false;
     bool isInitialized = false;
-    bool isDamage = false;
-
     [Range(1f, 1000f)]
     const byte startingHP = 100;
 
-    // [Networked(OnChanged = nameof(OnStateChanged))]
+    bool isDamage = false;
+
+    [Networked(OnChanged = nameof(OnStateChanged))]
     private bool isDead {get; set;}
 
-    // [Networked(OnChanged = nameof(OnHPChanged))]
+    [Networked(OnChanged = nameof(OnHPChanged))]
     byte HP {get; set;}
 
     [Range(0f, 5f)]
@@ -26,12 +26,14 @@ public class EnemyHPHandler : NetworkBehaviour
     private MeshRenderer[] meshs;
     private Animator anim;
     NetworkInGameMessages networkInGameMessages;
+    HitboxRoot hitboxRoot;
 
     void Awake()
     {
         meshs = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponentInChildren<Animator>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
+        hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
     }
 
     void Start()
@@ -44,15 +46,11 @@ public class EnemyHPHandler : NetworkBehaviour
         isInitialized = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     IEnumerator OnHitCO()
     {
         // 피격시 효과
         isDamage = true;
+        anim.SetBool("isWalk", false);
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
@@ -64,6 +62,17 @@ public class EnemyHPHandler : NetworkBehaviour
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+    }
+    IEnumerator OnDeadCO()
+    {
+        anim.SetTrigger("doDie");
+
+        yield return new WaitForSeconds(2.0f);
+
+        if(Object.HasStateAuthority)
+        {
+            Runner.Despawn(Object);
+        }
     }
 
     public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount, Vector3 AttackPostion)
@@ -81,7 +90,6 @@ public class EnemyHPHandler : NetworkBehaviour
 
         Debug.Log($"{Time.time} Enemy took damage got {HP} left");
 
-        //player died
         if(HP <= 0)
         {
             networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed Enemy");
@@ -93,7 +101,45 @@ public class EnemyHPHandler : NetworkBehaviour
             KnockBack(AttackPostion);
         }
     }
-    private void OnDestroy() 
+    static void OnStateChanged(Changed<EnemyHPHandler> changed)
+    {
+        Debug.Log($"{Time.time} OnStateChanged isDead {changed.Behaviour.isDead}");
+
+        bool isDeadCurrent = changed.Behaviour.isDead;
+
+        changed.LoadOld();
+        bool isDeadOld = changed.Behaviour.isDead;
+
+        if(isDeadCurrent)
+            changed.Behaviour.OnDeath();
+    }
+    private void OnDeath()
+    {
+        Debug.Log($"{Time.time} OnDeath");
+        StartCoroutine(OnDeadCO());
+    }
+
+    static void OnHPChanged(Changed<EnemyHPHandler> changed)
+    {
+        Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
+
+        byte newHP = changed.Behaviour.HP;
+        
+        changed.LoadOld();
+        byte oldHP = changed.Behaviour.HP;
+
+        if(newHP < oldHP)
+            changed.Behaviour.OnHPReduced();
+    }
+
+    private void OnHPReduced()
+    {
+        if(!isInitialized)
+            return;
+        StartCoroutine(OnHitCO());
+    }
+
+   private void OnDestroy() 
     {
         if(enemySpawner != null)
             enemySpawner.GetComponent<EnemySpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
@@ -103,6 +149,10 @@ public class EnemyHPHandler : NetworkBehaviour
     {
         return isDead;
     }
+    public bool GetIsDamage()
+    {
+        return isDamage;
+    }
 
     public void KnockBack(Vector3 AttackPostion)
     {
@@ -111,4 +161,18 @@ public class EnemyHPHandler : NetworkBehaviour
 
         transform.position += reactDir * knockbackForce;
     }
+
+    //animation
+    // [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    // private void RPC_animatonSetBool(string action, bool isDone)
+    // {
+    //     anim.SetBool(action, isDone);
+    //     // anim.SetTrigger("doJump");
+    // }
+
+    // [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    // private void RPC_animatonSetTrigger(string action)
+    // {
+    //     anim.SetTrigger(action);
+    // }
 }
