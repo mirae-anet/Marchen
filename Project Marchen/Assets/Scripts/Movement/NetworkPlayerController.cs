@@ -206,15 +206,16 @@ public class NetworkPlayerController : NetworkBehaviour
             
             if (escPanel.activeSelf)
             {
-                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 escPanel.SetActive(false);
                 
             }
             else
             {
-                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 escPanel.SetActive(true);
-
             }
         }
     }
