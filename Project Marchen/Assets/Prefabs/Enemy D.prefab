@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 10.5, y: 1.5, z: 10.5}
+  m_Size: {x: 3.5, y: 0.5, z: 3.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &9018617088999398337
 MonoBehaviour:
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 9133255185617633366}
   - component: {fileID: 9059457711460115631}
   - component: {fileID: 8598634235778929608}
-  - component: {fileID: 76833387404411293}
+  - component: {fileID: 2159748224023093607}
   - component: {fileID: 3653246416590905438}
   - component: {fileID: 3918455874816875654}
   m_Layer: 8
@@ -153,7 +153,7 @@ Transform:
   m_GameObject: {fileID: 7988094277207216310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4545907147140773934}
@@ -190,9 +190,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
---- !u!195 &76833387404411293
+  m_Size: {x: 3.5, y: 3.5, z: 3.5}
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!195 &2159748224023093607
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,6 +245,8 @@ MonoBehaviour:
   isLook: 1
   missile: {fileID: 3533313218899643882, guid: a39c4f0065b4a2d4bbb6fa2ef4cb9e30, type: 3}
   target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
+  nav: {fileID: 0}
+  anim: {fileID: 0}
   missilePortA: {fileID: 4749937308794696053}
   missilePortB: {fileID: 3042713969576838739}
   meleeArea: {fileID: 2077004877910869444}
@@ -266,15 +268,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
       propertyPath: m_LocalPosition.x

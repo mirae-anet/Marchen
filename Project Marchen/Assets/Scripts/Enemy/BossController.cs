@@ -6,19 +6,19 @@ using UnityEngine.AI;
 public class BossController : MonoBehaviour
 {
     public bool isLook;
+    private bool isChase = false;
 
     public GameObject missile;
     public Transform target;
+    public NavMeshAgent nav;
+    public Animator anim;
     public Transform missilePortA;
     public Transform missilePortB;
-
-    private bool isChase = false;
 
     private EnemyMain enemyMain;
     private Rigidbody rigid;
     private BoxCollider boxCollider;
-    private NavMeshAgent nav;
-    private Animator anim;
+    
     private Vector3 lookVec;
     private Vector3 tauntVec;
 
