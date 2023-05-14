@@ -9,12 +9,17 @@ public class EscHandler : MonoBehaviour
 {
 
 
-    public void OutGame()
+    public void ExitRoom()
     {
         MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
         NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
         networkRunner.Shutdown();
         SceneManager.LoadScene("Lobby");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 
