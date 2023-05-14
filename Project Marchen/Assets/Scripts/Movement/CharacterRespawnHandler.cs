@@ -39,7 +39,7 @@ public class CharacterRespawnHandler : NetworkBehaviour
             }               
 
             //Don't update the client positon when they are dead
-            if(hpHandler.isDead)
+            if(hpHandler.GetIsDead())
                 return;
         }
 
@@ -74,9 +74,7 @@ public class CharacterRespawnHandler : NetworkBehaviour
             {
                 Debug.Log($"{Time.time} Respawn due to fall outside of map at position {transform.position}");
 
-                networkInGameMessages.SendInGameRPCMessage(networkPlayer.nickName.ToString(), "fell off the world");
-
-                Respawn();
+                hpHandler.OnTakeDamage(networkPlayer.nickName.ToString(),(byte)255,transform.position);
             }
         }
     }

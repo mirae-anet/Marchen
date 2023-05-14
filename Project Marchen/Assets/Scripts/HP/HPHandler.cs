@@ -9,7 +9,7 @@ public class HPHandler : NetworkBehaviour
     byte HP {get; set;}
 
     [Networked(OnChanged = nameof(OnStateChanged))]
-    public bool isDead {get; set;}
+    private bool isDead {get; set;}
     bool isDamage = false;
     bool isInitialized = false;
     const byte startingHP = 100;
@@ -242,5 +242,9 @@ public class HPHandler : NetworkBehaviour
 
         rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
         rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
+    }
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }

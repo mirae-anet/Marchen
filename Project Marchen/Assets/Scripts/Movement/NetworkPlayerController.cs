@@ -56,7 +56,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.isDead)
+        if(hpHandler.GetIsDead())
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
