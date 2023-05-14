@@ -2342,6 +2342,7 @@ GameObject:
   - component: {fileID: 1445110492}
   - component: {fileID: 1445110491}
   - component: {fileID: 1445110495}
+  - component: {fileID: 1445110496}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2453,6 +2454,18 @@ MonoBehaviour:
   statusPanel: {fileID: 1860564179}
   playerNameInputField: {fileID: 2045884984}
   sessionNameInputField: {fileID: 190753949}
+--- !u!114 &1445110496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445110490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60895c111e658c745ba5344139551631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486807301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,6 +3320,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 3517918621977130847, guid: 7f66ed4c37f77fa45a032a467ec2380b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3517918622100214036, guid: 7f66ed4c37f77fa45a032a467ec2380b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3394,6 +3411,10 @@ PrefabInstance:
     - target: {fileID: 3517918622100214037, guid: 7f66ed4c37f77fa45a032a467ec2380b, type: 3}
       propertyPath: m_Name
       value: SessionListItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517918622100214037, guid: 7f66ed4c37f77fa45a032a467ec2380b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3517918622120488455, guid: 7f66ed4c37f77fa45a032a467ec2380b, type: 3}
       propertyPath: m_IsActive
