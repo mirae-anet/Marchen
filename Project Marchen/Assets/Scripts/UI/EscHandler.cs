@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class EscHandler : MonoBehaviour
 {
-
+    public GameObject escPanel;
 
     public void ExitRoom()
     {
