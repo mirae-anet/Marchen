@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5013553161024436538}
   - component: {fileID: 8006292596598719374}
   - component: {fileID: 6093636326147128949}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Arggo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062362018885022397}
-  - component: {fileID: -5025989515052022538}
   - component: {fileID: -5449209661034368636}
   - component: {fileID: -7203190204246124608}
   - component: {fileID: 994849947371516910}
@@ -96,22 +95,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &-5025989515052022538
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320669544841490502}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!65 &-5449209661034368636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139,7 +122,7 @@ NavMeshAgent:
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 480
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -162,6 +145,7 @@ MonoBehaviour:
   enemyType: 1
   maxHealth: 200
   curHealth: 200
+  knockbackForce: 0.3
 --- !u!114 &7723078686095487547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +160,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeArea: {fileID: 0}
   bullet: {fileID: 8687621084049323187, guid: 4b5e0144e56f1d041863b6549977ef70, type: 3}
+  agrroPulling: {fileID: 424008714869244661}
+  moveDis: 3
+  moveSpeed: 5
+  attackCancel: 1
 --- !u!1001 &5779840721249975049
 PrefabInstance:
   m_ObjectHideFlags: 0

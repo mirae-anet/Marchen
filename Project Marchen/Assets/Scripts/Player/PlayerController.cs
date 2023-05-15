@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,15 +10,17 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigid;
     private CameraController camControl;
     private PlayerMain playerMain;
+    private PlayerAttack playerAttack;
 
-    private bool isMove;
-    private bool isJump;
-    private bool isDodge;
-    private bool isAttack;
+    private bool isMove = false;
+    private bool isJump = false;
+    private bool isDodge = false;
+    private bool isAttack = false;
+    private bool isReload = false;
+    private bool isGrounded = false;
 
     private Vector3 moveDir;
     private Vector3 saveDir;
-    private Vector3 feetpos;
 
     // 입력값 저장 변수
     private Vector2 moveInput;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     private bool dodgeInput;
     private bool attackInput;
+    private bool reloadInput;
 
     // 인스펙터
     [Header("오브젝트 연결")]
@@ -47,12 +51,16 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         camControl = GetComponentInChildren<CameraController>();
         playerMain = GetComponent<PlayerMain>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
     
     void Update()
     {
-        if (playerMain.getIsDead())
+        if (playerMain.GetIsDead())
+        {
+            rigid.velocity = Vector3.zero;
             return;
+        }
 
         // 입력값 저장
         GetInput();
@@ -66,6 +74,7 @@ public class PlayerController : MonoBehaviour
         PlayerDodge();
 
         PlayerAttack();
+        PlayerReload();
     }
 
     private void GetInput()
@@ -76,6 +85,7 @@ public class PlayerController : MonoBehaviour
         dodgeInput = Input.GetButtonDown("Dodge");
 
         attackInput = Input.GetButtonDown("Fire1");
+        reloadInput = Input.GetButtonDown("Reload");
     }
 
     private void GroundCheck()
@@ -83,32 +93,27 @@ public class PlayerController : MonoBehaviour
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
+        if (isGrounded)
         {
-            if (rayHit.distance < 1.0f)
-            {
-                isJump = false;
-                anim.SetBool("isJump", false);
-                //Debug.Log("착지");
-            }
+            isJump = false;
+            anim.SetBool("isJump", false);
+            //Debug.Log("착지");
         }
     }
 
     private void PlayerMove()
     {
-        if (isDodge || playerMain.getIsHit() || isAttack) // 회피, 피격 중 이동 제한
+        if (isDodge || playerMain.GetIsHit()) // 회피, 피격 중 이동 제한
             return;
 
         isMove = moveInput.magnitude != 0; // moveInput의 길이로 입력 판정
         
         if (isMove)
         {
-            moveDir = camControl.getMoveDir(moveInput);
-
+            moveDir = camControl.GetMoveDir(moveInput);
+            SetForward(moveDir);
             //playerBody.forward = lookForward; // 캐릭터 고정
-            playerBody.forward = moveDir;       // 카메라 고정
+            //playerBody.forward = moveDir;     // 카메라 고정
 
             float walkSpeed = (walkInput ? 0.3f : 1f); // 걷기면 속도 0.3배
 
@@ -126,9 +131,11 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !playerMain.getIsHit() && !isAttack)
+        if (jumpInput && !isJump && !isDodge && !playerMain.GetIsHit() && !isAttack)
         {
             isJump = true;
+            isGrounded = false;
+            playerAttack.StopReload();
 
             rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
@@ -139,9 +146,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !playerMain.getIsHit() && !isAttack)
+        if (dodgeInput && isMove && !isDodge && !playerMain.GetIsHit() && !isAttack)
         {
             isDodge = true;
+            playerAttack.StopReload();
 
             saveDir = moveDir; // 회피 방향 기억
             rigid.AddForce(saveDir.normalized * dodgePower, ForceMode.Impulse);
@@ -160,37 +168,47 @@ public class PlayerController : MonoBehaviour
     
     private void PlayerAttack()
     {
-        if (attackInput && !isAttack && !isDodge && !playerMain.getIsHit())
+        if (attackInput && !isAttack && !isDodge && !playerMain.GetIsHit())
         {
-            isAttack = true;
-            saveDir = moveDir; // 회피 방향 기억
+            playerAttack.StopReload();
+            SetIsAttack(true);
 
-            StartCoroutine(AttackCoolTime(playerMain.GetWeaponMain().getDelay()));
+            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
+            saveDir = camControl.gameObject.transform.forward; // 카메라 방향 기억
+            saveDir.y = 0;
+
+            playerAttack.DoAttack(saveDir); // 카메라 방향
         }
     }
 
-    IEnumerator AttackCoolTime(float coolTime)
+    private void PlayerReload()
     {
-        // 선딜레이
-        rigid.velocity = new Vector3((saveDir * moveSpeed).x , rigid.velocity.y, (saveDir * moveSpeed).z);
-        anim.SetBool("isRun", true);
-
-        yield return new WaitForSeconds(0.3f);
-
-        rigid.velocity = new Vector3((saveDir * moveSpeed).x * 0.3f, rigid.velocity.y, (saveDir * moveSpeed).z * 0.3f);
-        playerMain.GetWeaponMain().Attack();
-        anim.SetTrigger("doSwing");
-
-        yield return new WaitForSeconds(coolTime);
-
-        isAttack = false;
+        if (reloadInput && !GetActiveJDAH() && !isReload)
+            playerAttack.DoReload();
     }
 
-    private void OnDrawGizmos()
+    public void SetIsGrounded(bool bol)
     {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
+        isGrounded = bol;
+    }
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
+    public void SetIsAttack(bool bol)
+    {
+        isAttack = bol;
+    }
+
+    public void SetIsReload(bool bol)
+    {
+        isReload = bol;
+    }
+
+    public bool GetActiveJDAH()
+    {
+        return isJump || isDodge || isAttack || playerMain.GetIsHit(); // 하나라도 작동하면 true
+    }
+
+    public void SetForward(Vector3 dir)
+    {
+        playerBody.forward = dir;
     }
 }

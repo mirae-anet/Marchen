@@ -54,7 +54,7 @@ public class GrenadeHandler : NetworkBehaviour
                     HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
 
                     if(hpHandler != null)
-                        hpHandler.OnTakeDamage(thrownByPlayerName, damageAmount);
+                        hpHandler.OnTakeDamage(thrownByPlayerName, damageAmount, transform.position);
                 }
 
                 Runner.Despawn(networkObject);

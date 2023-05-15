@@ -8,6 +8,7 @@ using Fusion;
 public class NetworkPlayerController : NetworkBehaviour
 {
 
+    private bool isControllerEnable = true;
     private bool isMove = false;
     private bool isJump;
     private bool isDodge;
@@ -47,7 +48,6 @@ public class NetworkPlayerController : NetworkBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private HPHandler hpHandler;
-    private CharacterMovementHandler characterMovementHandler;
 
 
     //패널
@@ -59,7 +59,6 @@ public class NetworkPlayerController : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
-        characterMovementHandler = GetComponent<CharacterMovementHandler>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -67,6 +66,7 @@ public class NetworkPlayerController : NetworkBehaviour
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
+        // Debug.Log($"{isJump}");
 
         if(Object.HasInputAuthority)
         {
@@ -76,7 +76,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
         if(GetInput(out NetworkInputData networkInputData))
         {
-            if(!characterMovementHandler.GetCharacterControllerEnabled())
+            if(!isControllerEnable)
                 return;
 
             // 입력값 저장
@@ -96,27 +96,22 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if (rigid.velocity.y > 0) // 추락이 아닐 때
             return;
+        if (isDodge)
+            return;
+        // if (isAttack)
+        //     return;
 
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y+0.3f, playerBody.position.z);
+        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
-        //local화 가능? 가능할 듯 update를 이용해서 hasInputAuthority확인 후에 계산하고 networked로 동기화하기
-        if (Physics.BoxCast(feetpos, raySize / 2, Vector3.down, out RaycastHit rayHit, Quaternion.identity, 1f, LayerMask.GetMask("Ground")))
+        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.identity, LayerMask.GetMask("Ground"));
+
+        if(colliders.Length > 0)
         {
-            if (rayHit.distance < 1.0f)
-            {
-                isJump = false;
-                // if(Object.HasInputAuthority)
-                    // anim.SetBool("isJump", false);
-                // anim.SetBool("isJump", false);
-                // RPC_animatonSetBool("isJump", false);
-                //Debug.Log("착지");
-            }
-            else
-            {
-                isJump = true;
-                // if(Object.HasInputAuthority)
-                //     anim.SetBool("isJump", true);
-            }
+            isJump = false;
+        }
+        else
+        {
+            isJump = true;    
         }
     }
 
@@ -243,6 +238,15 @@ public class NetworkPlayerController : NetworkBehaviour
     private void RPC_animatonSetTrigger(string action)
     {
         anim.SetTrigger(action);
+    }
+
+    public void SetCharacterControllerEnabled(bool isEnabled)
+    {
+        isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
     }
 
     /*
