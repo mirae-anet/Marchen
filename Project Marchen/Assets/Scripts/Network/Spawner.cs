@@ -141,7 +141,27 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         // Debug.Log("OnInputMissing");
     }
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data){Debug.Log("OnReliableDataReceived");}
-    public void OnSceneLoadDone(NetworkRunner runner){Debug.Log("OnSceneLoadDone");}
+    public void OnSceneLoadDone(NetworkRunner runner)
+    {
+        Debug.Log("OnSceneLoadDone");
+        //Scene object respawn for host migration
+        // EnemySpawnHandler[] enemySpawners = FindObjectsOfType<EnemySpawnHandler>();
+        // if(enemySpawners.Length > 0)
+        // {
+        //     foreach(EnemySpawnHandler enemySpawner in enemySpawners)
+        //     {
+        //         enemySpawner.RespawnForHostMiragtion();
+        //     }
+        // }
+        // ItemSpawnHandler[] ItemSpawners = FindObjectsOfType<ItemSpawnHandler>();
+        // if(enemySpawners.Length > 0)
+        // {
+        //     foreach(ItemSpawnHandler itemSpawner in ItemSpawners)
+        //     {
+        //         itemSpawner.RespawnForHostMiragtion();
+        //     }
+        // }
+    }
     public void OnSceneLoadStart(NetworkRunner runner){Debug.Log("OnSceneLoadStart");}
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {

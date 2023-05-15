@@ -12,22 +12,51 @@ public class EnemySpawnHandler : NetworkBehaviour
     private EnemyHPHandler enemyPrefab;
     [SerializeField]
     private Transform anchorPoint;
+    public EnemySpawnHandler enemySpawnerPF;
     private bool spawnAble = true;
-
+    public bool skipSettingStartValues = false;
     TickTimer respawnDelay = TickTimer.None;
 
     void Start()
     {
-        if(TryGetBehaviour<NetworkRunner>(out NetworkRunner networkRunner))
+        if(skipSettingStartValues)
+            return;
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if(!skipSettingStartValues)
         {
-            if(networkRunner.IsServer)
-                SpawnEnemy(networkRunner);
+            RespawnForHostMiragtion();
+            skipSettingStartValues = true;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RespawnForHostMiragtion()
     {
+        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+        if(networkRunner != null)
+        {
+            if(!networkRunner.IsServer)
+                return;
+            
+            if(Object.IsSceneObject)
+            {
+                Debug.Log("Respawn Spawner start");
+                Transform tmp = anchorPoint.transform;
+                // networkRunner.Despawn(Object);
+                RPC_Despawn();
+                networkRunner.Spawn(enemySpawnerPF, tmp.position, Quaternion.identity);
+            }
+            else
+            {
+                if(skipSettingStartValues)
+                    return;
+
+                SpawnEnemy(networkRunner);
+                Debug.Log("first spawning");
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,8 +79,9 @@ public class EnemySpawnHandler : NetworkBehaviour
         EnemyHPHandler spawnedEnemy = networkRunner.Spawn(enemyPrefab, anchorPoint.position, Quaternion.identity);
         spawnedEnemy.enemySpawner = Object;
         Runner.SetPlayerObject(Object.StateAuthority, spawnedEnemy.Object);
-        Debug.Log($"spawn item");
+        Debug.Log($"spawn enemy");
         spawnAble = false;
+        gameObject.SetActive(false);
     }
     public void SetTimer()
     {
@@ -59,5 +89,13 @@ public class EnemySpawnHandler : NetworkBehaviour
         if(networkRunner != null && networkRunner.IsServer)
             respawnDelay = TickTimer.CreateFromSeconds(networkRunner, delayTime);
         spawnAble = true;
+    }
+
+    [Rpc (RpcSources.All, RpcTargets.All)]
+    private void RPC_Despawn()
+    {
+        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+        if(networkRunner != null)
+            networkRunner.Despawn(Object);
     }
 }

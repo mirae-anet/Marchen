@@ -12,22 +12,51 @@ public class ItemSpawnHandler : NetworkBehaviour
     private HeartHandler itemPrefab;
     [SerializeField]
     private Transform anchorPoint;
+    public ItemSpawnHandler itemSpawnerPF;
     private bool spawnAble = true;
-
+    public bool skipSettingStartValues = false;
     TickTimer respawnDelay = TickTimer.None;
 
     void Start()
     {
-        if(TryGetBehaviour<NetworkRunner>(out NetworkRunner networkRunner))
+        if(skipSettingStartValues)
+            return;
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if(!skipSettingStartValues)
         {
-            if(networkRunner.IsServer)
-                SpawnItem(networkRunner);
+            RespawnForHostMiragtion();
+            skipSettingStartValues = true;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RespawnForHostMiragtion()
     {
+        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+        if(networkRunner != null)
+        {
+            if(!networkRunner.IsServer)
+                return;
+            
+            if(Object.IsSceneObject)
+            {
+                Debug.Log("Respawn Spawner start");
+                Transform tmp = anchorPoint.transform;
+                // networkRunner.Despawn(Object);
+                RPC_Despawn();
+                networkRunner.Spawn(itemSpawnerPF, tmp.position, Quaternion.identity);
+            }
+            else
+            {
+                if(skipSettingStartValues)
+                    return;
+
+                SpawnItem(networkRunner);
+                Debug.Log("first spawning");
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +80,7 @@ public class ItemSpawnHandler : NetworkBehaviour
         spawnedItem.itemSpawner = Object;
         Debug.Log($"spawn item");
         spawnAble = false;
+        gameObject.SetActive(false);
     }
     public void SetTimer()
     {
@@ -58,5 +88,13 @@ public class ItemSpawnHandler : NetworkBehaviour
         if(networkRunner != null && networkRunner.IsServer)
             respawnDelay = TickTimer.CreateFromSeconds(networkRunner, delayTime);
         spawnAble = true;
+    }
+
+    [Rpc (RpcSources.All, RpcTargets.All)]
+    private void RPC_Despawn()
+    {
+        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+        if(networkRunner != null)
+            networkRunner.Despawn(Object);
     }
 }

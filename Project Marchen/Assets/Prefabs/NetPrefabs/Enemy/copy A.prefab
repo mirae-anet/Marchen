@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 3520917383900379781}
   - component: {fileID: 1349707092566703562}
   m_Layer: 16
-  m_Name: EnemySpawner A
+  m_Name: copy A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   AoiPositionSource: {fileID: 0}
   Flags: 2305
   NetworkGuid:
-    RawGuidValue: 76a8e012188974d76a9dae9dcaf3ab82
+    RawGuidValue: f10fcbd15d68e4a7bbc7381376ca4188
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3520917383900379781}
@@ -188,7 +188,7 @@ MonoBehaviour:
   delayTime: 15
   enemyPrefab: {fileID: 1299652720661714567, guid: cbd9884f1b09245949c1d89b119c8bae, type: 3}
   anchorPoint: {fileID: 7434632492330415833}
-  enemySpawnerPF: {fileID: 3520917383900379781, guid: f10fcbd15d68e4a7bbc7381376ca4188, type: 3}
+  itemSpawnerPF: {fileID: 6487694065727322817, guid: de058069d265b4d4c9c28fca50495d1f, type: 3}
   skipSettingStartValues: 0
 --- !u!114 &1349707092566703562
 MonoBehaviour:
