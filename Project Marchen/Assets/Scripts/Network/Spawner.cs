@@ -4,6 +4,7 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -87,6 +88,14 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log("OnPlayerLeft");
+
+        int playerToken = GetPlayerToken(runner, player);
+        if (mapTokenIDWithNetworkPlayer.TryGetValue(playerToken, out NetworkPlayer networkPlayer))
+        {
+            runner.Despawn(networkPlayer.GetComponent<NetworkObject>());
+            mapTokenIDWithNetworkPlayer.Remove(playerToken);
+            SceneManager.LoadScene("Lobby");
+        }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {

@@ -19,10 +19,14 @@ public class MainMenuUIHandler : MonoBehaviour
     [Header("New game session")]
     public TMP_InputField sessionNameInputField;
 
+    private EscHandler escHandler;
+    
+
     void Start()
     {
         if(PlayerPrefs.HasKey("PlayerNickname"))
             playerNameInputField.text = PlayerPrefs.GetString("PlayerNickname");
+        
     }
     
 
@@ -32,7 +36,7 @@ public class MainMenuUIHandler : MonoBehaviour
         sessionBrowserPanel.SetActive(false);
         createSessionPanel.SetActive(false);
         statusPanel.SetActive(false);
-}
+    }
     public void OnFindGameClicked()
     {
         //PlayerPrefs는 게임 설정이나 데이터를 저장하고 로드하는 데 사용되는 기본적인 저장소입니다. 
