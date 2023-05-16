@@ -62,7 +62,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.isDead)
+        if(hpHandler.GetIsDead())
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
@@ -248,15 +248,4 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         return isControllerEnable;
     }
-
-    /*
-    private void OnDrawGizmos()
-    {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
-    }
-    */
-
 }

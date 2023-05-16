@@ -64,7 +64,7 @@ public class WeaponHandler : NetworkBehaviour
     //동작이나 값을 동기화하려면 별도의 방법을 추가적으로 사용해야 한다. ex) RPC, [Networked], Base.~~~ 등
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.isDead)
+        if(hpHandler.GetIsDead())
             return;
         
         //inputAuthority가 있는 클라이언트와 전달 받은 서버만 실행한다.
@@ -105,7 +105,7 @@ public class WeaponHandler : NetworkBehaviour
                 if(Object.InputAuthority == hitinfo.Hitbox.Root.GetComponent<NetworkObject>().InputAuthority)
                     return;
                 //아니면 데미지
-                hitinfo.Hitbox.transform.root.GetComponent<HPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount);
+                hitinfo.Hitbox.transform.root.GetComponent<EnemyHPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount, transform.position);
             }
 
             isHitOtherPlayer = true;

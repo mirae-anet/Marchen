@@ -39,13 +39,17 @@ public class HeartHandler : NetworkBehaviour
                 HPHandler hpHandler = other.transform.root.GetComponent<HPHandler>();
                 hpHandler.OnHeal(value);
     
+                if(itemSpawner != null)
+                {
+                    itemSpawner.gameObject.SetActive(true);
+                    itemSpawner.GetComponent<ItemSpawnHandler>().SetTimer();  
+                }
+                
                 Runner.Despawn(networkObject);
             }
         }
     }
     private void OnDestroy()
     {
-        if(itemSpawner != null)
-            itemSpawner.GetComponent<ItemSpawnHandler>().SetTimer();  
     }
 }
