@@ -1,17 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class EnemySpawnHandler : NetworkBehaviour
+public class SpawnHandler : NetworkBehaviour
 {
     [Header("설정")]
     [SerializeField]
     private float delayTime;
-    [SerializeField]
-    private EnemyHPHandler enemyPrefab;
-    [SerializeField]
-    private Transform anchorPoint;
+    public NetworkBehaviour prefab; //EnemyHPHandler, HeartHandler
+    public Transform anchorPoint;
     private bool spawnAble = true;
     public bool skipSettingStartValues = false;
     TickTimer respawnDelay = TickTimer.None;
@@ -23,8 +22,9 @@ public class EnemySpawnHandler : NetworkBehaviour
         
         if(!skipSettingStartValues)
         {
-            SpawnEnemy();
-            Debug.Log("first spawning");
+            // Spawn();
+            // skipSettingStartValues = true;
+            // Debug.Log("first spawning");
         }
     }
 
@@ -40,25 +40,32 @@ public class EnemySpawnHandler : NetworkBehaviour
             return;
 
         if(respawnDelay.ExpiredOrNotRunning(Runner))
-            SpawnEnemy();
+            Spawn();
     }
-    private void SpawnEnemy()
+    private void Spawn()
     {
-        EnemyHPHandler spawnedEnemy = Runner.Spawn(enemyPrefab, anchorPoint.position, Quaternion.identity);
-        spawnedEnemy.Spawner = Object;
-        Debug.Log($"spawn enemy");
+        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.identity);
+
+        if(spawned.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+            enemyHPHandler.Spawner = Object;
+        if(spawned.TryGetComponent<HeartHandler>(out HeartHandler heartHandler))
+            heartHandler.Spawner = Object;
+
+        Debug.Log($"spawned");
         spawnAble = false;
         gameObject.SetActive(false);
     }
     public void SetTimer()
     {
         if(Runner != null && Object.HasStateAuthority)
+        {
             respawnDelay = TickTimer.CreateFromSeconds(Runner, delayTime);
-        spawnAble = true;
+            spawnAble = true;
+        }
     }
 
     /*
-    [Rpc (RpcSources.All, RpcTargets.All)]
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_Despawn()
     {
         NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();

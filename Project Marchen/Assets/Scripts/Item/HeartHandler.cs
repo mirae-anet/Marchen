@@ -14,7 +14,7 @@ public class HeartHandler : NetworkBehaviour
 
     //other component
     NetworkObject networkObject;
-    public NetworkObject itemSpawner;
+    public NetworkObject Spawner;
 
     void Start()
     {
@@ -39,10 +39,10 @@ public class HeartHandler : NetworkBehaviour
                 HPHandler hpHandler = other.transform.root.GetComponent<HPHandler>();
                 hpHandler.OnHeal(value);
     
-                if(itemSpawner != null)
+                if(Spawner != null)
                 {
-                    itemSpawner.gameObject.SetActive(true);
-                    itemSpawner.GetComponent<ItemSpawnHandler>().SetTimer();  
+                    Spawner.gameObject.SetActive(true);
+                    Spawner.GetComponent<SpawnHandler>().SetTimer();  
                 }
                 
                 Runner.Despawn(networkObject);

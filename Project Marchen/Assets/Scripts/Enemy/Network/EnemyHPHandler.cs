@@ -22,7 +22,7 @@ public class EnemyHPHandler : NetworkBehaviour
     public float knockbackForce = 0.3f;
 
     // other component
-    public NetworkObject enemySpawner;
+    public NetworkObject Spawner;
     private MeshRenderer[] meshs;
     private Animator anim;
     NetworkInGameMessages networkInGameMessages;
@@ -71,10 +71,10 @@ public class EnemyHPHandler : NetworkBehaviour
 
         if(Object.HasStateAuthority)
         {
-            if(enemySpawner != null)
+            if(Spawner != null)
             {
-                enemySpawner.gameObject.SetActive(true);
-                enemySpawner.GetComponent<EnemySpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
+                Spawner.gameObject.SetActive(true);
+                Spawner.GetComponent<SpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
             }
             Runner.Despawn(Object);
         }

@@ -38,8 +38,7 @@ public class NetworkEnemyController : NetworkBehaviour
     }
 
 
-    // public override void FixedUpdateNetwork() 
-    public void FixedUpdate() 
+    public override void FixedUpdateNetwork() 
     {
         if(!Object.HasStateAuthority)
             return;
