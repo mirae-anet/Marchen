@@ -24,8 +24,6 @@ public class SpawnerSpawner : MonoBehaviour
             return;
         
         InteractionHandler interactionHandler = other.transform.root.GetComponent<InteractionHandler>();
-        interactionHandler.RequestSpawn(spawnerPF, transform.position, Quaternion.identity);
-    
-        Destroy(gameObject, 3);
+        interactionHandler.RequestSpawn(spawnerPF, transform.position, Quaternion.identity, gameObject);
     }
 }
