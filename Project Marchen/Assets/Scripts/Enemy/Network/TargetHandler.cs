@@ -39,7 +39,7 @@ public class TargetHandler : NetworkBehaviour
         this.target = target;
         isAggro = true;
 
-        networkEnemyController.SetNavEnabled(true);
+        // networkEnemyController.SetNavEnabled(true);
         // networkEnemyController.SetIsChase(true); //ChaseStart()에서 실행하는 것이 원래 의도인듯?
 
         // StopCoroutine("Think"); //사실상 효과없음.
@@ -76,7 +76,7 @@ public class TargetHandler : NetworkBehaviour
         RPC_animatonSetBool("isWalk", false);
         RPC_animatonSetBool("isAttack", false);
 
-        networkEnemyController.SetNavEnabled(false);
+        // networkEnemyController.SetNavEnabled(false);
         networkEnemyController.SetIsChase(false);
         agrroPulling.SetActive(true);
         isAggro = false;

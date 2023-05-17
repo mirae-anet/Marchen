@@ -72,7 +72,8 @@ public class NetworkEnemyController : NetworkBehaviour
 
     void EnemyWander() // 어그로 아닐 때 이동
     {
-        transform.position += transform.forward* moveSpeed * isMove * Runner.DeltaTime;
+        // transform.position += transform.forward* moveSpeed * isMove * Runner.DeltaTime;
+        nav.Move(transform.forward * moveSpeed * isMove * Runner.DeltaTime);
     }
 
     IEnumerator ThinkCO(float worry) // 어그로 아닐 때 이동 결정하는 함수
@@ -117,12 +118,13 @@ public class NetworkEnemyController : NetworkBehaviour
         }
     }
 
-
+    /*
     public void SetNavEnabled(bool bol)
     {
         // isChase = bol;
         nav.enabled = bol;
     }
+    */
     public void SetIsChase(bool bol)
     {
         isChase = bol;
