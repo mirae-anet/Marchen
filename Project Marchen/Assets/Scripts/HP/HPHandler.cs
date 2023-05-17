@@ -73,13 +73,13 @@ public class HPHandler : NetworkBehaviour
         if(Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         //화면 정상화
         if(Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
 
         //아바타 정상화
         isDamage = false;

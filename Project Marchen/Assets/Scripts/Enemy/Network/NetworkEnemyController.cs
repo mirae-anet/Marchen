@@ -23,6 +23,7 @@ public class NetworkEnemyController : NetworkBehaviour
     private EnemyHPHandler enemyHPHandler;
     private NavMeshAgent nav;
     private TargetHandler targetHandler;
+    private EnemyAttackHandler enemyAttackHandler;
 
     void Awake()
     {
@@ -30,6 +31,7 @@ public class NetworkEnemyController : NetworkBehaviour
         enemyHPHandler = GetComponent<EnemyHPHandler>();
         nav = GetComponent<NavMeshAgent>();
         targetHandler = GetComponent<TargetHandler>();
+        enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
     }
     void Start()
     {
@@ -55,7 +57,7 @@ public class NetworkEnemyController : NetworkBehaviour
             isThinking = false;
             targetHandler.TargetisAlive();
             EnemyChase();
-            // Aiming();
+            enemyAttackHandler.Aiming();
             // AttackCancel(); // EnemyHPHandler에서 호출하도록 수정
         }
         else

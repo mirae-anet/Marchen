@@ -1,0 +1,112 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Fusion;
+
+public class MeleeAttackHandler : EnemyAttackHandler
+{
+    private bool isAttack = false;
+    public float targetRadius =  1.5f;
+    public float targetRange = 3f;
+    public Vector3 boxSize = new Vector3(2f, 2f, 2f);
+    public byte damageAmount = 10;
+    public Transform anchorPoint;
+    
+    //other component
+    NetworkEnemyController networkEnemyController;
+    private Animator anim;
+    private EnemyHPHandler enemyHPHandler;
+
+    void Start()
+    {
+        networkEnemyController = GetComponent<NetworkEnemyController>();
+        anim = GetComponentInChildren<Animator>();
+        enemyHPHandler = GetComponent<EnemyHPHandler>();
+    }
+
+    public override void Aiming() // 레이캐스트로 플레이어 위치 특정
+    {
+        RaycastHit[] rayHits =
+            Physics.SphereCastAll(transform.position,           // 위치
+                                  targetRadius,                 // 반지름
+                                  transform.forward,            // 방향
+                                  targetRange,                  // 방향으로 부터 거리
+                                  LayerMask.GetMask("Player")); // 레이어 특정
+
+        if (rayHits.Length > 0 && !isAttack && !enemyHPHandler.GetIsDamage())
+            StartCoroutine("AttackCO");
+    }
+
+    IEnumerator AttackCO()
+    {
+        networkEnemyController.SetIsChase(false);
+        isAttack = true;
+
+        yield return new WaitForSeconds(0.3f);
+
+        RPC_animatonSetBool("isAttack", true);
+        yield return new WaitForSeconds(0.5f);
+
+        List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
+
+        float endTime = Time.time + 1f;
+        while (Time.time < endTime)
+        {
+            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.identity, Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
+            if(hitCount > 0)
+            {
+                for(int i = 0; i < hitCount; i++)
+                {
+                    HPHandler hpHandler = hits[i].Hitbox.Root.GetComponent<HPHandler>();
+
+                    if(hpHandler != null)
+                        hpHandler.OnTakeDamage(transform.name, damageAmount, transform.position);
+                }
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // meleeArea.enabled = true;
+        // yield return new WaitForSeconds(1f);
+        // meleeArea.enabled = false;
+        yield return new WaitForSeconds(1f);
+
+        networkEnemyController.SetIsChase(true);
+        isAttack = false;
+        RPC_animatonSetBool("isAttack", false);
+    }
+
+
+    /*
+    public override void AttackCancel()
+    {
+        if (!attackCancel)
+            return;
+
+        if (isHit)
+        {
+            StopCoroutine("Attack");
+
+            isChase = true;
+            isAttack = false;
+
+            anim.SetBool("isAttack", false);
+
+            if (meleeArea != null)
+                meleeArea.enabled = false;
+        }
+    }
+    */
+
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_animatonSetBool(string action, bool isDone)
+    {
+        anim.SetBool(action, isDone);
+    }
+
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_animatonSetTrigger(string action)
+    {
+        anim.SetTrigger(action);
+    }
+}
