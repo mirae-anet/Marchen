@@ -17,6 +17,7 @@ public class GrenadeHandler : NetworkBehaviour
     //Thrown by info
     PlayerRef thrownByPlayerRef;
     string thrownByPlayerName;
+    NetworkObject thrownByNetworkObject;
 
     //Hit info
     List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
@@ -28,7 +29,7 @@ public class GrenadeHandler : NetworkBehaviour
     NetworkObject networkObject;
     NetworkRigidbody networkRigidbody;
 
-    public void Throw(Vector3 throwForce, PlayerRef thrownByPlayerRef, string thrownByPlayerName)
+    public void Throw(Vector3 throwForce, PlayerRef thrownByPlayerRef, NetworkObject thrownByNetworkObject,string thrownByPlayerName)
     {
         networkObject = GetComponent<NetworkObject>();
         networkRigidbody = GetComponent<NetworkRigidbody>();
@@ -36,6 +37,7 @@ public class GrenadeHandler : NetworkBehaviour
         networkRigidbody.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
         this.thrownByPlayerRef = thrownByPlayerRef;
         this.thrownByPlayerName = thrownByPlayerName;
+        this.thrownByNetworkObject = thrownByNetworkObject;
 
         explodeTickTimer = TickTimer.CreateFromSeconds(Runner, 2);
     }
@@ -54,7 +56,7 @@ public class GrenadeHandler : NetworkBehaviour
                     EnemyHPHandler enemyHpHandler = hits[i].Hitbox.transform.root.GetComponent<EnemyHPHandler>();
 
                     if(enemyHpHandler != null)
-                        enemyHpHandler.OnTakeDamage(thrownByPlayerName, damageAmount, transform.position);
+                        enemyHpHandler.OnTakeDamage(thrownByPlayerName, thrownByNetworkObject,damageAmount, transform.position);
                 }
 
                 Runner.Despawn(networkObject);

@@ -87,7 +87,7 @@ public class RocketHandler : NetworkBehaviour
                     EnemyHPHandler enemyHpHandler = hits[i].Hitbox.transform.root.GetComponent<EnemyHPHandler>();
 
                     if(enemyHpHandler != null)
-                        enemyHpHandler.OnTakeDamage(firedByPlayerName, damageAmount, checkForImpactPoint.position);
+                        enemyHpHandler.OnTakeDamage(firedByPlayerName, firedByNetworkObject, damageAmount, checkForImpactPoint.position);
                 }
 
                 Runner.Despawn(networkObject);

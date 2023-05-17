@@ -105,8 +105,11 @@ public class NetworkEnemyController : NetworkBehaviour
     {
         if (!nav.enabled)
             return;
-
-        nav.SetDestination(targetHandler.GetTarget().position);
+        
+        Transform target = targetHandler.GetTarget();
+        
+        if(target != null)
+            nav.SetDestination(target.position);
 
         if(!isChase || enemyHPHandler.GetIsDamage())
         {

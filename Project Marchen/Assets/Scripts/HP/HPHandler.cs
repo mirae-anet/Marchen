@@ -104,7 +104,7 @@ public class HPHandler : NetworkBehaviour
     }
 
     //Function only called on the server
-    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount, Vector3 AttackPostion)
+    public void OnTakeDamage(string damagedByNickname, byte damageAmount, Vector3 AttackPostion)
     {
         //only take damage while alive
         if(isDead)
@@ -122,7 +122,7 @@ public class HPHandler : NetworkBehaviour
         //player died
         if(HP <= 0)
         {
-            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
+            networkInGameMessages.SendInGameRPCMessage(damagedByNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
             Debug.Log($"{Time.time} {transform.name} died");
             isDead = true;
         }

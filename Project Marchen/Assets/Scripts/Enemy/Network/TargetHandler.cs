@@ -40,15 +40,12 @@ public class TargetHandler : NetworkBehaviour
         isAggro = true;
 
         // networkEnemyController.SetNavEnabled(true);
-        // networkEnemyController.SetIsChase(true); //ChaseStart()에서 실행하는 것이 원래 의도인듯?
-
-        // StopCoroutine("Think"); //사실상 효과없음.
         StartCoroutine(ChaseStartCO());
     }
 
     IEnumerator ChaseStartCO()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.1f);
         networkEnemyController.SetIsChase(true); //single code에선 SetTarget에서 이미 호출함 그래서 효과없음.
         RPC_animatonSetBool("isWalk", true);
         Debug.Log(gameObject.name + " ChaseStart");
@@ -76,7 +73,6 @@ public class TargetHandler : NetworkBehaviour
         RPC_animatonSetBool("isWalk", false);
         RPC_animatonSetBool("isAttack", false);
 
-        // networkEnemyController.SetNavEnabled(false);
         networkEnemyController.SetIsChase(false);
         agrroPulling.SetActive(true);
         isAggro = false;
