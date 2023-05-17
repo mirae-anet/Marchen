@@ -28,6 +28,7 @@ public class EnemyHPHandler : NetworkBehaviour
     NetworkInGameMessages networkInGameMessages;
     HitboxRoot hitboxRoot;
     TargetHandler targetHandler;
+    EnemyAttackHandler enemyAttackHandler;
 
     void Awake()
     {
@@ -36,6 +37,7 @@ public class EnemyHPHandler : NetworkBehaviour
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         targetHandler = GetComponent<TargetHandler>();
+        enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
     }
 
     void Start()
@@ -106,6 +108,7 @@ public class EnemyHPHandler : NetworkBehaviour
         else
         {
             KnockBack(AttackPostion);
+            enemyAttackHandler.AttackCancel();
             targetHandler.SetTarget(damagedByNetworkObject.transform); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
         }
     }

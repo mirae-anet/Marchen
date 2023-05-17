@@ -6,6 +6,7 @@ using Fusion;
 public class MeleeAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
+    public bool attackCancel = true;
     public float targetRadius =  1.5f;
     public float targetRange = 3f;
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
@@ -76,27 +77,17 @@ public class MeleeAttackHandler : EnemyAttackHandler
         RPC_animatonSetBool("isAttack", false);
     }
 
-
-    /*
     public override void AttackCancel()
     {
         if (!attackCancel)
             return;
 
-        if (isHit)
-        {
-            StopCoroutine("Attack");
+        StopCoroutine("AttackCO");
 
-            isChase = true;
-            isAttack = false;
-
-            anim.SetBool("isAttack", false);
-
-            if (meleeArea != null)
-                meleeArea.enabled = false;
-        }
+        networkEnemyController.SetIsChase(true);
+        isAttack = false;
+        RPC_animatonSetBool("isAttack", false);
     }
-    */
 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
