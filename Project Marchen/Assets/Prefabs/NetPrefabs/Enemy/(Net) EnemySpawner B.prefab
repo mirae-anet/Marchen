@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7434632492330415833}
   - component: {fileID: 7434632492330415828}
   - component: {fileID: 7434632492330415835}
-  - component: {fileID: 56858182490533523}
   m_Layer: 16
   m_Name: AnchorPoint
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &56858182490533523
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434632492330415832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7434632493628454399
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,10 +94,10 @@ GameObject:
   - component: {fileID: 7434632493628454395}
   - component: {fileID: 7434632493628454394}
   - component: {fileID: 7434632493628454393}
-  - component: {fileID: 3520917383900379781}
   - component: {fileID: 372930622566489090}
+  - component: {fileID: 6950139073719678658}
   m_Layer: 16
-  m_Name: EnemySpawner B
+  m_Name: (Net) EnemySpawner B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,27 +155,9 @@ MonoBehaviour:
     RawGuidValue: 3bcaee6d72427442cb653f23227083e5
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 3520917383900379781}
   - {fileID: 372930622566489090}
+  - {fileID: 6950139073719678658}
   SimulationBehaviours: []
---- !u!114 &3520917383900379781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434632493628454399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46aa59b9515e947ddab68f36178a69fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  delayTime: 15
-  enemyPrefab: {fileID: 6229936859651675028, guid: 2b5809c4205cb4c2db4f45c740174f8e, type: 3}
-  anchorPoint: {fileID: 7434632492330415833}
-  enemySpawnerPF: {fileID: 3520917383900379781, guid: af9597a1b71264b818ad3d071c664111, type: 3}
-  skipSettingStartValues: 0
 --- !u!114 &372930622566489090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +186,23 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &6950139073719678658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434632493628454399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a818888b4e1343a69fbd710391cc79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  delayTime: 10
+  prefab: {fileID: 4897826830327110097, guid: 2b5809c4205cb4c2db4f45c740174f8e, type: 3}
+  anchorPoint: {fileID: 7434632492330415833}
+  skipSettingStartValues: 0
 --- !u!1001 &2454883388989447891
 PrefabInstance:
   m_ObjectHideFlags: 0

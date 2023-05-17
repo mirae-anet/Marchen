@@ -150,29 +150,15 @@ public class NetworkRunnerHandler : MonoBehaviour
                     }
                 });
             }
-            //enemy spanwer
-            else if(resumeNetworkObject.TryGetBehaviour<EnemySpawnHandler>(out var oldEnemySpawner))
+            // Dynamic spawner
+            else if(resumeNetworkObject.TryGetBehaviour<SpawnHandler>(out var oldSpawner))
             {
-                Transform oldEnemySpawnerTransform = oldEnemySpawner.gameObject.transform;
-                runner.Spawn(resumeNetworkObject, position: oldEnemySpawnerTransform.position, oldEnemySpawnerTransform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                runner.Spawn(resumeNetworkObject, position: oldSpawner.transform.position, oldSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy state
-                    EnemySpawnHandler newSpawner = newNetworkObject.GetComponent<EnemySpawnHandler>();
-                    newSpawner.CopyStateFrom(oldEnemySpawner);
-                    newSpawner.skipSettingStartValues = true;
-                });
-            }
-            // item spawner
-            else if(resumeNetworkObject.TryGetBehaviour<ItemSpawnHandler>(out var oldItemSpawner))
-            {
-                Transform oldItem = oldItemSpawner.gameObject.transform;
-                runner.Spawn(resumeNetworkObject, position: oldItem.position, oldItem.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
-                {
-                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
-                    //Copy state
-                    ItemSpawnHandler newSpawner = newNetworkObject.GetComponent<ItemSpawnHandler>();
-                    newSpawner.CopyStateFrom(oldItemSpawner);
+                    SpawnHandler newSpawner = newNetworkObject.GetComponent<SpawnHandler>();
+                    newSpawner.CopyStateFrom(oldSpawner);
                     newSpawner.skipSettingStartValues = true;
                 });
             }

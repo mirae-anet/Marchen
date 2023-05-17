@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7434632492330415833}
   - component: {fileID: 7434632492330415828}
   - component: {fileID: 7434632492330415835}
-  - component: {fileID: 56858182490533523}
   m_Layer: 16
   m_Name: AnchorPoint
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &56858182490533523
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434632492330415832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7434632493628454399
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,10 +94,10 @@ GameObject:
   - component: {fileID: 7434632493628454395}
   - component: {fileID: 7434632493628454394}
   - component: {fileID: 7434632493628454393}
-  - component: {fileID: 3520917383900379781}
   - component: {fileID: 1349707092566703562}
+  - component: {fileID: 2441586644691982859}
   m_Layer: 16
-  m_Name: copy A
+  m_Name: (Net) EnemySpawner A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,30 +152,12 @@ MonoBehaviour:
   AoiPositionSource: {fileID: 0}
   Flags: 2305
   NetworkGuid:
-    RawGuidValue: f10fcbd15d68e4a7bbc7381376ca4188
+    RawGuidValue: 76a8e012188974d76a9dae9dcaf3ab82
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 3520917383900379781}
   - {fileID: 1349707092566703562}
+  - {fileID: 2441586644691982859}
   SimulationBehaviours: []
---- !u!114 &3520917383900379781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7434632493628454399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46aa59b9515e947ddab68f36178a69fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  delayTime: 15
-  enemyPrefab: {fileID: 1299652720661714567, guid: cbd9884f1b09245949c1d89b119c8bae, type: 3}
-  anchorPoint: {fileID: 7434632492330415833}
-  itemSpawnerPF: {fileID: 6487694065727322817, guid: de058069d265b4d4c9c28fca50495d1f, type: 3}
-  skipSettingStartValues: 0
 --- !u!114 &1349707092566703562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +186,23 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &2441586644691982859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434632493628454399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a818888b4e1343a69fbd710391cc79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  delayTime: 10
+  prefab: {fileID: -7306548645563275295, guid: cbd9884f1b09245949c1d89b119c8bae, type: 3}
+  anchorPoint: {fileID: 7434632492330415833}
+  skipSettingStartValues: 0
 --- !u!1001 &3666846570870113350
 PrefabInstance:
   m_ObjectHideFlags: 0

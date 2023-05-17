@@ -1295,6 +1295,7 @@ GameObject:
   - component: {fileID: 3151836074117985339}
   - component: {fileID: 9061902636817628115}
   - component: {fileID: 4797138551789220831}
+  - component: {fileID: 5628767189330560181}
   m_Layer: 6
   m_Name: Test PF
   m_TagString: Player
@@ -1373,6 +1374,7 @@ MonoBehaviour:
   - {fileID: 3151836074117985339}
   - {fileID: 9061902636817628115}
   - {fileID: 4797138551789220831}
+  - {fileID: 5628767189330560181}
   SimulationBehaviours: []
 --- !u!114 &6441630219631003985
 MonoBehaviour:
@@ -1444,7 +1446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _isDead: 0
   uiOnHitColor: {r: 1, g: 0, b: 0, a: 0.05882353}
   uiOnHitImage: {fileID: 3802945920268722317}
   playerModel: {fileID: 4323213110611308241}
@@ -1541,6 +1542,19 @@ MonoBehaviour:
   doubleTapTime: 0.2
   raySize: {x: 1.8, y: 0.6, z: 1.8}
   escPanel: {fileID: 3908764343849807949}
+--- !u!114 &5628767189330560181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e680e0e875aaa413384d75aed767d4f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
 --- !u!1 &3706017666956517793
 GameObject:
   m_ObjectHideFlags: 0
