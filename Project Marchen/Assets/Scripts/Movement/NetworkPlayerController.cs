@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Fusion;
 
 public class NetworkPlayerController : NetworkBehaviour
@@ -52,17 +53,18 @@ public class NetworkPlayerController : NetworkBehaviour
 
     //패널
     public GameObject escPanel;
-
+    public TMP_InputField inputField;
 
     void Awake()
     {
+        
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
     }
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.GetIsDead())
+        if (hpHandler.GetIsDead())
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
@@ -89,6 +91,9 @@ public class NetworkPlayerController : NetworkBehaviour
 
             //Esc메뉴
             EscMenu();
+            //채팅
+            Chat();
+
         }
     }
 
@@ -193,7 +198,7 @@ public class NetworkPlayerController : NetworkBehaviour
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
     }
-
+    //ESC MENU
     public void EscMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -211,6 +216,37 @@ public class NetworkPlayerController : NetworkBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 escPanel.SetActive(true);
+            }
+        }
+    }
+
+    //CHAT
+    public void Chat()
+    {
+        NetworkPlayer nickname = FindObjectOfType<NetworkPlayer>();
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused)
+        {
+            //포커스가 없을때
+            if (!inputField.isFocused)
+            {
+                inputField.ActivateInputField();
+            }
+            else if(inputField.isFocused)
+            {
+                NetworkInGameMessages message = FindObjectOfType<NetworkInGameMessages>();
+                //텍스트 넣기
+                string inputText = inputField.text;
+                
+                if (string.IsNullOrEmpty(inputText))
+                {
+                    return;
+                }
+                message.RPC_SendMessage(nickname.playerNickNameTM.text, inputText);
+                // 비우기
+                inputField.text = "";
+                // 비활성화
+                inputField.DeactivateInputField();
             }
         }
     }

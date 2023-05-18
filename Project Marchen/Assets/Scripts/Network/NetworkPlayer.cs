@@ -11,12 +11,12 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public static NetworkPlayer Local {get; set;}
     public Transform playerBody;
     public Transform nickNameUI;
-
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
 
     // Remote Client Token Hash
-    [Networked] public int token {get; set;} //need for Host migration
+   
+ [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
 
     public LocalCameraHandler localCameraHandler;
@@ -109,11 +109,13 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         Debug.Log($"{Time.time} OnNickNameChanged value {changed.Behaviour.nickName}");
         changed.Behaviour.OnNickNameChanged();
     }
+
     private void OnNickNameChanged()
     {
         Debug.Log($"Nickname changed for player to {nickName} for player {gameObject.name}");
         playerNickNameTM.text = nickName.ToString();
     }
+
     //from client to server
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_SetNickName(string nickName, RpcInfo info = default)
@@ -126,7 +128,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             networkInGameMessages.SendInGameRPCMessage(nickName, "joined");
             isPublicJoinMessageSent = true;
         }
+
     }
+
+
 
     private void OnDestroy()
     {
