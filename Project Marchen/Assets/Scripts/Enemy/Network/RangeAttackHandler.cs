@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class MeleeAttackHandler : EnemyAttackHandler
+public class RangeAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
     public bool attackCancel = true;
-    // public float targetRadius =  1.5f;
-    public float targetRange = 3f;
-    public Vector3 boxSize = new Vector3(2f, 2f, 2f);
-    public byte damageAmount = 10;
+    public float targetRadius =  0.5f;
+    public float targetRange = 25f;
     public Transform anchorPoint;
     
+    //prefab
+    public BulletHandler bulletPrefab;
+
     //other component
     NetworkEnemyController networkEnemyController;
     private Animator anim;
@@ -27,7 +28,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
 
     public override void Aiming() // 레이캐스트로 플레이어 위치 특정
     {
-        if(Physics.BoxCast(transform.position, boxSize/2, transform.forward, Quaternion.identity, targetRange, LayerMask.GetMask("Player")) )
+        if(Physics.SphereCast(transform.position, targetRadius, transform.forward, out var hitInfo, targetRange, LayerMask.GetMask("Player")) )
         {
             if(!isAttack && !enemyHPHandler.GetIsDamage())
                 StartCoroutine("AttackCO");
@@ -44,26 +45,12 @@ public class MeleeAttackHandler : EnemyAttackHandler
         RPC_animatonSetBool("isAttack", true);
         yield return new WaitForSeconds(0.5f);
 
-        List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
-
-        float endTime = Time.time + 1f;
-        while (Time.time < endTime)
+        Runner.Spawn(bulletPrefab, anchorPoint.position, Quaternion.LookRotation(transform.forward), Object.StateAuthority, (runner, spawnedBullet) =>
         {
-            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.identity, Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
-            if(hitCount > 0)
-            {
-                for(int i = 0; i < hitCount; i++)
-                {
-                    HPHandler hpHandler = hits[i].Hitbox.Root.GetComponent<HPHandler>();
+            spawnedBullet.GetComponent<BulletHandler>().Fire(Object.StateAuthority, Object, transform.name);
+        });
 
-                    if(hpHandler != null)
-                        hpHandler.OnTakeDamage(transform.name, damageAmount, transform.position);
-                }
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
