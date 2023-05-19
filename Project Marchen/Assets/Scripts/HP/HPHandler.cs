@@ -70,13 +70,13 @@ public class HPHandler : NetworkBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
 
-        if(Object.HasInputAuthority)
+        if(Object != null && Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
         yield return new WaitForSeconds(0.5f);
 
         //화면 정상화
-        if(Object.HasInputAuthority && !isDead)
+        if(Object != null && Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
 
         yield return new WaitForSeconds(0.5f);

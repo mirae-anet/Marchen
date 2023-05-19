@@ -17,20 +17,41 @@ public class MeleeAttackHandler : EnemyAttackHandler
     NetworkEnemyController networkEnemyController;
     private Animator anim;
     private EnemyHPHandler enemyHPHandler;
+    TargetHandler targetHandler;
 
     void Start()
     {
         networkEnemyController = GetComponent<NetworkEnemyController>();
         anim = GetComponentInChildren<Animator>();
         enemyHPHandler = GetComponent<EnemyHPHandler>();
+        targetHandler = GetComponent<TargetHandler>();
     }
 
     public override void Aiming() // 레이캐스트로 플레이어 위치 특정
     {
-        if(Physics.BoxCast(transform.position, boxSize/2, transform.forward, Quaternion.identity, targetRange, LayerMask.GetMask("Player")) )
+        // if(Physics.BoxCast(transform.position, boxSize/2, transform.forward, Quaternion.identity, targetRange, LayerMask.GetMask("Player")) )
+        // {
+        //     if(!isAttack && !enemyHPHandler.GetIsDamage())
+        //         StartCoroutine("AttackCO");
+        // }
+        if(isAttack || enemyHPHandler.GetIsDamage())
+            return;
+
+        RaycastHit[] rayhits = Physics.BoxCastAll(transform.position, boxSize/2, transform.forward, Quaternion.LookRotation(transform.forward), targetRange, LayerMask.GetMask("Player"));
+
+        if(rayhits.Length > 0)
         {
-            if(!isAttack && !enemyHPHandler.GetIsDamage())
-                StartCoroutine("AttackCO");
+            // foreach(RaycastHit rayhit in rayhits) // target 확인
+            for(int i = 0; rayhits.Length > i; i++)
+            {
+                
+                Transform player = rayhits[i].collider.transform.root.transform;
+                if(targetHandler.GetTarget() == player)
+                {
+                    StartCoroutine("AttackCO");
+                    break;
+                }
+            }
         }
     }
 

@@ -38,8 +38,7 @@ public class TargetHandler : NetworkBehaviour
         Debug.Log(gameObject.name + " target set");
         this.target = target;
         isAggro = true;
-
-        // networkEnemyController.SetNavEnabled(true);
+        agrroPulling.SetActive(false);
         StartCoroutine(ChaseStartCO());
     }
 

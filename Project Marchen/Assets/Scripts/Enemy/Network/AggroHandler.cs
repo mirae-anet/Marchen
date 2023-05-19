@@ -15,7 +15,6 @@ public class AggroHandler : NetworkBehaviour
         {
             Transform player = target.GetComponentInParent<Transform>().root; // Player 최상위 오브젝트 Transform
             gameObject.GetComponentInParent<TargetHandler>().SetTarget(player);
-            gameObject.SetActive(false);
         }
     }
 }
