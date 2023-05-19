@@ -105,7 +105,7 @@ public class WeaponHandler : NetworkBehaviour
                 if(Object.InputAuthority == hitinfo.Hitbox.Root.GetComponent<NetworkObject>().InputAuthority)
                     return;
                 //아니면 데미지
-                hitinfo.Hitbox.transform.root.GetComponent<EnemyHPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), damageAmount, transform.position);
+                hitinfo.Hitbox.transform.root.GetComponent<EnemyHPHandler>().OnTakeDamage(networkPlayer.nickName.ToString(), networkObject, damageAmount, transform.position);
             }
 
             isHitOtherPlayer = true;
@@ -162,7 +162,7 @@ public class WeaponHandler : NetworkBehaviour
         {
             Runner.Spawn(grenadePrefab, bodyAnchorPoint.position + aimFowardVector * 1.5f, Quaternion.LookRotation(aimFowardVector), Object.InputAuthority, (runner, spawnedGrenade) =>
             {
-                spawnedGrenade.GetComponent<GrenadeHandler>().Throw(aimFowardVector * ThrowForce, Object.InputAuthority, networkPlayer.nickName.ToString());
+                spawnedGrenade.GetComponent<GrenadeHandler>().Throw(aimFowardVector * ThrowForce, Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
                 Debug.Log("${Time.time} {networkPlayer.nickName} throw grenade");
             });
 

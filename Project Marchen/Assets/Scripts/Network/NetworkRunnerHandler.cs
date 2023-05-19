@@ -148,6 +148,11 @@ public class NetworkRunnerHandler : MonoBehaviour
                         newHPHandler.CopyStateFrom(oldHPHandler);
                         newHPHandler.skipSettingStartValues = true;
                     }
+                    if(resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
+                    {
+                        TargetHandler newTargetHandler = newNetworkObject.GetComponent<TargetHandler>();
+                        newTargetHandler.CopyStateFrom(oldTargetHandler);
+                    }
                 });
             }
             // Dynamic spawner
@@ -162,6 +167,17 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newSpawner.skipSettingStartValues = true;
                 });
             }
+            else if(resumeNetworkObject.TryGetBehaviour<BulletHandler>(out var oldBullet))
+            {
+                Transform oldBull = oldBullet.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldBull.position, oldBull.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    //Copy state
+                    BulletHandler newBullet = newNetworkObject.GetComponent<BulletHandler>();
+                    newBullet.CopyStateFrom(oldBullet);
+                });
+            }
             else if(resumeNetworkObject.TryGetBehaviour<GrenadeHandler>(out var oldGrenade))
             {
                 Transform oldGren = oldGrenade.gameObject.transform;
@@ -169,8 +185,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy state
-                    GrenadeHandler newGren = newNetworkObject.GetComponent<GrenadeHandler>();
-                    newGren.CopyStateFrom(oldGrenade);
+                    GrenadeHandler newGrenade = newNetworkObject.GetComponent<GrenadeHandler>();
+                    newGrenade.CopyStateFrom(oldGrenade);
                 });
             }
             else if(resumeNetworkObject.TryGetBehaviour<RocketHandler>(out var oldRocket))
@@ -180,8 +196,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy state
-                    RocketHandler newRoc = newNetworkObject.GetComponent<RocketHandler>();
-                    newRoc.CopyStateFrom(oldRocket);
+                    RocketHandler newRocket = newNetworkObject.GetComponent<RocketHandler>();
+                    newRocket.CopyStateFrom(oldRocket);
                 });
             }
             else

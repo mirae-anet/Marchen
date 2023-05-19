@@ -1413,7 +1413,7 @@ MonoBehaviour:
   gunCoolTime: 0.15
   grenadeCoolTime: 2
   rocketCoolTime: 2
-  ThrowForce: 50
+  ThrowForce: 30
 --- !u!114 &4381579702224905231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   _interpolationDataSource: 0
   InterpolationSpace: 0
   InterpolationTarget: {fileID: 6640970328589365237}
-  InterpolateErrorCorrection: 1
+  InterpolateErrorCorrection: 0
   InterpolatedErrorCorrectionSettings:
     MinRate: 3.3
     MaxRate: 10
@@ -3210,7 +3210,7 @@ MonoBehaviour:
   bodyAnchorPoint: {fileID: 7081180801289539154}
   layerMask:
     serializedVersion: 2
-    m_Bits: 2121
+    m_Bits: 2393
   maxDistance: 500
   localCamera: {fileID: 406200595790773962}
 --- !u!1 &8249866763524273807

@@ -103,7 +103,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
         feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
-        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.identity, LayerMask.GetMask("Ground"));
+        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.LookRotation(transform.forward), LayerMask.GetMask("Ground"));
 
         if(colliders.Length > 0)
         {

@@ -23,6 +23,7 @@ public class NetworkEnemyController : NetworkBehaviour
     private EnemyHPHandler enemyHPHandler;
     private NavMeshAgent nav;
     private TargetHandler targetHandler;
+    private EnemyAttackHandler enemyAttackHandler;
 
     void Awake()
     {
@@ -30,6 +31,7 @@ public class NetworkEnemyController : NetworkBehaviour
         enemyHPHandler = GetComponent<EnemyHPHandler>();
         nav = GetComponent<NavMeshAgent>();
         targetHandler = GetComponent<TargetHandler>();
+        enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
     }
     void Start()
     {
@@ -55,7 +57,7 @@ public class NetworkEnemyController : NetworkBehaviour
             isThinking = false;
             targetHandler.TargetisAlive();
             EnemyChase();
-            // Aiming();
+            enemyAttackHandler.Aiming();
             // AttackCancel(); // EnemyHPHandler에서 호출하도록 수정
         }
         else
@@ -72,7 +74,8 @@ public class NetworkEnemyController : NetworkBehaviour
 
     void EnemyWander() // 어그로 아닐 때 이동
     {
-        transform.position += transform.forward* moveSpeed * isMove * Runner.DeltaTime;
+        // transform.position += transform.forward* moveSpeed * isMove * Runner.DeltaTime;
+        nav.Move(transform.forward * moveSpeed * isMove * Runner.DeltaTime);
     }
 
     IEnumerator ThinkCO(float worry) // 어그로 아닐 때 이동 결정하는 함수
@@ -104,8 +107,11 @@ public class NetworkEnemyController : NetworkBehaviour
     {
         if (!nav.enabled)
             return;
-
-        nav.SetDestination(targetHandler.GetTarget().position);
+        
+        Transform target = targetHandler.GetTarget();
+        
+        if(target != null)
+            nav.SetDestination(target.position);
 
         if(!isChase || enemyHPHandler.GetIsDamage())
         {
@@ -117,12 +123,13 @@ public class NetworkEnemyController : NetworkBehaviour
         }
     }
 
-
+    /*
     public void SetNavEnabled(bool bol)
     {
         // isChase = bol;
         nav.enabled = bol;
     }
+    */
     public void SetIsChase(bool bol)
     {
         isChase = bol;

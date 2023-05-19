@@ -27,6 +27,8 @@ public class EnemyHPHandler : NetworkBehaviour
     private Animator anim;
     NetworkInGameMessages networkInGameMessages;
     HitboxRoot hitboxRoot;
+    TargetHandler targetHandler;
+    EnemyAttackHandler enemyAttackHandler;
 
     void Awake()
     {
@@ -34,6 +36,8 @@ public class EnemyHPHandler : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
+        targetHandler = GetComponent<TargetHandler>();
+        enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
     }
 
     void Start()
@@ -80,7 +84,7 @@ public class EnemyHPHandler : NetworkBehaviour
         }
     }
 
-    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount, Vector3 AttackPostion)
+    public void OnTakeDamage(string damagedByNickname, NetworkObject damagedByNetworkObject, byte damageAmount, Vector3 AttackPostion)
     {
         //only take damage while alive
         if(isDead)
@@ -97,14 +101,15 @@ public class EnemyHPHandler : NetworkBehaviour
 
         if(HP <= 0)
         {
-            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed Enemy");
+            networkInGameMessages.SendInGameRPCMessage(damagedByNickname, $"Killed Enemy");
             Debug.Log($"{Time.time} {transform.name} died");
             isDead = true;
         }
         else
         {
             KnockBack(AttackPostion);
-            // enemyController.SetTarget(other.GetComponentInParent<Transform>().root); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
+            enemyAttackHandler.AttackCancel();
+            targetHandler.SetTarget(damagedByNetworkObject.transform); // 타겟 변경(PlayerMain이 담겨있는 오브젝트로)
         }
     }
     static void OnStateChanged(Changed<EnemyHPHandler> changed)
