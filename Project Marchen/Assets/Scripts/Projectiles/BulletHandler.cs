@@ -5,9 +5,9 @@ using Fusion;
 
 public class BulletHandler : NetworkBehaviour
 {
-    // [Header("Prefabs")]
-    // [SerializeField]
-    // GameObject explosionParticleSystemPrefab;
+    [Header("Prefabs")]
+    [SerializeField]
+    GameObject explosionParticleSystemPrefab;
 
     [Header("Collsion")]
     [SerializeField]
@@ -89,7 +89,7 @@ public class BulletHandler : NetworkBehaviour
                 {
                     HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
 
-                    if(hpHandler != null)
+                    if(hpHandler != null && firedByNetworkObject != null)
                         hpHandler.OnTakeDamage(firedByNetworkObject.transform.name, damageAmount, transform.position);
                 }
 
@@ -102,6 +102,6 @@ public class BulletHandler : NetworkBehaviour
     //When despawning the object we want to create a visual explosion
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        // Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
+        Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
     }
 }
