@@ -57,7 +57,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
     void Awake()
     {
-        
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
@@ -91,10 +90,11 @@ public class NetworkPlayerController : NetworkBehaviour
 
             //Esc메뉴
             EscMenu();
-            //채팅
-            Chat();
+
+            RPC_Chat();
 
         }
+
     }
 
     public void GroundCheck()
@@ -221,9 +221,9 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     //CHAT
-    public void Chat()
+    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    public void RPC_Chat()
     {
-        NetworkPlayer nickname = FindObjectOfType<NetworkPlayer>();
 
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused)
         {
@@ -242,7 +242,8 @@ public class NetworkPlayerController : NetworkBehaviour
                 {
                     return;
                 }
-                message.RPC_SendMessage(nickname.playerNickNameTM.text, inputText);
+
+                message.RPC_SendMessage(GameManager.instance.playerNickName, inputText);
                 // 비우기
                 inputField.text = "";
                 // 비활성화

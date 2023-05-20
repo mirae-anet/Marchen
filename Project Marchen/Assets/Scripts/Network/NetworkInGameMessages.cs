@@ -33,7 +33,7 @@ public class NetworkInGameMessages : NetworkBehaviour
 
 
     //원래
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.All, RpcTargets.All)]
     private void RPC_InGameMessage(string message, RpcInfo info = default)
     {
         Debug.Log($"[RPC] InGameMessage {message}");
