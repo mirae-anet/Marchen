@@ -6,14 +6,13 @@ using UnityEngine.AI;
 public class BossController : MonoBehaviour
 {
     public bool isLook;
+
     private bool isChase = false;
 
     public GameObject missile;
-    public Transform target;
-    public NavMeshAgent nav;
-    public Animator anim;
     public Transform missilePortA;
     public Transform missilePortB;
+    public Transform target;
 
     private EnemyMain enemyMain;
     private Rigidbody rigid;
@@ -21,6 +20,8 @@ public class BossController : MonoBehaviour
     
     private Vector3 lookVec;
     private Vector3 tauntVec;
+    private NavMeshAgent nav;
+    private Animator anim;
 
     [Header("오브젝트 연결")]
     [SerializeField]
@@ -33,10 +34,14 @@ public class BossController : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        nav = GetComponent<NavMeshAgent>();
 
         nav.isStopped = true;
+    }
+
+    void Start()
+    {
         StartCoroutine(Think());
     }
 
@@ -110,12 +115,15 @@ public class BossController : MonoBehaviour
     IEnumerator MissileShot()
     {
         anim.SetTrigger("doShot");
+
         yield return new WaitForSeconds(0.2f);
+
         GameObject instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
         BulletBoss bossMissileA = instantMissileA.GetComponent<BulletBoss>();
         bossMissileA.target = target;
 
         yield return new WaitForSeconds(0.3f);
+
         GameObject instantMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
         BulletBoss bossMissileB = instantMissileB.GetComponent<BulletBoss>();
         bossMissileB.target = target;
@@ -129,10 +137,13 @@ public class BossController : MonoBehaviour
     {
         isLook = false;
         anim.SetTrigger("doBigShot");
+
         Instantiate(bullet, transform.position, transform.rotation);
+
         yield return new WaitForSeconds(3f);
 
         isLook = true;
+
         StartCoroutine(Think());
     }
 
@@ -147,20 +158,18 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        if (boxCollider != null && meleeArea != null)
+        if (meleeArea != null)
             meleeArea.enabled = true;
 
         yield return new WaitForSeconds(0.5f);
 
-        if (boxCollider != null && meleeArea != null)
+        if (meleeArea != null)
             meleeArea.enabled = false;
 
         yield return new WaitForSeconds(1f);
 
-        if (boxCollider != null)
-            boxCollider.enabled = true;
-
         isLook = true;
+        boxCollider.enabled = true;
         nav.isStopped = true;
         
         StartCoroutine(Think());
