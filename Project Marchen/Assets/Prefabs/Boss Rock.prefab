@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3376268890457718798}
   - component: {fileID: 5157992625169689502}
   - component: {fileID: 2300605818422482673}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5195631488374450820}
   - component: {fileID: 1983796130977972776}
   - component: {fileID: 8220497257164885686}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Boss Rock
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -174,4 +174,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
+  isMelee: 0
   isRock: 1

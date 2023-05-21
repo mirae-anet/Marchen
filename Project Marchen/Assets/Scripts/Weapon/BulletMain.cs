@@ -25,8 +25,11 @@ public class BulletMain : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!isRock && collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
-            Destroy(gameObject, 1);
+        if (!isRock)
+        {
+            if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
+                Destroy(gameObject, 1);
+        }
     }
 
     void OnTriggerEnter(Collider other)

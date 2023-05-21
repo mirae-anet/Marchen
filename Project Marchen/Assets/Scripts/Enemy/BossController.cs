@@ -63,7 +63,6 @@ public class BossController : MonoBehaviour
 
             transform.LookAt(target.position + lookVec);
         }
-
         else
             nav.SetDestination(tauntVec);
     }

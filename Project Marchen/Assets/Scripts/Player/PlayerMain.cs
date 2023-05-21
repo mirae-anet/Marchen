@@ -64,13 +64,13 @@ public class PlayerMain : MonoBehaviour
 
                     rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
                     rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
-
-                    if (other.GetComponent<Rigidbody>() != null) // Bullet 이면 해당 오브젝트 파괴
-                        Destroy(other.gameObject);
                 }
 
                 StartCoroutine(OnDamage(isBossAttack));
             }
+
+            if (other.GetComponent<Rigidbody>() != null) // Bullet 이면 해당 오브젝트 파괴
+                Destroy(other.gameObject);
         }
     }
     
