@@ -12,10 +12,13 @@ public class NetworkPlayerController : NetworkBehaviour
     private bool isMove = false;
     private bool isJump;
     private bool isDodge;
+    private bool isAttack = false;
+    private bool attackInput;
 
     private Vector3 moveDir;
     private Vector3 dodgeDir;
     private Vector3 feetpos;
+    public Vector3 aimForwardVector;
 
     // 입력값 저장 변수
     // private Vector2 moveInput;
@@ -48,7 +51,7 @@ public class NetworkPlayerController : NetworkBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private HPHandler hpHandler;
-
+    private AttackHandler attackHandler;
 
     //패널
     public GameObject escPanel;
@@ -59,6 +62,7 @@ public class NetworkPlayerController : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
+        attackHandler = GetComponent<AttackHandler>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -86,6 +90,8 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerMove();
             PlayerJump();
             PlayerDodge();
+            PlayerAttack();
+            PlayerReload();
 
             //Esc메뉴
             EscMenu();
@@ -122,6 +128,8 @@ public class NetworkPlayerController : NetworkBehaviour
         this.walkInput = networkInputData.walkInput;
         this.jumpInput = networkInputData.jumpInput;
         this.dodgeInput = networkInputData.dodgeInput;
+        this.attackInput = networkInputData.attackInput;
+        this.aimForwardVector = networkInputData.aimForwardVector;
     }
 
     public void PlayerMove()
@@ -147,14 +155,12 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             RPC_animatonSetBool("isRun", isMove);
             RPC_animatonSetBool("isWalk", walkInput);
-            // anim.SetBool("isRun", isMove);     // true일 때 걷는 애니메이션, false일 때 대기 애니메이션
-            // anim.SetBool("isWalk", walkInput); // isMove, walkOn 둘 다 True 일 때는 걷기
         }
     }
 
     public void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !hpHandler.getIsHit())
+        if (jumpInput && !isJump && !isDodge && !isAttack && !hpHandler.getIsHit())
         {
 
             isJump = true;
@@ -177,7 +183,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
     public void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !hpHandler.getIsHit())
+        if (dodgeInput && isMove && !isDodge && !isAttack && !hpHandler.getIsHit())
         {
             if(Object.HasStateAuthority)
             {
@@ -192,6 +198,30 @@ public class NetworkPlayerController : NetworkBehaviour
             isDodge = true;
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
+    }
+    private void PlayerAttack()
+    {
+        //input && state 모두 실행 중
+        if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        {
+            SetIsAttack(true);
+
+            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
+
+            attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
+        }
+    }
+    public void PlayerReload()
+    {
+        //input && state 모두 실행 중
+
+        // if (!reloadInput || isReload)
+            // return;
+        
+        if(isJump || isDodge || isAttack || hpHandler.getIsHit())
+            return;
+        
+        // playerAttack.DoReload();
     }
 
     public void EscMenu()
@@ -215,6 +245,18 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
+    public void SetIsAttack(bool bol)
+    {
+        isAttack = bol;
+    }
+    public void SetCharacterControllerEnabled(bool isEnabled)
+    {
+        isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
+    }
     IEnumerator PlayerDodgeOut(float second)
     {
         yield return new WaitForSeconds(second);
@@ -222,7 +264,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_LookForward(Vector3 moveDir)
+    public void RPC_LookForward(Vector3 moveDir)
     {
         playerPF.forward = moveDir;
     }
@@ -238,14 +280,5 @@ public class NetworkPlayerController : NetworkBehaviour
     private void RPC_animatonSetTrigger(string action)
     {
         anim.SetTrigger(action);
-    }
-
-    public void SetCharacterControllerEnabled(bool isEnabled)
-    {
-        isControllerEnable = isEnabled;
-    }
-    public bool GetCharacterControllerEnabled()
-    {
-        return isControllerEnable;
     }
 }

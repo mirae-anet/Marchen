@@ -14,6 +14,7 @@ public class BulletHandler : NetworkBehaviour
     private Transform checkForImpactPoint;
     [SerializeField]
     private LayerMask collisionLayers;
+    public bool isExplosion;
 
     //Thrown by info
     PlayerRef firedByPlayerRef;
@@ -90,7 +91,7 @@ public class BulletHandler : NetworkBehaviour
                     HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
 
                     if(hpHandler != null && firedByNetworkObject != null)
-                        hpHandler.OnTakeDamage(firedByNetworkObject.transform.name, damageAmount, transform.position);
+                        hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
                 }
 
                 Runner.Despawn(networkObject);
@@ -102,6 +103,7 @@ public class BulletHandler : NetworkBehaviour
     //When despawning the object we want to create a visual explosion
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
+        if(isExplosion)
+            Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
     }
 }
