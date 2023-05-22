@@ -10,9 +10,8 @@ public class CharacterInputHandler : MonoBehaviour
     bool walkInput = false;
     bool jumpInput = false;
     bool dodgeInput = false;
-    bool isFireButtonPressed = false;
-    bool isGrenadeFireButtonPressed = false;
-    bool isRocketLauncherFireButtonPressed = false;
+    bool attackInput = false;
+    bool reloadInput = false;
 
     //other components
     LocalCameraHandler localCameraHandler;
@@ -50,18 +49,10 @@ public class CharacterInputHandler : MonoBehaviour
             walkInput = true;
         if(Input.GetButtonDown("Dodge"))
             dodgeInput = true;
-
-        //fire
         if(Input.GetButtonDown("Fire1"))
-            isFireButtonPressed = true;
-
-        //Grenade fire
-        if(Input.GetKeyDown(KeyCode.G))
-            isGrenadeFireButtonPressed = true;
-
-        //Rocket fire
-        if(Input.GetButtonDown("Fire2"))
-            isRocketLauncherFireButtonPressed = true;
+            attackInput = true;
+        if(Input.GetButtonDown("Reload"))
+            reloadInput = true;
 
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector); 
@@ -79,25 +70,22 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.walkInput = walkInput;
         //dodge data
         networkInputData.dodgeInput = dodgeInput;
+        //attack data
+        networkInputData.attackInput = attackInput;
+        //reload data
+        networkInputData.reloadInput = reloadInput;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
         networkInputData.aimForwardVector = localCameraHandler.getAimForwardVector();
-        //Fire data
-        networkInputData.isFireButtonPressed = isFireButtonPressed;
-        //Grenade data
-        networkInputData.isGrenadeFireButtonPressed = isGrenadeFireButtonPressed;
-        //Rocket data
-        networkInputData.isRocketLauncherFireButtonPressed = isRocketLauncherFireButtonPressed;
 
         //Reset variables now that we have read their status
         // isMove = false;
         jumpInput = false;
         walkInput = false;
         dodgeInput = false;
-        isFireButtonPressed = false;
-        isGrenadeFireButtonPressed = false;
-        isRocketLauncherFireButtonPressed = false;
+        attackInput = false;
+        reloadInput = false;
 
         return networkInputData;
     }

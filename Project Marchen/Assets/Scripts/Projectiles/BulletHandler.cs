@@ -14,6 +14,7 @@ public class BulletHandler : NetworkBehaviour
     private Transform checkForImpactPoint;
     [SerializeField]
     private LayerMask collisionLayers;
+    public bool isExplosion;
 
     //Thrown by info
     PlayerRef firedByPlayerRef;
@@ -87,10 +88,20 @@ public class BulletHandler : NetworkBehaviour
                 //Deal damage to anything within the hit radius
                 for(int i = 0; i < hitCount; i++)
                 {
-                    HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
+                    //BUG!!!
+                    // HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
+                    // if(hpHandler != null && firedByNetworkObject != null)
 
-                    if(hpHandler != null && firedByNetworkObject != null)
-                        hpHandler.OnTakeDamage(firedByNetworkObject.transform.name, damageAmount, transform.position);
+                    if(hits[i].Hitbox.transform.root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
+                    {
+                        if(firedByNetworkObject != null)
+                            hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
+                    }
+                    if(hits[i].Hitbox.transform.root.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+                    {
+                        if(firedByNetworkObject != null)
+                            enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
+                    }
                 }
 
                 Runner.Despawn(networkObject);
@@ -102,6 +113,7 @@ public class BulletHandler : NetworkBehaviour
     //When despawning the object we want to create a visual explosion
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
+        if(isExplosion)
+            Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
     }
 }
