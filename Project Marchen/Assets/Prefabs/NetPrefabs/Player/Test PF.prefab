@@ -1625,7 +1625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  inputField: {fileID: 8203332410794262984}
   playerNickNameTM: {fileID: 7928563024512991462}
   playerBody: {fileID: 6640970328589365237}
   nickNameUI: {fileID: 4563216276530025217}
@@ -1680,6 +1679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5bc4a046f9b456796fe2254ce82324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  escPanel: {fileID: 3908764343849807949}
 --- !u!114 &8697239627248929451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1833,7 +1833,6 @@ MonoBehaviour:
   dodgePower: 20
   doubleTapTime: 0.2
   raySize: {x: 1.8, y: 0.6, z: 1.8}
-  escPanel: {fileID: 3908764343849807949}
   inputField: {fileID: 8203332410794262984}
 --- !u!114 &5628767189330560181
 MonoBehaviour:
@@ -2089,8 +2088,8 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 1
-  m_InputType: 1
+  m_ContentType: 0
+  m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

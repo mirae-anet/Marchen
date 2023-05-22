@@ -35,7 +35,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
-        if(Object.HasInputAuthority)
+        //본인 
+        if(Object.HasInputAuthority) //플레이어 본인
         {
             Local = this;
 
@@ -63,10 +64,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             localCameraHandler.transform.parent = null;
 
             RPC_SetNickName(GameManager.instance.playerNickName);
-
+            
             Debug.Log("Spawned local player");
         }
-        else
+        else //다른플레이어
         {
             //Disable the camera if we are not the local player
             // localCameraHandler.localCamera.enabled = false;
@@ -130,7 +131,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
 
     }
-
 
 
     private void OnDestroy()

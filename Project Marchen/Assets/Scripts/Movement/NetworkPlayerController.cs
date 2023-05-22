@@ -52,7 +52,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
 
     //패널
-    public GameObject escPanel;
     public TMP_InputField inputField;
 
     void Awake()
@@ -60,6 +59,7 @@ public class NetworkPlayerController : NetworkBehaviour
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
+        
     }
     public override void FixedUpdateNetwork()
     {
@@ -79,7 +79,6 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             if(!isControllerEnable)
                 return;
-
             // 입력값 저장
             SetInput(networkInputData);
 
@@ -88,12 +87,11 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerJump();
             PlayerDodge();
 
-            //Esc메뉴
-            EscMenu();
-
-            RPC_Chat();
 
         }
+        //채팅
+        RPC_Chat();
+
 
     }
 
@@ -198,33 +196,12 @@ public class NetworkPlayerController : NetworkBehaviour
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
     }
-    //ESC MENU
-    public void EscMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-            if (escPanel.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                escPanel.SetActive(false);
-                
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                escPanel.SetActive(true);
-            }
-        }
-    }
-
+   
     //CHAT
     [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
     public void RPC_Chat()
     {
-
+        
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused)
         {
             //포커스가 없을때
