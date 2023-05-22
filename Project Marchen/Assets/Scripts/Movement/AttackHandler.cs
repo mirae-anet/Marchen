@@ -15,13 +15,11 @@ public class AttackHandler : NetworkBehaviour
 
     //other componet
     HPHandler hpHandler;
-    Animator anim;
     WeaponHandler weaponHandler;
 
     void Awake()
     {
         hpHandler = GetComponent<HPHandler>();
-        anim = GetComponentInChildren<Animator>();
         WeaponEquip();
     }
 
@@ -45,28 +43,21 @@ public class AttackHandler : NetworkBehaviour
 
     public void DoAttack(Vector3 aimDir)
     {
-        weaponHandler.StopReload();
+        StopReload();
         weaponHandler.Attack(aimDir);
+        Debug.Log("DoAttack");
     }
 
-    /*
     public void DoReload()
     {
-        // if (weaponMain.type == WeaponMain.Type.Melee)
-        //     return;
-        
-        anim.SetTrigger("doReload");
-        playerController.SetIsReload(true);
-
-        StartCoroutine("ReloadOut", 0.8f);
+        if (weaponHandler.type == WeaponHandler.Type.Melee)
+            return;
+        weaponHandler.Reload();
+        Debug.Log("DoReload");
     }
-
 
     public void StopReload()
     {
-        StopCoroutine("ReloadOut");
-        playerController.SetIsReload(false);
+        weaponHandler.StopReload();
     }
-    */
-
 }

@@ -13,6 +13,7 @@ public struct NetworkInputData : INetworkInput
     public NetworkBool walkInput;
     public NetworkBool dodgeInput;
     public NetworkBool attackInput;
+    public NetworkBool reloadInput;
     public Vector3 aimForwardVector;
     public NetworkBool isJumpButtonPressed;
 

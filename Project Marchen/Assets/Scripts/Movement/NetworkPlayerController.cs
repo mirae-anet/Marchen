@@ -13,7 +13,9 @@ public class NetworkPlayerController : NetworkBehaviour
     private bool isJump;
     private bool isDodge;
     private bool isAttack = false;
+    private bool isReload = false;
     private bool attackInput;
+    private bool reloadInput;
 
     private Vector3 moveDir;
     private Vector3 dodgeDir;
@@ -74,7 +76,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
         if(Object.HasInputAuthority)
         {
-            // anim.SetBool("isJump", isJump);
             RPC_animatonSetBool("isJump", isJump);
         }
 
@@ -129,6 +130,7 @@ public class NetworkPlayerController : NetworkBehaviour
         this.jumpInput = networkInputData.jumpInput;
         this.dodgeInput = networkInputData.dodgeInput;
         this.attackInput = networkInputData.attackInput;
+        this.reloadInput = networkInputData.reloadInput;
         this.aimForwardVector = networkInputData.aimForwardVector;
     }
 
@@ -167,6 +169,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
             if(Object.HasStateAuthority)
             {
+                attackHandler.StopReload();
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }
 
@@ -187,13 +190,13 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             if(Object.HasStateAuthority)
             {
+                attackHandler.StopReload();
                 dodgeDir = moveDir; // 회피 방향 기억
                 rigid.AddForce(dodgeDir.normalized * dodgePower, ForceMode.Impulse);
             }
 
             if(Object.HasInputAuthority)
                 RPC_animatonSetTrigger("doDodge");
-                // anim.SetTrigger("doDodge");
 
             isDodge = true;
             StartCoroutine(PlayerDodgeOut(0.5f));
@@ -201,9 +204,13 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     private void PlayerAttack()
     {
-        //input && state 모두 실행 중
-        if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        if(!Object.HasStateAuthority)
+            return;
+        
+        if(attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
         {
+            Debug.Log("PlayerAttack");
+            attackHandler.StopReload();
             SetIsAttack(true);
 
             rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
@@ -213,15 +220,17 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     public void PlayerReload()
     {
-        //input && state 모두 실행 중
+        if(!Object.HasStateAuthority)
+            return;
 
-        // if (!reloadInput || isReload)
-            // return;
+        if (!reloadInput || isReload)
+            return;
         
         if(isJump || isDodge || isAttack || hpHandler.getIsHit())
             return;
         
-        // playerAttack.DoReload();
+        Debug.Log("PlayerReload()");
+        attackHandler.DoReload();
     }
 
     public void EscMenu()
@@ -248,6 +257,10 @@ public class NetworkPlayerController : NetworkBehaviour
     public void SetIsAttack(bool bol)
     {
         isAttack = bol;
+    }
+    public void SetIsReload(bool bol)
+    {
+        isReload = bol;
     }
     public void SetCharacterControllerEnabled(bool isEnabled)
     {

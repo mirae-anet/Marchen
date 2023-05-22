@@ -11,6 +11,7 @@ public class CharacterInputHandler : MonoBehaviour
     bool jumpInput = false;
     bool dodgeInput = false;
     bool attackInput = false;
+    bool reloadInput = false;
 
     //other components
     LocalCameraHandler localCameraHandler;
@@ -48,10 +49,10 @@ public class CharacterInputHandler : MonoBehaviour
             walkInput = true;
         if(Input.GetButtonDown("Dodge"))
             dodgeInput = true;
-
-        //fire
         if(Input.GetButtonDown("Fire1"))
             attackInput = true;
+        if(Input.GetButtonDown("Reload"))
+            reloadInput = true;
 
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector); 
@@ -71,6 +72,8 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.dodgeInput = dodgeInput;
         //attack data
         networkInputData.attackInput = attackInput;
+        //reload data
+        networkInputData.reloadInput = reloadInput;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
@@ -82,6 +85,7 @@ public class CharacterInputHandler : MonoBehaviour
         walkInput = false;
         dodgeInput = false;
         attackInput = false;
+        reloadInput = false;
 
         return networkInputData;
     }
