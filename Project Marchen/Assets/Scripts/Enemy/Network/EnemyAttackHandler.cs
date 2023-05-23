@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
-public class EnemyAttackHandler : MonoBehaviour
+//Melee와 Range AttackHandler의 부모
+public class EnemyAttackHandler : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public virtual void Aiming(){}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void AttackCancel(){}
 }

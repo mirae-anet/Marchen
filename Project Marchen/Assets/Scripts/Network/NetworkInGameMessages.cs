@@ -13,22 +13,16 @@ public class NetworkInGameMessages : NetworkBehaviour
         
     }
 
-
-
     //CHAT
     public void RPC_SendMessage(string userNickName, string message) 
     {
-
         RPC_InGameMessage($"<b>{userNickName }: </b> {message}");
-
-
     }
 
 
-    // IN OUT
-    public void SendInGameRPCMessage(string userNickName, string  message)
+    public void SendInGameRPCMessage(string NickName, string  message)
     {
-        RPC_InGameMessage($"<b>{userNickName}</b> {message}");
+        RPC_InGameMessage($"<b>{NickName}</b> {message}");
     }
 
 

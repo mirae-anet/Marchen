@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class RocketHandler : NetworkBehaviour
+public class BulletHandler : NetworkBehaviour
 {
     [Header("Prefabs")]
     [SerializeField]
@@ -14,10 +14,11 @@ public class RocketHandler : NetworkBehaviour
     private Transform checkForImpactPoint;
     [SerializeField]
     private LayerMask collisionLayers;
+    public bool isExplosion;
 
     //Thrown by info
     PlayerRef firedByPlayerRef;
-    string firedByPlayerName;
+    string firedByName;
     NetworkObject firedByNetworkObject;
 
     //Hit info
@@ -27,29 +28,32 @@ public class RocketHandler : NetworkBehaviour
     TickTimer maxLiveDurationTickTimer = TickTimer.None;
     
     //Rocket info
-    [Header("Rocket info")]
+    [Header("Bullet info")]
     [SerializeField]
     byte damageAmount;
-    int rocketSpeed = 20;
+    [SerializeField]
+    float radius = 4;
+    [SerializeField]
+    int bulletSpeed;
 
     //other components
     NetworkObject networkObject;
 
-    public void Fire(PlayerRef firedByPlayerRef, NetworkObject firedByNetworkObject, string firedByPlayerName)
+    public void Fire(PlayerRef firedByPlayerRef, NetworkObject firedByNetworkObject, string firedByName)
     {
-        this.firedByPlayerName = firedByPlayerName;;
+        this.firedByName = firedByName;;
         this.firedByPlayerRef = firedByPlayerRef;
         this.firedByNetworkObject = firedByNetworkObject;
         
         networkObject = GetComponent<NetworkObject>();
 
-        Debug.Log("${Time.time} {firedByPlayerName} fire rocket");
+        Debug.Log("${Time.time} {firedByPlayerName} fire Bullet");
         maxLiveDurationTickTimer = TickTimer.CreateFromSeconds(Runner, 10);
     }
 
     public override void FixedUpdateNetwork()
     {
-        transform.position += transform.forward * Runner.DeltaTime * rocketSpeed;
+        transform.position += transform.forward * Runner.DeltaTime * bulletSpeed;
 
         if(Object.HasStateAuthority)
         {
@@ -79,15 +83,25 @@ public class RocketHandler : NetworkBehaviour
             if(isValidHit)
             {
                 //Now we need to figure out of anything was within the blast radius
-                hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, 4, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
+                hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, radius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
 
                 //Deal damage to anything within the hit radius
                 for(int i = 0; i < hitCount; i++)
                 {
-                    EnemyHPHandler enemyHpHandler = hits[i].Hitbox.transform.root.GetComponent<EnemyHPHandler>();
+                    //BUG!!!
+                    // HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
+                    // if(hpHandler != null && firedByNetworkObject != null)
 
-                    if(enemyHpHandler != null)
-                        enemyHpHandler.OnTakeDamage(firedByPlayerName, firedByNetworkObject, damageAmount, checkForImpactPoint.position);
+                    if(hits[i].Hitbox.transform.root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
+                    {
+                        if(firedByNetworkObject != null)
+                            hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
+                    }
+                    if(hits[i].Hitbox.transform.root.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+                    {
+                        if(firedByNetworkObject != null)
+                            enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
+                    }
                 }
 
                 Runner.Despawn(networkObject);
@@ -99,6 +113,7 @@ public class RocketHandler : NetworkBehaviour
     //When despawning the object we want to create a visual explosion
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
+        if(isExplosion)
+            Instantiate(explosionParticleSystemPrefab, checkForImpactPoint.transform.position, Quaternion.identity);
     }
 }
