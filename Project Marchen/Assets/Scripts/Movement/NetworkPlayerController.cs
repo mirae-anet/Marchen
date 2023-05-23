@@ -263,6 +263,7 @@ public class NetworkPlayerController : NetworkBehaviour
                 
                 if (string.IsNullOrEmpty(inputText))
                 {
+                    isChatting = false;
                     return;
                 }
 
