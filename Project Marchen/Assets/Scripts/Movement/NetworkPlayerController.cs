@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Fusion;
 
 public class NetworkPlayerController : NetworkBehaviour
@@ -11,10 +12,15 @@ public class NetworkPlayerController : NetworkBehaviour
     private bool isMove = false;
     private bool isJump;
     private bool isDodge;
+    private bool isAttack = false;
+    private bool isReload = false;
+    private bool attackInput;
+    private bool reloadInput;
 
     private Vector3 moveDir;
     private Vector3 dodgeDir;
     private Vector3 feetpos;
+    public Vector3 aimForwardVector;
 
     // 입력값 저장 변수
     // private Vector2 moveInput;
@@ -47,16 +53,22 @@ public class NetworkPlayerController : NetworkBehaviour
     private Animator anim;
     private Rigidbody rigid;
     private HPHandler hpHandler;
+    private AttackHandler attackHandler;
+
+    //패널
+    public GameObject escPanel;
+
 
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
+        attackHandler = GetComponent<AttackHandler>();
     }
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.isDead)
+        if(hpHandler.GetIsDead())
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
@@ -64,7 +76,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
         if(Object.HasInputAuthority)
         {
-            // anim.SetBool("isJump", isJump);
             RPC_animatonSetBool("isJump", isJump);
         }
 
@@ -80,6 +91,11 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerMove();
             PlayerJump();
             PlayerDodge();
+            PlayerAttack();
+            PlayerReload();
+
+            //Esc메뉴
+            EscMenu();
         }
     }
 
@@ -94,7 +110,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
         feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
 
-        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.identity, LayerMask.GetMask("Ground"));
+        Collider[] colliders = Physics.OverlapBox(feetpos, raySize/2, Quaternion.LookRotation(transform.forward), LayerMask.GetMask("Ground"));
 
         if(colliders.Length > 0)
         {
@@ -113,6 +129,9 @@ public class NetworkPlayerController : NetworkBehaviour
         this.walkInput = networkInputData.walkInput;
         this.jumpInput = networkInputData.jumpInput;
         this.dodgeInput = networkInputData.dodgeInput;
+        this.attackInput = networkInputData.attackInput;
+        this.reloadInput = networkInputData.reloadInput;
+        this.aimForwardVector = networkInputData.aimForwardVector;
     }
 
     public void PlayerMove()
@@ -138,20 +157,19 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             RPC_animatonSetBool("isRun", isMove);
             RPC_animatonSetBool("isWalk", walkInput);
-            // anim.SetBool("isRun", isMove);     // true일 때 걷는 애니메이션, false일 때 대기 애니메이션
-            // anim.SetBool("isWalk", walkInput); // isMove, walkOn 둘 다 True 일 때는 걷기
         }
     }
 
     public void PlayerJump()
     {
-        if (jumpInput && !isJump && !isDodge && !hpHandler.getIsHit())
+        if (jumpInput && !isJump && !isDodge && !isAttack && !hpHandler.getIsHit())
         {
 
             isJump = true;
 
             if(Object.HasStateAuthority)
             {
+                attackHandler.StopReload();
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }
 
@@ -168,23 +186,90 @@ public class NetworkPlayerController : NetworkBehaviour
 
     public void PlayerDodge()
     {
-        if (dodgeInput && isMove && !isDodge && !hpHandler.getIsHit())
+        if (dodgeInput && isMove && !isDodge && !isAttack && !hpHandler.getIsHit())
         {
             if(Object.HasStateAuthority)
             {
+                attackHandler.StopReload();
                 dodgeDir = moveDir; // 회피 방향 기억
                 rigid.AddForce(dodgeDir.normalized * dodgePower, ForceMode.Impulse);
             }
 
             if(Object.HasInputAuthority)
                 RPC_animatonSetTrigger("doDodge");
-                // anim.SetTrigger("doDodge");
 
             isDodge = true;
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
     }
+    private void PlayerAttack()
+    {
+        if(!Object.HasStateAuthority)
+            return;
+        
+        if(attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        {
+            Debug.Log("PlayerAttack");
+            attackHandler.StopReload();
+            SetIsAttack(true);
 
+            rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
+
+            attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
+        }
+    }
+    public void PlayerReload()
+    {
+        if(!Object.HasStateAuthority)
+            return;
+
+        if (!reloadInput || isReload)
+            return;
+        
+        if(isJump || isDodge || isAttack || hpHandler.getIsHit())
+            return;
+        
+        Debug.Log("PlayerReload()");
+        attackHandler.DoReload();
+    }
+
+    public void EscMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            
+            if (escPanel.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                escPanel.SetActive(false);
+                
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                escPanel.SetActive(true);
+            }
+        }
+    }
+
+    public void SetIsAttack(bool bol)
+    {
+        isAttack = bol;
+    }
+    public void SetIsReload(bool bol)
+    {
+        isReload = bol;
+    }
+    public void SetCharacterControllerEnabled(bool isEnabled)
+    {
+        isControllerEnable = isEnabled;
+    }
+    public bool GetCharacterControllerEnabled()
+    {
+        return isControllerEnable;
+    }
     IEnumerator PlayerDodgeOut(float second)
     {
         yield return new WaitForSeconds(second);
@@ -192,7 +277,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
     
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_LookForward(Vector3 moveDir)
+    public void RPC_LookForward(Vector3 moveDir)
     {
         playerPF.forward = moveDir;
     }
@@ -209,24 +294,4 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         anim.SetTrigger(action);
     }
-
-    public void SetCharacterControllerEnabled(bool isEnabled)
-    {
-        isControllerEnable = isEnabled;
-    }
-    public bool GetCharacterControllerEnabled()
-    {
-        return isControllerEnable;
-    }
-
-    /*
-    private void OnDrawGizmos()
-    {
-        feetpos = new Vector3(playerBody.position.x, playerBody.position.y, playerBody.position.z);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(feetpos, raySize);
-    }
-    */
-
 }

@@ -12,9 +12,9 @@ public class NetworkInGameMessages : NetworkBehaviour
     {
         
     }
-    public void SendInGameRPCMessage(string userNickName, string  message)
+    public void SendInGameRPCMessage(string NickName, string  message)
     {
-        RPC_InGameMessage($"<b>{userNickName}</b> {message}");
+        RPC_InGameMessage($"<b>{NickName}</b> {message}");
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
