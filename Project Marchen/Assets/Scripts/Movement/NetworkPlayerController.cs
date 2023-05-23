@@ -53,6 +53,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
     //패널
     public TMP_InputField inputField;
+    bool isChatting = false;
 
     void Awake()
     {
@@ -83,9 +84,12 @@ public class NetworkPlayerController : NetworkBehaviour
             SetInput(networkInputData);
 
             // 플레이어 조작
-            PlayerMove();
-            PlayerJump();
-            PlayerDodge();
+            if (isChatting == false)
+            {
+                PlayerMove();
+                PlayerJump();
+                PlayerDodge();
+            }
 
 
         }
@@ -201,13 +205,15 @@ public class NetworkPlayerController : NetworkBehaviour
     [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
     public void RPC_Chat()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused)
+        //원래
+        //Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused
+        if (Input.GetButtonDown("Enter") || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             //포커스가 없을때
             if (!inputField.isFocused)
             {
                 inputField.ActivateInputField();
+                isChatting = true;
             }
             else if(inputField.isFocused)
             {
@@ -225,6 +231,7 @@ public class NetworkPlayerController : NetworkBehaviour
                 inputField.text = "";
                 // 비활성화
                 inputField.DeactivateInputField();
+                isChatting = false;
             }
         }
     }

@@ -18,7 +18,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
    
  [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
-
+    
     public LocalCameraHandler localCameraHandler;
     public GameObject localUI;
 
