@@ -132,6 +132,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             {
                 Debug.Log($"{Time.time} Found player that has not reconnected. Despawning {entry.Value.nickName}");
                 networkObjectDictionary.Runner.Despawn(networkObjectDictionary);
+                // mapTokenIDWithNetworkPlayer.Remove(entry.Key);
             }
         }
 
