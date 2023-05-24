@@ -47,8 +47,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         networkRunner = Instantiate(networkRunnerPrefab);
         networkRunner.name = "Network runner - Migrated";
 
-        var clientTask = InitializeNetworkRunnerHostMigration(networkRunner, hostMigrationToken);
-
+        var clientTask =InitializeNetworkRunnerHostMigration(networkRunner, hostMigrationToken);
         Debug.Log($"Host migration started.");
     }
 
@@ -96,7 +95,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             // Initialized = initialized,
             SceneManager = sceneManager,
             HostMigrationToken = hostMigrationToken, //contain all necessary info to restart the runner.
-            HostMigrationResume = HostMigrationResume, //this will be invoked to resume the simulation
+            HostMigrationResume = HostMigrationResume, //this will be invoked to resume the simulation 
             ConnectionToken = GameManager.instance.GetConnectionToken()
         });
     }

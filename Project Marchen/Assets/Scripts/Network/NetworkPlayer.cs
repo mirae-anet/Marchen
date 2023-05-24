@@ -120,6 +120,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             }
         }
     }
+
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
     {

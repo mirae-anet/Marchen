@@ -117,7 +117,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnHostMigrationCleanUp()
     {
         Debug.Log("Spawner OnHostMigrationCleanUp started");
-
+        LinkedList<int> removeTokens = new LinkedList<int>(); 
         foreach(KeyValuePair<int, NetworkPlayer> entry in mapTokenIDWithNetworkPlayer)
         {
             NetworkObject networkObjectDictionary = entry.Value.GetComponent<NetworkObject>();
@@ -125,8 +125,15 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             {
                 Debug.Log($"{Time.time} Found player that has not reconnected. Despawning {entry.Value.nickName}");
                 networkObjectDictionary.Runner.Despawn(networkObjectDictionary);
+                removeTokens.AddLast(entry.Key);
             }
         }
+        for(int i=0; i < removeTokens.Count; i++)
+        {
+            mapTokenIDWithNetworkPlayer.Remove(removeTokens.Last.Value);
+            removeTokens.RemoveLast();
+        }
+
 
         Debug.Log("Spawner OnHostMigrationCleanUp completed");
 
