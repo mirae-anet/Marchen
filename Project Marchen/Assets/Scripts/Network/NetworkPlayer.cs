@@ -14,6 +14,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
 
+
+
     // Remote Client Token Hash
    
  [Networked] public int token {get; set;} //need for Host migration
@@ -90,19 +92,33 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public void PlayerLeft(PlayerRef player)
     {
+
         if(Object.HasStateAuthority)
         {
             //서버로 하여금 떠나간 플레이어에 해당하는 아바타만 "left" 메시지 발송
-            if(Runner.TryGetPlayerObject(player, out NetworkObject playerLeftNetworkObject))
+            if (Runner.TryGetPlayerObject(player, out NetworkObject playerLeftNetworkObject))
             {
                 if(playerLeftNetworkObject == Object)
                     //RPC message를 보내기 전에 아바타가 despawn되는 경우 메시지가 누락될 수 있어서.
                     Local.GetComponent<NetworkInGameMessages>().SendInGameRPCMessage(playerLeftNetworkObject.GetComponent<NetworkPlayer>().nickName.ToString(), "left");
             }
-        }
+            if (player == Object.InputAuthority)
+            {
+                Spawner spawner = FindObjectOfType<Spawner>();
+                if(spawner != null)
+                {
+                    foreach (KeyValuePair<int, NetworkPlayer> pair in spawner.mapTokenIDWithNetworkPlayer)
+                    {
+                        if (pair.Value == this)
+                        {
+                            spawner.mapTokenIDWithNetworkPlayer.Remove(pair.Key);
+                            Runner.Despawn(Object);
 
-        if(player == Object.InputAuthority)
-            Runner.Despawn(Object);
+                        }
+                    }
+                }
+            }
+        }
     }
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)

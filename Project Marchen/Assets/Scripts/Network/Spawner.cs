@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     NetworkPlayer playerPrefab;
     
     //Mapping between Token ID and Re-created Players
-    Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
+    public Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
 
     //other components
     CharacterInputHandler characterInputHandler;
@@ -71,7 +71,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
                 networkPlayer.GetComponent<NetworkObject>().AssignInputAuthority(player);
                 networkPlayer.Spawned();
             }
-            else
+            else 
             {
                 Debug.Log($"Spawning new player for connection token {playerToken}");
                 NetworkPlayer spawnedNetworkPlayer = runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player);
@@ -88,15 +88,8 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log("OnPlayerLeft");
-
-        int playerToken = GetPlayerToken(runner, player);
-        if (mapTokenIDWithNetworkPlayer.TryGetValue(playerToken, out NetworkPlayer networkPlayer))
-        {
-            runner.Despawn(networkPlayer.GetComponent<NetworkObject>());
-            mapTokenIDWithNetworkPlayer.Remove(playerToken);
-            SceneManager.LoadScene("Lobby");
-        }
     }
+
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         if(characterInputHandler == null && NetworkPlayer.Local != null)

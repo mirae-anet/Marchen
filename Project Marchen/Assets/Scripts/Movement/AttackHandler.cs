@@ -60,4 +60,12 @@ public class AttackHandler : NetworkBehaviour
     {
         weaponHandler.StopReload();
     }
+
+    //추가
+    public void ChangeWeapon(int weaponIndex)
+    {
+        weaponType = (Type)weaponIndex;
+        WeaponEquip();
+    }
+
 }

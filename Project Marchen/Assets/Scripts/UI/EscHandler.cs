@@ -13,6 +13,7 @@ public class EscHandler : MonoBehaviour
     {
         MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
         NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+
         networkRunner.Shutdown();
         SceneManager.LoadScene("Lobby");
     }

@@ -100,7 +100,7 @@ public class NetworkPlayerController : NetworkBehaviour
             }
         }
         //채팅
-        RPC_Chat();
+        //RPC_Chat();
 
 
     }
