@@ -29,7 +29,8 @@ public class HPHandler : NetworkBehaviour
     NetworkPlayer networkPlayer;
     Animator anim;
     Rigidbody rigid;
-    HeartBar heartBar;
+    public HeartBar heartBar;
+    public HeartBar myHeartBar;
 
     private void Awake()
     {
@@ -41,7 +42,6 @@ public class HPHandler : NetworkBehaviour
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
-        heartBar = GetComponentInChildren<HeartBar>();
     }
     void Start()
     {
@@ -49,21 +49,15 @@ public class HPHandler : NetworkBehaviour
         {
             if(Object.HasStateAuthority)
                 HP = startingHP;
-
-            if(heartBar != null)
-            {
-                heartBar.SetMaxHP(startingHP);
-                heartBar.SetSlider(HP);
-            }
             isDead = false;
         }
-        else
+
+        if(heartBar != null)
         {
-            if(heartBar != null)
-            {
-                heartBar.SetMaxHP(startingHP);
-                heartBar.SetSlider(HP);
-            }
+            heartBar.SetMaxHP(startingHP);
+            heartBar.SetSlider(HP);
+            myHeartBar.SetMaxHP(startingHP);
+            myHeartBar.SetSlider(HP);
         }
 
         isInitialized = true;
@@ -176,6 +170,8 @@ public class HPHandler : NetworkBehaviour
         byte newHP = changed.Behaviour.HP;
         if(changed.Behaviour.heartBar != null)
             changed.Behaviour.heartBar.SetSlider(newHP);
+        if(changed.Behaviour.myHeartBar != null)
+            changed.Behaviour.myHeartBar.SetSlider(newHP);
         
         changed.LoadOld();
         byte oldHP = changed.Behaviour.HP;
