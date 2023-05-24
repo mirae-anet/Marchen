@@ -14,7 +14,7 @@ public class NetworkInGameMessages : NetworkBehaviour
     }
 
     //CHAT
-    public void RPC_SendMessage(string userNickName, string message) 
+    public void SendMessage(string userNickName, string message) 
     {
         RPC_InGameMessage($"<b>{userNickName }: </b> {message}");
     }

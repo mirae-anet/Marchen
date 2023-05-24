@@ -58,7 +58,7 @@ public class NetworkPlayerController : NetworkBehaviour
 
     //패널
     public TMP_InputField inputField;
-    bool isChatting = false;
+
 
     void Awake()
     {
@@ -90,17 +90,15 @@ public class NetworkPlayerController : NetworkBehaviour
 
             // 플레이어 조작
 
-            if (isChatting == false)
-            {
-                PlayerMove();
-                PlayerJump();
-                PlayerDodge();
-                PlayerAttack();
-                PlayerReload();
-            }
+            PlayerMove();
+            PlayerJump();
+            PlayerDodge();
+            PlayerAttack();
+            PlayerReload();
+            
         }
         //채팅
-        //RPC_Chat();
+        RPC_Chat();
 
 
     }
@@ -253,7 +251,6 @@ public class NetworkPlayerController : NetworkBehaviour
             if (!inputField.isFocused)
             {
                 inputField.ActivateInputField();
-                isChatting = true;
             }
             else if(inputField.isFocused)
             {
@@ -263,16 +260,14 @@ public class NetworkPlayerController : NetworkBehaviour
                 
                 if (string.IsNullOrEmpty(inputText))
                 {
-                    isChatting = false;
                     return;
                 }
 
-                message.RPC_SendMessage(GameManager.instance.playerNickName, inputText);
+                message.SendMessage(GameManager.instance.playerNickName, inputText);
                 // 비우기
                 inputField.text = "";
                 // 비활성화
                 inputField.DeactivateInputField();
-                isChatting = false;
             }
         }
     }

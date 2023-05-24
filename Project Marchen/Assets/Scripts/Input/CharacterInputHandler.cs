@@ -16,9 +16,6 @@ public class CharacterInputHandler : MonoBehaviour
     //other components
     LocalCameraHandler localCameraHandler;
     NetworkPlayerController networkPlayerController;
-    //Esc메뉴
-    [SerializeField] private GameObject escPanel;
-
 
     private void Awake()
     {
@@ -62,7 +59,7 @@ public class CharacterInputHandler : MonoBehaviour
         localCameraHandler.SetViewInputVector(viewInputVector);
 
         //ESC
-        EscMenu();
+        //EscMenu();
     }
     public NetworkInputData GetNetworkInput()
     {
@@ -96,28 +93,4 @@ public class CharacterInputHandler : MonoBehaviour
         return networkInputData;
     }
 
-    //ESC MENU
-    public void EscMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //카메라
-            
-            if (escPanel.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                escPanel.SetActive(false);
-                localCameraHandler.EnableCameraRotation(true);
-
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                escPanel.SetActive(true);
-                localCameraHandler.EnableCameraRotation(false);
-            }
-        }
-    }
 }
