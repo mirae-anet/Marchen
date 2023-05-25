@@ -44,7 +44,7 @@ public class CharacterInputHandler : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // 이동 입력 벡터
         isMove = (moveInput.magnitude != 0); // moveInput의 길이로 입력 판정
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
             jumpInput = true;
         if(Input.GetButtonDown("Walk"))
             walkInput = true;

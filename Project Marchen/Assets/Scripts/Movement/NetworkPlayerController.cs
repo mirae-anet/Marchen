@@ -214,20 +214,20 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
 
-
     private void PlayerAttack()
     {
         if(!Object.HasStateAuthority)
             return;
-        
-        if(attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        if (attackInput)
+        {
+            Debug.Log("확인확인");
+        }
+        if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
         {
             Debug.Log("PlayerAttack");
             attackHandler.StopReload();
             SetIsAttack(true);
-
             rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
-
             attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
         }
     }

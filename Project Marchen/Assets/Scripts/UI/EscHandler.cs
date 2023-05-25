@@ -12,7 +12,7 @@ public class EscHandler : MonoBehaviour
 
     private void Awake()
     {
-        localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
+        localCameraHandler = GetComponentInParent<LocalCameraHandler>();
     }
 
     private void Update()
@@ -56,6 +56,5 @@ public class EscHandler : MonoBehaviour
             }
         }
     }
-
 
 }
