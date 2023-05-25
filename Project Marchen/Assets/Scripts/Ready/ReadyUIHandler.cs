@@ -33,10 +33,6 @@ public class ReadyUIHandler : NetworkBehaviour
         {
             DontDestroyOnLoad(gameObjectToTransfer);
 
-            //Check if the player is ready
-            if (!gameObjectToTransfer.GetComponent<CharacterOutfitHandler>().isDoneWithCharacterSelection)
-                Runner.Disconnect(gameObjectToTransfer.GetComponent<NetworkObject>().InputAuthority);
-
         }
         Runner.SetActiveScene("TestScene(network)");
     }
@@ -57,7 +53,6 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         if(Runner.IsServer)
         {
-            
             startGame();
         }
     }

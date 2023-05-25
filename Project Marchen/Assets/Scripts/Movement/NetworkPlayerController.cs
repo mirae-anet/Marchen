@@ -59,13 +59,19 @@ public class NetworkPlayerController : NetworkBehaviour
     //패널
     public TMP_InputField inputField;
 
-
+    private void Start()
+    {
+        inputField.onEndEdit.AddListener(SendMyMessage);
+    }
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
         attackHandler = GetComponent<AttackHandler>();
+
+        //추가
+        inputField.onEndEdit.AddListener(SendMessage);
 
     }
     public override void FixedUpdateNetwork()
@@ -243,33 +249,35 @@ public class NetworkPlayerController : NetworkBehaviour
     [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
     public void RPC_Chat()
     {
-        //원래
-        //Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) && !inputField.isFocused
         if (Input.GetButtonDown("Enter") || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             //포커스가 없을때
             if (!inputField.isFocused)
             {
                 inputField.ActivateInputField();
-            }
-            else if(inputField.isFocused)
-            {
-                NetworkInGameMessages message = FindObjectOfType<NetworkInGameMessages>();
-                //텍스트 넣기
-                string inputText = inputField.text;
-                
-                if (string.IsNullOrEmpty(inputText))
-                {
-                    return;
-                }
-
-                message.SendMessage(GameManager.instance.playerNickName, inputText);
-                // 비우기
-                inputField.text = "";
-                // 비활성화
-                inputField.DeactivateInputField();
+                SetCharacterControllerEnabled(false);
             }
         }
+    }
+
+    private void SendMyMessage(string newMessage)
+    {
+        NetworkInGameMessages message = FindObjectOfType<NetworkInGameMessages>();
+        string inputText = inputField.text;
+
+        if (string.IsNullOrEmpty(inputText))
+        {
+            SetCharacterControllerEnabled(true);
+            return;
+        }
+        message.SendMessage(GameManager.instance.playerNickName, inputText);
+        // 비우기
+        inputField.text = "";
+        // 비활성화
+        Debug.Log($"case 3 : {inputField.isFocused}");
+        inputField.DeactivateInputField();
+        Debug.Log($"case 4 : {inputField.isFocused}");
+        SetCharacterControllerEnabled(true);
     }
 
     public void SetIsAttack(bool bol)

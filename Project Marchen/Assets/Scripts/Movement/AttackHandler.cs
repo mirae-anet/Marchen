@@ -63,6 +63,23 @@ public class AttackHandler : NetworkBehaviour
 
     //추가
     public void ChangeWeapon(int weaponIndex)
+    {   
+        if(weaponIndex == 0)
+        {
+
+        }
+        weaponType = (Type)weaponIndex;
+        WeaponEquip();
+
+        if (Object.HasInputAuthority)
+        {
+            RPC_RequestWeaponChange(weaponIndex);
+        }
+    }
+
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    void RPC_RequestWeaponChange(int weaponIndex)
     {
         weaponType = (Type)weaponIndex;
         WeaponEquip();
