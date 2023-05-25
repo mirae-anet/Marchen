@@ -28,7 +28,8 @@ public class EnemyHPHandler : NetworkBehaviour
     NetworkInGameMessages networkInGameMessages;
     HitboxRoot hitboxRoot;
     TargetHandler targetHandler;
-    EnemyAttackHandler enemyAttackHandler;
+    EnemyAttackHandler enemyAttackHandler; 
+    HeartBar heartBar;
 
     void Awake()
     {
@@ -38,13 +39,30 @@ public class EnemyHPHandler : NetworkBehaviour
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         targetHandler = GetComponent<TargetHandler>();
         enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
+        heartBar = GetComponentInChildren<HeartBar>();
     }
 
     void Start()
     {
-        if(!skipSettingStartValues){
-            HP = startingHP;
+        if(!skipSettingStartValues)
+        {
+            if(Object.HasStateAuthority)
+                HP = startingHP;
+            
+            if(heartBar != null)
+            {
+                heartBar.SetMaxHP(startingHP);
+                heartBar.SetSlider(HP);
+            }
             isDead = false;
+        }
+        else
+        {
+            if(heartBar != null)
+            {
+                heartBar.SetMaxHP(startingHP);
+                heartBar.SetSlider(HP);
+            }
         }
 
         isInitialized = true;
@@ -136,6 +154,9 @@ public class EnemyHPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
 
         byte newHP = changed.Behaviour.HP;
+
+        if(changed.Behaviour.heartBar != null)
+            changed.Behaviour.heartBar.SetSlider(newHP);
         
         changed.LoadOld();
         byte oldHP = changed.Behaviour.HP;

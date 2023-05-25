@@ -30,7 +30,6 @@ public class LocalCameraHandler : MonoBehaviour
     float cameraRotationY = 0;
 
     //other component
-    // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     CharacterRespawnHandler characterRespawnHandler;
 
     [SerializeField]
@@ -89,17 +88,6 @@ public class LocalCameraHandler : MonoBehaviour
         // Move the cameraArm to the position of the player
         transform.position = cameraAnchorPoint.position;
 
-        /*
-        //old
-        //Move the camera to the position of the player
-        localCamera.transform.position = cameraAnchorPoint.position;
-        //Calculate rotation
-        cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
-        cameraRotationX = Mathf.Clamp(cameraRotationX, -90, 90);
-        cameraRotationY += viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.rotationSpeed;
-        //Apply rotation
-        localCamera.transform.rotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0);
-        */
     }
 
     public void SetViewInputVector(Vector2 viewInput)
