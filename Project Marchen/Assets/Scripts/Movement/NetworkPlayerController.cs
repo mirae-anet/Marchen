@@ -83,7 +83,13 @@ public class NetworkPlayerController : NetworkBehaviour
             if(!isControllerEnable)
                 return;
             if(networkInGameMessages.isTyping)
+            {
+                if(Object.HasStateAuthority)
+                    rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
+                if(Object.HasInputAuthority)
+                    RPC_animatonSetBool("isRun", false);
                 return;
+            }
             
             // 입력값 저장
             SetInput(networkInputData);
