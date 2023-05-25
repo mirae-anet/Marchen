@@ -1156,7 +1156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5bc4a046f9b456796fe2254ce82324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escPanel: {fileID: 3908764343849807949}
 --- !u!114 &4381579702224905231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,6 +1207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  isTyping: 0
+  inputField: {fileID: 7157959077205163639}
 --- !u!54 &2940614669891650209
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1287,7 +1288,6 @@ MonoBehaviour:
   dodgePower: 20
   doubleTapTime: 0.2
   raySize: {x: 1.8, y: 0.6, z: 1.8}
-  inputField: {fileID: 7157959077205163639}
 --- !u!114 &5628767189330560181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,7 +2690,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 9121167783289154634}
   m_TextViewport: {fileID: 2231646976366545335}
   m_TextComponent: {fileID: 5974762832230963902}

@@ -51,7 +51,7 @@ public class SpawnHandler : NetworkBehaviour
         if(spawned.TryGetComponent<HeartHandler>(out HeartHandler heartHandler))
             heartHandler.Spawner = Object;
 
-        Debug.Log($"spawned");
+        Debug.Log($"Spawner Spawned Something");
         spawnAble = false;
         gameObject.SetActive(false);
     }

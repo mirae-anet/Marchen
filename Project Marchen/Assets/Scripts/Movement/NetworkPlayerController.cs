@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Fusion;
 
 public class NetworkPlayerController : NetworkBehaviour
@@ -55,24 +54,16 @@ public class NetworkPlayerController : NetworkBehaviour
     private Rigidbody rigid;
     private HPHandler hpHandler;
     private AttackHandler attackHandler;
+    private NetworkInGameMessages networkInGameMessages;
 
     //패널
-    public TMP_InputField inputField;
-
-    private void Start()
-    {
-        inputField.onEndEdit.AddListener(SendMyMessage);
-    }
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
         attackHandler = GetComponent<AttackHandler>();
-
-        //추가
-        inputField.onEndEdit.AddListener(SendMessage);
-
+        networkInGameMessages = GetComponent<NetworkInGameMessages>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -91,6 +82,9 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             if(!isControllerEnable)
                 return;
+            if(networkInGameMessages.isTyping)
+                return;
+            
             // 입력값 저장
             SetInput(networkInputData);
 
@@ -101,12 +95,7 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerDodge();
             PlayerAttack();
             PlayerReload();
-            
         }
-        //채팅
-        RPC_Chat();
-
-
     }
 
     public void GroundCheck()
@@ -218,10 +207,6 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if(!Object.HasStateAuthority)
             return;
-        if (attackInput)
-        {
-            Debug.Log("확인확인");
-        }
         if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
         {
             Debug.Log("PlayerAttack");
@@ -244,40 +229,6 @@ public class NetworkPlayerController : NetworkBehaviour
         
         Debug.Log("PlayerReload()");
         attackHandler.DoReload();
-    }
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
-    public void RPC_Chat()
-    {
-        if (Input.GetButtonDown("Enter") || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            //포커스가 없을때
-            if (!inputField.isFocused)
-            {
-                inputField.ActivateInputField();
-                SetCharacterControllerEnabled(false);
-            }
-        }
-    }
-
-    private void SendMyMessage(string newMessage)
-    {
-        NetworkInGameMessages message = FindObjectOfType<NetworkInGameMessages>();
-        string inputText = inputField.text;
-
-        if (string.IsNullOrEmpty(inputText))
-        {
-            SetCharacterControllerEnabled(true);
-            return;
-        }
-        message.SendMessage(GameManager.instance.playerNickName, inputText);
-        // 비우기
-        inputField.text = "";
-        // 비활성화
-        Debug.Log($"case 3 : {inputField.isFocused}");
-        inputField.DeactivateInputField();
-        Debug.Log($"case 4 : {inputField.isFocused}");
-        SetCharacterControllerEnabled(true);
     }
 
     public void SetIsAttack(bool bol)

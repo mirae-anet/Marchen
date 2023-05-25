@@ -31,16 +31,13 @@ public class BillBoard : MonoBehaviour
             {
                 if(cams != null && cams[i].isActiveAndEnabled)
                 {
-                    Debug.Log("case 0");
                     return cams[i];
                 }
             }
-            Debug.Log("case 1");
             return null;
         }
         else
         {
-            Debug.Log("case 1");
             return null;
         }
     }
