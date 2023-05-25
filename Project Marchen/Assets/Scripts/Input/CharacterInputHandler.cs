@@ -13,6 +13,8 @@ public class CharacterInputHandler : MonoBehaviour
     bool attackInput = false;
     bool reloadInput = false;
 
+    //esc
+    bool escEnable = true;
     //other components
     LocalCameraHandler localCameraHandler;
     NetworkPlayerController networkPlayerController;
@@ -50,16 +52,18 @@ public class CharacterInputHandler : MonoBehaviour
             walkInput = true;
         if(Input.GetButtonDown("Dodge"))
             dodgeInput = true;
-        if(Input.GetButtonDown("Fire1"))
-            attackInput = true;
         if(Input.GetButtonDown("Reload"))
             reloadInput = true;
+        if (escEnable == true)
+        {
+            if (Input.GetButtonDown("Fire1"))
+                attackInput = true;
+        }
 
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector);
 
-        //ESC
-        //EscMenu();
+
     }
     public NetworkInputData GetNetworkInput()
     {
@@ -91,6 +95,11 @@ public class CharacterInputHandler : MonoBehaviour
         reloadInput = false;
 
         return networkInputData;
+    }
+
+    public void EnableinPut(bool enable)
+    {
+        escEnable = enable;
     }
 
 }

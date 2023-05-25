@@ -9,10 +9,11 @@ public class EscHandler : MonoBehaviour
 {
     public GameObject escPanel;
     LocalCameraHandler localCameraHandler;
-
+    CharacterInputHandler inputHandler;
     private void Awake()
     {
         localCameraHandler = GetComponentInParent<LocalCameraHandler>();
+        inputHandler = GetComponentInParent<CharacterInputHandler>();
     }
 
     private void Update()
@@ -45,6 +46,7 @@ public class EscHandler : MonoBehaviour
                 Cursor.visible = false;
                 escPanel.SetActive(false);
                 localCameraHandler.EnableCameraRotation(true);
+                inputHandler.EnableinPut(true);
 
             }
             else
@@ -53,6 +55,7 @@ public class EscHandler : MonoBehaviour
                 Cursor.visible = true;
                 escPanel.SetActive(true);
                 localCameraHandler.EnableCameraRotation(false);
+                inputHandler.EnableinPut(false);
             }
         }
     }
