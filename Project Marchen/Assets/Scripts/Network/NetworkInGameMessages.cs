@@ -60,6 +60,9 @@ public class NetworkInGameMessages : NetworkBehaviour
                 
         if (string.IsNullOrEmpty(inputText))
         {
+            inputField.DeactivateInputField(true);
+            inputField.interactable = false;
+            EventSystem.current.SetSelectedGameObject(null);
             RPC_SetIsTyping(false);
             return;
         }
