@@ -34,6 +34,7 @@ public class LocalCameraHandler : MonoBehaviour
 
     [SerializeField]
     private Camera localCamera;
+    private bool cameraRotationEnabled = true;
 
     void Awake()
     {
@@ -64,27 +65,29 @@ public class LocalCameraHandler : MonoBehaviour
         {
             return;
         }
-        //new
+        if (cameraRotationEnabled)
+        {
+            cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
+            cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
+            Vector3 camAngle = transform.rotation.eulerAngles;
 
-        //Move the cameraArm to the position of the player
+            float x = camAngle.x - cameraRotationX;
+
+            if (x < 180f)
+            {
+                x = Mathf.Clamp(x, -1f, 70f); // 위쪽 70도 제한
+            }
+            else
+            {
+                x = Mathf.Clamp(x, 335f, 361f); // 아래쪽 25도 제한
+            }
+
+            transform.rotation = Quaternion.Euler(x, camAngle.y + cameraRotationY, camAngle.z); // 새 회전 값
+        }
+
+        // Move the cameraArm to the position of the player
         transform.position = cameraAnchorPoint.position;
 
-        cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
-        cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
-        Vector3 camAngle = transform.rotation.eulerAngles;    // 카메라 위치 값을 오일러 각으로 변환
-
-        float x = camAngle.x - cameraRotationX;
-
-        if (x < 180f)   // 위쪽 70도 제한
-        {
-            x = Mathf.Clamp(x, -1f, 70f);
-        }
-        else            // 아래쪽 25도 제한
-        {
-            x = Mathf.Clamp(x, 335f, 361f);
-        }
-
-        transform.rotation = Quaternion.Euler(x, camAngle.y + cameraRotationY, camAngle.z);    // 새 회전 값
     }
 
     public void SetViewInputVector(Vector2 viewInput)
@@ -136,5 +139,10 @@ public class LocalCameraHandler : MonoBehaviour
     public void localCameraEnable(bool able)
     {
         localCamera.enabled = able;       
+    }
+
+    public void EnableCameraRotation(bool enable)
+    {
+        cameraRotationEnabled = enable;
     }
 }

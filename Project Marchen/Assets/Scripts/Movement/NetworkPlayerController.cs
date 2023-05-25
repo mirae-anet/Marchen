@@ -54,21 +54,20 @@ public class NetworkPlayerController : NetworkBehaviour
     private Rigidbody rigid;
     private HPHandler hpHandler;
     private AttackHandler attackHandler;
+    private NetworkInGameMessages networkInGameMessages;
 
     //패널
-    public GameObject escPanel;
-
-
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody>();
         hpHandler = GetComponent<HPHandler>();
         attackHandler = GetComponent<AttackHandler>();
+        networkInGameMessages = GetComponent<NetworkInGameMessages>();
     }
     public override void FixedUpdateNetwork()
     {
-        if(hpHandler.GetIsDead())
+        if (hpHandler.GetIsDead())
             return;
         
         GroundCheck(); // 바닥 체크 후 anim.SetBool("isJump", false);
@@ -83,19 +82,19 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             if(!isControllerEnable)
                 return;
-
+            if(networkInGameMessages.isTyping)
+                return;
+            
             // 입력값 저장
             SetInput(networkInputData);
 
             // 플레이어 조작
+
             PlayerMove();
             PlayerJump();
             PlayerDodge();
             PlayerAttack();
             PlayerReload();
-
-            //Esc메뉴
-            EscMenu();
         }
     }
 
@@ -202,19 +201,18 @@ public class NetworkPlayerController : NetworkBehaviour
             StartCoroutine(PlayerDodgeOut(0.5f));
         }
     }
+
+
     private void PlayerAttack()
     {
         if(!Object.HasStateAuthority)
             return;
-        
-        if(attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
         {
             Debug.Log("PlayerAttack");
             attackHandler.StopReload();
             SetIsAttack(true);
-
             rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
-
             attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
         }
     }
@@ -231,27 +229,6 @@ public class NetworkPlayerController : NetworkBehaviour
         
         Debug.Log("PlayerReload()");
         attackHandler.DoReload();
-    }
-
-    public void EscMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-            if (escPanel.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                escPanel.SetActive(false);
-                
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                escPanel.SetActive(true);
-            }
-        }
     }
 
     public void SetIsAttack(bool bol)

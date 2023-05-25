@@ -60,4 +60,25 @@ public class AttackHandler : NetworkBehaviour
     {
         weaponHandler.StopReload();
     }
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    //추가
+    public void ChangeWeapon(int weaponIndex)
+    {   
+        weaponType = (Type)weaponIndex;
+        WeaponEquip();
+
+        if (Object.HasInputAuthority)
+        {
+            RPC_RequestWeaponChange(weaponIndex);
+        }
+    }
+
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    void RPC_RequestWeaponChange(int weaponIndex)
+    {
+        weaponType = (Type)weaponIndex;
+        WeaponEquip();
+    }
+
 }
