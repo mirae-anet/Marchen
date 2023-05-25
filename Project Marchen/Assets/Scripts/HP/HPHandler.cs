@@ -29,6 +29,8 @@ public class HPHandler : NetworkBehaviour
     NetworkPlayer networkPlayer;
     Animator anim;
     Rigidbody rigid;
+    public HeartBar heartBar;
+    public HeartBar myHeartBar;
 
     private void Awake()
     {
@@ -43,9 +45,19 @@ public class HPHandler : NetworkBehaviour
     }
     void Start()
     {
-        if(!skipSettingStartValues){
-            HP = startingHP;
+        if(!skipSettingStartValues)
+        {
+            if(Object.HasStateAuthority)
+                HP = startingHP;
             isDead = false;
+        }
+
+        if(heartBar != null)
+        {
+            heartBar.SetMaxHP(startingHP);
+            heartBar.SetSlider(HP);
+            myHeartBar.SetMaxHP(startingHP);
+            myHeartBar.SetSlider(HP);
         }
 
         isInitialized = true;
@@ -156,6 +168,10 @@ public class HPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
 
         byte newHP = changed.Behaviour.HP;
+        if(changed.Behaviour.heartBar != null)
+            changed.Behaviour.heartBar.SetSlider(newHP);
+        if(changed.Behaviour.myHeartBar != null)
+            changed.Behaviour.myHeartBar.SetSlider(newHP);
         
         changed.LoadOld();
         byte oldHP = changed.Behaviour.HP;

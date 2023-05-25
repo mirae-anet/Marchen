@@ -11,6 +11,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public static NetworkPlayer Local {get; set;}
     public Transform playerBody;
     public Transform nickNameUI;
+    public Transform heartBar;
 
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
@@ -43,6 +44,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             //자신의 닉네임은 안 보이도록 레이어를 변경
             Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
             Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
+            Utils.SetRenderLayerInChildren(heartBar, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera
             if(Camera.main != null)

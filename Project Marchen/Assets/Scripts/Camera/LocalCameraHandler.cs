@@ -30,7 +30,6 @@ public class LocalCameraHandler : MonoBehaviour
     float cameraRotationY = 0;
 
     //other component
-    // NetworkCharacterControllerPrototypeCustom networkCharacterControllerPrototypeCustom;
     CharacterRespawnHandler characterRespawnHandler;
 
     [SerializeField]
@@ -86,18 +85,6 @@ public class LocalCameraHandler : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(x, camAngle.y + cameraRotationY, camAngle.z);    // 새 회전 값
-
-        /*
-        //old
-        //Move the camera to the position of the player
-        localCamera.transform.position = cameraAnchorPoint.position;
-        //Calculate rotation
-        cameraRotationX += viewInput.y * Time.deltaTime * networkCharacterControllerPrototypeCustom.viewUpDownRotationSpeed;
-        cameraRotationX = Mathf.Clamp(cameraRotationX, -90, 90);
-        cameraRotationY += viewInput.x * Time.deltaTime * networkCharacterControllerPrototypeCustom.rotationSpeed;
-        //Apply rotation
-        localCamera.transform.rotation = Quaternion.Euler(cameraRotationX, cameraRotationY, 0);
-        */
     }
 
     public void SetViewInputVector(Vector2 viewInput)
