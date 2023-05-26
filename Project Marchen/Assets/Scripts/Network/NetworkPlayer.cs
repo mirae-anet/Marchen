@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
@@ -158,5 +158,23 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         //Get rid of the local camera if we get destroyed as a new one will be spawned with the new Network player   
         if(localCameraHandler != null)
             Destroy(localCameraHandler.gameObject);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name != "Ready")
+        {
+            //Tell the host that we need to perform the spawned code manually
+            if (Object.HasStateAuthority && Object.HasInputAuthority)
+                Spawned();
+
+            if (Object.HasStateAuthority)
+                GetComponent<CharacterRespawnHandler>().RequestRespawn();
+        }
     }
 }
