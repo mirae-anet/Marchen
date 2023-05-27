@@ -10,11 +10,10 @@ public class InteractionHandler : NetworkBehaviour
     {
         
     }
-    public void RequestSpawn(NetworkBehaviour prefab, Vector3 position, Quaternion quaternion, GameObject spawnerSpawner)
+    public void RequestSpawn(NetworkBehaviour prefab, Vector3 position, Quaternion quaternion)
     {
         if(Runner.IsServer)
             Runner.Spawn(prefab, position, quaternion);
         
-        Destroy(spawnerSpawner);
     }
 }
