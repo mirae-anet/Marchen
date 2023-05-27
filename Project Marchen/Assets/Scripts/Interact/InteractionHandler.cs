@@ -10,6 +10,9 @@ public class InteractionHandler : NetworkBehaviour
     {
         
     }
+
+    public virtual void action(Transform other){}
+
     public void RequestSpawn(NetworkBehaviour prefab, Vector3 position, Quaternion quaternion)
     {
         if(Runner.IsServer)

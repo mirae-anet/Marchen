@@ -1059,8 +1059,8 @@ GameObject:
   - component: {fileID: 3151836074117985339}
   - component: {fileID: 9061902636817628115}
   - component: {fileID: 4797138551789220831}
-  - component: {fileID: 5628767189330560181}
   - component: {fileID: 1213169584012460585}
+  - component: {fileID: 7883644087192971896}
   m_Layer: 6
   m_Name: Test PF
   m_TagString: Player
@@ -1139,8 +1139,8 @@ MonoBehaviour:
   - {fileID: 3151836074117985339}
   - {fileID: 9061902636817628115}
   - {fileID: 4797138551789220831}
-  - {fileID: 5628767189330560181}
   - {fileID: 1213169584012460585}
+  - {fileID: 7883644087192971896}
   - {fileID: 1890632948988653450}
   - {fileID: 7261233525089267724}
   SimulationBehaviours: []
@@ -1288,19 +1288,6 @@ MonoBehaviour:
   dodgePower: 20
   doubleTapTime: 0.2
   raySize: {x: 1.8, y: 0.6, z: 1.8}
---- !u!114 &5628767189330560181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597645375552586582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e680e0e875aaa413384d75aed767d4f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
 --- !u!114 &1213169584012460585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,6 +1305,19 @@ MonoBehaviour:
   weapons:
   - {fileID: 7809428636636552867}
   - {fileID: 2911763550395956773}
+--- !u!114 &7883644087192971896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597645375552586582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f094ee59fc16e4b0a93bffdafe1030d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
 --- !u!1 &3908764343849807949
 GameObject:
   m_ObjectHideFlags: 0
