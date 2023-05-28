@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class SetReponAreaAction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.tag != "Player")
+            return;
         
-    }
+        CharacterRespawnHandler characterRespawnHandler = other.transform.root.GetComponent<CharacterRespawnHandler>();
+        if(characterRespawnHandler != null)
+            characterRespawnHandler.ChangeSpawnPoint(transform.position);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(transform.root.gameObject);
     }
 }

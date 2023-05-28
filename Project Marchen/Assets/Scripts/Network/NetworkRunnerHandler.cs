@@ -124,6 +124,13 @@ public class NetworkRunnerHandler : MonoBehaviour
                         newHPHandler.skipSettingStartValues = true;
                     }
 
+                    if(resumeNetworkObject.TryGetBehaviour<CharacterRespawnHandler>(out var oldRespawnHandler))
+                    {
+                        CharacterRespawnHandler newRespawnHandler = newNetworkObject.GetComponent<CharacterRespawnHandler>();
+                        newRespawnHandler.CopyStateFrom(oldRespawnHandler);
+                        newRespawnHandler.skipSettingStartValues = true;
+                    }
+
                     //Map the connection token with the new Network player
                     if(resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
                     {
