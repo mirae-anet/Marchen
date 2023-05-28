@@ -6,11 +6,6 @@ using Fusion;
 public class InteractionHandler : NetworkBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public virtual void action(Transform other){}
 
     public void RequestSpawn(NetworkBehaviour prefab, Vector3 position, Quaternion quaternion)
