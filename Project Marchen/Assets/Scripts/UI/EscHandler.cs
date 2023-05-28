@@ -45,7 +45,7 @@ public class EscHandler : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 escPanel.SetActive(false);
-                localCameraHandler.EnableCameraRotation(true);
+                localCameraHandler.EnableRotationEsc(true);
                 inputHandler.EnableinPut(true);
 
             }
@@ -54,7 +54,7 @@ public class EscHandler : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 escPanel.SetActive(true);
-                localCameraHandler.EnableCameraRotation(false);
+                localCameraHandler.EnableRotationEsc(false);
                 inputHandler.EnableinPut(false);
             }
         }
