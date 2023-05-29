@@ -13,9 +13,12 @@ public class CharacterInputHandler : MonoBehaviour
     bool attackInput = false;
     bool reloadInput = false;
 
+    //esc
+    bool escEnable = true;
     //other components
     LocalCameraHandler localCameraHandler;
     NetworkPlayerController networkPlayerController;
+
     private void Awake()
     {
         localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
@@ -43,19 +46,23 @@ public class CharacterInputHandler : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // 이동 입력 벡터
         isMove = (moveInput.magnitude != 0); // moveInput의 길이로 입력 판정
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
             jumpInput = true;
         if(Input.GetButtonDown("Walk"))
             walkInput = true;
         if(Input.GetButtonDown("Dodge"))
             dodgeInput = true;
-        if(Input.GetButtonDown("Fire1"))
-            attackInput = true;
         if(Input.GetButtonDown("Reload"))
             reloadInput = true;
+        if (escEnable == true)
+        {
+            if (Input.GetButtonDown("Fire1"))
+                attackInput = true;
+        }
 
         //Set view
-        localCameraHandler.SetViewInputVector(viewInputVector); 
+        localCameraHandler.SetViewInputVector(viewInputVector);
+
 
     }
     public NetworkInputData GetNetworkInput()
@@ -89,4 +96,10 @@ public class CharacterInputHandler : MonoBehaviour
 
         return networkInputData;
     }
+
+    public void EnableinPut(bool enable)
+    {
+        escEnable = enable;
+    }
+
 }

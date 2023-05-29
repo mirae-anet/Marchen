@@ -11,14 +11,18 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public static NetworkPlayer Local {get; set;}
     public Transform playerBody;
     public Transform nickNameUI;
+    public Transform heartBar;
 
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
 
-    // Remote Client Token Hash
-    [Networked] public int token {get; set;} //need for Host migration
-    bool isPublicJoinMessageSent = false;
 
+
+    // Remote Client Token Hash
+   
+ [Networked] public int token {get; set;} //need for Host migration
+    bool isPublicJoinMessageSent = false;
+    
     public LocalCameraHandler localCameraHandler;
     public GameObject localUI;
 
@@ -35,7 +39,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
-        if(Object.HasInputAuthority)
+        //본인 
+        if(Object.HasInputAuthority) //플레이어 본인
         {
             Local = this;
 
@@ -43,6 +48,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             //자신의 닉네임은 안 보이도록 레이어를 변경
             Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
             Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
+            Utils.SetRenderLayerInChildren(heartBar, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera
             if(Camera.main != null)
@@ -63,10 +69,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             localCameraHandler.transform.parent = null;
 
             RPC_SetNickName(GameManager.instance.playerNickName);
-
+            
             Debug.Log("Spawned local player");
         }
-        else
+        else //다른플레이어
         {
             //Disable the camera if we are not the local player
             // localCameraHandler.localCamera.enabled = false;
@@ -89,31 +95,48 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public void PlayerLeft(PlayerRef player)
     {
+
         if(Object.HasStateAuthority)
         {
             //서버로 하여금 떠나간 플레이어에 해당하는 아바타만 "left" 메시지 발송
-            if(Runner.TryGetPlayerObject(player, out NetworkObject playerLeftNetworkObject))
+            if (Runner.TryGetPlayerObject(player, out NetworkObject playerLeftNetworkObject))
             {
                 if(playerLeftNetworkObject == Object)
                     //RPC message를 보내기 전에 아바타가 despawn되는 경우 메시지가 누락될 수 있어서.
                     Local.GetComponent<NetworkInGameMessages>().SendInGameRPCMessage(playerLeftNetworkObject.GetComponent<NetworkPlayer>().nickName.ToString(), "left");
             }
-        }
+            if (player == Object.InputAuthority)
+            {
+                Spawner spawner = FindObjectOfType<Spawner>();
+                if(spawner != null)
+                {
+                    foreach (KeyValuePair<int, NetworkPlayer> pair in spawner.mapTokenIDWithNetworkPlayer)
+                    {
+                        if (pair.Value == this)
+                        {
+                            spawner.mapTokenIDWithNetworkPlayer.Remove(pair.Key);
+                            Runner.Despawn(Object);
 
-        if(player == Object.InputAuthority)
-            Runner.Despawn(Object);
+                        }
+                    }
+                }
+            }
+        }
     }
+
     //playerNickNameTM은 static으로 만들 수 없어서 나눴다.
     static void OnNickNameChanged(Changed<NetworkPlayer> changed)
     {
         Debug.Log($"{Time.time} OnNickNameChanged value {changed.Behaviour.nickName}");
         changed.Behaviour.OnNickNameChanged();
     }
+
     private void OnNickNameChanged()
     {
         Debug.Log($"Nickname changed for player to {nickName} for player {gameObject.name}");
         playerNickNameTM.text = nickName.ToString();
     }
+
     //from client to server
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_SetNickName(string nickName, RpcInfo info = default)
@@ -126,7 +149,9 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             networkInGameMessages.SendInGameRPCMessage(nickName, "joined");
             isPublicJoinMessageSent = true;
         }
+
     }
+
 
     private void OnDestroy()
     {

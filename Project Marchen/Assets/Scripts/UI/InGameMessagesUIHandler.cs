@@ -20,12 +20,11 @@ public class InGameMessagesUIHandler : MonoBehaviour
         messageQueue.Enqueue(message);
         if(messageQueue.Count > 3)
             messageQueue.Dequeue();
-        
-        int queueIndex = 0;
-        foreach(string messageInQueue in messageQueue)
+
+        for (int i = textMeshProUGUIs.Length - 1; i > 0; i--)
         {
-            textMeshProUGUIs[queueIndex].text = messageInQueue;
-            queueIndex++;
+            textMeshProUGUIs[i].text = textMeshProUGUIs[i - 1].text;
         }
+        textMeshProUGUIs[0].text = message;
     }   
 }
