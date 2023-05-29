@@ -44,20 +44,24 @@ public class EscHandler : MonoBehaviour
         {
             //카메라
             readyUIHandler = FindObjectOfType<ReadyUIHandler>();
+            setselect = FindObjectOfType<SetsSelect>();
             if (escPanel.activeSelf)
             {
 
-                if (readyUIHandler != null) 
+                if (readyUIHandler != null) // 다른 UI가 켜져있으면
+                {
+                    escPanel.SetActive(false);
+                    return;
+                }
+                else
                 {
                     escPanel.SetActive(false);
                     localCameraHandler.EnableRotationEsc(true);
+                    setselect.RPC_NotCamera(true);
                     inputHandler.EnableinPut(true);
-                    return;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                 }
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-
-
             }
             else
             {
@@ -68,6 +72,11 @@ public class EscHandler : MonoBehaviour
                 inputHandler.EnableinPut(false);
             }
         }
+    }
+    
+    public bool ActiveEsc()
+    {
+        return escPanel.activeSelf;
     }
 
 }

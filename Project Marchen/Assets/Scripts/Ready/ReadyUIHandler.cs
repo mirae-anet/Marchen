@@ -13,7 +13,7 @@ public class ReadyUIHandler : NetworkBehaviour
     public GameObject ReadyUiCanvas;
 
     bool isReady = false;
-
+    SetsSelect setslect;
     //countdown
     TickTimer countdownTickTimer = TickTimer.None;
 
@@ -23,6 +23,7 @@ public class ReadyUIHandler : NetworkBehaviour
     void Start()
     {
         countDownText.text = "";
+        setslect = FindObjectOfType<SetsSelect>();
     }
 
     // Update is called once per frame
@@ -107,6 +108,6 @@ public class ReadyUIHandler : NetworkBehaviour
 
     public void LeftUi()
     {
-        
+        setslect.LeftUI();
     }
 }

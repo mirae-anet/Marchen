@@ -8,51 +8,78 @@ public class SetsSelect : NetworkBehaviour
     public Camera localCamera;
     CharacterInputHandler inputHandler;
     public GameObject ReadyUiCanvas;
-    
+    EscHandler escHandler;
+
     private void OnCollisionEnter(Collision collision)
     {
-            if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //호스트인경우
+            NetworkObject networkObject = collision.transform.root.GetComponent<NetworkObject>();
+            if (Runner.IsServer && networkObject.HasInputAuthority)
             {
-                NetworkObject networkObject = collision.transform.root.GetComponent<NetworkObject>();
-                //redyui핸들러가있을경우
-                readyUIHandler = FindObjectOfType<ReadyUIHandler>();
-                if (readyUIHandler != null) { return; }
-
-                if (Runner.IsServer && networkObject.HasInputAuthority)
+                //캔버스가 있을경우
+                readyUIHandler = FindObjectOfType<ReadyUIHandler>(true);
+                if (readyUIHandler == null)
                 {
                     Runner.Spawn(ReadyUiCanvas);
-                    RPC_SetCanvas(true);
+                    RPC_MouseSet(true);
                     RPC_NotCamera(false);
                 }
+                else{ return; }
             }
-    }
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_SetCanvas(bool set)
-    {
-        readyUIHandler = FindObjectOfType<ReadyUIHandler>(true);
-        if(readyUIHandler != null)
-        {
-            inputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
-            inputHandler.EnableinPut(false);
-
-            /*GameObject setCanvas = readyUIHandler.gameObject;
-            setCanvas.SetActive(set);*/
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
     }
 
+    //마우스잠금
+   [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+   public void RPC_MouseSet(bool set)
+   {
+        inputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
+        inputHandler.EnableinPut(!set);
+        //마우스 활성화
+        if (set)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+  
+    }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_NotCamera(bool set)
+    public void RPC_NotCamera(bool enable)
     {
         localCamera = FindLocalCamera();
         LocalCameraHandler camerahandler = localCamera.GetComponentInParent<LocalCameraHandler>();
-        camerahandler.EnableRotationReady(set);
+        camerahandler.EnableRotationReady(enable);
     }
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_LeftUi()
+    {
+        readyUIHandler = FindObjectOfType<ReadyUIHandler>(true);
+        GameObject setCanvas = readyUIHandler.gameObject;
+        NetworkObject canvasNetworkObject = setCanvas.GetComponent<NetworkObject>();
+        Runner.Despawn(canvasNetworkObject);
+    }
+
+    public void LeftUI()
+    {
+        escHandler = FindObjectOfType<EscHandler>();
+        if (escHandler.ActiveEsc())
+        {
+            RPC_LeftUi();
+            return;
+        }
+        RPC_LeftUi();
+        RPC_MouseSet(false);
+        RPC_NotCamera(true);
+    }
 
     private Camera FindLocalCamera()
     {
