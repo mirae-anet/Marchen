@@ -10,6 +10,7 @@ public class ReadyUIHandler : NetworkBehaviour
     [Header("UI")]
     public TextMeshProUGUI buttonReadyText;
     public TextMeshProUGUI countDownText;
+    public GameObject ReadyUiCanvas;
 
     bool isReady = false;
 
@@ -104,4 +105,8 @@ public class ReadyUIHandler : NetworkBehaviour
         else countDownText.text = $"Game start in {countDown}";
     }
 
+    public void LeftUi()
+    {
+        
+    }
 }

@@ -9,7 +9,6 @@ public class SetsSelect : NetworkBehaviour
     CharacterInputHandler inputHandler;
     public GameObject ReadyUiCanvas;
     
-    
     private void OnCollisionEnter(Collision collision)
     {
             if (collision.gameObject.CompareTag("Player"))
@@ -21,7 +20,6 @@ public class SetsSelect : NetworkBehaviour
 
                 if (Runner.IsServer && networkObject.HasInputAuthority)
                 {
-                    
                     Runner.Spawn(ReadyUiCanvas);
                     RPC_SetCanvas(true);
                     RPC_NotCamera(false);
@@ -38,13 +36,14 @@ public class SetsSelect : NetworkBehaviour
             inputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
             inputHandler.EnableinPut(false);
 
-            GameObject setCanvas = readyUIHandler.gameObject;
-            setCanvas.SetActive(set);
+            /*GameObject setCanvas = readyUIHandler.gameObject;
+            setCanvas.SetActive(set);*/
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
+
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_NotCamera(bool set)
@@ -62,7 +61,7 @@ public class SetsSelect : NetworkBehaviour
         {
             for (int i = 0; i < cams.Length; i++)
             {
-                if (cams != null && cams[i].isActiveAndEnabled)
+                if (cams[i] != null && cams[i].isActiveAndEnabled)
                 {
                     return cams[i];
                 }
@@ -74,5 +73,6 @@ public class SetsSelect : NetworkBehaviour
             return null;
         }
     }
+
 
 }
