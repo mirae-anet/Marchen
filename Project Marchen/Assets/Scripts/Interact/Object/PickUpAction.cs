@@ -1,18 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PickUpAction : InteractionHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum Type { GreenBook, RedBook};
+    [Header("설정")]
+    public Type type;
 
-    // Update is called once per frame
+    //other component
+    public NetworkObject Spawner;
+
     void Update()
     {
-        
+        transform.Rotate(Vector3.up * 20 * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(Object.HasStateAuthority)
+        {
+            if (other.tag == "Player")
+            {
+                PlayerActionHandler playerActionHandler = other.transform.root.GetComponent<PlayerActionHandler>();
+                if(playerActionHandler != null)
+                    playerActionHandler.action(transform);
+    
+                if(Spawner != null)
+                {
+                    Spawner.gameObject.SetActive(true);
+                    Spawner.GetComponent<SpawnHandler>().SetTimer();
+                }
+                
+                Runner.Despawn(Object);
+            }
+        }
+    }
+    private void OnDestroy()
+    {
     }
 }

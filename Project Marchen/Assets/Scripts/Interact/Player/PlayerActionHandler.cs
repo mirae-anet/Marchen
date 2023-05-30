@@ -5,15 +5,30 @@ using Fusion;
 
 public class PlayerActionHandler : InteractionHandler
 {
+    public bool skipSettingStartValues = false;
     public LayerMask layerMask;
     public Transform BodyAnchor;
     Vector3 boxSize = new Vector3(2,2,2);
+
+    [Networked(OnChanged = nameof(OnBookChanged))]
+    private bool greenBook {get; set;}
+    [Networked(OnChanged = nameof(OnBookChanged))]
+    private bool redBook {get; set;}
 
     //other component
     NetworkPlayerController networkPlayerController;
 
     void Start()
     {
+        if(!skipSettingStartValues)
+        {
+            if(Object.HasStateAuthority)
+            {
+                greenBook = false;
+                redBook = false;
+            }
+        }
+
         networkPlayerController = GetComponent<NetworkPlayerController>();
     }
 
@@ -38,6 +53,20 @@ public class PlayerActionHandler : InteractionHandler
                 }
             }
         }
+        else if(other.TryGetComponent<PickUpAction>(out PickUpAction pickUpAction))
+        {
+            greenBook = true;
+            switch (pickUpAction.type)
+            {
+                case PickUpAction.Type.GreenBook:
+                    greenBook = true;
+                    break;
+
+                case PickUpAction.Type.RedBook:
+                    redBook = true;
+                    break;
+            }
+        }
 
     }
 
@@ -56,6 +85,12 @@ public class PlayerActionHandler : InteractionHandler
             }
         }
         // networkPlayerController.SetIsInteract(false);
+    }
+
+    static void OnBookChanged(Changed<PlayerActionHandler> changed)
+    {
+        Debug.Log($"GreenBook : {changed.Behaviour.greenBook}, RedBook : {changed.Behaviour.redBook}");
+        //UI에 변경사항 표시
     }
 
 }

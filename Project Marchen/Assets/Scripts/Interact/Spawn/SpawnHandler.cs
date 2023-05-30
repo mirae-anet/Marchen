@@ -27,8 +27,7 @@ public class SpawnHandler : NetworkBehaviour
             // Debug.Log("first spawning");
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay (Collider other)
     {
         if(!spawnAble)
             return;
@@ -48,8 +47,10 @@ public class SpawnHandler : NetworkBehaviour
 
         if(spawned.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
             enemyHPHandler.Spawner = Object;
-        if(spawned.TryGetComponent<HeartHandler>(out HeartHandler heartHandler))
+        else if(spawned.TryGetComponent<HeartHandler>(out HeartHandler heartHandler))
             heartHandler.Spawner = Object;
+        else if(spawned.TryGetComponent<PickUpAction>(out PickUpAction pickUpAction))
+            pickUpAction.Spawner = Object;
 
         Debug.Log($"Spawner Spawned Something");
         spawnAble = false;
