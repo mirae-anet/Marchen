@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EscHandler : MonoBehaviour
+public class EscHandler : NetworkBehaviour
 {
     public GameObject escPanel;
     LocalCameraHandler localCameraHandler;
@@ -26,10 +26,7 @@ public class EscHandler : MonoBehaviour
     }
     public void ExitRoom()
     {
-        MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-
-        networkRunner.Shutdown();
+        Runner.Shutdown();
         SceneManager.LoadScene("Lobby");
     }
 
@@ -51,13 +48,13 @@ public class EscHandler : MonoBehaviour
                 if (readyUIHandler != null) // 다른 UI가 켜져있으면
                 {
                     escPanel.SetActive(false);
+                    localCameraHandler.EnableRotationEsc(true);
                     return;
                 }
                 else
                 {
                     escPanel.SetActive(false);
                     localCameraHandler.EnableRotationEsc(true);
-                    setselect.RPC_NotCamera(true);
                     inputHandler.EnableinPut(true);
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
@@ -65,6 +62,12 @@ public class EscHandler : MonoBehaviour
             }
             else
             {
+                if (readyUIHandler != null)
+                {
+                    escPanel.SetActive(true);
+                    localCameraHandler.EnableRotationEsc(false);
+                    return;
+                }
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 escPanel.SetActive(true);

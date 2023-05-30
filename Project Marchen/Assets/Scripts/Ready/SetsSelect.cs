@@ -18,13 +18,13 @@ public class SetsSelect : NetworkBehaviour
             NetworkObject networkObject = collision.transform.root.GetComponent<NetworkObject>();
             if (Runner.IsServer && networkObject.HasInputAuthority)
             {
-                //캔버스가 있을경우
+                //캔버스가 없을경우
                 readyUIHandler = FindObjectOfType<ReadyUIHandler>(true);
                 if (readyUIHandler == null)
                 {
                     Runner.Spawn(ReadyUiCanvas);
                     RPC_MouseSet(true);
-                    RPC_NotCamera(false);
+                    RPC_RotateCamera(false);
                 }
                 else{ return; }
             }
@@ -52,7 +52,7 @@ public class SetsSelect : NetworkBehaviour
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_NotCamera(bool enable)
+    public void RPC_RotateCamera(bool enable)
     {
         localCamera = FindLocalCamera();
         LocalCameraHandler camerahandler = localCamera.GetComponentInParent<LocalCameraHandler>();
@@ -74,11 +74,12 @@ public class SetsSelect : NetworkBehaviour
         if (escHandler.ActiveEsc())
         {
             RPC_LeftUi();
+            RPC_RotateCamera(true);
             return;
         }
         RPC_LeftUi();
         RPC_MouseSet(false);
-        RPC_NotCamera(true);
+        RPC_RotateCamera(true);
     }
 
     private Camera FindLocalCamera()
