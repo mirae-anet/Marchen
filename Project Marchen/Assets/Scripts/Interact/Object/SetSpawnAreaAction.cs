@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetReponAreaAction : MonoBehaviour
+public class SetSpawnAreaAction : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

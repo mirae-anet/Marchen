@@ -19,7 +19,26 @@ public class PlayerActionHandler : InteractionHandler
 
     public override void action(Transform other)
     {
-        Debug.Log("Player");
+        if(!Object.HasStateAuthority)
+            return;
+
+        // Debug.Log("Player action");
+
+        if(other.TryGetComponent<DespawnAction>(out DespawnAction despawnAction))
+        {
+            EnemyHPHandler[] enemyHPHandlers = FindObjectsOfType<EnemyHPHandler>();
+            if(enemyHPHandlers.Length > 0)
+            {
+                for(int i = 0; i < enemyHPHandlers.Length; i++)
+                {
+                    if(enemyHPHandlers[i] != null)
+                    {
+                        enemyHPHandlers[i].OnTakeDamage("", Object, 255, transform.position); //MAX 즉사
+                    }
+                }
+            }
+        }
+
     }
 
     public void Interact()
