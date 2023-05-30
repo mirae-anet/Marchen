@@ -9,7 +9,7 @@ public class SetsSelect : NetworkBehaviour
     CharacterInputHandler inputHandler;
     public GameObject ReadyUiCanvas;
     EscHandler escHandler;
-
+    NetworkObject spawnCanvas;//추가
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -19,10 +19,15 @@ public class SetsSelect : NetworkBehaviour
             if (Runner.IsServer && networkObject.HasInputAuthority)
             {
                 //캔버스가 없을경우
-                readyUIHandler = FindObjectOfType<ReadyUIHandler>(true);
+                readyUIHandler = FindObjectOfType<ReadyUIHandler>();
+                
                 if (readyUIHandler == null)
                 {
-                    Runner.Spawn(ReadyUiCanvas);
+                    //호스트만 게임시작 나가기창 생성
+                    spawnCanvas = Runner.Spawn(ReadyUiCanvas);
+                    ReadyUIHandler readyUiCanvasScript = spawnCanvas.GetComponent<ReadyUIHandler>();
+                    readyUiCanvasScript.SetActive();
+
                     RPC_MouseSet(true);
                     RPC_RotateCamera(false);
                 }
@@ -32,7 +37,7 @@ public class SetsSelect : NetworkBehaviour
     }
 
     //마우스잠금
-   [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
    public void RPC_MouseSet(bool set)
    {
         inputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();

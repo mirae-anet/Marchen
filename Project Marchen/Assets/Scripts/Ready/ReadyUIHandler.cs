@@ -11,6 +11,8 @@ public class ReadyUIHandler : NetworkBehaviour
     public TextMeshProUGUI buttonReadyText;
     public TextMeshProUGUI countDownText;
     public GameObject ReadyUiCanvas;
+    public GameObject StartBtn;
+    public GameObject LeftBtn;
 
     bool isReady = false;
     SetsSelect setslect;
@@ -75,9 +77,9 @@ public class ReadyUIHandler : NetworkBehaviour
         else isReady = true;
 
         if (isReady)
-            buttonReadyText.text = "NOT READY";
+            buttonReadyText.text = "게임시작";
         else
-            buttonReadyText.text = "READY";
+            buttonReadyText.text = "취소";
 
         if(Runner.IsServer)
         {
@@ -109,5 +111,11 @@ public class ReadyUIHandler : NetworkBehaviour
     public void LeftUi()
     {
         setslect.LeftUI();
+    }
+
+    public void SetActive()
+    {
+        StartBtn.SetActive(true);
+        LeftBtn.SetActive(true);
     }
 }

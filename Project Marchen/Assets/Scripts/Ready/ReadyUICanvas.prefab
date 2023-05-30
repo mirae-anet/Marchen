@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8898856257804573398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -974,6 +974,8 @@ MonoBehaviour:
   buttonReadyText: {fileID: 1615470636044566995}
   countDownText: {fileID: 1615470634512208198}
   ReadyUiCanvas: {fileID: 1615470635503636574}
+  StartBtn: {fileID: 1615470636030570017}
+  LeftBtn: {fileID: 458676432215837559}
 --- !u!1 &1615470635909568151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,12 +1124,12 @@ GameObject:
   - component: {fileID: 1615470636030570020}
   - component: {fileID: 1615470636030570019}
   m_Layer: 5
-  m_Name: Ready
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1615470636030570018
 RectTransform:
   m_ObjectHideFlags: 0
