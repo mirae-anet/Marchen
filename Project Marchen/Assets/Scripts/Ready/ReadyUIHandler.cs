@@ -16,16 +16,19 @@ public class ReadyUIHandler : NetworkBehaviour
 
     bool isReady = false;
     SetsSelect setslect;
+    LocalCameraHandler local;
     //countdown
     TickTimer countdownTickTimer = TickTimer.None;
 
     [Networked(OnChanged = nameof(OnCountdownChanged))]
     byte countDown { get; set; }
 
+
     void Start()
     {
         countDownText.text = "";
         setslect = FindObjectOfType<SetsSelect>();
+        local = FindObjectOfType<LocalCameraHandler>(); // 임시
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class ReadyUIHandler : NetworkBehaviour
             startGame();
 
             countdownTickTimer = TickTimer.None;
+
         }
         else if(countdownTickTimer.IsRunning)
         {
@@ -55,7 +59,7 @@ public class ReadyUIHandler : NetworkBehaviour
             DontDestroyOnLoad(gameObjectToTransfer);
         }
 
-        Runner.SetActiveScene("TestScene(network)");
+        Runner.SetActiveScene("TestScene(network)orginal");
     }
     public void OnChangeWeaponHammer()
     {
@@ -76,23 +80,21 @@ public class ReadyUIHandler : NetworkBehaviour
             isReady = false;
         else isReady = true;
 
-        if (isReady)
-            buttonReadyText.text = "게임시작";
-        else
-            buttonReadyText.text = "취소";
-
         if(Runner.IsServer)
         {
             //startGame();
             if (isReady)
+            {
                 countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 10);
+                buttonReadyText.text = "취소";
+            }
             else
             {
                 countdownTickTimer = TickTimer.None;
                 countDown = 0;
+                buttonReadyText.text = "게임시작";
             }
         }
-
         NetworkPlayer.Local.GetComponent<CharacterOutfitHandler>().OnReady(isReady);
     }
 
