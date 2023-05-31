@@ -17,6 +17,11 @@ public class PlayerActionHandler : InteractionHandler
 
     //other component
     NetworkPlayerController networkPlayerController;
+    public GameObject image1;
+    public GameObject image2;
+    public GameObject myImage1;
+    public GameObject myImage2;
+    // public GameObject image3;
 
     void Start()
     {
@@ -28,6 +33,11 @@ public class PlayerActionHandler : InteractionHandler
                 redBook = false;
             }
         }
+
+        image1.SetActive(greenBook);
+        image2.SetActive(redBook);
+        myImage1.SetActive(greenBook);
+        myImage2.SetActive(redBook);
 
         networkPlayerController = GetComponent<NetworkPlayerController>();
     }
@@ -83,13 +93,16 @@ public class PlayerActionHandler : InteractionHandler
                     interactionHandler.action(transform);
             }
         }
-        // networkPlayerController.SetIsInteract(false);
     }
 
     static void OnBookChanged(Changed<PlayerActionHandler> changed)
     {
         Debug.Log($"GreenBook : {changed.Behaviour.greenBook}, RedBook : {changed.Behaviour.redBook}");
         //UI에 변경사항 표시
+        changed.Behaviour.image1.SetActive(changed.Behaviour.greenBook);
+        changed.Behaviour.image2.SetActive(changed.Behaviour.redBook);
+        changed.Behaviour.myImage1.SetActive(changed.Behaviour.greenBook);
+        changed.Behaviour.myImage2.SetActive(changed.Behaviour.redBook);
     }
 
 }
