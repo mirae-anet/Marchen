@@ -34,6 +34,9 @@ public class MeleeAttackHandler : EnemyAttackHandler
         //     if(!isAttack && !enemyHPHandler.GetIsDamage())
         //         StartCoroutine("AttackCO");
         // }
+        if(enemyHPHandler == null)
+            return;
+
         if(isAttack || enemyHPHandler.GetIsDamage())
             return;
 

@@ -11,9 +11,9 @@ public class PlayerActionHandler : InteractionHandler
     Vector3 boxSize = new Vector3(2,2,2);
 
     [Networked(OnChanged = nameof(OnBookChanged))]
-    private bool greenBook {get; set;}
+    public bool greenBook {get; set;}
     [Networked(OnChanged = nameof(OnBookChanged))]
-    private bool redBook {get; set;}
+    public bool redBook {get; set;}
 
     //other component
     NetworkPlayerController networkPlayerController;

@@ -37,7 +37,4 @@ public class PickUpAction : InteractionHandler
             }
         }
     }
-    private void OnDestroy()
-    {
-    }
 }

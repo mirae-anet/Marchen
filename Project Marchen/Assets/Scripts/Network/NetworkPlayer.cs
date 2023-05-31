@@ -18,8 +18,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
 
     // Remote Client Token Hash
-   
- [Networked] public int token {get; set;} //need for Host migration
+   [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
     
     public LocalCameraHandler localCameraHandler;
