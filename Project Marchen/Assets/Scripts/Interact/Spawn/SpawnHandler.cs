@@ -65,13 +65,4 @@ public class SpawnHandler : NetworkBehaviour
         }
     }
 
-    /*
-    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_Despawn()
-    {
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-        if(networkRunner != null)
-            networkRunner.Despawn(Object);
-    }
-    */
 }

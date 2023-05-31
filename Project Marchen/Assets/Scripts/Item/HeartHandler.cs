@@ -22,7 +22,7 @@ public class HeartHandler : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(Object.HasStateAuthority)
+        if(Object != null && Object.HasStateAuthority)
         {
             // Debug.Log($"Heart OnTriggerEnter : {other.tag}");
     

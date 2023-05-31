@@ -55,7 +55,6 @@ public class PlayerActionHandler : InteractionHandler
         }
         else if(other.TryGetComponent<PickUpAction>(out PickUpAction pickUpAction))
         {
-            greenBook = true;
             switch (pickUpAction.type)
             {
                 case PickUpAction.Type.GreenBook:

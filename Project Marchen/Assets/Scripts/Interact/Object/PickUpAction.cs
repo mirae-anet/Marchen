@@ -19,7 +19,7 @@ public class PickUpAction : InteractionHandler
 
     private void OnTriggerEnter(Collider other)
     {
-        if(Object.HasStateAuthority)
+        if(Object != null && Object.HasStateAuthority)
         {
             if (other.tag == "Player")
             {
