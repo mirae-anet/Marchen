@@ -34,6 +34,9 @@ public class MeleeAttackHandler : EnemyAttackHandler
         //     if(!isAttack && !enemyHPHandler.GetIsDamage())
         //         StartCoroutine("AttackCO");
         // }
+        if(enemyHPHandler == null)
+            return;
+
         if(isAttack || enemyHPHandler.GetIsDamage())
             return;
 
@@ -70,7 +73,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
         float endTime = Time.time + 1f;
         while (Time.time < endTime)
         {
-            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.identity, Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
+            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.LookRotation(transform.forward), Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
             if(hitCount > 0)
             {
                 for(int i = 0; i < hitCount; i++)

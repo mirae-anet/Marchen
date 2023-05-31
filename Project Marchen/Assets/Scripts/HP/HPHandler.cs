@@ -217,7 +217,6 @@ public class HPHandler : NetworkBehaviour
 
         if(Object.HasStateAuthority)
         {
-            gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
             rigid.velocity = Vector3.zero;
             rigid.isKinematic = true;
             rigid.detectCollisions = false;

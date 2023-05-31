@@ -29,7 +29,7 @@ public class BillBoard : MonoBehaviour
         {
             for(int i = 0; i < cams.Length; i++)
             {
-                if(cams != null && cams[i].isActiveAndEnabled)
+                if(cams[i] != null && cams[i].isActiveAndEnabled)
                 {
                     return cams[i];
                 }

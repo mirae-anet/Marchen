@@ -10,8 +10,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public TextMeshProUGUI playerNickNameTM;
     public static NetworkPlayer Local {get; set;}
     public Transform playerBody;
-    public Transform nickNameUI;
-    public Transform heartBar;
+    public Transform WorldSpaceCanvas;
 
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
@@ -19,8 +18,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
 
     // Remote Client Token Hash
-   
- [Networked] public int token {get; set;} //need for Host migration
+   [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
     
     public LocalCameraHandler localCameraHandler;
@@ -47,8 +45,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             //Sets the layer of the local players model
             //자신의 닉네임은 안 보이도록 레이어를 변경
             Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
-            Utils.SetRenderLayerInChildren(nickNameUI, LayerMask.NameToLayer("IgnoreCamera"));
-            Utils.SetRenderLayerInChildren(heartBar, LayerMask.NameToLayer("IgnoreCamera"));
+            Utils.SetRenderLayerInChildren(WorldSpaceCanvas, LayerMask.NameToLayer("IgnoreCamera"));
 
             //Disable main camera
             if(Camera.main != null)
