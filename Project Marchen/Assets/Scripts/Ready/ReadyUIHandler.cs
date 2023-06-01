@@ -36,6 +36,7 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         if (countdownTickTimer.Expired(Runner))
         {
+            setslect.LeftUI();
             startGame();
 
             countdownTickTimer = TickTimer.None;
