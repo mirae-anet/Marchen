@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ReadyUIHandler : NetworkBehaviour
 {
@@ -60,19 +61,21 @@ public class ReadyUIHandler : NetworkBehaviour
         {
             DontDestroyOnLoad(gameObjectToTransfer);
         }
-        Runner.SetActiveScene("TestScene(network)original");
+        Runner.SetActiveScene("TestScene(network)_Potal2");
     }
     public void OnChangeWeaponHammer()
     {
         if (isReady)
             return;
         NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(0);
+        EventSystem.current.SetSelectedGameObject(null);
     }
     public void OnChangeWeaponGun()
     {
         if (isReady)
             return;
         NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(1);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OnReady()
@@ -97,6 +100,7 @@ public class ReadyUIHandler : NetworkBehaviour
             }
         }
         NetworkPlayer.Local.GetComponent<CharacterOutfitHandler>().OnReady(isReady);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     static void OnCountdownChanged(Changed<ReadyUIHandler> changed)
