@@ -36,10 +36,11 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         if (countdownTickTimer.Expired(Runner))
         {
-            setslect.LeftUI();
             startGame();
 
             countdownTickTimer = TickTimer.None;
+            if(Object.HasStateAuthority)
+                setslect.LeftUI();
 
         }
         else if(countdownTickTimer.IsRunning)
@@ -59,8 +60,7 @@ public class ReadyUIHandler : NetworkBehaviour
         {
             DontDestroyOnLoad(gameObjectToTransfer);
         }
-
-        Runner.SetActiveScene("TestScene(network)orginal");
+        Runner.SetActiveScene("TestScene(network)original");
     }
     public void OnChangeWeaponHammer()
     {
