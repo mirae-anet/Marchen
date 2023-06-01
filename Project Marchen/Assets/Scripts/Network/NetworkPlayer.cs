@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
@@ -37,8 +37,14 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
+        bool Library = SceneManager.GetActiveScene().name == "TestScene(network)orginal";
+        bool Sector1 = SceneManager.GetActiveScene().name == "TestScene(network)orginal";
+        bool Sector2 = SceneManager.GetActiveScene().name == "TestScene(network)orginal";
+        bool Sector3 = SceneManager.GetActiveScene().name == "TestScene(network)orginal";
+        bool SectorBoss = SceneManager.GetActiveScene().name == "TestScene(network)orginal";
+
         //본인 
-        if(Object.HasInputAuthority) //플레이어 본인
+        if (Object.HasInputAuthority) //플레이어 본인
         {
             Local = this;
 
@@ -52,8 +58,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 Camera.main.gameObject.SetActive(false);
 
             //Only 1 audio listener is allowed in the scene so enable loacl players audio listener
-            AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
-            audioListener.enabled = true;
+            /*AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
+            audioListener.enabled = true;*/
             
             //Enable the local camera
             // localCameraHandler.localCamera.enabled = true;
@@ -155,5 +161,23 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         //Get rid of the local camera if we get destroyed as a new one will be spawned with the new Network player   
         if(localCameraHandler != null)
             Destroy(localCameraHandler.gameObject);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name != "TestScene(network)")
+        {
+            //Tell the host that we need to perform the spawned code manually
+            if (Object.HasStateAuthority && Object.HasInputAuthority)
+                Spawned();
+
+            if (Object.HasStateAuthority)
+                GetComponent<CharacterRespawnHandler>().RequestRespawn();
+        }
     }
 }

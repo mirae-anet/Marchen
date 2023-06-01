@@ -34,7 +34,10 @@ public class LocalCameraHandler : MonoBehaviour
 
     [SerializeField]
     private Camera localCamera;
-    private bool cameraRotationEnabled = true;
+    //ESC MENU
+    private bool EscRotationEnabled = true;
+    //READYUI
+    private bool ReadyRotationEnabled = true;
 
     void Awake()
     {
@@ -65,7 +68,7 @@ public class LocalCameraHandler : MonoBehaviour
         {
             return;
         }
-        if (cameraRotationEnabled)
+        if (EscRotationEnabled && ReadyRotationEnabled)
         {
             cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
             cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
@@ -141,8 +144,17 @@ public class LocalCameraHandler : MonoBehaviour
         localCamera.enabled = able;       
     }
 
-    public void EnableCameraRotation(bool enable)
+
+    public void EnableRotationEsc(bool enable)
     {
-        cameraRotationEnabled = enable;
+        EscRotationEnabled = enable;
     }
+
+    public void EnableRotationReady(bool enable)
+    {
+        ReadyRotationEnabled = enable;
+    }
+
+
+
 }
