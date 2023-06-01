@@ -28,6 +28,7 @@ public class GrabAction : InteractionHandler
             if(networkPlayerController != null)
                 networkPlayerController.SetIsInteract(true);
             
+            Utils.SetRenderLayerInChildren(this.transform,LayerMask.NameToLayer("UI"));
             this.transform.parent = other;
 
             isGrab = true;
@@ -35,6 +36,7 @@ public class GrabAction : InteractionHandler
         else
         {
             this.transform.parent = null;
+            Utils.SetRenderLayerInChildren(this.transform,LayerMask.NameToLayer("Ground"));
 
             rigid.isKinematic = false;
 
