@@ -12,6 +12,7 @@ public class CharacterInputHandler : MonoBehaviour
     bool dodgeInput = false;
     bool attackInput = false;
     bool reloadInput = false;
+    bool interactInput = false;
 
     //esc
     bool escEnable = true;
@@ -59,6 +60,8 @@ public class CharacterInputHandler : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
                 attackInput = true;
         }
+        if(Input.GetButtonDown("Interact"))
+            interactInput = true;
 
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector);
@@ -81,6 +84,8 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.attackInput = attackInput;
         //reload data
         networkInputData.reloadInput = reloadInput;
+        //interact data
+        networkInputData.interactInput = interactInput;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
@@ -93,6 +98,7 @@ public class CharacterInputHandler : MonoBehaviour
         dodgeInput = false;
         attackInput = false;
         reloadInput = false;
+        interactInput = false;
 
         return networkInputData;
     }
