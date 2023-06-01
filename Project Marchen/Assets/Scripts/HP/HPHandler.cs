@@ -9,7 +9,7 @@ public class HPHandler : NetworkBehaviour
     byte HP {get; set;}
 
     [Networked(OnChanged = nameof(OnStateChanged))]
-    public bool isDead {get; set;}
+    private bool isDead {get; set;}
     bool isDamage = false;
     bool isInitialized = false;
     const byte startingHP = 100;
@@ -29,6 +29,8 @@ public class HPHandler : NetworkBehaviour
     NetworkPlayer networkPlayer;
     Animator anim;
     Rigidbody rigid;
+    public HeartBar heartBar;
+    public HeartBar myHeartBar;
 
     private void Awake()
     {
@@ -43,9 +45,19 @@ public class HPHandler : NetworkBehaviour
     }
     void Start()
     {
-        if(!skipSettingStartValues){
-            HP = startingHP;
+        if(!skipSettingStartValues)
+        {
+            if(Object.HasStateAuthority)
+                HP = startingHP;
             isDead = false;
+        }
+
+        if(heartBar != null)
+        {
+            heartBar.SetMaxHP(startingHP);
+            heartBar.SetSlider(HP);
+            myHeartBar.SetMaxHP(startingHP);
+            myHeartBar.SetSlider(HP);
         }
 
         isInitialized = true;
@@ -70,16 +82,16 @@ public class HPHandler : NetworkBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
 
-        if(Object.HasInputAuthority)
+        if(Object != null && Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
         //화면 정상화
-        if(Object.HasInputAuthority && !isDead)
+        if(Object != null && Object.HasInputAuthority && !isDead)
             uiOnHitImage.color = new Color(0, 0, 0, 0);
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
 
         //아바타 정상화
         isDamage = false;
@@ -104,7 +116,7 @@ public class HPHandler : NetworkBehaviour
     }
 
     //Function only called on the server
-    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount, Vector3 AttackPostion)
+    public void OnTakeDamage(string damagedByNickname, byte damageAmount, Vector3 AttackPostion)
     {
         //only take damage while alive
         if(isDead)
@@ -122,7 +134,7 @@ public class HPHandler : NetworkBehaviour
         //player died
         if(HP <= 0)
         {
-            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
+            networkInGameMessages.SendInGameRPCMessage(damagedByNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
             Debug.Log($"{Time.time} {transform.name} died");
             isDead = true;
         }
@@ -132,29 +144,6 @@ public class HPHandler : NetworkBehaviour
         }
     }
     //method overload
-    public void OnTakeDamage(string damageCausedByPlayerNickname, byte damageAmount)
-    {
-        //only take damage while alive
-        if(isDead)
-            return;
-        if(isDamage)
-            return;
-
-        //Ensure that we cannot flip the byte as it can't handle minus values.
-        if(damageAmount > HP)
-            damageAmount = HP;
-        HP -= damageAmount;
-
-        Debug.Log($"{Time.time} {transform.name} took damage got {HP} left");
-
-        //player died
-        if(HP <= 0)
-        {
-            networkInGameMessages.SendInGameRPCMessage(damageCausedByPlayerNickname, $"Killed <b>{networkPlayer.nickName.ToString()}</b>");
-            Debug.Log($"{Time.time} {transform.name} died");
-            isDead = true;
-        }
-    }
 
     public void OnHeal(byte HealAmount)
     {
@@ -179,6 +168,10 @@ public class HPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
 
         byte newHP = changed.Behaviour.HP;
+        if(changed.Behaviour.heartBar != null)
+            changed.Behaviour.heartBar.SetSlider(newHP);
+        if(changed.Behaviour.myHeartBar != null)
+            changed.Behaviour.myHeartBar.SetSlider(newHP);
         
         changed.LoadOld();
         byte oldHP = changed.Behaviour.HP;
@@ -224,7 +217,6 @@ public class HPHandler : NetworkBehaviour
 
         if(Object.HasStateAuthority)
         {
-            gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
             rigid.velocity = Vector3.zero;
             rigid.isKinematic = true;
             rigid.detectCollisions = false;
@@ -265,5 +257,9 @@ public class HPHandler : NetworkBehaviour
 
         rigid.AddForce(Vector3.up * 25f, ForceMode.Impulse);
         rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
+    }
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }

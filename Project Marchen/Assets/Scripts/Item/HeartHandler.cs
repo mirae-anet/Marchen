@@ -13,13 +13,7 @@ public class HeartHandler : NetworkBehaviour
     // public Type type;
 
     //other component
-    NetworkObject networkObject;
-    public NetworkObject itemSpawner;
-
-    void Start()
-    {
-        networkObject = GetComponent<NetworkObject>();
-    }
+    public NetworkObject Spawner;
 
     void Update()
     {
@@ -28,24 +22,27 @@ public class HeartHandler : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-
-        if(networkRunner.IsServer)
+        if(Object != null && Object.HasStateAuthority)
         {
             // Debug.Log($"Heart OnTriggerEnter : {other.tag}");
     
             if (other.tag == "Player")
             {
                 HPHandler hpHandler = other.transform.root.GetComponent<HPHandler>();
-                hpHandler.OnHeal(value);
+                if(hpHandler != null)
+                    hpHandler.OnHeal(value);
     
-                Runner.Despawn(networkObject);
+                if(Spawner != null)
+                {
+                    Spawner.gameObject.SetActive(true);
+                    Spawner.GetComponent<SpawnHandler>().SetTimer();  
+                }
+                
+                Runner.Despawn(Object);
             }
         }
     }
     private void OnDestroy()
     {
-        if(itemSpawner != null)
-            itemSpawner.GetComponent<ItemSpawnHandler>().SetTimer();  
     }
 }

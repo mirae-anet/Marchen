@@ -10,13 +10,16 @@ public class CharacterInputHandler : MonoBehaviour
     bool walkInput = false;
     bool jumpInput = false;
     bool dodgeInput = false;
-    bool isFireButtonPressed = false;
-    bool isGrenadeFireButtonPressed = false;
-    bool isRocketLauncherFireButtonPressed = false;
+    bool attackInput = false;
+    bool reloadInput = false;
+    bool interactInput = false;
 
+    //esc
+    bool escEnable = true;
     //other components
     LocalCameraHandler localCameraHandler;
     NetworkPlayerController networkPlayerController;
+
     private void Awake()
     {
         localCameraHandler = GetComponentInChildren<LocalCameraHandler>();
@@ -44,27 +47,25 @@ public class CharacterInputHandler : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")); // 이동 입력 벡터
         isMove = (moveInput.magnitude != 0); // moveInput의 길이로 입력 판정
 
-        if(Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
             jumpInput = true;
         if(Input.GetButtonDown("Walk"))
             walkInput = true;
         if(Input.GetButtonDown("Dodge"))
             dodgeInput = true;
-
-        //fire
-        if(Input.GetButtonDown("Fire1"))
-            isFireButtonPressed = true;
-
-        //Grenade fire
-        if(Input.GetKeyDown(KeyCode.G))
-            isGrenadeFireButtonPressed = true;
-
-        //Rocket fire
-        if(Input.GetButtonDown("Fire2"))
-            isRocketLauncherFireButtonPressed = true;
+        if(Input.GetButtonDown("Reload"))
+            reloadInput = true;
+        if (escEnable == true)
+        {
+            if (Input.GetButtonDown("Fire1"))
+                attackInput = true;
+        }
+        if(Input.GetButtonDown("Interact"))
+            interactInput = true;
 
         //Set view
-        localCameraHandler.SetViewInputVector(viewInputVector); 
+        localCameraHandler.SetViewInputVector(viewInputVector);
+
 
     }
     public NetworkInputData GetNetworkInput()
@@ -79,26 +80,32 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.walkInput = walkInput;
         //dodge data
         networkInputData.dodgeInput = dodgeInput;
+        //attack data
+        networkInputData.attackInput = attackInput;
+        //reload data
+        networkInputData.reloadInput = reloadInput;
+        //interact data
+        networkInputData.interactInput = interactInput;
         //moveDir
         networkInputData.moveDir = localCameraHandler.getMoveDir(moveInputVector);
         //Aim data
         networkInputData.aimForwardVector = localCameraHandler.getAimForwardVector();
-        //Fire data
-        networkInputData.isFireButtonPressed = isFireButtonPressed;
-        //Grenade data
-        networkInputData.isGrenadeFireButtonPressed = isGrenadeFireButtonPressed;
-        //Rocket data
-        networkInputData.isRocketLauncherFireButtonPressed = isRocketLauncherFireButtonPressed;
 
         //Reset variables now that we have read their status
         // isMove = false;
         jumpInput = false;
         walkInput = false;
         dodgeInput = false;
-        isFireButtonPressed = false;
-        isGrenadeFireButtonPressed = false;
-        isRocketLauncherFireButtonPressed = false;
+        attackInput = false;
+        reloadInput = false;
+        interactInput = false;
 
         return networkInputData;
     }
+
+    public void EnableinPut(bool enable)
+    {
+        escEnable = enable;
+    }
+
 }

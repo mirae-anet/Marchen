@@ -4,6 +4,7 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -11,7 +12,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     NetworkPlayer playerPrefab;
     
     //Mapping between Token ID and Re-created Players
-    Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
+    public Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
 
     //other components
     CharacterInputHandler characterInputHandler;
@@ -70,7 +71,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
                 networkPlayer.GetComponent<NetworkObject>().AssignInputAuthority(player);
                 networkPlayer.Spawned();
             }
-            else
+            else 
             {
                 Debug.Log($"Spawning new player for connection token {playerToken}");
                 NetworkPlayer spawnedNetworkPlayer = runner.Spawn(playerPrefab, Utils.GetRandomSpawnPoint(), Quaternion.identity, player);
@@ -88,6 +89,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         Debug.Log("OnPlayerLeft");
     }
+
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         if(characterInputHandler == null && NetworkPlayer.Local != null)
@@ -115,7 +117,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnHostMigrationCleanUp()
     {
         Debug.Log("Spawner OnHostMigrationCleanUp started");
-
+        LinkedList<int> removeTokens = new LinkedList<int>(); 
         foreach(KeyValuePair<int, NetworkPlayer> entry in mapTokenIDWithNetworkPlayer)
         {
             NetworkObject networkObjectDictionary = entry.Value.GetComponent<NetworkObject>();
@@ -123,8 +125,16 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
             {
                 Debug.Log($"{Time.time} Found player that has not reconnected. Despawning {entry.Value.nickName}");
                 networkObjectDictionary.Runner.Despawn(networkObjectDictionary);
+                removeTokens.AddLast(entry.Key);
+
             }
         }
+        for(int i=0; i < removeTokens.Count; i++)
+        {
+            mapTokenIDWithNetworkPlayer.Remove(removeTokens.Last.Value);
+            removeTokens.RemoveLast();
+        }
+
 
         Debug.Log("Spawner OnHostMigrationCleanUp completed");
 
