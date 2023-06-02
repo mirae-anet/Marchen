@@ -7,7 +7,7 @@ public class AttackHandler : NetworkBehaviour
 {
     public enum Type { Hammer, Gun };
     [Header("설정")]//시작
-    static private Type weaponType;
+    private Type weaponType;
 
     [Header("오브젝트 연결")]
     [SerializeField]
@@ -36,7 +36,8 @@ public class AttackHandler : NetworkBehaviour
         // 씬 변경 시 이전 값을 유지하기 위해 추가
         if (Object.HasStateAuthority)
         {
-            RPC_RequestWeaponChange((int)weaponType);
+            //RPC_RequestWeaponChange((int)weaponType);
+            ChangeWeapon((int)weaponType);
         }
     }
 
