@@ -37,19 +37,40 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
-        bool Library = SceneManager.GetActiveScene().name == "fdsadsfa";
+        bool Library = SceneManager.GetActiveScene().name == "TestScene(network)_Potal";
         
-        if(Library)
+        //본인 
+        if (Object.HasInputAuthority) //플레이어 본인
         {
+            Local = this;
 
-        }
-        else
-        {
-            //본인 
-            if (Object.HasInputAuthority) //플레이어 본인
+            if (Library)
             {
-                Local = this;
+                 //Sets the layer of the local players model
+                //자신의 닉네임은 안 보이도록 레이어를 변경
+                Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
+                Utils.SetRenderLayerInChildren(WorldSpaceCanvas, LayerMask.NameToLayer("IgnoreCamera"));
 
+                //Disable main camera
+                if (Camera.main != null)
+                    Camera.main.gameObject.SetActive(false);
+
+                //Only 1 audio listener is allowed in the scene so enable loacl players audio listener
+                /*AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
+                audioListener.enabled = true;*/
+
+                //Enable the local camera
+                // localCameraHandler.localCamera.enabled = true;
+                localCameraHandler.localCameraEnable(true);
+
+                //Enable UI for local player
+                localUI.SetActive(true);
+
+                //Detach camera if enabled
+                localCameraHandler.transform.parent = null;
+            }
+            else
+            {
                 //Sets the layer of the local players model
                 //자신의 닉네임은 안 보이도록 레이어를 변경
                 Utils.SetRenderLayerInChildren(playerBody, LayerMask.NameToLayer("LocalPlayerModel"));
@@ -64,7 +85,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 audioListener.enabled = true;
 
                 //Enable the local camera
-                // localCameraHandler.localCamera.enabled = true;
+                //.localCamera.enabled = true;
                 localCameraHandler.localCameraEnable(true);
 
                 //Enable UI for local player
@@ -72,31 +93,32 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
                 //Detach camera if enabled
                 localCameraHandler.transform.parent = null;
-
-                RPC_SetNickName(GameManager.instance.playerNickName);
-
-                Debug.Log("Spawned local player");
-            }
-            else //다른플레이어
-            {
-                //Disable the camera if we are not the local player
-                // localCameraHandler.localCamera.enabled = false;
-                localCameraHandler.localCameraEnable(false);
-
-                //Disable UI in the PlayerUICanvas
-                localUI.SetActive(false);
-
-                //Only 1 audio listener is allowed in the scene so disable remote players audio listener
-                AudioListener audioListener = GetComponentInChildren<AudioListener>();
-                audioListener.enabled = false;
-
-                Debug.Log("Spawned remote player");
             }
 
-            Runner.SetPlayerObject(Object.InputAuthority, Object);
+            RPC_SetNickName(GameManager.instance.playerNickName);
 
-            transform.name = $"P_{Object.Id}";
+            Debug.Log("Spawned local player");
         }
+        else //다른플레이어
+        {
+            //Disable the camera if we are not the local player
+            // localCameraHandler.localCamera.enabled = false;
+            localCameraHandler.localCameraEnable(false);
+
+            //Disable UI in the PlayerUICanvas
+            localUI.SetActive(false);
+
+            //Only 1 audio listener is allowed in the scene so disable remote players audio listener
+            AudioListener audioListener = GetComponentInChildren<AudioListener>();
+            audioListener.enabled = false;
+
+            Debug.Log("Spawned remote player");
+        }
+
+        Runner.SetPlayerObject(Object.InputAuthority, Object);
+
+        transform.name = $"P_{Object.Id}";
+        
     }
 
     public void PlayerLeft(PlayerRef player)
@@ -173,14 +195,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name != "TestScene(network)_Potal")
+        Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
+
+        /*if (scene.name != "TestScene(network)_Potal")
         {
             //Tell the host that we need to perform the spawned code manually
-            if (Object.HasStateAuthority && Object.HasInputAuthority)
+            if (Object.HasStateAuthority && Object.HasInputAuthority) 
                 Spawned();
 
             if (Object.HasStateAuthority)
                 GetComponent<CharacterRespawnHandler>().RequestRespawn();
-        }
+        }*/
     }
 }

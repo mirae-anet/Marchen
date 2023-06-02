@@ -1465,7 +1465,7 @@ RectTransform:
   m_Children:
   - {fileID: 8046661761272996854}
   m_Father: {fileID: 4891701774029805233}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2003,7 +2003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  weaponType: 1
+  weaponType: 0
   weapons:
   - {fileID: 7809428636636552867}
   - {fileID: 2911763550395956773}
@@ -2041,6 +2041,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   BodyAnchor: {fileID: 8329117566836997475}
+  _greenBook: 0
+  _redBook: 0
   image1: {fileID: 782352194091736887}
   image2: {fileID: 8259243397000299339}
   myImage1: {fileID: 9151438348618553819}
