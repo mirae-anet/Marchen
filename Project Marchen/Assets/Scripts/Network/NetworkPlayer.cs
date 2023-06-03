@@ -43,6 +43,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         if (Object.HasInputAuthority) //플레이어 본인
         {
             Local = this;
+            LocalCameraHandler.Local = localCameraHandler;
 
             if (Library)
             {
@@ -67,6 +68,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 //Enable UI for local player
                 localUI.SetActive(true);
 
+                //HP bar와 ItemCanvas는 비활성화해야함.
+
                 //Detach camera if enabled
                 localCameraHandler.transform.parent = null;
             }
@@ -79,18 +82,23 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
                 //Disable main camera
                 if (Camera.main != null)
+                {
                     Camera.main.gameObject.SetActive(false);
+                    Debug.Log("Deactivate main camera");
+                }
 
                 //Only 1 audio listener is allowed in the scene so enable loacl players audio listener
-                /*AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
+                AudioListener audioListener = localCameraHandler.GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
                 if(audioListener !=null)
-                    audioListener.enabled = true;*/
+                    audioListener.enabled = true;
 
                 //Enable the local camera
                 localCameraHandler.localCameraEnable(true);
 
                 //Enable UI for local player
                 localUI.SetActive(true);
+
+                //HP bar와 ItemCanvas는 비활성화해야함.
 
                 //Detach camera if enabled
                 localCameraHandler.transform.parent = null;
@@ -206,18 +214,17 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        if (scene.name != "TestScene(network)_Potal")
+        if (scene.name != "TestScene(network)_Potal" && scene.name != "Lobby")
         {
             //Tell the host that we need to perform the spawned code manually
-            if (Object.HasStateAuthority && Object.HasInputAuthority)
+            if (Object != null && Object.HasStateAuthority && Object.HasInputAuthority)
             {
                 Spawned();
             }
 
-            if (Object.HasStateAuthority)
+            if (Object != null && Object.HasStateAuthority)
                 GetComponent<CharacterRespawnHandler>().RequestRespawn();
         }
     }

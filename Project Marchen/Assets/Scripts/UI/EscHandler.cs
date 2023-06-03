@@ -10,8 +10,6 @@ public class EscHandler : NetworkBehaviour
     public GameObject escPanel;
     LocalCameraHandler localCameraHandler;
     CharacterInputHandler inputHandler;
-
-    private SetsSelect setselect;
     private ReadyUIHandler readyUIHandler;
 
     private void Awake()
@@ -41,7 +39,6 @@ public class EscHandler : NetworkBehaviour
         {
             //카메라
             readyUIHandler = FindObjectOfType<ReadyUIHandler>();
-            setselect = FindObjectOfType<SetsSelect>();
             if (escPanel.activeSelf)
             {
 
