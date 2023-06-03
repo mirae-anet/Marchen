@@ -2003,7 +2003,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  weaponType: 0
   weapons:
   - {fileID: 7809428636636552867}
   - {fileID: 2911763550395956773}
@@ -5556,6 +5555,10 @@ PrefabInstance:
     - target: {fileID: 1873072230472789115, guid: 8e1494908d90445cbb03f22414ca31c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878020263689099374, guid: 8e1494908d90445cbb03f22414ca31c1, type: 3}
+      propertyPath: delay
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e1494908d90445cbb03f22414ca31c1, type: 3}
