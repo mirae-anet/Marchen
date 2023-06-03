@@ -89,7 +89,7 @@ public class ReadyUIHandler : NetworkBehaviour
             //startGame();
             if (isReady)
             {
-                countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 10);
+                countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 1);
                 buttonReadyText.text = "취소";
             }
             else
@@ -99,7 +99,6 @@ public class ReadyUIHandler : NetworkBehaviour
                 buttonReadyText.text = "게임시작";
             }
         }
-        NetworkPlayer.Local.GetComponent<CharacterOutfitHandler>().OnReady(isReady);
         EventSystem.current.SetSelectedGameObject(null);
     }
 

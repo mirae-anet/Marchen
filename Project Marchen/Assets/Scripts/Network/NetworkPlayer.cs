@@ -56,8 +56,9 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                     Camera.main.gameObject.SetActive(false);
 
                 //Only 1 audio listener is allowed in the scene so enable loacl players audio listener
-                /*AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
-                audioListener.enabled = true;*/
+                AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
+                if (audioListener != null)
+                    audioListener.enabled = true;
 
                 //Enable the local camera
                 // localCameraHandler.localCamera.enabled = true;
@@ -81,11 +82,11 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                     Camera.main.gameObject.SetActive(false);
 
                 //Only 1 audio listener is allowed in the scene so enable loacl players audio listener
-                AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
-                audioListener.enabled = true;
+                /*AudioListener audioListener = GetComponentInChildren<AudioListener>(true); // true : inactive object도 대상에 포함.
+                if(audioListener !=null)
+                    audioListener.enabled = true;*/
 
                 //Enable the local camera
-                //.localCamera.enabled = true;
                 localCameraHandler.localCameraEnable(true);
 
                 //Enable UI for local player
@@ -101,18 +102,28 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
         else //다른플레이어
         {
-            //Disable the camera if we are not the local player
-            // localCameraHandler.localCamera.enabled = false;
-            localCameraHandler.localCameraEnable(false);
+            if(Library)
+            {
+                //Disable the camera if we are not the local player
+                // localCameraHandler.localCamera.enabled = false;
+                localCameraHandler.localCameraEnable(false);
 
-            //Disable UI in the PlayerUICanvas
-            localUI.SetActive(false);
+                //Disable UI in the PlayerUICanvas
+                localUI.SetActive(false);
 
-            //Only 1 audio listener is allowed in the scene so disable remote players audio listener
-            AudioListener audioListener = GetComponentInChildren<AudioListener>();
-            audioListener.enabled = false;
+                Debug.Log("Spawned remote player");
+            }
+            else
+            {
+                //Disable the camera if we are not the local player
+                // localCameraHandler.localCamera.enabled = false;
+                localCameraHandler.localCameraEnable(false);
 
-            Debug.Log("Spawned remote player");
+                //Disable UI in the PlayerUICanvas
+                localUI.SetActive(false);
+
+                Debug.Log("Spawned remote player");
+            }
         }
 
         Runner.SetPlayerObject(Object.InputAuthority, Object);
@@ -195,13 +206,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
         if (scene.name != "TestScene(network)_Potal")
         {
             //Tell the host that we need to perform the spawned code manually
-            if (Object.HasStateAuthority && Object.HasInputAuthority) 
+            if (Object.HasStateAuthority && Object.HasInputAuthority)
+            {
                 Spawned();
+            }
 
             if (Object.HasStateAuthority)
                 GetComponent<CharacterRespawnHandler>().RequestRespawn();

@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class AttackHandler : NetworkBehaviour
 {
     public enum Type { Hammer, Gun };
-    [Header("설정")]//시작
-    private Type weaponType;
+    
+    [Networked(OnChanged = nameof(WeaponEquip))]
+    public Type weaponType { get; set; }
 
     [Header("오브젝트 연결")]
     [SerializeField]
@@ -21,38 +22,45 @@ public class AttackHandler : NetworkBehaviour
 
     void Start()
     {
+
+        if (SceneManager.GetActiveScene().name == "TestScene(network)_Potal")
+        {
+            if (Object.HasStateAuthority)
+            {
+                if (weaponType == Type.Gun)
+                {
+                    weaponType = Type.Hammer;
+                }
+                else
+                {
+                    weaponType = Type.Gun;
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
+
         hpHandler = GetComponent<HPHandler>();
 
-        // 선택했던 weaponType 값
-        if (PlayerPrefs.HasKey("WeaponType"))
-        {
-            weaponType = (Type)PlayerPrefs.GetInt("WeaponType");
-        }
 
-        WeaponEquip();
-
-        // 씬 변경 시 이전 값을 유지하기 위해 추가
-        if (Object.HasStateAuthority)
-        {
-            //RPC_RequestWeaponChange((int)weaponType);
-            ChangeWeapon((int)weaponType);
-        }
     }
 
-    void WeaponEquip()
+    static void WeaponEquip(Changed<AttackHandler> changed)
     {
-        switch (weaponType)
+        switch (changed.Behaviour.weaponType)
         {
             case Type.Hammer:
-                weapons[0].SetActive(true);
-                weapons[1].SetActive(false);
-                weaponHandler = weapons[0].GetComponent<WeaponHandler>();
+                changed.Behaviour.weapons[0].SetActive(true);
+                changed.Behaviour.weapons[1].SetActive(false);
+                changed.Behaviour.weaponHandler = changed.Behaviour.weapons[0].GetComponent<WeaponHandler>();
                 break;
 
             case Type.Gun:
-                weapons[0].SetActive(false);
-                weapons[1].SetActive(true);
-                weaponHandler = weapons[1].GetComponent<WeaponHandler>();
+                changed.Behaviour.weapons[0].SetActive(false);
+                changed.Behaviour.weapons[1].SetActive(true);
+                changed.Behaviour.weaponHandler = changed.Behaviour.weapons[1].GetComponent<WeaponHandler>();
                 break;
         }
     }
@@ -80,25 +88,15 @@ public class AttackHandler : NetworkBehaviour
     //추가
     public void ChangeWeapon(int weaponIndex)
     {
-        weaponType = (Type)weaponIndex;
-        WeaponEquip();
-
-        if (Object.HasInputAuthority)
-        {
-            RPC_RequestWeaponChange(weaponIndex);
-        }
-
-        // 변경한값 저장
-        PlayerPrefs.SetInt("WeaponType", (int)weaponType);
+        RPC_RequestWeaponChange(weaponIndex);
     }
 
 
 
-    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     void RPC_RequestWeaponChange(int weaponIndex)
     {
         weaponType = (Type)weaponIndex;
-        WeaponEquip();
     }
 
 }
