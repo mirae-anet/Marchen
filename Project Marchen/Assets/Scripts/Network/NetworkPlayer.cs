@@ -197,7 +197,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        /*if (scene.name != "TestScene(network)_Potal")
+        if (scene.name != "TestScene(network)_Potal")
         {
             //Tell the host that we need to perform the spawned code manually
             if (Object.HasStateAuthority && Object.HasInputAuthority) 
@@ -205,6 +205,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             if (Object.HasStateAuthority)
                 GetComponent<CharacterRespawnHandler>().RequestRespawn();
-        }*/
+        }
     }
 }

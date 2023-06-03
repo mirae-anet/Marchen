@@ -18,12 +18,10 @@ public class AttackHandler : NetworkBehaviour
     WeaponHandler weaponHandler;
 
     Scene scene;
+
     void Start()
     {
         hpHandler = GetComponent<HPHandler>();
-
-        if (scene.name == "TestScene(network)_Potal")
-            ChangeWeapon(1);
 
         // 선택했던 weaponType 값
         if (PlayerPrefs.HasKey("WeaponType"))
