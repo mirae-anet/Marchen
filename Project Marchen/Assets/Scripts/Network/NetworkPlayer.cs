@@ -225,7 +225,14 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             }
 
             if (Object != null && Object.HasStateAuthority)
-                GetComponent<CharacterRespawnHandler>().RequestRespawn();
+            {
+                CharacterRespawnHandler characterRespawnHandler = GetComponent<CharacterRespawnHandler>();
+                if(characterRespawnHandler != null)
+                {
+                    characterRespawnHandler.ChangeSpawnPoint(new Vector3(0,0,0));
+                    characterRespawnHandler.RequestRespawn();
+                }
+            }
         }
     }
 }
