@@ -7,62 +7,50 @@ public class AttackHandler : NetworkBehaviour
 {
     public enum Type { Hammer, Gun };
     
-    [Networked(OnChanged = nameof(WeaponEquip))]
-    public Type weaponType { get; set; }
+    [Networked(OnChanged = nameof(OnChangeWeapon))]
+    private Type weaponType { get; set; }
 
     [Header("오브젝트 연결")]
     [SerializeField]
     private GameObject[] weapons;
 
     //other componet
-    HPHandler hpHandler;
     WeaponHandler weaponHandler;
-
-    Scene scene;
 
     void Start()
     {
-
         if (SceneManager.GetActiveScene().name == "TestScene(network)_Potal")
         {
             if (Object.HasStateAuthority)
             {
-                if (weaponType == Type.Gun)
-                {
-                    weaponType = Type.Hammer;
-                }
-                else
-                {
-                    weaponType = Type.Gun;
-                }
+                weaponType = Type.Hammer;
             }
         }
-        else
-        {
-            return;
-        }
 
-        hpHandler = GetComponent<HPHandler>();
-
-
+        WeaponEquip();
     }
 
-    static void WeaponEquip(Changed<AttackHandler> changed)
+    void WeaponEquip()
     {
-        switch (changed.Behaviour.weaponType)
+        switch (weaponType)
         {
             case Type.Hammer:
-                changed.Behaviour.weapons[0].SetActive(true);
-                changed.Behaviour.weapons[1].SetActive(false);
-                changed.Behaviour.weaponHandler = changed.Behaviour.weapons[0].GetComponent<WeaponHandler>();
+                weapons[0].SetActive(true);
+                weapons[1].SetActive(false);
+                weaponHandler = weapons[0].GetComponent<WeaponHandler>();
                 break;
 
             case Type.Gun:
-                changed.Behaviour.weapons[0].SetActive(false);
-                changed.Behaviour.weapons[1].SetActive(true);
-                changed.Behaviour.weaponHandler = changed.Behaviour.weapons[1].GetComponent<WeaponHandler>();
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(true);
+                weaponHandler = weapons[1].GetComponent<WeaponHandler>();
                 break;
         }
+    }
+
+    static void OnChangeWeapon(Changed<AttackHandler> changed)
+    {
+        changed.Behaviour.WeaponEquip();
     }
 
     public void DoAttack(Vector3 aimDir)
@@ -84,14 +72,11 @@ public class AttackHandler : NetworkBehaviour
     {
         weaponHandler.StopReload();
     }
-    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-    //추가
+
     public void ChangeWeapon(int weaponIndex)
     {
         RPC_RequestWeaponChange(weaponIndex);
     }
-
-
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     void RPC_RequestWeaponChange(int weaponIndex)
