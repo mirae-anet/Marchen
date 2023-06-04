@@ -225,6 +225,17 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newShelf.skipSettingStartValues = true;
                 });
             }
+            else if(resumeNetworkObject.TryGetBehaviour<MovingGroundAction>(out var oldMovingGround))
+            {
+                Transform oldMovingTrans = oldMovingGround.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldMovingTrans.position, oldMovingTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    MovingGroundAction newMovingGround = newNetworkObject.GetComponent<MovingGroundAction>();
+                    newMovingGround.CopyStateFrom(oldMovingGround);
+                    newMovingGround.skipSettingStartValues = true;
+                });
+            }
             else
             {
                 Transform oldOne = resumeNetworkObject.gameObject.transform;
