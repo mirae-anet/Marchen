@@ -64,7 +64,6 @@ public class HammerHandler : WeaponHandler
             }
             yield return new WaitForSeconds(0.05f);
         }
-
         RPC_SetTrailEffect(false);
 
         networkPlayerController.SetIsAttack(false);

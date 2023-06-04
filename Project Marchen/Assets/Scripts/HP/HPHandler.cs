@@ -48,8 +48,10 @@ public class HPHandler : NetworkBehaviour
         if(!skipSettingStartValues)
         {
             if(Object.HasStateAuthority)
+            {
                 HP = startingHP;
-            isDead = false;
+                isDead = false;
+            }
         }
 
         if(heartBar != null)

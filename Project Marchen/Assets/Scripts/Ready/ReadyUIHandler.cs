@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ReadyUIHandler : NetworkBehaviour
 {
-
     [Header("UI")]
     public TextMeshProUGUI buttonReadyText;
     public TextMeshProUGUI countDownText;
@@ -15,8 +15,7 @@ public class ReadyUIHandler : NetworkBehaviour
     public GameObject LeftBtn;
 
     bool isReady = false;
-    SetsSelect setslect;
-    LocalCameraHandler local;
+
     //countdown
     TickTimer countdownTickTimer = TickTimer.None;
 
@@ -27,11 +26,8 @@ public class ReadyUIHandler : NetworkBehaviour
     void Start()
     {
         countDownText.text = "";
-        setslect = FindObjectOfType<SetsSelect>();
-        local = FindObjectOfType<LocalCameraHandler>(); // 임시
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (countdownTickTimer.Expired(Runner))
@@ -40,15 +36,13 @@ public class ReadyUIHandler : NetworkBehaviour
 
             countdownTickTimer = TickTimer.None;
             if(Object.HasStateAuthority)
-                setslect.LeftUI();
-
+                LeftUI();
         }
         else if(countdownTickTimer.IsRunning)
         {
             countDown = (byte)countdownTickTimer.RemainingTime(Runner);
         }
     }
-
 
     void startGame()
     {
@@ -60,19 +54,21 @@ public class ReadyUIHandler : NetworkBehaviour
         {
             DontDestroyOnLoad(gameObjectToTransfer);
         }
-        Runner.SetActiveScene("TestScene(network)original");
+        Runner.SetActiveScene("TestScene(network)_Potal2");
     }
     public void OnChangeWeaponHammer()
     {
         if (isReady)
             return;
         NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(0);
+        EventSystem.current.SetSelectedGameObject(null);
     }
     public void OnChangeWeaponGun()
     {
         if (isReady)
             return;
         NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(1);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OnReady()
@@ -86,7 +82,7 @@ public class ReadyUIHandler : NetworkBehaviour
             //startGame();
             if (isReady)
             {
-                countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 10);
+                countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 5);
                 buttonReadyText.text = "취소";
             }
             else
@@ -96,7 +92,7 @@ public class ReadyUIHandler : NetworkBehaviour
                 buttonReadyText.text = "게임시작";
             }
         }
-        NetworkPlayer.Local.GetComponent<CharacterOutfitHandler>().OnReady(isReady);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     static void OnCountdownChanged(Changed<ReadyUIHandler> changed)
@@ -110,15 +106,70 @@ public class ReadyUIHandler : NetworkBehaviour
             countDownText.text = $"";
         else countDownText.text = $"Game start in {countDown}";
     }
-
-    public void LeftUi()
+    public void LeftUI()
     {
-        setslect.LeftUI();
+        // escHandler = FindObjectOfType<EscHandler>();
+        EscHandler escHandler = LocalCameraHandler.Local.GetComponentInChildren<EscHandler>();
+        if (escHandler.ActiveEsc())
+        {
+            RPC_SetActiveReadyUI(false);
+            RPC_RotateCamera(true);
+            return;
+        }
+        RPC_SetActiveReadyUI(false);
+        RPC_MouseSet(false);
+        RPC_RotateCamera(true);
     }
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetActiveReadyUI(bool bol)
+    {
+        ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
+        readyUIHandler.gameObject.SetActive(bol);
+    }
+
+    //마우스잠금
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_MouseSet(bool set)
+    {
+        CharacterInputHandler inputHandler = NetworkPlayer.Local.GetComponent<CharacterInputHandler>();
+        inputHandler.EnableinPut(!set);
+        //마우스 활성화
+        if (set)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+  
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_RotateCamera(bool enable)
+    {
+        Camera localCamera = FindLocalCamera();
+        LocalCameraHandler camerahandler = localCamera.GetComponentInParent<LocalCameraHandler>();
+        camerahandler.EnableRotationReady(enable);
+    }
     public void SetActive()
     {
         StartBtn.SetActive(true);
         LeftBtn.SetActive(true);
+    }
+    private Camera FindLocalCamera()
+    {
+        if(LocalCameraHandler.Local != null)
+        {
+            Camera localCamera = LocalCameraHandler.Local.GetComponentInChildren<Camera>();
+            return localCamera;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
