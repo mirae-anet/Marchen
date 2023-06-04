@@ -29,6 +29,9 @@ public class SessionInfoListUIItem : MonoBehaviour
         if (sessionInfo.PlayerCount >= MaxPlayer)
             isJoinButtonActive = false;
 
+        if(sessionInfo.IsOpen==false)
+            isJoinButtonActive = false;
+
         joinButton.gameObject.SetActive(isJoinButtonActive);
     }
 
