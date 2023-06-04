@@ -117,9 +117,10 @@ public class HPHandler : NetworkBehaviour
         characterRespawnHandler.RequestRespawn();
     }
 
-    //Function only called on the server
     public void OnTakeDamage(string damagedByNickname, byte damageAmount, Vector3 AttackPostion)
     {
+        if(!Object.HasStateAuthority)
+            return;
         //only take damage while alive
         if(isDead)
             return;
