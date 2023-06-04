@@ -1,24 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Fusion;
 
 public class StoryTextAction : InteractionHandler
 {
-    private bool first = true;
+    public TextAsset textAsset;
+
     private void OnTriggerEnter(Collider other)
     {
-        if(!first)
-            return;
-
         if (other.tag != "Player")
             return;
         
+        if(!other.transform.root.GetComponent<NetworkObject>().HasInputAuthority)
+            return;
+
         PrintStory();
 
         // this.GetComponent<SphereCollider>().radius = 3f;
         this.GetComponent<SphereCollider>().enabled = false;
-        first = false;
     }
 
     public override void action(Transform other)
@@ -46,9 +47,20 @@ public class StoryTextAction : InteractionHandler
             obj.GetComponent<PlayerActionHandler>().Interact();
         }
     }
+
     private void PrintStory()
     {
-        // 자신의 StoryTextUI에 스토리를 설명하는 Text를 출력 
-        Debug.Log("OnPrintStroy");
+        //local player의 story text ui를 찾는다.
+        if(LocalCameraHandler.Local != null)
+        {
+            StoryTextUIHandler storyTextUIHandler = LocalCameraHandler.Local.GetComponentInChildren<StoryTextUIHandler>(true);
+            if(storyTextUIHandler != null)
+            {
+                Debug.Log("OnPrintStory");
+                storyTextUIHandler.gameObject.SetActive(true);
+                storyTextUIHandler.StartStory(textAsset);
+            }
+        }
     }
+
 }

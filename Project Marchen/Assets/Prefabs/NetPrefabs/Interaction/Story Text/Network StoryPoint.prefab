@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1006270221258027049}
   - component: {fileID: 1006270221257224201}
   - component: {fileID: 1006270221256127177}
-  - component: {fileID: 8608918818293725501}
   - component: {fileID: 4612334157563216929}
+  - component: {fileID: 8608918818293725501}
   m_Layer: 5
   m_Name: Scroll_Open
   m_TagString: Untagged
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8608918818293725501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006270221258124297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cde8d906cbdb74bbfb4a52d579510cbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
 --- !u!135 &4612334157563216929
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -111,6 +98,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: -0.0024640337, y: 0.024892945, z: 0.039483692}
+--- !u!114 &8608918818293725501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006270221258124297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde8d906cbdb74bbfb4a52d579510cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  textAsset: {fileID: 4900000, guid: 701f759999868b4469bb7c5b62f95ddc, type: 3}
 --- !u!1 &6487694065727322822
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  textAsset: {fileID: 4900000, guid: 701f759999868b4469bb7c5b62f95ddc, type: 3}
 --- !u!1 &6487694066979224033
 GameObject:
   m_ObjectHideFlags: 0

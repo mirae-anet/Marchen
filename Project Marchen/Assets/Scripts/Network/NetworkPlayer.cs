@@ -234,6 +234,5 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 }
             }
         }
-        */
     }
 }

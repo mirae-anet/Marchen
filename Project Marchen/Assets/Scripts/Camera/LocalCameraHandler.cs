@@ -146,7 +146,6 @@ public class LocalCameraHandler : MonoBehaviour
         localCamera.enabled = able;       
     }
 
-
     public void EnableRotationEsc(bool enable)
     {
         EscRotationEnabled = enable;
@@ -156,7 +155,4 @@ public class LocalCameraHandler : MonoBehaviour
     {
         ReadyRotationEnabled = enable;
     }
-
-
-
 }
