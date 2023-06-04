@@ -76,7 +76,6 @@ public class PlayerActionHandler : InteractionHandler
                     break;
             }
         }
-
     }
 
     public void Interact()
@@ -104,5 +103,4 @@ public class PlayerActionHandler : InteractionHandler
         changed.Behaviour.myImage1.SetActive(changed.Behaviour.greenBook);
         changed.Behaviour.myImage2.SetActive(changed.Behaviour.redBook);
     }
-
 }

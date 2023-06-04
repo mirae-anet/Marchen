@@ -2,24 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-
+using UnityEngine.SceneManagement;
 public class AttackHandler : NetworkBehaviour
 {
     public enum Type { Hammer, Gun };
-    [Header("설정")]
-    public Type weaponType;
+    
+    [Networked(OnChanged = nameof(OnChangeWeapon))]
+    private Type weaponType { get; set; }
 
     [Header("오브젝트 연결")]
     [SerializeField]
     private GameObject[] weapons;
 
     //other componet
-    HPHandler hpHandler;
     WeaponHandler weaponHandler;
 
-    void Awake()
+    void Start()
     {
-        hpHandler = GetComponent<HPHandler>();
+        if (SceneManager.GetActiveScene().name == "TestScene(network)_Potal")
+        {
+            if (Object.HasStateAuthority)
+            {
+                weaponType = Type.Hammer;
+            }
+        }
+
         WeaponEquip();
     }
 
@@ -41,6 +48,11 @@ public class AttackHandler : NetworkBehaviour
         }
     }
 
+    static void OnChangeWeapon(Changed<AttackHandler> changed)
+    {
+        changed.Behaviour.WeaponEquip();
+    }
+
     public void DoAttack(Vector3 aimDir)
     {
         StopReload();
@@ -60,25 +72,16 @@ public class AttackHandler : NetworkBehaviour
     {
         weaponHandler.StopReload();
     }
-    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-    //추가
-    public void ChangeWeapon(int weaponIndex)
-    {   
-        weaponType = (Type)weaponIndex;
-        WeaponEquip();
 
-        if (Object.HasInputAuthority)
-        {
-            RPC_RequestWeaponChange(weaponIndex);
-        }
+    public void ChangeWeapon(int weaponIndex)
+    {
+        RPC_RequestWeaponChange(weaponIndex);
     }
 
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     void RPC_RequestWeaponChange(int weaponIndex)
     {
         weaponType = (Type)weaponIndex;
-        WeaponEquip();
     }
 
 }

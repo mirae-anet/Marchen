@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LocalCameraHandler : MonoBehaviour
 {
+    static public LocalCameraHandler Local;
+
     [Header("설정")]
     [Range(100f, 500f)]
     [SerializeField]
