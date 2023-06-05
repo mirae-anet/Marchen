@@ -15,10 +15,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
 
-
+    [Networked] public bool FirstJoin { get; set; }
 
     // Remote Client Token Hash
-   [Networked] public int token {get; set;} //need for Host migration
+    [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
     
     public LocalCameraHandler localCameraHandler;
@@ -216,7 +216,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        if (scene.name != "TestScene(network)_Potal" && scene.name != "Lobby")
+        if (scene.name != "Lobby" && FirstJoin == false)
         {
             //Tell the host that we need to perform the spawned code manually
             if (Object != null && Object.HasStateAuthority && Object.HasInputAuthority)
