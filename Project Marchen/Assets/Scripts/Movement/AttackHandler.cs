@@ -8,7 +8,7 @@ public class AttackHandler : NetworkBehaviour
     public enum Type { Hammer, Gun };
     
     [Networked(OnChanged = nameof(OnChangeWeapon))]
-    private Type weaponType { get; set; }
+    public Type weaponType { get; set; }
 
     [Header("오브젝트 연결")]
     [SerializeField]

@@ -69,7 +69,7 @@ public class MainMenuUIHandler : MonoBehaviour
         NetworkRunnerHandler networkRunnerHandler = FindAnyObjectByType<NetworkRunnerHandler>();
 
         // networkRunnerHandler.CreateGame(sessionNameInputField.text, "TestGameScene_Potal");
-        networkRunnerHandler.CreateGame(sessionNameInputField.text, "TestGameScene");
+        networkRunnerHandler.CreateGame(sessionNameInputField.text, "3_Test/TestGameScene");
 
         HideAllPanels();
 
