@@ -30,6 +30,7 @@ public class SeeThrough : MonoBehaviour
         Vector3 playerPosition = player.transform.position + offest;
         float characterDistance = Vector3.Distance(transform.position, playerPosition);
 
+        // RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1,playerPosition - transform.position, characterDistance, layerMask);
         RaycastHit[] hits = Physics.RaycastAll(transform.position, playerPosition - transform.position, characterDistance, layerMask);
         if (hits.Length > 0)
         {
@@ -59,8 +60,9 @@ public class SeeThrough : MonoBehaviour
     }
     private void HideObstruction(Transform obstruction)
     {
-        if(obstruction.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
-            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        if(obstruction != null)
+            if(obstruction.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+                meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
         // MeshRenderer meshRenderer = obstruction.GetComponentInChildren<MeshRenderer>();
         // if(meshRenderer != null)
@@ -68,8 +70,9 @@ public class SeeThrough : MonoBehaviour
 }
     private void ShowObstruction(Transform obstruction)
     {
-        if(obstruction.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
-            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        if(obstruction != null)
+            if(obstruction.TryGetComponent<MeshRenderer>(out MeshRenderer meshRenderer))
+                meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
         // MeshRenderer meshRenderer = obstruction.GetComponentInChildren<MeshRenderer>();
         // if(meshRenderer != null)
