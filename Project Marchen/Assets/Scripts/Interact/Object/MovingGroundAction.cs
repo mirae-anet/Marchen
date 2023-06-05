@@ -35,7 +35,6 @@ public class MovingGroundAction : InteractionHandler
         if(!move)
             return;
         
-        Debug.Log("move");
         transform.position += moveDir * Runner.DeltaTime * moveSpeed ;
 
         if(range <= Vector3.Distance(transform.position, startPosition))
@@ -53,7 +52,6 @@ public class MovingGroundAction : InteractionHandler
         if(!Object.HasStateAuthority)
             return;
 
-        Debug.Log("stay");
         move = true;
     }
 

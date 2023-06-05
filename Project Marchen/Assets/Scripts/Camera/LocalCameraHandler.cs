@@ -8,20 +8,16 @@ public class LocalCameraHandler : MonoBehaviour
 
     [Header("설정")]
     [Range(100f, 500f)]
-    [SerializeField]
-    private float cameraSpeed = 200f;
+    public float cameraSpeed = 200f;
 
     [Header("Anchor Point")]
-    [SerializeField]
-    Transform cameraAnchorPoint;
-    [SerializeField]
-    Transform bodyAnchorPoint;
+    public Transform cameraAnchorPoint;
+    public Transform bodyAnchorPoint;
+    public Transform BulletPos;
 
     [Header("Layer for the aim raycast")]
-    [SerializeField]
-    LayerMask layerMask;
-    [SerializeField]
-    float maxDistance;
+    public LayerMask layerMask;
+    public float maxDistance;
     Vector3 aimForwardVector;
 
     //Input
@@ -41,30 +37,20 @@ public class LocalCameraHandler : MonoBehaviour
     //READYUI
     private bool ReadyRotationEnabled = true;
 
-    void Awake()
-    {
-    //   networkCharacterControllerPrototypeCustom = GetComponentInParent<NetworkCharacterControllerPrototypeCustom>();
-      characterRespawnHandler = GetComponentInParent<CharacterRespawnHandler>();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         transform.forward = GameManager.instance.cameraViewRotation;
-        aimForwardVector = bodyAnchorPoint.forward;
-    }
-
-    private void Update()
-    {
-        //조종하는 사람만 실행
-        if(characterRespawnHandler.Object != null)
-            if(!characterRespawnHandler.Object.HasInputAuthority)
-                return;
-        
-        setAimForwardVector();
+        aimForwardVector = BulletPos.forward;
     }
 
     void LateUpdate()
+    {
+        CamControl();
+        setAimForwardVector();
+    }
+
+    private void CamControl()
     {
         if(!localCamera.enabled)
         {
@@ -92,7 +78,32 @@ public class LocalCameraHandler : MonoBehaviour
 
         // Move the cameraArm to the position of the player
         transform.position = cameraAnchorPoint.position;
+    }
 
+    //3차원에서 보는 바라보는 곳으로 aimForwardVector 갱신
+    private void setAimForwardVector()
+    {
+        if(Local != null)
+            if(Local != this)
+                return;
+
+        Vector3 hitPoint;
+        RaycastHit hit;
+
+        if(Physics.Raycast(localCamera.transform.position + localCamera.transform.forward.normalized * 22 , localCamera.transform.forward, out hit, maxDistance, layerMask))
+        {
+            Debug.DrawRay(localCamera.transform.position + localCamera.transform.forward.normalized * 22, localCamera.transform.forward * hit.distance, Color.yellow);
+            hitPoint = hit.point;
+            aimForwardVector = hitPoint - BulletPos.position;
+        }
+        else
+        {
+            // hit nothing. 바라보고있는 방향의 maxDistance의 좌표
+            Debug.DrawRay(localCamera.transform.position + localCamera.transform.forward.normalized * 22, localCamera.transform.forward.normalized * maxDistance, Color.yellow);
+            hitPoint = localCamera.transform.position + localCamera.transform.forward.normalized * (maxDistance+22);
+            aimForwardVector = hitPoint - BulletPos.position;
+        }
+        aimForwardVector = aimForwardVector.normalized;
     }
 
     public void SetViewInputVector(Vector2 viewInput)
@@ -100,11 +111,11 @@ public class LocalCameraHandler : MonoBehaviour
         this.viewInput = viewInput;
     }
 
-    private void OnDestroy()
+    public Vector3 getAimForwardVector()
     {
-        //when localCamera was disabled
-        GameManager.instance.cameraViewRotation = transform.forward;
+        return aimForwardVector;
     }
+
     public Vector3 getMoveDir(Vector2 moveInputVector)
     {
         Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
@@ -113,32 +124,6 @@ public class LocalCameraHandler : MonoBehaviour
         Vector3 moveDir = (lookForward * moveInputVector.y) + (lookRight * moveInputVector.x); // 바라보는 방향 기준 이동 방향
 
         return moveDir;
-    }
-
-    //3차원에서 보는 바라보는 곳으로 aimForwardVector 갱신
-    private void setAimForwardVector()
-    {
-        Vector3 hitPoint;
-        RaycastHit hit;
-
-        if(Physics.Raycast(localCamera.transform.position + localCamera.transform.forward.normalized * 22 , localCamera.transform.forward, out hit, maxDistance, layerMask))
-        {
-            Debug.DrawRay(localCamera.transform.position + localCamera.transform.forward.normalized * 22, localCamera.transform.forward * hit.distance, Color.yellow);
-            hitPoint = hit.point;
-            aimForwardVector = hitPoint - bodyAnchorPoint.position;
-        }
-        else
-        {
-            // hit nothing. 바라보고있는 방향의 maxDistance의 좌표
-            Debug.DrawRay(localCamera.transform.position + localCamera.transform.forward.normalized * 22, localCamera.transform.forward.normalized * maxDistance, Color.yellow);
-            hitPoint = localCamera.transform.position + localCamera.transform.forward.normalized * (maxDistance+22);
-            aimForwardVector = hitPoint - bodyAnchorPoint.position;
-        }
-        aimForwardVector = aimForwardVector.normalized;
-    }
-    public Vector3 getAimForwardVector()
-    {
-        return aimForwardVector;
     }
 
     public void localCameraEnable(bool able)
@@ -154,5 +139,11 @@ public class LocalCameraHandler : MonoBehaviour
     public void EnableRotationReady(bool enable)
     {
         ReadyRotationEnabled = enable;
+    }
+
+    private void OnDestroy()
+    {
+        //when localCamera was disabled
+        GameManager.instance.cameraViewRotation = transform.forward;
     }
 }

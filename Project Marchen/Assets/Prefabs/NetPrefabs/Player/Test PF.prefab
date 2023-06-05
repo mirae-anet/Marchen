@@ -2346,6 +2346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _weaponType: 1
   weapons:
   - {fileID: 7809428636636552867}
   - {fileID: 2911763550395956773}
@@ -2883,6 +2884,7 @@ GameObject:
   - component: {fileID: 2805626286509812294}
   - component: {fileID: 406200595790773962}
   - component: {fileID: 8155178793089499102}
+  - component: {fileID: 2061530696340193050}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Player
@@ -2959,6 +2961,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029522898635562803}
   m_Enabled: 0
+--- !u!114 &2061530696340193050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029522898635562803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7b7384c5174457d957fcac7b9787a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4980385288277362890}
+  offest: {x: 0, y: 2, z: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 25
 --- !u!1 &5076652926007045707
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,7 +5817,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpeed: 200
   cameraAnchorPoint: {fileID: 2721850773489610248}
-  bodyAnchorPoint: {fileID: 7081180801289539154}
+  bodyAnchorPoint: {fileID: 8329117566836997475}
+  BulletPos: {fileID: 7081180801289539154}
   layerMask:
     serializedVersion: 2
     m_Bits: 2393
