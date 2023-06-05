@@ -59,6 +59,7 @@ public class ReadyUIHandler : NetworkBehaviour
             RPC_SetActiveReadyUI(false);
             isReady = false;
             NetworkPlayer.Local.GetComponent<NetworkPlayer>().FirstJoin = false;
+            buttonReadyText.text = "게임시작";
             Runner.SetActiveScene("TestScene(network)_Potal2");
         }
         else
