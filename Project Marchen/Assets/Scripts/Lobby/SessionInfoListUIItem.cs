@@ -12,6 +12,7 @@ public class SessionInfoListUIItem : MonoBehaviour
     public TextMeshProUGUI sessionNameText;
     public TextMeshProUGUI playerCountText;
     public Button joinButton;
+    public TextMeshProUGUI isPlayMark;
 
     SessionInfo sessionInfo;
 
@@ -28,6 +29,12 @@ public class SessionInfoListUIItem : MonoBehaviour
 
         if (sessionInfo.PlayerCount >= MaxPlayer)
             isJoinButtonActive = false;
+
+        if (sessionInfo.IsOpen == false)
+        {
+            isJoinButtonActive = false;
+            isPlayMark.gameObject.SetActive(true);
+        }
 
         joinButton.gameObject.SetActive(isJoinButtonActive);
     }
