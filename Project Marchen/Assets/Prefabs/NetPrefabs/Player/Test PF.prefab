@@ -2237,7 +2237,6 @@ GameObject:
   - component: {fileID: 9061902636817628115}
   - component: {fileID: 4797138551789220831}
   - component: {fileID: 1213169584012460585}
-  - component: {fileID: 2157341127005803354}
   - component: {fileID: 7883644087192971896}
   m_Layer: 6
   m_Name: Test PF
@@ -2318,7 +2317,6 @@ MonoBehaviour:
   - {fileID: 9061902636817628115}
   - {fileID: 4797138551789220831}
   - {fileID: 1213169584012460585}
-  - {fileID: 2157341127005803354}
   - {fileID: 7883644087192971896}
   - {fileID: 1890632948988653450}
   - {fileID: 7261233525089267724}
@@ -2485,22 +2483,6 @@ MonoBehaviour:
   weapons:
   - {fileID: 7809428636636552867}
   - {fileID: 2911763550395956773}
---- !u!114 &2157341127005803354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597645375552586582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4f1930a565e124eae0bffa0c6ceab8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  _isDoneWidthCharacterSelection:
-    _value: 0
-  readyCheckboxImage: {fileID: 0}
 --- !u!114 &7883644087192971896
 MonoBehaviour:
   m_ObjectHideFlags: 0
