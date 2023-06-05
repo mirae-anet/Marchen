@@ -48,8 +48,10 @@ public class HPHandler : NetworkBehaviour
         if(!skipSettingStartValues)
         {
             if(Object.HasStateAuthority)
+            {
                 HP = startingHP;
-            isDead = false;
+                isDead = false;
+            }
         }
 
         if(heartBar != null)
@@ -115,9 +117,10 @@ public class HPHandler : NetworkBehaviour
         characterRespawnHandler.RequestRespawn();
     }
 
-    //Function only called on the server
     public void OnTakeDamage(string damagedByNickname, byte damageAmount, Vector3 AttackPostion)
     {
+        if(!Object.HasStateAuthority)
+            return;
         //only take damage while alive
         if(isDead)
             return;
@@ -217,7 +220,6 @@ public class HPHandler : NetworkBehaviour
 
         if(Object.HasStateAuthority)
         {
-            gameObject.tag = "Respawn"; // Player 태그 갖고 있으면 Enemy 타겟팅 망가짐
             rigid.velocity = Vector3.zero;
             rigid.isKinematic = true;
             rigid.detectCollisions = false;

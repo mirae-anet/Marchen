@@ -14,6 +14,7 @@ public class NetworkPlayerController : NetworkBehaviour
     private bool isDodge;
     private bool isAttack = false;
     private bool isReload = false;
+    private bool isInteract = false;
     private bool attackInput;
     private bool reloadInput;
 
@@ -27,6 +28,7 @@ public class NetworkPlayerController : NetworkBehaviour
     private bool walkInput;
     private bool jumpInput;
     private bool dodgeInput;
+    private bool interactInput;
 
     // 인스펙터
     [Header("오브젝트 연결")]
@@ -55,6 +57,7 @@ public class NetworkPlayerController : NetworkBehaviour
     private HPHandler hpHandler;
     private AttackHandler attackHandler;
     private NetworkInGameMessages networkInGameMessages;
+    private PlayerActionHandler playerActionHandler;
 
     //패널
     void Awake()
@@ -64,6 +67,7 @@ public class NetworkPlayerController : NetworkBehaviour
         hpHandler = GetComponent<HPHandler>();
         attackHandler = GetComponent<AttackHandler>();
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
+        playerActionHandler = GetComponent<PlayerActionHandler>();
     }
     public override void FixedUpdateNetwork()
     {
@@ -101,6 +105,7 @@ public class NetworkPlayerController : NetworkBehaviour
             PlayerDodge();
             PlayerAttack();
             PlayerReload();
+            PlayerInteract();
         }
     }
 
@@ -137,6 +142,7 @@ public class NetworkPlayerController : NetworkBehaviour
         this.attackInput = networkInputData.attackInput;
         this.reloadInput = networkInputData.reloadInput;
         this.aimForwardVector = networkInputData.aimForwardVector;
+        this.interactInput = networkInputData.interactInput;
     }
 
     public void PlayerMove()
@@ -213,7 +219,7 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if(!Object.HasStateAuthority)
             return;
-        if (attackInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        if (attackInput && !isAttack && !isDodge && !isInteract && !hpHandler.getIsHit())
         {
             Debug.Log("PlayerAttack");
             attackHandler.StopReload();
@@ -230,11 +236,22 @@ public class NetworkPlayerController : NetworkBehaviour
         if (!reloadInput || isReload)
             return;
         
-        if(isJump || isDodge || isAttack || hpHandler.getIsHit())
+        if(isJump || isDodge || isAttack || isInteract || hpHandler.getIsHit())
             return;
         
         Debug.Log("PlayerReload()");
         attackHandler.DoReload();
+    }
+    private void PlayerInteract()
+    {
+        if(!Object.HasStateAuthority)
+            return;
+        if (interactInput && !isAttack && !isDodge && !hpHandler.getIsHit())
+        {
+            Debug.Log("PlayerInteract");
+            attackHandler.StopReload();
+            playerActionHandler.Interact();
+        }
     }
 
     public void SetIsAttack(bool bol)
@@ -244,6 +261,10 @@ public class NetworkPlayerController : NetworkBehaviour
     public void SetIsReload(bool bol)
     {
         isReload = bol;
+    }
+    public void SetIsInteract(bool bol)
+    {
+        isInteract = bol;
     }
     public void SetCharacterControllerEnabled(bool isEnabled)
     {

@@ -6,7 +6,11 @@ public static class Utils
 {
     public static Vector3 GetRandomSpawnPoint()
     {
-        return new Vector3(Random.Range(-50, 50), 5, Random.Range(-50, 50));
+        return new Vector3(Random.Range(-5, 5), 5, Random.Range(-5, 5));
+    }
+    public static Vector3 GetRandomSpawnPoint(Vector3 spawnPoint)
+    {
+        return spawnPoint + new Vector3(Random.Range(-5, 5), 5, Random.Range(5, 5));
     }
 
     public static void SetRenderLayerInChildren(Transform transform, int layerNumber)
