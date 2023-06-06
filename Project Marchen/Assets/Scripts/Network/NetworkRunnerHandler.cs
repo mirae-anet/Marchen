@@ -31,8 +31,8 @@ public class NetworkRunnerHandler : MonoBehaviour
             networkRunner.name = "Network runner";
 
             // 자동으로 방 입장. 호스트, 클라이언트 자동 설정
-            // if(SceneManager.GetActiveScene().name != "Lobby")//추가
-            if(SceneManager.GetActiveScene().name != "Scene_1")//추가
+            //if(SceneManager.GetActiveScene().name != "Scene_1")//추가
+            if(SceneManager.GetActiveScene().name != "Lobby")//추가
             {
                 var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient,"TestSession" ,GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
             }
@@ -143,6 +143,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                     {
                         //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 새로 작성.
                         FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
+
+                        
                     }
 
                 });

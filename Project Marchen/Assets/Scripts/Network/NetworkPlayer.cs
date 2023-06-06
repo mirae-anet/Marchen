@@ -15,10 +15,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [Networked(OnChanged = nameof(OnNickNameChanged))]
     public NetworkString<_16> nickName{get; set;} //최대 16자
 
-
+    public bool FirstJoin = true;
 
     // Remote Client Token Hash
-   [Networked] public int token {get; set;} //need for Host migration
+    [Networked] public int token {get; set;} //need for Host migration
     bool isPublicJoinMessageSent = false;
     
     public LocalCameraHandler localCameraHandler;
@@ -29,14 +29,17 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     private void Awake() 
     {
-        networkInGameMessages = GetComponent<NetworkInGameMessages>();    
+        Debug.Log("어웨이크로그");
+        networkInGameMessages = GetComponent<NetworkInGameMessages>(); 
     }
     void Start()
     {
+        FirstJoin = false;
     }
 
     public override void Spawned()
     {
+        Debug.Log("스폰로그");
         bool Library = SceneManager.GetActiveScene().name == "TestScene(network)_Potal";
         
         //본인 
@@ -72,6 +75,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
                 //Detach camera if enabled
                 localCameraHandler.transform.parent = null;
+
             }
             else
             {
@@ -102,6 +106,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
                 //Detach camera if enabled
                 localCameraHandler.transform.parent = null;
+
             }
 
             RPC_SetNickName(GameManager.instance.playerNickName);
@@ -120,6 +125,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 localUI.SetActive(false);
 
                 Debug.Log("Spawned remote player");
+
             }
             else
             {
@@ -216,7 +222,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        if (scene.name != "TestScene(network)_Potal" && scene.name != "Lobby")
+        if (scene.name != "Lobby" && FirstJoin == false)
         {
             //Tell the host that we need to perform the spawned code manually
             if (Object != null && Object.HasStateAuthority && Object.HasInputAuthority)
