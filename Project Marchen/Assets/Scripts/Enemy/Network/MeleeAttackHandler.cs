@@ -87,7 +87,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
