@@ -13,6 +13,6 @@ public class SetSpawnAreaAction : MonoBehaviour
         if(characterRespawnHandler != null)
             characterRespawnHandler.ChangeSpawnPoint(transform.position);
 
-        Destroy(transform.root.gameObject);
+        Destroy(this.gameObject);
     }
 }
