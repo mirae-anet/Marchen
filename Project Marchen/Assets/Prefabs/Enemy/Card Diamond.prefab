@@ -255,6 +255,7 @@ MonoBehaviour:
   meleeArea: {fileID: 357257375527372702}
   bullet: {fileID: 0}
   agrroPulling: {fileID: 304063909}
+  anchorPoint: {fileID: 0}
   moveDis: 3
   moveSpeed: 5
   attackCancel: 1
@@ -267,7 +268,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1439161317686407493}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 15
   m_Acceleration: 50
   avoidancePriority: 50
@@ -276,7 +277,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 13
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
