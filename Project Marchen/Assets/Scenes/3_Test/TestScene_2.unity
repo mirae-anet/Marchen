@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 8e94b891387b2dc43964d192e01c41d5, type: 2}
---- !u!1 &76935211 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5635539874650883886, guid: 40449177d431b10419956c44a313a983, type: 3}
-  m_PrefabInstance: {fileID: 8311037606975484860}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &93871960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,11 +184,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057d865aeaa438443927c436487f9683, type: 3}
---- !u!1 &119905671 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5635539874650883886, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-  m_PrefabInstance: {fileID: 1642022115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &120199423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,16 +1153,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501337501}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &530262862 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 1547730763, guid: 40449177d431b10419956c44a313a983, type: 3}
-  m_PrefabInstance: {fileID: 8311037606975484860}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &567720810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 288484766, guid: 40449177d431b10419956c44a313a983, type: 3}
-  m_PrefabInstance: {fileID: 8311037606975484860}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &602412166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,11 +1635,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899927919}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &927889332 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 6854758314064295369, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-  m_PrefabInstance: {fileID: 1642022115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &956318423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,22 +2746,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 212302159}
     m_Modifications:
-    - target: {fileID: 5635539873237992688, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_Speed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539873237992688, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_Acceleration
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539873237992688, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539873237992688, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 5635539874650659598, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2835,14 +2794,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat Brown
       objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
 --- !u!4 &1642022116 stripped
@@ -2850,53 +2801,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5635539874650659598, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
   m_PrefabInstance: {fileID: 1642022115}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1642022118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119905671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30030de1cdc0f5e4eb8a3cc183aa49ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeArea: {fileID: 927889332}
-  bullet: {fileID: 0}
-  agrroPulling: {fileID: 1679141496}
-  moveDis: 3
-  moveSpeed: 5
-  attackCancel: 1
---- !u!114 &1642022119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119905671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 0
-  maxHealth: 50
-  curHealth: 50
-  knockbackForce: 0.3
---- !u!65 &1642022120
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119905671}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7, y: 3.5, z: 6}
-  m_Center: {x: 0, y: 1.7, z: 0.5}
 --- !u!1 &1644804488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,11 +2898,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644804488}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1679141496 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2618600179837636803, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-  m_PrefabInstance: {fileID: 1642022115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1679594576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 205007807421100328, guid: 7bddaefb157a4b443b2c47ced94bf698, type: 3}
@@ -3766,53 +3665,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5635539874650659598, guid: 40449177d431b10419956c44a313a983, type: 3}
   m_PrefabInstance: {fileID: 8311037606975484860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4423600274480146612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76935211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30030de1cdc0f5e4eb8a3cc183aa49ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeArea: {fileID: 530262862}
-  bullet: {fileID: 0}
-  agrroPulling: {fileID: 567720810}
-  moveDis: 3
-  moveSpeed: 5
-  attackCancel: 1
---- !u!114 &4423600274480146613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76935211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 0
-  maxHealth: 50
-  curHealth: 50
-  knockbackForce: 0.3
---- !u!65 &4423600274480146614
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76935211}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7, y: 3.5, z: 6}
-  m_Center: {x: 0, y: 1.7, z: 0.5}
 --- !u!1001 &8311037606975484860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3867,14 +3719,6 @@ PrefabInstance:
     - target: {fileID: 5635539874650883886, guid: 40449177d431b10419956c44a313a983, type: 3}
       propertyPath: m_Name
       value: Rat White
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: 40449177d431b10419956c44a313a983, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: 40449177d431b10419956c44a313a983, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40449177d431b10419956c44a313a983, type: 3}

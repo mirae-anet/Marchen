@@ -2123,9 +2123,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5635539874650659598}
   - component: {fileID: 5635539873237992688}
-  m_Layer: 0
+  - component: {fileID: 4423600274480146614}
+  - component: {fileID: 4423600274480146612}
+  - component: {fileID: 4423600274480146613}
+  m_Layer: 8
   m_Name: Rat White
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2170,6 +2173,53 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &4423600274480146614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635539874650883886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7, y: 3.5, z: 6}
+  m_Center: {x: 0, y: 1.7, z: 0.5}
+--- !u!114 &4423600274480146612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635539874650883886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30030de1cdc0f5e4eb8a3cc183aa49ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeArea: {fileID: 1547730763}
+  bullet: {fileID: 0}
+  agrroPulling: {fileID: 288484766}
+  moveDis: 3
+  moveSpeed: 5
+  attackCancel: 1
+--- !u!114 &4423600274480146613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635539874650883886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  maxHealth: 50
+  curHealth: 50
+  knockbackForce: 0.3
 --- !u!1 &5635539874650883888
 GameObject:
   m_ObjectHideFlags: 0
