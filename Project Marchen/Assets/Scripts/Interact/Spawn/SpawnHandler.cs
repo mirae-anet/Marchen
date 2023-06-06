@@ -43,7 +43,7 @@ public class SpawnHandler : NetworkBehaviour
     }
     private void Spawn()
     {
-        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.identity);
+        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.LookRotation(transform.forward));
 
         if(spawned.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
             enemyHPHandler.Spawner = Object;

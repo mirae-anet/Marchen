@@ -2283,6 +2283,7 @@ MonoBehaviour:
     _length: 0
     _data:
       Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  FirstJoin: 1
   _token: 0
   localCameraHandler: {fileID: 3656742498359731824}
   localUI: {fileID: 6410614357387345707}
@@ -3185,14 +3186,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 750
   field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 40959
+    m_Bits: 35833
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6203,7 +6204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235f6da7e89e41379b70e09575c184f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 200
+  cameraSpeed: 20
   cameraAnchorPoint: {fileID: 2721850773489610248}
   bodyAnchorPoint: {fileID: 8329117566836997475}
   BulletPos: {fileID: 7081180801289539154}

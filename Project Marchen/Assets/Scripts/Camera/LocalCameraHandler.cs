@@ -7,7 +7,7 @@ public class LocalCameraHandler : MonoBehaviour
     static public LocalCameraHandler Local;
 
     [Header("설정")]
-    [Range(100f, 500f)]
+    [Range(1f, 500f)]
     public float cameraSpeed = 200f;
 
     [Header("Anchor Point")]
@@ -58,8 +58,8 @@ public class LocalCameraHandler : MonoBehaviour
         }
         if (EscRotationEnabled && ReadyRotationEnabled)
         {
-            cameraRotationX = viewInput.y * Time.deltaTime * cameraSpeed;
-            cameraRotationY = viewInput.x * Time.deltaTime * cameraSpeed;
+            cameraRotationX = viewInput.y *  cameraSpeed;
+            cameraRotationY = viewInput.x *  cameraSpeed;
             Vector3 camAngle = transform.rotation.eulerAngles;
 
             float x = camAngle.x - cameraRotationX;
