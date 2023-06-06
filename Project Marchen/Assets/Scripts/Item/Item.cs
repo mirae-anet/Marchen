@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum Type {Heart};
+    public enum Type {Heart, Key};
 
     [Header("설정")]
     public Type type;
