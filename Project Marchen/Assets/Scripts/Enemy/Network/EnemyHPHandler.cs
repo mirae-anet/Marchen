@@ -47,14 +47,16 @@ public class EnemyHPHandler : NetworkBehaviour
         if(!skipSettingStartValues)
         {
             if(Object.HasStateAuthority)
+            {
                 HP = startingHP;
+                isDead = false;
+            }
             
             if(heartBar != null)
             {
                 heartBar.SetMaxHP(startingHP);
                 heartBar.SetSlider(HP);
             }
-            isDead = false;
         }
         else
         {

@@ -6,7 +6,6 @@ using Fusion;
 public class SpawnerSpawner : MonoBehaviour
 {
     public NetworkBehaviour spawnerPF;
-
     // Start is called before the first frame update
     void Start()
     {

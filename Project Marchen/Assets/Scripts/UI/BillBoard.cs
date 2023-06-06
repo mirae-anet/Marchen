@@ -24,17 +24,10 @@ public class BillBoard : MonoBehaviour
     }
     private Camera FindLocalCamera()
     {
-        Camera[] cams = FindObjectsOfType<Camera>();
-        if(cams.Length > 0)
+        if(LocalCameraHandler.Local != null)
         {
-            for(int i = 0; i < cams.Length; i++)
-            {
-                if(cams[i] != null && cams[i].isActiveAndEnabled)
-                {
-                    return cams[i];
-                }
-            }
-            return null;
+            Camera localCamera = LocalCameraHandler.Local.GetComponentInChildren<Camera>();
+            return localCamera;
         }
         else
         {
