@@ -10,6 +10,7 @@ public class RangeAttackHandler : EnemyAttackHandler
     public float targetRadius =  0.5f;
     public float targetRange = 25f;
     public Transform anchorPoint;
+    public Transform detectionPos;
     
     //prefab
     public BulletHandler bulletPrefab;
@@ -38,7 +39,7 @@ public class RangeAttackHandler : EnemyAttackHandler
         if(isAttack || enemyHPHandler.GetIsDamage())
             return;
 
-        RaycastHit[] rayhits = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+        RaycastHit[] rayhits = Physics.SphereCastAll(detectionPos.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
         if(rayhits.Length > 0)
         {

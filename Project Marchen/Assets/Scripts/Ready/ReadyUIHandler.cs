@@ -54,7 +54,7 @@ public class ReadyUIHandler : NetworkBehaviour
         {
             DontDestroyOnLoad(gameObjectToTransfer);
         }//시작
-        if(SceneManager.GetActiveScene().name== "TestScene(network)_Potal")
+        if(SceneManager.GetActiveScene().name== "Scene_2")
         {
             RPC_SetActiveReadyUI(false);
             isReady = false;

@@ -21,7 +21,7 @@ public class PortalHandler : InteractionHandler
         if (Runner.IsServer && networkObject.HasInputAuthority)
         {
             ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
-            if (readyUIHandler != null && SceneManager.GetActiveScene().name == "TestScene(network)_Potal")
+            if (readyUIHandler != null && SceneManager.GetActiveScene().name == "Scene_2")
             {
                 Debug.Log("On PortalHandler trigger");
                 readyUIHandler.RPC_SetActiveReadyUI(true);
