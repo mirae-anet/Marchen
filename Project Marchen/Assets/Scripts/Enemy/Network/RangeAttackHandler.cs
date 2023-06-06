@@ -11,6 +11,7 @@ public class RangeAttackHandler : EnemyAttackHandler
     public float targetRange = 25f;
     public Transform anchorPoint;
     public Transform detectionPos;
+    private Vector3 aimVec;
     
     //prefab
     public BulletHandler bulletPrefab;
@@ -50,6 +51,7 @@ public class RangeAttackHandler : EnemyAttackHandler
                 Transform player = rayhits[i].collider.transform.root.transform;
                 if(targetHandler.GetTarget() == player)
                 {
+                    aimVec = player.transform.position - transform.position;
                     StartCoroutine("AttackCO");
                     break;
                 }
@@ -62,17 +64,17 @@ public class RangeAttackHandler : EnemyAttackHandler
         networkEnemyController.SetIsChase(false);
         isAttack = true;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
 
         RPC_animatonSetBool("isAttack", true);
         yield return new WaitForSeconds(0.5f);
 
-        Runner.Spawn(bulletPrefab, anchorPoint.position, Quaternion.LookRotation(transform.forward), Object.StateAuthority, (runner, spawnedBullet) =>
+        Runner.Spawn(bulletPrefab, anchorPoint.position, Quaternion.LookRotation(aimVec.normalized), Object.StateAuthority, (runner, spawnedBullet) =>
         {
             spawnedBullet.GetComponent<BulletHandler>().Fire(Object.StateAuthority, Object, transform.name);
         });
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
