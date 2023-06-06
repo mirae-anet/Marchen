@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum Type {Heart, Key};
+    public enum Type {Heart, Key, Bettery};
 
     [Header("설정")]
     public Type type;
-    [Range(1f, 100f)]
+    [Range(0f, 100f)]
     public int value = 20;
 
     void Update()
