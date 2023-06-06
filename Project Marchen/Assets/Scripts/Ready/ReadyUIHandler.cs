@@ -59,12 +59,12 @@ public class ReadyUIHandler : NetworkBehaviour
             RPC_SetActiveReadyUI(false);
             isReady = false;
             buttonReadyText.text = "게임시작";
-            Runner.SetActiveScene("TestScene(network)_Potal2");
+            Runner.SetActiveScene("Scene_3");
         }
         else
         {
             Runner.SessionInfo.IsOpen = true;
-            Runner.SetActiveScene("TestScene(network)_Potal");
+            Runner.SetActiveScene("Scene_2");
         }
     }
     public void OnChangeWeaponHammer()
