@@ -26,6 +26,10 @@ public class PlayerAttack : MonoBehaviour
     private AudioSource reloadSource;
     [SerializeField]
     private AudioClip reloadClip;
+    [SerializeField]
+    private AudioSource swingSource;
+    [SerializeField]
+    private AudioClip swingClip;
 
     [Header("설정")]
     public Type weaponType;
@@ -86,6 +90,8 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             anim.SetTrigger("doSwing");
+
+            SwingSound();
         }
         
         weaponMain.Attack();
@@ -130,4 +136,9 @@ public class PlayerAttack : MonoBehaviour
     {
         reloadSource.PlayOneShot(reloadClip);
     }
+
+    private void SwingSound()
+    {
+        swingSource.PlayOneShot(swingClip);
+    }    
 }
