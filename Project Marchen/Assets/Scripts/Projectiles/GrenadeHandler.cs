@@ -53,7 +53,7 @@ public class GrenadeHandler : NetworkBehaviour
 
                 for(int i =0; i < hitCount; i++)
                 {
-                    EnemyHPHandler enemyHpHandler = hits[i].Hitbox.transform.root.GetComponent<EnemyHPHandler>();
+                    EnemyHPHandler enemyHpHandler = hits[i].Hitbox.Root.transform.GetComponent<EnemyHPHandler>();
 
                     if(enemyHpHandler != null)
                         enemyHpHandler.OnTakeDamage(thrownByPlayerName, thrownByNetworkObject,damageAmount, transform.position);

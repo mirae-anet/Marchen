@@ -13,6 +13,6 @@ public class DespawnAction : MonoBehaviour
         if(playerActionHandler != null)
             playerActionHandler.action(transform);
         
-        Destroy(transform.root.gameObject);
+        Destroy(transform.gameObject);
     }
 }

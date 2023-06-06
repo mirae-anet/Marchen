@@ -92,12 +92,12 @@ public class BulletHandler : NetworkBehaviour
                     // HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
                     // if(hpHandler != null && firedByNetworkObject != null)
 
-                    if(hits[i].Hitbox.transform.root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
+                    if(hits[i].Hitbox.Root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
                     {
                         if(firedByNetworkObject != null)
                             hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
                     }
-                    if(hits[i].Hitbox.transform.root.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+                    if(hits[i].Hitbox.Root.transform.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
                     {
                         if(firedByNetworkObject != null)
                             enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
