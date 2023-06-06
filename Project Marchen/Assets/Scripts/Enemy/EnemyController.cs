@@ -27,6 +27,8 @@ public class EnemyController : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private GameObject agrroPulling;
+    [SerializeField]
+    private Transform anchorPoint;
 
     [Header("설정")]
     public float moveDis = 3f;
@@ -212,15 +214,15 @@ public class EnemyController : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 meleeArea.enabled = true;
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.6f);
                 meleeArea.enabled = false;
 
                 yield return new WaitForSeconds(1f);
                 break;
 
             case EnemyMain.Type.Range:
-                yield return new WaitForSeconds(0.5f);
-                GameObject instantBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 2.3f, transform.position.z), transform.rotation);
+                yield return new WaitForSeconds(0.8f);
+                GameObject instantBullet = Instantiate(bullet, new Vector3(anchorPoint.position.x, anchorPoint.position.y, anchorPoint.position.z), anchorPoint.rotation);
                 Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
                 rigidBullet.velocity = transform.forward * 20;
 
