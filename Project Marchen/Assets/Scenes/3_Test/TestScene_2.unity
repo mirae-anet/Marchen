@@ -602,7 +602,7 @@ Transform:
   m_Children:
   - {fileID: 1679594576}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &162234533
 PrefabInstance:
@@ -708,7 +708,7 @@ Transform:
   - {fileID: 543450651994927287}
   - {fileID: 543450652172418442}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214077265
 GameObject:
@@ -959,63 +959,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335611207}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &353797474
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 19.57142
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7.15
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.36
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
-      propertyPath: m_Name
-      value: Flamingo
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ee456b1525a01cf47af269e8481d0fb6, type: 3}
 --- !u!1 &423113520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2252,7 @@ Transform:
   - {fileID: 899927920}
   - {fileID: 292381405}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401596288
 GameObject:
@@ -2850,10 +2793,6 @@ PrefabInstance:
     - target: {fileID: 5635539874650883886, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
       propertyPath: m_Name
       value: Rat Brown
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4145048b77d5fe4ea5462e0312c055c, type: 3}
@@ -3522,10 +3461,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy A
       objectReference: {fileID: 0}
-    - target: {fileID: 328409505970683906, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4462523135328065168, guid: 82b9070e980b9c74ba3dafa57d9ee6b7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3597,10 +3532,6 @@ PrefabInstance:
     - target: {fileID: 1439161317686407493, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: m_Name
       value: Card_Diamond
-      objectReference: {fileID: 0}
-    - target: {fileID: 1439161317686407493, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1779833603260034047, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: m_RootOrder
@@ -3785,10 +3716,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat White
       objectReference: {fileID: 0}
-    - target: {fileID: 5635539874650883886, guid: 40449177d431b10419956c44a313a983, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40449177d431b10419956c44a313a983, type: 3}
 --- !u!1001 &8685152089182320188
@@ -3798,10 +3725,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 212302159}
     m_Modifications:
-    - target: {fileID: 6779762624531084168, guid: e10865df05e94324ab6207f87a49d4ed, type: 3}
-      propertyPath: m_Speed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8378580001354977548, guid: e10865df05e94324ab6207f87a49d4ed, type: 3}
       propertyPath: m_Name
       value: Card_Heart

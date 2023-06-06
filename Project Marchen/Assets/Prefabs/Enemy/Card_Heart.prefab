@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &340566929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 340566930}
+  - component: {fileID: 340566931}
+  m_Layer: 0
+  m_Name: AnchorPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &340566930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340566929}
+  m_LocalRotation: {x: -0.000000011175867, y: -0, z: 0.00000003946478, w: 1}
+  m_LocalPosition: {x: 1.83, y: 3.48, z: 2.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9155082134229404598}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &340566931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340566929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1547458704
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +76,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9155082134229404598}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1547458707
 SphereCollider:
@@ -1360,6 +1405,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 682939269630428349}
+  - {fileID: 340566930}
   - {fileID: 1547458705}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1375,8 +1421,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7, y: 6.4, z: 0.5}
-  m_Center: {x: 0, y: 3.2, z: 0}
+  m_Size: {x: 5.024296, y: 12.893252, z: 0.5}
+  m_Center: {x: -0.26908684, y: 6.446626, z: 0}
 --- !u!114 &543450652172418443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1409,6 +1455,7 @@ MonoBehaviour:
   meleeArea: {fileID: 0}
   bullet: {fileID: 3537896501868604822, guid: 21383d2ee2e7f3d4d9e853b639f3fd73, type: 3}
   agrroPulling: {fileID: 1547458704}
+  anchorPoint: {fileID: 340566930}
   moveDis: 3
   moveSpeed: 5
   attackCancel: 1
@@ -1422,7 +1469,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 10
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 480
