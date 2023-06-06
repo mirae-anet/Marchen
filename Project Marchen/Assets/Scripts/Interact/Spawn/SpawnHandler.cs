@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using UnityEngine.AI;
 
 public class SpawnHandler : NetworkBehaviour
 {
@@ -43,7 +44,7 @@ public class SpawnHandler : NetworkBehaviour
     }
     private void Spawn()
     {
-        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.LookRotation(transform.forward));
+        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.LookRotation(transform.forward),null, initSpawnPoint);
 
         if(spawned.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
             enemyHPHandler.Spawner = Object;
@@ -55,6 +56,12 @@ public class SpawnHandler : NetworkBehaviour
         Debug.Log($"Spawner Spawned Something");
         spawnAble = false;
         gameObject.SetActive(false);
+    }
+
+    private void initSpawnPoint(NetworkRunner networkRunner, NetworkObject networkObject)
+    {
+        if(networkObject.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
+            navMeshAgent.Warp(anchorPoint.position);
     }
     public void SetTimer()
     {
