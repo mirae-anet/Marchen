@@ -143,6 +143,8 @@ public class NetworkRunnerHandler : MonoBehaviour
                     {
                         //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 새로 작성.
                         FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
+
+                        
                     }
 
                 });
