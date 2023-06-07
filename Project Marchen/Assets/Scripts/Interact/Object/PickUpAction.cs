@@ -5,7 +5,7 @@ using Fusion;
 
 public class PickUpAction : InteractionHandler
 {
-    public enum Type { GreenBook, RedBook};
+    public enum Type { GreenBook, RedBook, BlueBattery, GreenBattary, Key};
     [Header("설정")]
     public Type type;
 

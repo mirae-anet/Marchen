@@ -169,11 +169,11 @@ GameObject:
   - component: {fileID: -7306548645563275295}
   - component: {fileID: -8880395031870932526}
   - component: {fileID: 5052782308570775071}
-  - component: {fileID: 1299652720661714567}
   - component: {fileID: 2440298237999788865}
   - component: {fileID: 2737190684683023362}
   - component: {fileID: 1511795754755024883}
   - component: {fileID: 3454433068369012509}
+  - component: {fileID: 4215929369996088009}
   m_Layer: 8
   m_Name: Network Rat Conflict White
   m_TagString: Enemy
@@ -238,11 +238,11 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: -7306548645563275295}
   - {fileID: 5052782308570775071}
-  - {fileID: 1299652720661714567}
   - {fileID: 2440298237999788865}
   - {fileID: 2737190684683023362}
   - {fileID: 1511795754755024883}
   - {fileID: 3454433068369012509}
+  - {fileID: 4215929369996088009}
   - {fileID: 9067209039955078003}
   SimulationBehaviours: []
 --- !u!114 &-7306548645563275295
@@ -311,22 +311,6 @@ MonoBehaviour:
   moveDis: 3
   moveSpeed: 5
   attackCancel: 1
---- !u!114 &1299652720661714567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328409505970683906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 631e9b868ada34d41931ab14fb67a601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  skipSettingStartValues: 0
-  knockbackForce: 1
-  Spawner: {fileID: 0}
 --- !u!114 &2440298237999788865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +376,22 @@ MonoBehaviour:
   boxSize: {x: 2, y: 2, z: 2}
   damageAmount: 15
   anchorPoint: {fileID: 7808249525328949647}
+--- !u!114 &4215929369996088009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328409505970683906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d311598013fbf49c1906159becc9f64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  skipSettingStartValues: 0
+  knockbackForce: 0.3
+  Spawner: {fileID: 0}
 --- !u!1 &512883900282431789
 GameObject:
   m_ObjectHideFlags: 0

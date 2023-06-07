@@ -12,7 +12,7 @@ public class FallCheckAction : MonoBehaviour
         if(other.transform.root.TryGetComponent<HPHandler>(out var hpHandler))
         {
             string nickName = other.transform.root.GetComponent<NetworkPlayer>().nickName.ToString();
-            hpHandler.OnTakeDamage(nickName,(byte)255,transform.position);
+            hpHandler.OnTakeDamage(nickName,(int)999,transform.position);
         }
     }
 }

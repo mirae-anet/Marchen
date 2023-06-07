@@ -29,7 +29,7 @@ public class RocketHandler : NetworkBehaviour
     //Rocket info
     [Header("Rocket info")]
     [SerializeField]
-    byte damageAmount;
+    int damageAmount;
     int rocketSpeed = 20;
 
     //other components
