@@ -89,7 +89,7 @@ public class HPHandler : NetworkBehaviour
         if(Object != null && Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         isDamage = false;
 
