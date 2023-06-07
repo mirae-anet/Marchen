@@ -80,6 +80,8 @@ public class HPHandler : NetworkBehaviour
     {
         // 피격시 효과
         isDamage = true;
+        if(Object != null && Object.HasInputAuthority)
+            hitboxRoot.HitboxRootActive = false;
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
@@ -87,7 +89,9 @@ public class HPHandler : NetworkBehaviour
         if(Object != null && Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+
+        isDamage = false;
 
         //화면 정상화
         if(Object != null && Object.HasInputAuthority && !isDead)
@@ -96,10 +100,12 @@ public class HPHandler : NetworkBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //아바타 정상화
-        isDamage = false;
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+
+        if(Object != null && Object.HasInputAuthority)
+            hitboxRoot.HitboxRootActive = true;
     }
     IEnumerator OnDeadCO()
     {
