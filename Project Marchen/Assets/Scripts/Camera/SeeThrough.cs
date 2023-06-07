@@ -12,6 +12,10 @@ public class SeeThrough : MonoBehaviour
 
     private void LateUpdate()
     {
+
+        if(LocalCameraHandler.Local != GetComponentInParent<LocalCameraHandler>())
+            return;
+
         ManageBlockingView();
  
         foreach (var obstruction in ObjectToHide)

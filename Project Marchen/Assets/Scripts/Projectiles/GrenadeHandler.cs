@@ -12,7 +12,7 @@ public class GrenadeHandler : NetworkBehaviour
 
     [Header("Grenade damage")]
     [SerializeField]
-    byte damageAmount;
+    int damageAmount;
 
     //Thrown by info
     PlayerRef thrownByPlayerRef;
