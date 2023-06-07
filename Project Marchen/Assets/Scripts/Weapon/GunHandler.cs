@@ -18,7 +18,7 @@ public class GunHandler : WeaponHandler
     [Header("설정")]
 
     [Range(1f, 100f)]
-    public byte damageAmount = 5;
+    public int damageAmount = 5;
     
     [Range(0f, 5f)]
     public float delay = 0.5f;

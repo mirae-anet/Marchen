@@ -13,7 +13,7 @@ public class HammerHandler : WeaponHandler
 
     [Header("설정")]
     [Range(1f, 100f)]
-    public byte damageAmount = 25;
+    public int damageAmount = 25;
     [Range(0f, 5f)]
     public float delay = 0.6f;
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using UnityEngine.SceneManagement;
+
 public class PortalHandler : InteractionHandler
 {
     private ReadyUIHandler readyUIHandler;
@@ -19,13 +21,17 @@ public class PortalHandler : InteractionHandler
         if (Runner.IsServer && networkObject.HasInputAuthority)
         {
             ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
-            if(readyUIHandler != null)
+            if (readyUIHandler != null && SceneManager.GetActiveScene().name == "Scene_2")
             {
                 Debug.Log("On PortalHandler trigger");
                 readyUIHandler.RPC_SetActiveReadyUI(true);
                 readyUIHandler.RPC_MouseSet(true);
                 readyUIHandler.RPC_RotateCamera(false);
                 readyUIHandler.SetActive();
+            }
+            else
+            {
+                readyUIHandler.startGame();
             }
         }
     }

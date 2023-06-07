@@ -11,9 +11,14 @@ public class BulletMain : MonoBehaviour
     public int damage = 10;
     public bool isMelee;
     public bool isRock;
+    [SerializeField]
+    private bool isMelee = false;
 
     private void Start()
     {
+        if (isMelee)
+            return;
+
         StartCoroutine(BulletDestroy(6f));
     }
 
@@ -30,13 +35,20 @@ public class BulletMain : MonoBehaviour
             if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
                 Destroy(gameObject, 1);
         }
+        if (isMelee)
+            return;
+
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
+            Destroy(gameObject, 1);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Wall")
+        if (isMelee)
+            return;
+
+        if (other.gameObject.tag == "Wall")
             Destroy(gameObject);
-            
     }
 
     public int GetDamage()

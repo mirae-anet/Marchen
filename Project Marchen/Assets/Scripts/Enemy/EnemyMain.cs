@@ -9,6 +9,7 @@ public class EnemyMain : MonoBehaviour
     //private Rigidbody rigid;
     private BoxCollider boxCollider;
     private MeshRenderer[] meshs;
+    private SkinnedMeshRenderer skin;
     private Animator anim;
 
     private bool isDead = false;
@@ -17,6 +18,7 @@ public class EnemyMain : MonoBehaviour
 
     [Header("설정")]
     public Type enemyType;
+    public bool Skinned = false;
     [Range(1f, 1000f)]
     public int maxHealth = 100;
     [Range(1f, 1000f)]
@@ -28,6 +30,7 @@ public class EnemyMain : MonoBehaviour
     {
         enemyController = GetComponent<EnemyController>();
         meshs = GetComponentsInChildren<MeshRenderer>();
+        skin = GetComponentInChildren<SkinnedMeshRenderer>();
         //rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -75,19 +78,28 @@ public class EnemyMain : MonoBehaviour
 
         transform.position += reactDir * knockbackForce;
 
-        foreach (MeshRenderer mesh in meshs)
-            mesh.material.color = Color.red;
+        if (!Skinned)
+        {
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.red;
+        }
+        else
+            skin.material.color = Color.red;
 
         yield return new WaitForSeconds(0.3f);
+
+        if (!Skinned)
+        {
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
+        }
+        else
+            skin.material.color = Color.white;
 
         if (curHealth <= 0)
             OnDie();
         else
-        {
-            foreach (MeshRenderer mesh in meshs)
-                mesh.material.color = Color.white; // 몬스터의 원래 색깔로 변경
             gameObject.layer = 8;  // 슈퍼 아머 해제
-        }
 
         enemyController.setIsHit(false);
     }
@@ -96,9 +108,6 @@ public class EnemyMain : MonoBehaviour
     {
         gameObject.layer = 10;  // 슈퍼 아머
         isDead = true;
-
-        foreach (MeshRenderer mesh in meshs)
-            mesh.material.color = Color.gray; // 몬스터가 죽으면 회색으로 변경
 
         //rigid.velocity = Vector3.zero;
         enemyController.SetIsNavEnabled(false);

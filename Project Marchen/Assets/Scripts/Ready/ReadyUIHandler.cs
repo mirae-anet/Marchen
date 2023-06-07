@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ReadyUIHandler : NetworkBehaviour
 {
@@ -21,7 +22,6 @@ public class ReadyUIHandler : NetworkBehaviour
 
     [Networked(OnChanged = nameof(OnCountdownChanged))]
     byte countDown { get; set; }
-
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class ReadyUIHandler : NetworkBehaviour
         }
     }
 
-    void startGame()
+    public void startGame()
     {
         Runner.SessionInfo.IsOpen = false;
 
@@ -53,8 +53,19 @@ public class ReadyUIHandler : NetworkBehaviour
         foreach (GameObject gameObjectToTransfer in gameObjectsToTransfer)
         {
             DontDestroyOnLoad(gameObjectToTransfer);
+        }//시작
+        if(SceneManager.GetActiveScene().name== "Scene_2")
+        {
+            RPC_SetActiveReadyUI(false);
+            isReady = false;
+            buttonReadyText.text = "게임시작";
+            Runner.SetActiveScene("Scene_3");
         }
-        Runner.SetActiveScene("TestScene(network)_Potal2");
+        else
+        {
+            Runner.SessionInfo.IsOpen = true;
+            Runner.SetActiveScene("Scene_2");
+        }
     }
     public void OnChangeWeaponHammer()
     {
@@ -172,4 +183,5 @@ public class ReadyUIHandler : NetworkBehaviour
             return null;
         }
     }
+
 }

@@ -18,8 +18,6 @@ public class MainMenuUIHandler : MonoBehaviour
 
     [Header("New game session")]
     public TMP_InputField sessionNameInputField;
-
-    private EscHandler escHandler;
     
 
     void Start()
@@ -69,7 +67,7 @@ public class MainMenuUIHandler : MonoBehaviour
         NetworkRunnerHandler networkRunnerHandler = FindAnyObjectByType<NetworkRunnerHandler>();
 
         // networkRunnerHandler.CreateGame(sessionNameInputField.text, "TestGameScene_Potal");
-        networkRunnerHandler.CreateGame(sessionNameInputField.text, "3_Test/TestGameScene");
+        networkRunnerHandler.CreateGame(sessionNameInputField.text, "3_Test/PotalTest/TestScene(network)_Potal");
 
         HideAllPanels();
 
