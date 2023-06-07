@@ -7,10 +7,10 @@ public class BulletMain : MonoBehaviour
     private Transform parentObject;
 
     [Header("설정")]
-    [Range(1f, 30f)]
+    [Range(0f, 30f)]
     public int damage = 10;
-    public bool isMelee;
-    public bool isRock;
+    [SerializeField]
+    private bool groundDestroy = false;
     [SerializeField]
     private bool isMelee = false;
 
@@ -30,12 +30,7 @@ public class BulletMain : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!isRock)
-        {
-            if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
-                Destroy(gameObject, 1);
-        }
-        if (isMelee)
+        if (isMelee || !groundDestroy)
             return;
 
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
