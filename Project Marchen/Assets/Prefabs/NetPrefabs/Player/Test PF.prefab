@@ -2808,6 +2808,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 40
   BodyAnchor: {fileID: 8329117566836997475}
+  _Key: 0
   _GreenBattery: 0
   _BlueBattery: 0
   _greenBook: 0
@@ -2816,10 +2817,12 @@ MonoBehaviour:
   image2: {fileID: 8259243397000299339}
   BlueBatteryImage: {fileID: 1699287441161582436}
   GreenBatteryImage: {fileID: 6803649690795253035}
+  KeyImage: {fileID: 1003084106919275073}
   myImage1: {fileID: 9151438348618553819}
   myImage2: {fileID: 8663932443527189692}
   myBlueBatteryImage: {fileID: 2922555742950293819}
   myGreenBatteryImage: {fileID: 3038816410186233055}
+  myKeyImage: {fileID: 6542666276298694179}
 --- !u!1 &3908764343849807949
 GameObject:
   m_ObjectHideFlags: 0
@@ -4473,7 +4476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 391.98682, y: -10}
+  m_AnchoredPosition: {x: 386.98682, y: -15}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5251236044267158373
@@ -7878,6 +7881,10 @@ PrefabInstance:
     - target: {fileID: 2418796916981829211, guid: 9a3e7fc0afb14d44bae17e75a08145a0, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244256713678264562, guid: 9a3e7fc0afb14d44bae17e75a08145a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4054050080549438676, guid: 9a3e7fc0afb14d44bae17e75a08145a0, type: 3}
       propertyPath: m_SizeDelta.x

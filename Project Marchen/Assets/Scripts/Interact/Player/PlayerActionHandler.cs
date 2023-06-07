@@ -10,14 +10,17 @@ public class PlayerActionHandler : InteractionHandler
     public Transform BodyAnchor;
     Vector3 boxSize = new Vector3(2,2,2);
 
-    [Networked(OnChanged = nameof(OnBatteryChanged))]
+    [Networked(OnChanged = nameof(OnValueChanged))]
+    public bool Key {get; set;}
+
+    [Networked(OnChanged = nameof(OnValueChanged))]
     public bool GreenBattery {get; set;}
-    [Networked(OnChanged = nameof(OnBatteryChanged))]
+    [Networked(OnChanged = nameof(OnValueChanged))]
     public bool BlueBattery {get; set;}
 
-    [Networked(OnChanged = nameof(OnBookChanged))]
+    [Networked(OnChanged = nameof(OnValueChanged))]
     public bool greenBook {get; set;}
-    [Networked(OnChanged = nameof(OnBookChanged))]
+    [Networked(OnChanged = nameof(OnValueChanged))]
     public bool redBook {get; set;}
 
     //other component
@@ -26,11 +29,13 @@ public class PlayerActionHandler : InteractionHandler
     public GameObject image2;
     public GameObject BlueBatteryImage;
     public GameObject GreenBatteryImage;
+    public GameObject KeyImage;
     // public GameObject Key;
     public GameObject myImage1;
     public GameObject myImage2;
     public GameObject myBlueBatteryImage;
     public GameObject myGreenBatteryImage;
+    public GameObject myKeyImage;
     // public GameObject myKey;
 
     void Start()
@@ -43,15 +48,16 @@ public class PlayerActionHandler : InteractionHandler
                 GreenBattery = false;
                 greenBook = false;
                 redBook = false;
+                Key = false;
             }
         }
 
         BlueBatteryImage.SetActive(BlueBattery);
         GreenBatteryImage.SetActive(GreenBattery);
-        // Key.SetActive();
         myBlueBatteryImage.SetActive(BlueBattery);
         myGreenBatteryImage.SetActive(GreenBattery);
-        // myKey.SetActive();
+        KeyImage.SetActive(Key);
+        myKeyImage.SetActive(Key);
 
         image1.SetActive(greenBook);
         image2.SetActive(redBook);
@@ -84,6 +90,10 @@ public class PlayerActionHandler : InteractionHandler
         {
             switch (pickUpAction.type)
             {
+                case PickUpAction.Type.Key:
+                    Key = true;
+                    break;
+
                 case PickUpAction.Type.BlueBattery:
                     BlueBattery = true;
                     break;
@@ -119,15 +129,16 @@ public class PlayerActionHandler : InteractionHandler
         }
     }
 
-    static void OnBatteryChanged(Changed<PlayerActionHandler> changed)
+    static void OnValueChanged(Changed<PlayerActionHandler> changed)
     {
+        changed.Behaviour.KeyImage.SetActive(changed.Behaviour.Key);
+        changed.Behaviour.myKeyImage.SetActive(changed.Behaviour.Key);
+
         changed.Behaviour.BlueBatteryImage.SetActive(changed.Behaviour.BlueBattery);
         changed.Behaviour.GreenBatteryImage.SetActive(changed.Behaviour.GreenBattery);
         changed.Behaviour.myBlueBatteryImage.SetActive(changed.Behaviour.BlueBattery);
         changed.Behaviour.myGreenBatteryImage.SetActive(changed.Behaviour.GreenBattery);
-    }
-    static void OnBookChanged(Changed<PlayerActionHandler> changed)
-    {
+
         changed.Behaviour.image1.SetActive(changed.Behaviour.greenBook);
         changed.Behaviour.image2.SetActive(changed.Behaviour.redBook);
         changed.Behaviour.myImage1.SetActive(changed.Behaviour.greenBook);
