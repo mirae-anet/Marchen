@@ -161,4 +161,21 @@ public class BossController : MonoBehaviour
         
         StartCoroutine(Think());
     }
+
+    // --------------------------- 외부 참조 함수 ------------------------
+    public void SetIsNavEnabled(bool bol)
+    {
+        isChase = bol;
+        nav.enabled = bol;
+    }
+
+    public void SetIsChase(bool bol)
+    {
+        isChase = bol;
+    }
+
+    //public void setIsHit(bool bol)
+    //{
+    //    isHit = bol;
+    //}
 }
