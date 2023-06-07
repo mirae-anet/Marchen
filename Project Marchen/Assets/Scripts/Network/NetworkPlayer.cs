@@ -222,7 +222,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        if (scene.name != "Lobby" && FirstJoin == false)
+        if (scene.name != "Scene_1" && FirstJoin == false)
         {
             //Tell the host that we need to perform the spawned code manually
             if (Object != null && Object.HasStateAuthority && Object.HasInputAuthority)
