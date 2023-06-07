@@ -10,7 +10,7 @@ public class EnemyHPHandler : NetworkBehaviour
     [Range(1f, 1000f)]
     const byte startingHP = 100;
 
-    bool isDamage = false;
+    protected bool isDamage = false;
 
     [Networked(OnChanged = nameof(OnStateChanged))]
     private bool isDead {get; set;}
@@ -24,14 +24,14 @@ public class EnemyHPHandler : NetworkBehaviour
     // other component
     public NetworkObject Spawner;
     private MeshRenderer[] meshs;
-    private Animator anim;
+    protected Animator anim;
     NetworkInGameMessages networkInGameMessages;
     HitboxRoot hitboxRoot;
     TargetHandler targetHandler;
     EnemyAttackHandler enemyAttackHandler; 
     HeartBar heartBar;
 
-    void Awake()
+    protected virtual void Awake()
     {
         meshs = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponentInChildren<Animator>();
@@ -70,7 +70,7 @@ public class EnemyHPHandler : NetworkBehaviour
         isInitialized = true;
     }
 
-    IEnumerator OnHitCO()
+    protected virtual IEnumerator OnHitCO()
     {
         // 피격시 효과
         isDamage = true;
