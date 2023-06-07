@@ -214,6 +214,28 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newRocket.CopyStateFrom(oldRocket);
                 });
             }
+            else if(resumeNetworkObject.TryGetBehaviour<DoorActionHandler>(out var oldDoor))
+            {
+                Transform oldDoorTrans = oldDoor.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldDoorTrans.position, oldDoorTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    DoorActionHandler newDoor = newNetworkObject.GetComponent<DoorActionHandler>();
+                    newDoor.CopyStateFrom(oldDoor);
+                    newDoor.skipSettingStartValues = true;
+                });
+            }
+            else if(resumeNetworkObject.TryGetBehaviour<ClockActionHandler>(out var oldClock))
+            {
+                Transform oldClockTrans = oldClock.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldClockTrans.position, oldClockTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    ClockActionHandler newClock = newNetworkObject.GetComponent<ClockActionHandler>();
+                    newClock.CopyStateFrom(oldClock);
+                    newClock.skipSettingStartValues = true;
+                });
+            }
             else if(resumeNetworkObject.TryGetBehaviour<ShelfActionHandler>(out var oldShelf))
             {
                 Transform oldShelfTrans = oldShelf.gameObject.transform;
