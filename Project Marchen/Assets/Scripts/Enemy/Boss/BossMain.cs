@@ -67,7 +67,7 @@ public class BossMain : MonoBehaviour
     {
         Debug.Log(gameObject.name + " Hit!");
         bossController.setIsHit(true);
-        anim.SetBool("isWalk", false);
+        //anim.SetBool("isWalk", false);
 
         transform.position += reactDir * knockbackForce;
 

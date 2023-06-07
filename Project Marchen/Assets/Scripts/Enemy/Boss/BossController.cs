@@ -42,8 +42,6 @@ public class BossController : MonoBehaviour
         bossMain = GetComponent<BossMain>();
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
-
-        nav.isStopped = true;
     }
 
     void FixedUpdate()
@@ -117,11 +115,11 @@ public class BossController : MonoBehaviour
 
     void EnemyChase()
     {
-        if (!nav.enabled)
+        if (!nav.enabled) // 네비를 끄면
             return;
 
         nav.SetDestination(target.position);
-        nav.isStopped = !isChase || isHit;
+        nav.isStopped = !isChase || isHit; // 추적 중이 아닐 때, 피격일 때, 네비 멈춤
     }
 
     void Aiming() // 레이캐스트로 플레이어 위치 특정
