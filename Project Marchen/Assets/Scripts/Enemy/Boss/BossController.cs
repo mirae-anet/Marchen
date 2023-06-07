@@ -5,19 +5,15 @@ using UnityEngine.AI;
 
 public class BossController : MonoBehaviour
 {
-    private EnemyMain enemyMain;
-    private Rigidbody rigid;
+    private BossMain bossMain;
     private NavMeshAgent nav;
     private Animator anim;
-    private BoxCollider boxCollider;
-
-    private Vector3 lookVec;
-    private Vector3 tauntVec;
-
-    private bool isLook = false;
+    private Transform target;
+    
     private bool isChase = false;
-
-    public Transform target;
+    private bool isHit = false;
+    private bool isAttack = false;
+    private bool isAggro = false;
 
     [Header("오브젝트 연결")]
     [SerializeField]
@@ -30,59 +26,122 @@ public class BossController : MonoBehaviour
     private Transform missilePortA;
     [SerializeField]
     private Transform missilePortB;
+    [SerializeField]
+    private GameObject agrroPulling;
+
+    [Header("설정")]
+    [Range(0f, 10f)]
+    public float targetRadius = 5f;
+    [Range(1f, 100f)]
+    public float targetRange = 55f; // 공격 사정 거리
+    [SerializeField]
+    private bool attackCancel = false; // 피격 시 공격 멈출지
 
     void Awake()
     {
-        enemyMain = GetComponent<EnemyMain>();
-        rigid = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<BoxCollider>();
+        bossMain = GetComponent<BossMain>();
         anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
 
         nav.isStopped = true;
     }
 
-    void Start()
+    void FixedUpdate()
     {
-        StartCoroutine(Think());
-    }
-
-    void Update()
-    {
-        if (enemyMain.GetIsDead())
+        if (bossMain.GetIsDead())
         {
             StopAllCoroutines();
             return;
         }
 
-        if (isLook)
+        if (isAggro) // 어그로 풀링
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-
-            lookVec = new Vector3(h, 0, v) * 5f;
-            transform.LookAt(target.position + lookVec);
-        }
-        else
-            nav.SetDestination(tauntVec);
-    }
-
-    void FixedUpdate()
-    {
-        FreezeVelocity();
-    }
-
-    void FreezeVelocity()
-    {
-        if (!isChase)
-        {
-            rigid.velocity = Vector3.zero;
-            rigid.angularVelocity = Vector3.zero;
+            //FreezeVelocity();
+            TargetisAlive();
+            EnemyChase();
+            Aiming();
+            AttackCancel();
         }
     }
 
-    IEnumerator Think()
+    // --------------------------- 타겟 관련 ------------------------
+    public void SetTarget(Transform transform) // 타겟 (재)설정
     {
+        target = transform;
+        isAggro = true;
+
+        SetIsNavEnabled(true);
+
+        Debug.Log(gameObject.name + " target reset");
+        StartCoroutine(ChaseStart());
+    }
+
+    void TargetOff() // 타겟 해제
+    {
+        //rigid.velocity = Vector3.zero;
+
+        //anim.SetBool("isWalk", false);
+        //anim.SetBool("isAttack", false);
+
+        SetIsNavEnabled(false);
+        agrroPulling.SetActive(true);
+        isAggro = false;
+    }
+
+    // --------------------------- 어그로 풀링 ------------------------
+    IEnumerator ChaseStart()
+    {
+        yield return new WaitForSeconds(0.8f);
+        isChase = true;
+        //anim.SetBool("isWalk", true);
+    }
+
+    void TargetisAlive() // 타겟 죽는거 확인
+    {
+        //Debug.Log(target.ToString());
+        if (target == null) // 타겟이 없으면
+        {
+            TargetOff();
+            return;
+        }
+        else if (target.gameObject.GetComponent<PlayerMain>().GetIsDead()) // 타겟이 죽으면
+        {
+            TargetOff();
+            return;
+        }
+        else // 타겟이 있고 살아 있다면
+            return;
+
+        //Debug.Log(target.parent.gameObject.ToString());
+    }
+
+    void EnemyChase()
+    {
+        if (!nav.enabled)
+            return;
+
+        nav.SetDestination(target.position);
+        nav.isStopped = !isChase || isHit;
+    }
+
+    void Aiming() // 레이캐스트로 플레이어 위치 특정
+    {
+        RaycastHit[] rayHits =
+            Physics.SphereCastAll(transform.position,           // 위치
+                                  targetRadius,                 // 반지름
+                                  transform.forward,            // 방향
+                                  targetRange,                  // 방향으로 부터 거리 (공격 사정 거리)
+                                  LayerMask.GetMask("Player")); // 레이어 특정
+
+        if (rayHits.Length > 0 && !isAttack && !isHit)
+            StartCoroutine("AttackThink");
+    }
+
+    IEnumerator AttackThink()
+    {
+        isChase = false;
+        isAttack = true;
+
         yield return new WaitForSeconds(0.1f);
         int ranAction = Random.Range(0, 5);
 
@@ -101,7 +160,8 @@ public class BossController : MonoBehaviour
                 break;
 
             case 4:
-                StartCoroutine(Taunt()); // 점프 공격 패턴
+                //StartCoroutine(Taunt()); // 점프 공격 패턴
+                StartCoroutine("AttackThink");
                 break;
         }
     }
@@ -112,54 +172,72 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         GameObject instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
-        BulletBoss bossMissileA = instantMissileA.GetComponent<BulletBoss>();
-        bossMissileA.target = target;
+        GuidedBullet bossMissileA = instantMissileA.GetComponent<GuidedBullet>();
+        bossMissileA.setTarget(target);
 
         yield return new WaitForSeconds(0.3f);
         GameObject instantMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
-        BulletBoss bossMissileB = instantMissileB.GetComponent<BulletBoss>();
-        bossMissileB.target = target;
+        GuidedBullet bossMissileB = instantMissileB.GetComponent<GuidedBullet>();
+        bossMissileB.setTarget(target);
 
         yield return new WaitForSeconds(2f);
-        StartCoroutine(Think());
+        isChase = true;
+        isAttack = false;
     }
     
     IEnumerator RockShot()
     {
-        isLook = false;
         anim.SetTrigger("doBigShot");
 
-        Instantiate(bullet, transform.position, transform.rotation);
+        GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+        rigidBullet.velocity = transform.forward * 20;
 
         yield return new WaitForSeconds(3f);
-        isLook = true;
-
-        StartCoroutine(Think());
+        isChase = true;
+        isAttack = false;
     }
 
-    IEnumerator Taunt()
-    {
-        tauntVec = target.position + lookVec;
+    //IEnumerator Taunt()
+    //{
+    //    //tauntVec = target.position + lookVec;
 
-        isLook = false;
-        nav.isStopped = false;
-        boxCollider.enabled = false;
-        anim.SetTrigger("doTaunt");
+    //    nav.isStopped = false;
+    //    boxCollider.enabled = false;
+    //    anim.SetTrigger("doTaunt");
 
-        yield return new WaitForSeconds(1.5f);
-        if (meleeArea != null)
-            meleeArea.enabled = true;
+    //    yield return new WaitForSeconds(1.5f);
+    //    if (meleeArea != null)
+    //        meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(0.5f);
-        if (meleeArea != null)
-            meleeArea.enabled = false;
+    //    yield return new WaitForSeconds(0.5f);
+    //    if (meleeArea != null)
+    //        meleeArea.enabled = false;
 
-        yield return new WaitForSeconds(1f);
-        isLook = true;
-        boxCollider.enabled = true;
-        nav.isStopped = true;
+    //    yield return new WaitForSeconds(1f);
+    //    boxCollider.enabled = true;
+    //    nav.isStopped = true;
         
-        StartCoroutine(Think());
+    //    StartCoroutine(AttackThink());
+    //}
+
+    void AttackCancel()
+    {
+        if (!attackCancel)
+            return;
+
+        if (isHit)
+        {
+            StopCoroutine("Attack");
+
+            isChase = true;
+            isAttack = false;
+
+            anim.SetBool("isAttack", false);
+
+            if (meleeArea != null)
+                meleeArea.enabled = false;
+        }
     }
 
     // --------------------------- 외부 참조 함수 ------------------------
@@ -174,8 +252,8 @@ public class BossController : MonoBehaviour
         isChase = bol;
     }
 
-    //public void setIsHit(bool bol)
-    //{
-    //    isHit = bol;
-    //}
+    public void setIsHit(bool bol)
+    {
+        isHit = bol;
+    }
 }

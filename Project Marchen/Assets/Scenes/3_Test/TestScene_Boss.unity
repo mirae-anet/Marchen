@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3918455874816875654, guid: 809c98e09a772ff428b0874e7ff909eb, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 872110886}
     - target: {fileID: 7988094277207216310, guid: 809c98e09a772ff428b0874e7ff909eb, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -1400,11 +1396,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867334191}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &872110886 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-  m_PrefabInstance: {fileID: 3132167054652666864}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &899927919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,7 +2110,7 @@ Transform:
   - {fileID: 899927920}
   - {fileID: 292381405}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401596288
 GameObject:
@@ -3197,7 +3188,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_LocalPosition.x

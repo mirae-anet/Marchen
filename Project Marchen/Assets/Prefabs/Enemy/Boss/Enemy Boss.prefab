@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &279823635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279823636}
+  - component: {fileID: 279823638}
+  - component: {fileID: 279823637}
+  m_Layer: 18
+  m_Name: Arggo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &279823636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279823635}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9133255185617633366}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &279823638
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279823635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 35
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &279823637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279823635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1465caa4c6c95fd43a93fd16158d0b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7149994540613102368
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,10 +190,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133255185617633366}
-  - component: {fileID: 9059457711460115631}
   - component: {fileID: 8598634235778929608}
   - component: {fileID: 2159748224023093607}
-  - component: {fileID: 3653246416590905438}
+  - component: {fileID: 719443798845974936}
   - component: {fileID: 3918455874816875654}
   m_Layer: 8
   m_Name: Enemy Boss
@@ -160,25 +217,10 @@ Transform:
   - {fileID: 2191666925907852834}
   - {fileID: 4749937308794696053}
   - {fileID: 3042713969576838739}
+  - {fileID: 279823636}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &9059457711460115631
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7988094277207216310}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!65 &8598634235778929608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -202,11 +244,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2
-  m_Speed: 40
+  m_Speed: 10
   m_Acceleration: 60
   avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
+  m_AngularSpeed: 180
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -214,7 +256,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3653246416590905438
+--- !u!114 &719443798845974936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,13 +265,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7988094277207216310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe5c739544d3634dbc7d7b8e04fc484, type: 3}
+  m_Script: {fileID: 11500000, guid: c822eabf21b902842a17ec28a9f6356c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
   Skinned: 0
-  maxHealth: 300
-  curHealth: 300
+  maxHealth: 1000
+  curHealth: 1000
   knockbackForce: 0.3
 --- !u!114 &3918455874816875654
 MonoBehaviour:
@@ -243,12 +284,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167f642a43d58804d8dc0409f71d2341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   meleeArea: {fileID: 2077004877910869444}
   bullet: {fileID: 8517147483184773383, guid: cec00fc40acd0bf4b98eb1363f6b521d, type: 3}
   missile: {fileID: 3533313218899643882, guid: a39c4f0065b4a2d4bbb6fa2ef4cb9e30, type: 3}
   missilePortA: {fileID: 4749937308794696053}
   missilePortB: {fileID: 3042713969576838739}
+  agrroPulling: {fileID: 279823635}
+  targetRadius: 5
+  targetRange: 55
+  attackCancel: 0
 --- !u!1001 &4079406986716864453
 PrefabInstance:
   m_ObjectHideFlags: 0

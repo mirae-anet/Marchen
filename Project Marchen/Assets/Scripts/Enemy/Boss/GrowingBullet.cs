@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossRock : BulletMain
+public class GrowingBullet : BulletMain
 {
+    private Rigidbody rigid;
+
+    private bool isShoot = false;
+
     float angularPower = 2;
     float scaleValue = 0.1f;
-
-    bool isShoot;
-
-    Rigidbody rigid;
 
     void Awake()
     {

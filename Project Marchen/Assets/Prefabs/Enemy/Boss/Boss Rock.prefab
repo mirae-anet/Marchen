@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5195631488374450820}
   - component: {fileID: 1983796130977972776}
   - component: {fileID: 8220497257164885686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Boss Rock
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ Rigidbody:
   m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 96
@@ -174,5 +174,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
+  groundDestroy: 0
   isMelee: 0
-  isRock: 1
