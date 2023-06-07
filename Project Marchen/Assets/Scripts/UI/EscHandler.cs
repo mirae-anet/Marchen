@@ -25,7 +25,7 @@ public class EscHandler : NetworkBehaviour
     public void ExitRoom()
     {
         Runner.Shutdown();
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene("Scene_1");
     }
 
     public void ExitGame()

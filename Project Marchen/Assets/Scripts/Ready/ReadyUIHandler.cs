@@ -20,9 +20,8 @@ public class ReadyUIHandler : NetworkBehaviour
     //countdown
     TickTimer countdownTickTimer = TickTimer.None;
 
-    [Networked(OnChanged = nameof(OnCountdownChanged))]
-    byte countDown { get; set; }
-
+    static byte countDown = 0;
+    static byte previousCount = 0;
     void Start()
     {
         countDownText.text = "";
@@ -30,17 +29,25 @@ public class ReadyUIHandler : NetworkBehaviour
 
     void Update()
     {
-        if (countdownTickTimer.Expired(Runner))
+        if (Object.HasStateAuthority)
         {
-            startGame();
+            if (countdownTickTimer.Expired(Runner))
+            {
+                startGame();
 
-            countdownTickTimer = TickTimer.None;
-            if(Object.HasStateAuthority)
-                LeftUI();
-        }
-        else if(countdownTickTimer.IsRunning)
-        {
-            countDown = (byte)countdownTickTimer.RemainingTime(Runner);
+                countdownTickTimer = TickTimer.None;
+                if(Object.HasStateAuthority)
+                    LeftUI();
+            }
+            else if(countdownTickTimer.IsRunning)
+            {
+                countDown = (byte)countdownTickTimer.RemainingTime(Runner);
+                if (countDown != previousCount)
+                {
+                    previousCount = countDown;
+                    RPC_SetCountDown(countDown);
+                }
+            }
         }
     }
 
@@ -101,24 +108,26 @@ public class ReadyUIHandler : NetworkBehaviour
                 countdownTickTimer = TickTimer.None;
                 countDown = 0;
                 buttonReadyText.text = "게임시작";
+                countDown = 0;
+                RPC_SetCountDown(countDown);
             }
         }
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-    static void OnCountdownChanged(Changed<ReadyUIHandler> changed)
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetCountDown(byte NewcountDown)
     {
-        changed.Behaviour.OnCountdownChanged();
+        TextMeshProUGUI LocalcountDownText = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>().countDownText;
+        countDown = NewcountDown;
+        if (countDown == 0)
+            LocalcountDownText.text = $"";
+        else LocalcountDownText.text = $"Game start in {countDown}";
     }
 
-    private void OnCountdownChanged()
-    {
-        if (countDown == 0)
-            countDownText.text = $"";
-        else countDownText.text = $"Game start in {countDown}";
-    }
     public void LeftUI()
-    {
+    { 
         // escHandler = FindObjectOfType<EscHandler>();
         EscHandler escHandler = LocalCameraHandler.Local.GetComponentInChildren<EscHandler>();
         if (escHandler.ActiveEsc())
