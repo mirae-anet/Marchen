@@ -14,7 +14,7 @@ public class BossController : MonoBehaviour
     private Vector3 lookVec;
     private Vector3 tauntVec;
 
-    private bool isLook;
+    private bool isLook = false;
     private bool isChase = false;
 
     public Transform target;
