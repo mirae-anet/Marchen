@@ -30,7 +30,7 @@ public class BulletHandler : NetworkBehaviour
     //Rocket info
     [Header("Bullet info")]
     [SerializeField]
-    byte damageAmount;
+    int damageAmount;
     [SerializeField]
     float radius = 4;
     [SerializeField]

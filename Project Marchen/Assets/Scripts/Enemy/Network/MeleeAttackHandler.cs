@@ -10,7 +10,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
     // public float targetRadius =  1.5f;
     public float targetRange = 3f;
     public Vector3 boxSize = new Vector3(2f, 2f, 2f);
-    public byte damageAmount = 10;
+    public int damageAmount = 10;
     public Transform anchorPoint;
     
     //other component

@@ -8,7 +8,7 @@ public class EnemyHPHandler : NetworkBehaviour
     public bool skipSettingStartValues = false;
     bool isInitialized = false;
     [Range(1f, 1000f)]
-    const byte startingHP = 100;
+    const int startingHP = 100;
 
     protected bool isDamage = false;
 
@@ -16,7 +16,7 @@ public class EnemyHPHandler : NetworkBehaviour
     private bool isDead {get; set;}
 
     [Networked(OnChanged = nameof(OnHPChanged))]
-    byte HP {get; set;}
+    int HP {get; set;}
 
     [Range(0f, 5f)]
     public float knockbackForce = 0.3f;
@@ -104,7 +104,7 @@ public class EnemyHPHandler : NetworkBehaviour
         }
     }
 
-    public void OnTakeDamage(string damagedByNickname, NetworkObject damagedByNetworkObject, byte damageAmount, Vector3 AttackPostion)
+    public void OnTakeDamage(string damagedByNickname, NetworkObject damagedByNetworkObject, int damageAmount, Vector3 AttackPostion)
     {
         //only take damage while alive
         if(isDead)
@@ -112,7 +112,6 @@ public class EnemyHPHandler : NetworkBehaviour
         if(isDamage)
             return;
 
-        //Ensure that we cannot flip the byte as it can't handle minus values.
         if(damageAmount > HP)
             damageAmount = HP;
         HP -= damageAmount;
@@ -155,13 +154,13 @@ public class EnemyHPHandler : NetworkBehaviour
     {
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
 
-        byte newHP = changed.Behaviour.HP;
+        int newHP = changed.Behaviour.HP;
 
         if(changed.Behaviour.heartBar != null)
             changed.Behaviour.heartBar.SetSlider(newHP);
         
         changed.LoadOld();
-        byte oldHP = changed.Behaviour.HP;
+        int oldHP = changed.Behaviour.HP;
 
         if(newHP < oldHP)
             changed.Behaviour.OnHPReduced();

@@ -7,12 +7,12 @@ public class HeartBar : MonoBehaviour
 {
 
     public Slider slider;
-    public void SetMaxHP(byte HP)
+    public void SetMaxHP(int HP)
     {
         slider.maxValue = HP;
     }
 
-    public void SetSlider(byte HP)
+    public void SetSlider(int HP)
     {
         slider.value = HP;
     }
