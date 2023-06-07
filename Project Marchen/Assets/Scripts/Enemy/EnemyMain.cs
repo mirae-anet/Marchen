@@ -14,7 +14,7 @@ public class EnemyMain : MonoBehaviour
 
     private bool isDead = false;
 
-    public enum Type { Melee, Range };
+    public enum Type { Melee, Range, Boss };
 
     [Header("설정")]
     public Type enemyType;
@@ -114,7 +114,8 @@ public class EnemyMain : MonoBehaviour
 
         anim.SetTrigger("doDie");
 
-        Destroy(gameObject, 3); // 3초 뒤에 삭제
+        if (enemyType != Type.Boss)
+            Destroy(gameObject, 3); // 3초 뒤에 삭제
     }
 
     public Type GetEnemyType()
