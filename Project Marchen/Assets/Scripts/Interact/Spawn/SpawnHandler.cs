@@ -67,7 +67,7 @@ public class SpawnHandler : NetworkBehaviour
     {
         if(Runner != null && Object.HasStateAuthority)
         {
-            respawnDelay = TickTimer.CreateFromSeconds(Runner, delayTime);
+            respawnDelay = TickTimer.CreateFromSeconds(Runner, delayTime );
             spawnAble = true;
         }
     }
