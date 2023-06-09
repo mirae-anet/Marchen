@@ -169,7 +169,17 @@ public class NetworkRunnerHandler : MonoBehaviour
                     }
                 });
             }
-            // Dynamic spawner
+            else if(resumeNetworkObject.TryGetBehaviour<CountSpawnHandler>(out var oldCountSpawner))
+            {
+                runner.Spawn(resumeNetworkObject, position: oldCountSpawner.transform.position, oldCountSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    //Copy state
+                    CountSpawnHandler newCountSpawner = newNetworkObject.GetComponent<CountSpawnHandler>();
+                    newCountSpawner.CopyStateFrom(oldCountSpawner);
+                    newCountSpawner.skipSettingStartValues = true;
+                });
+            }
             else if(resumeNetworkObject.TryGetBehaviour<SpawnHandler>(out var oldSpawner))
             {
                 runner.Spawn(resumeNetworkObject, position: oldSpawner.transform.position, oldSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>

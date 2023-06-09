@@ -8,27 +8,15 @@ using UnityEngine.AI;
 public class SpawnHandler : NetworkBehaviour
 {
     [Header("설정")]
-    [SerializeField]
-    private float delayTime;
+    public float delayTime;
     public NetworkBehaviour prefab; //EnemyHPHandler, HeartHandler
     public Transform anchorPoint;
-    private bool spawnAble = true;
+    protected bool spawnAble = true;
     public bool skipSettingStartValues = false;
-    TickTimer respawnDelay = TickTimer.None;
+    protected TickTimer respawnDelay = TickTimer.None;
 
-    void Start()
-    {
-        if(!Object.HasStateAuthority)
-            return;
-        
-        if(!skipSettingStartValues)
-        {
-            // Spawn();
-            // skipSettingStartValues = true;
-            // Debug.Log("first spawning");
-        }
-    }
-    private void OnTriggerStay (Collider other)
+    protected virtual void Start(){}
+    protected virtual void OnTriggerStay (Collider other)
     {
         if(!spawnAble)
             return;
@@ -42,7 +30,7 @@ public class SpawnHandler : NetworkBehaviour
         if(respawnDelay.ExpiredOrNotRunning(Runner))
             Spawn();
     }
-    private void Spawn()
+    protected virtual void Spawn()
     {
         NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.LookRotation(transform.forward),null, initSpawnPoint);
 
@@ -63,7 +51,7 @@ public class SpawnHandler : NetworkBehaviour
         if(networkObject.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
             navMeshAgent.Warp(anchorPoint.position);
     }
-    public void SetTimer()
+    public virtual void SetTimer()
     {
         if(Runner != null && Object.HasStateAuthority)
         {

@@ -12,6 +12,5 @@ public class InteractionHandler : NetworkBehaviour
     {
         if(Runner.IsServer)
             Runner.Spawn(prefab, position, quaternion);
-        
     }
 }
