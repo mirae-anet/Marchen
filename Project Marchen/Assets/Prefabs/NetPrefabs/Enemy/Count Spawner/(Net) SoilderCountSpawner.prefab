@@ -307,14 +307,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143238278548306325}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 2.5, z: 0}
+  m_LocalRotation: {x: -0, y: 0.053121652, z: -0, w: 0.99858814}
+  m_LocalPosition: {x: -544, y: -7.1, z: -117.9}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7434632493628454395}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 6.09, z: 0}
 --- !u!33 &8673008095446656230
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143238278548306325}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -376,7 +376,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 15, y: 15, z: 15}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1242406379015420151
 GameObject:
@@ -2590,7 +2590,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 500
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7434632493628454393
 MonoBehaviour:
@@ -2659,13 +2659,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  delayTime: 30
+  delayTime: 10
   prefab: {fileID: 0}
   anchorPoint: {fileID: 7434632492330415833}
   skipSettingStartValues: 0
-  targetCount: 4
+  _count: 0
+  targetCount: 20
   prefabs:
   - {fileID: -7306548645563275295, guid: b80abf138c4a74d41842c324e0bf8d3f, type: 3}
+  - {fileID: -7306548645563275295, guid: b80abf138c4a74d41842c324e0bf8d3f, type: 3}
+  - {fileID: -7306548645563275295, guid: b80abf138c4a74d41842c324e0bf8d3f, type: 3}
+  - {fileID: 4897826830327110097, guid: c418208a316d34d02a15e171dea69f6b, type: 3}
+  - {fileID: 4897826830327110097, guid: c418208a316d34d02a15e171dea69f6b, type: 3}
   - {fileID: 4897826830327110097, guid: c418208a316d34d02a15e171dea69f6b, type: 3}
 --- !u!114 &7210712233287574296
 MonoBehaviour:

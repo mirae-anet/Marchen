@@ -5435,7 +5435,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 200
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7434632493628454393
 MonoBehaviour:
@@ -5504,13 +5504,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  delayTime: 15
+  delayTime: 10
   prefab: {fileID: 0}
   anchorPoint: {fileID: 7434632492330415833}
   skipSettingStartValues: 0
-  targetCount: 4
+  _count: 0
+  targetCount: 20
   prefabs:
   - {fileID: -7306548645563275295, guid: 39a2245b0f64140fdaed113c80f97a5e, type: 3}
+  - {fileID: -7306548645563275295, guid: 39a2245b0f64140fdaed113c80f97a5e, type: 3}
+  - {fileID: -7306548645563275295, guid: 39a2245b0f64140fdaed113c80f97a5e, type: 3}
+  - {fileID: -7306548645563275295, guid: f2de27b8d1a8b43a680ee0795aa6c57f, type: 3}
+  - {fileID: -7306548645563275295, guid: f2de27b8d1a8b43a680ee0795aa6c57f, type: 3}
   - {fileID: -7306548645563275295, guid: f2de27b8d1a8b43a680ee0795aa6c57f, type: 3}
 --- !u!114 &5849349935327274391
 MonoBehaviour:
