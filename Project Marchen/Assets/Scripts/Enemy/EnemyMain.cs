@@ -16,6 +16,12 @@ public class EnemyMain : MonoBehaviour
 
     public enum Type { Melee, Range };
 
+    [Header("오브젝트 연결")]
+    [SerializeField]
+    private AudioSource deadSource;
+    [SerializeField]
+    private AudioClip deadClip;
+
     [Header("설정")]
     public Type enemyType;
     public bool Skinned = false;
@@ -114,7 +120,14 @@ public class EnemyMain : MonoBehaviour
 
         anim.SetTrigger("doDie");
 
+        DeadSound();
+
         Destroy(gameObject, 3); // 3초 뒤에 삭제
+    }
+
+    private void DeadSound()
+    {
+        deadSource.PlayOneShot(deadClip);
     }
 
     public Type GetEnemyType()
