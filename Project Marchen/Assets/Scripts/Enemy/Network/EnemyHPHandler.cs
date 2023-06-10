@@ -25,7 +25,6 @@ public class EnemyHPHandler : NetworkBehaviour
     public NetworkObject Spawner;
     private MeshRenderer[] meshs;
     protected Animator anim;
-    NetworkInGameMessages networkInGameMessages;
     HitboxRoot hitboxRoot;
     TargetHandler targetHandler;
     EnemyAttackHandler enemyAttackHandler; 
@@ -35,7 +34,6 @@ public class EnemyHPHandler : NetworkBehaviour
     {
         meshs = GetComponentsInChildren<MeshRenderer>();
         anim = GetComponentInChildren<Animator>();
-        networkInGameMessages = GetComponent<NetworkInGameMessages>();
         hitboxRoot = GetComponentInChildren<HitboxRoot>(); 
         targetHandler = GetComponent<TargetHandler>();
         enemyAttackHandler = GetBehaviour<EnemyAttackHandler>();
@@ -120,7 +118,6 @@ public class EnemyHPHandler : NetworkBehaviour
 
         if(HP <= 0)
         {
-            networkInGameMessages.SendInGameRPCMessage(damagedByNickname, $"Killed Enemy");
             Debug.Log($"{Time.time} {transform.name} died");
             isDead = true;
         }
