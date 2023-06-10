@@ -78,10 +78,10 @@ public class BossController : MonoBehaviour
 
     void TargetOff() // 타겟 해제
     {
-        anim.SetBool("isAttackGuided", false);
-        anim.SetBool("isAttackStraight", false);
-        anim.SetBool("isAttackArea", false);
-        anim.SetBool("isWalk", false);
+        //anim.SetBool("isAttackGuided", false);
+        //anim.SetBool("isAttackStraight", false);
+        //anim.SetBool("isAttackArea", false);
+        //anim.SetBool("isWalk", false);
 
         SetIsNavEnabled(false);
         agrroPulling.SetActive(true);
@@ -221,21 +221,12 @@ public class BossController : MonoBehaviour
         anim.SetBool("isAttackArea", true);
 
         yield return new WaitForSeconds(0.5f);
-        GameObject instantBullet = Instantiate(AreaBullet, transform.position, transform.rotation);
-        Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
-        rigidBullet.velocity = transform.forward * 20;
-
-        GameObject instantBullet2 = Instantiate(AreaBullet, transform.position, transform.rotation);
-        Rigidbody rigidBullet2 = instantBullet2.GetComponent<Rigidbody>();
-        rigidBullet2.velocity = transform.forward * -20;
-
-        GameObject instantBullet3 = Instantiate(AreaBullet, transform.position, transform.rotation);
-        Rigidbody rigidBullet3 = instantBullet3.GetComponent<Rigidbody>();
-        rigidBullet3.velocity = transform.right * 20;
-
-        GameObject instantBullet4 = Instantiate(AreaBullet, transform.position, transform.rotation);
-        Rigidbody rigidBullet4 = instantBullet4.GetComponent<Rigidbody>();
-        rigidBullet4.velocity = transform.right * -20;
+        for (int i = 0; i < 17; i++)
+        {
+            GameObject instantBullet = Instantiate(AreaBullet, transform.position, Quaternion.Euler(0f, 22.5f * i, 0f));
+            Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+            rigidBullet.velocity = instantBullet.transform.forward * 20;
+        }
 
         yield return new WaitForSeconds(1f);
         isChase = true;
@@ -255,7 +246,10 @@ public class BossController : MonoBehaviour
             isChase = true;
             isAttack = false;
 
-            anim.SetBool("isAttack", false);
+            anim.SetBool("isAttackArea", false);
+            anim.SetBool("isAttackStraight", false);
+            anim.SetBool("isAttackGuided", false);
+            anim.SetBool("isAttackGuided2", false);
         }
     }
 
