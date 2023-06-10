@@ -154,7 +154,7 @@ public class BossController : MonoBehaviour
             case 2:
 
             case 3:
-                StartCoroutine(AttackStraigh()); // 돌 굴러가는 패턴
+                StartCoroutine(AttackStraight()); // 돌 굴러가는 패턴
                 break;
 
             case 4:
@@ -194,7 +194,7 @@ public class BossController : MonoBehaviour
         isAttack = false;
     }
     
-    IEnumerator AttackStraigh()
+    IEnumerator AttackStraight()
     {
         isChase = false;
         isAttack = true;
@@ -217,13 +217,22 @@ public class BossController : MonoBehaviour
         isAttack = true;
         anim.SetBool("isAttackArea", true);
 
-        yield return new WaitForSeconds(1.5f);
-        if (meleeArea != null)
-            meleeArea.enabled = true;
-
         yield return new WaitForSeconds(0.5f);
-        if (meleeArea != null)
-            meleeArea.enabled = false;
+        GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
+        rigidBullet.velocity = transform.forward * 20;
+
+        GameObject instantBullet2 = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rigidBullet2 = instantBullet2.GetComponent<Rigidbody>();
+        rigidBullet2.velocity = transform.forward * -20;
+
+        GameObject instantBullet3 = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rigidBullet3 = instantBullet3.GetComponent<Rigidbody>();
+        rigidBullet3.velocity = transform.right * 20;
+
+        GameObject instantBullet4 = Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rigidBullet4 = instantBullet4.GetComponent<Rigidbody>();
+        rigidBullet4.velocity = transform.right * -20;
 
         yield return new WaitForSeconds(1f);
         isChase = true;
