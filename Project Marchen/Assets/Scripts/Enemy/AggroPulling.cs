@@ -10,13 +10,13 @@ public class AggroPulling : MonoBehaviour
         {
             Transform player = target.GetComponentInParent<Transform>().root; // Player 최상위 오브젝트 Transform
             
-            // 잡몹이면
-            if (gameObject.GetComponentInParent<EnemyController>() != null)
+            
+            if (gameObject.GetComponentInParent<EnemyController>() != null) // 잡몹용
             {
                 gameObject.GetComponentInParent<EnemyController>().SetTarget(player);
                 Debug.Log(gameObject.GetComponentInParent<EnemyMain>().name + " -> " + player);
             }
-            else
+            else // 보스용
             {
                 gameObject.GetComponentInParent<BossController>().SetTarget(player);
                 Debug.Log(gameObject.GetComponentInParent<BossMain>().name + " -> " + player);

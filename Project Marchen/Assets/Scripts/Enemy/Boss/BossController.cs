@@ -76,10 +76,10 @@ public class BossController : MonoBehaviour
 
     void TargetOff() // 타겟 해제
     {
-        //rigid.velocity = Vector3.zero;
-
-        //anim.SetBool("isWalk", false);
-        //anim.SetBool("isAttack", false);
+        anim.SetBool("isAttackGuided", false);
+        anim.SetBool("isAttackStraight", false);
+        anim.SetBool("isAttackArea", false);
+        anim.SetBool("isWalk", false);
 
         SetIsNavEnabled(false);
         agrroPulling.SetActive(true);
@@ -91,7 +91,7 @@ public class BossController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         isChase = true;
-        //anim.SetBool("isWalk", true);
+        anim.SetBool("isWalk", true);
     }
 
     void TargetisAlive() // 타겟 죽는거 확인
@@ -119,7 +119,7 @@ public class BossController : MonoBehaviour
             return;
 
         nav.SetDestination(target.position);
-        nav.isStopped = !isChase || isHit; // 추적 중이 아닐 때, 피격일 때, 네비 멈춤
+        nav.isStopped = !isChase || isHit; // 추적 중이 아닐 때, 피격일 때) 네비 멈춤
     }
 
     void Aiming() // 레이캐스트로 플레이어 위치 특정
@@ -148,25 +148,27 @@ public class BossController : MonoBehaviour
             case 0:
 
             case 1:
-                StartCoroutine(MissileShot()); // 미사일 발사 패턴
+                StartCoroutine(AttackGuided()); // 미사일 발사 패턴
                 break;
 
             case 2:
 
             case 3:
-                StartCoroutine(RockShot()); // 돌 굴러가는 패턴
+                StartCoroutine(AttackStraigh()); // 돌 굴러가는 패턴
                 break;
 
             case 4:
-                //StartCoroutine(Taunt()); // 점프 공격 패턴
-                StartCoroutine("AttackThink");
+                StartCoroutine(AttackArea()); // 점프 공격 패턴
                 break;
         }
     }
 
-    IEnumerator MissileShot()
+    IEnumerator AttackGuided()
     {
-        anim.SetTrigger("doShot");
+        isChase = false;
+        isAttack = true;
+        //yield return new WaitForSeconds(0.3f);
+        anim.SetBool("isAttackGuided", true);
 
         yield return new WaitForSeconds(0.2f);
         GameObject instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
@@ -181,11 +183,14 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         isChase = true;
         isAttack = false;
+        anim.SetBool("isAttackGuided", false);
     }
     
-    IEnumerator RockShot()
+    IEnumerator AttackStraigh()
     {
-        anim.SetTrigger("doBigShot");
+        isChase = false;
+        isAttack = true;
+        anim.SetBool("isAttackStraight", true);
 
         GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
@@ -194,30 +199,28 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isChase = true;
         isAttack = false;
+        anim.SetBool("isAttackStraight", false);
     }
 
-    //IEnumerator Taunt()
-    //{
-    //    //tauntVec = target.position + lookVec;
+    IEnumerator AttackArea()
+    {
+        isChase = false;
+        isAttack = true;
+        anim.SetBool("isAttackArea", true);
 
-    //    nav.isStopped = false;
-    //    boxCollider.enabled = false;
-    //    anim.SetTrigger("doTaunt");
+        yield return new WaitForSeconds(1.5f);
+        if (meleeArea != null)
+            meleeArea.enabled = true;
 
-    //    yield return new WaitForSeconds(1.5f);
-    //    if (meleeArea != null)
-    //        meleeArea.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        if (meleeArea != null)
+            meleeArea.enabled = false;
 
-    //    yield return new WaitForSeconds(0.5f);
-    //    if (meleeArea != null)
-    //        meleeArea.enabled = false;
-
-    //    yield return new WaitForSeconds(1f);
-    //    boxCollider.enabled = true;
-    //    nav.isStopped = true;
-        
-    //    StartCoroutine(AttackThink());
-    //}
+        yield return new WaitForSeconds(1f);
+        isChase = true;
+        isAttack = false;
+        anim.SetBool("isAttackArea", false);
+    }
 
     void AttackCancel()
     {
