@@ -7,7 +7,7 @@ public class HeartHandler : NetworkBehaviour
 {
     [Header("설정")]
     [Range(1f, 100f)]
-    public byte value = 20;
+    public int value = 20;
     // public int value = 20;
     // public enum Type {Heart};
     // public Type type;

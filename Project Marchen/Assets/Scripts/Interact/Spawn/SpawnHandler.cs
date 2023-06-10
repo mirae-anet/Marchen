@@ -3,31 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using UnityEngine.AI;
 
 public class SpawnHandler : NetworkBehaviour
 {
     [Header("설정")]
-    [SerializeField]
-    private float delayTime;
+    public float delayTime;
     public NetworkBehaviour prefab; //EnemyHPHandler, HeartHandler
     public Transform anchorPoint;
-    private bool spawnAble = true;
+    protected bool spawnAble = true;
     public bool skipSettingStartValues = false;
-    TickTimer respawnDelay = TickTimer.None;
+    protected TickTimer respawnDelay = TickTimer.None;
 
-    void Start()
-    {
-        if(!Object.HasStateAuthority)
-            return;
-        
-        if(!skipSettingStartValues)
-        {
-            // Spawn();
-            // skipSettingStartValues = true;
-            // Debug.Log("first spawning");
-        }
-    }
-    private void OnTriggerStay (Collider other)
+    protected virtual void Start(){}
+    protected virtual void OnTriggerStay (Collider other)
     {
         if(!spawnAble)
             return;
@@ -41,9 +30,9 @@ public class SpawnHandler : NetworkBehaviour
         if(respawnDelay.ExpiredOrNotRunning(Runner))
             Spawn();
     }
-    private void Spawn()
+    protected virtual void Spawn()
     {
-        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.identity);
+        NetworkBehaviour spawned = Runner.Spawn(prefab, anchorPoint.position, Quaternion.LookRotation(transform.forward),null, initSpawnPoint);
 
         if(spawned.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
             enemyHPHandler.Spawner = Object;
@@ -56,11 +45,17 @@ public class SpawnHandler : NetworkBehaviour
         spawnAble = false;
         gameObject.SetActive(false);
     }
-    public void SetTimer()
+
+    private void initSpawnPoint(NetworkRunner networkRunner, NetworkObject networkObject)
+    {
+        if(networkObject.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
+            navMeshAgent.Warp(anchorPoint.position);
+    }
+    public virtual void SetTimer()
     {
         if(Runner != null && Object.HasStateAuthority)
         {
-            respawnDelay = TickTimer.CreateFromSeconds(Runner, delayTime);
+            respawnDelay = TickTimer.CreateFromSeconds(Runner, delayTime );
             spawnAble = true;
         }
     }

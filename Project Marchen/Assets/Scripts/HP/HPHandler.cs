@@ -6,13 +6,13 @@ using Fusion;
 public class HPHandler : NetworkBehaviour
 {
     [Networked(OnChanged = nameof(OnHPChanged))]
-    byte HP {get; set;}
+    int HP {get; set;}
 
     [Networked(OnChanged = nameof(OnStateChanged))]
     private bool isDead {get; set;}
     bool isDamage = false;
     bool isInitialized = false;
-    const byte startingHP = 100;
+    const int startingHP = 100;
 
     public Color uiOnHitColor;
     public Image uiOnHitImage;
@@ -80,6 +80,8 @@ public class HPHandler : NetworkBehaviour
     {
         // 피격시 효과
         isDamage = true;
+        if(Object != null && Object.HasInputAuthority)
+            hitboxRoot.HitboxRootActive = false;
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
@@ -87,7 +89,9 @@ public class HPHandler : NetworkBehaviour
         if(Object != null && Object.HasInputAuthority)
             uiOnHitImage.color = uiOnHitColor;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+
+        isDamage = false;
 
         //화면 정상화
         if(Object != null && Object.HasInputAuthority && !isDead)
@@ -96,10 +100,12 @@ public class HPHandler : NetworkBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //아바타 정상화
-        isDamage = false;
 
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
+
+        if(Object != null && Object.HasInputAuthority)
+            hitboxRoot.HitboxRootActive = true;
     }
     IEnumerator OnDeadCO()
     {
@@ -117,7 +123,7 @@ public class HPHandler : NetworkBehaviour
         characterRespawnHandler.RequestRespawn();
     }
 
-    public void OnTakeDamage(string damagedByNickname, byte damageAmount, Vector3 AttackPostion)
+    public void OnTakeDamage(string damagedByNickname, int damageAmount, Vector3 AttackPostion)
     {
         if(!Object.HasStateAuthority)
             return;
@@ -127,7 +133,6 @@ public class HPHandler : NetworkBehaviour
         if(isDamage)
             return;
 
-        //Ensure that we cannot flip the byte as it can't handle minus values.
         if(damageAmount > HP)
             damageAmount = HP;
         HP -= damageAmount;
@@ -148,7 +153,7 @@ public class HPHandler : NetworkBehaviour
     }
     //method overload
 
-    public void OnHeal(byte HealAmount)
+    public void OnHeal(int HealAmount)
     {
         if(!Object.HasStateAuthority)
             return;
@@ -156,9 +161,8 @@ public class HPHandler : NetworkBehaviour
         if(isDead)
             return;
 
-        //Ensure that we cannot flip the byte as it can't handle minus values
         if(HealAmount > startingHP - HP)
-            HealAmount = (byte)(startingHP - HP);
+            HealAmount = (int)(startingHP - HP);
         HP += HealAmount;
 
         RPC_OnHPIncreased();
@@ -170,14 +174,14 @@ public class HPHandler : NetworkBehaviour
     {
         Debug.Log($"{Time.time} OnHPChanged value {changed.Behaviour.HP}");
 
-        byte newHP = changed.Behaviour.HP;
+        int newHP = changed.Behaviour.HP;
         if(changed.Behaviour.heartBar != null)
             changed.Behaviour.heartBar.SetSlider(newHP);
         if(changed.Behaviour.myHeartBar != null)
             changed.Behaviour.myHeartBar.SetSlider(newHP);
         
         changed.LoadOld();
-        byte oldHP = changed.Behaviour.HP;
+        int oldHP = changed.Behaviour.HP;
 
         if(newHP < oldHP)
             changed.Behaviour.OnHPReduced();

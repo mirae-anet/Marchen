@@ -29,7 +29,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     private void Awake() 
     {
-        Debug.Log("어웨이크로그");
         networkInGameMessages = GetComponent<NetworkInGameMessages>(); 
     }
     void Start()
@@ -39,8 +38,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
-        Debug.Log("스폰로그");
-        bool Library = SceneManager.GetActiveScene().name == "TestScene(network)_Potal";
+        bool Library = SceneManager.GetActiveScene().name == "Scene_2";
         
         //본인 
         if (Object.HasInputAuthority) //플레이어 본인
@@ -222,7 +220,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     {
         Debug.Log($"{Time.time} OnSceneLoaded: " + scene.name);
 
-        if (scene.name != "Lobby" && FirstJoin == false)
+        if (scene.name != "Scene_1" && FirstJoin == false)
         {
             //Tell the host that we need to perform the spawned code manually
             if (Object != null && Object.HasStateAuthority && Object.HasInputAuthority)

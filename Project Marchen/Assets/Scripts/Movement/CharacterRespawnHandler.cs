@@ -15,14 +15,12 @@ public class CharacterRespawnHandler : NetworkBehaviour
 
     //other components
     HPHandler hpHandler;
-    NetworkInGameMessages networkInGameMessages;
     NetworkPlayer networkPlayer;
 
     private void Awake()
     {
         // networkyerController = GetComponent<NetworkPlayerController>();
         hpHandler = GetComponent<HPHandler>();
-        networkInGameMessages = GetComponent<NetworkInGameMessages>();
         networkPlayer = GetComponent<NetworkPlayer>();
     }
     void Start()
@@ -48,7 +46,7 @@ public class CharacterRespawnHandler : NetworkBehaviour
 
     void Respawn()
     {
-        transform.position = Utils.GetRandomSpawnPoint(spawnPoint);
+        transform.position = Utils.GetRandomSpawnPoint(spawnPoint, 5f);
         hpHandler.OnRespawned();
         isRespawnRequested = false;
     }

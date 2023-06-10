@@ -30,7 +30,7 @@ public class BulletHandler : NetworkBehaviour
     //Rocket info
     [Header("Bullet info")]
     [SerializeField]
-    byte damageAmount;
+    int damageAmount;
     [SerializeField]
     float radius = 4;
     [SerializeField]
@@ -64,22 +64,13 @@ public class BulletHandler : NetworkBehaviour
                 return;
             }
 
-            //Check if the rocket has hit anything
-            int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, 0.5f, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
             bool isValidHit = false;
+
+            int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, 0.5f, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
 
             if(hitCount > 0)
                 isValidHit = true;
-            
-            //check what we've hit
-            for(int i=0; i < hitCount; i++)
-            {
-                if(hits[i].Hitbox != null)
-                    if(hits[i].Hitbox.Root.GetBehaviour<NetworkObject>() == firedByNetworkObject)
-                        isValidHit = false;
-            }
 
-            //We hit something valid
             if(isValidHit)
             {
                 //Now we need to figure out of anything was within the blast radius
@@ -88,16 +79,12 @@ public class BulletHandler : NetworkBehaviour
                 //Deal damage to anything within the hit radius
                 for(int i = 0; i < hitCount; i++)
                 {
-                    //BUG!!!
-                    // HPHandler hpHandler = hits[i].Hitbox.transform.root.GetComponent<HPHandler>();
-                    // if(hpHandler != null && firedByNetworkObject != null)
-
-                    if(hits[i].Hitbox.transform.root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
+                    if(hits[i].Hitbox.Root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
                     {
                         if(firedByNetworkObject != null)
                             hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
                     }
-                    if(hits[i].Hitbox.transform.root.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+                    if(hits[i].Hitbox.Root.transform.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
                     {
                         if(firedByNetworkObject != null)
                             enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
