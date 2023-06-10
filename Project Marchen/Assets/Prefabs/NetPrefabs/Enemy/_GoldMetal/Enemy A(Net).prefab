@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 5052782308570775071}
   - component: {fileID: 1299652720661714567}
   - component: {fileID: 2440298237999788865}
-  - component: {fileID: 2737190684683023362}
   - component: {fileID: 1511795754755024883}
   - component: {fileID: 3454433068369012509}
   m_Layer: 8
@@ -144,7 +143,6 @@ MonoBehaviour:
   - {fileID: 5052782308570775071}
   - {fileID: 1299652720661714567}
   - {fileID: 2440298237999788865}
-  - {fileID: 2737190684683023362}
   - {fileID: 1511795754755024883}
   - {fileID: 3454433068369012509}
   - {fileID: 9067209039955078003}
@@ -249,21 +247,6 @@ MonoBehaviour:
   Offset: {x: 0, y: 0, z: 0}
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes: []
---- !u!114 &2737190684683023362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328409505970683906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386eeacb5e0e4b2ab5cfadbfd26711d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  isTyping: 0
-  inputField: {fileID: 0}
 --- !u!114 &1511795754755024883
 MonoBehaviour:
   m_ObjectHideFlags: 0

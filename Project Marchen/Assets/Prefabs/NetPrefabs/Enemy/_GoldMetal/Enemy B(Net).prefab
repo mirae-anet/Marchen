@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: 5426978172050559822}
   - component: {fileID: 6229936859651675028}
   - component: {fileID: 6369491305781678750}
-  - component: {fileID: 5248080277351174776}
   - component: {fileID: 8614288081554649415}
   - component: {fileID: 5097137231529076214}
   m_Layer: 8
@@ -220,7 +219,6 @@ MonoBehaviour:
   - {fileID: 5426978172050559822}
   - {fileID: 6229936859651675028}
   - {fileID: 6369491305781678750}
-  - {fileID: 5248080277351174776}
   - {fileID: 8614288081554649415}
   - {fileID: 5097137231529076214}
   - {fileID: 4706119867053234246}
@@ -325,21 +323,6 @@ MonoBehaviour:
   Offset: {x: 0, y: 0, z: 0}
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes: []
---- !u!114 &5248080277351174776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3320669544841490502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d386eeacb5e0e4b2ab5cfadbfd26711d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  isTyping: 0
-  inputField: {fileID: 0}
 --- !u!114 &8614288081554649415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +354,7 @@ MonoBehaviour:
   targetRadius: 0.5
   targetRange: 25
   anchorPoint: {fileID: 5530762273434116446}
+  detectionPos: {fileID: 0}
   bulletPrefab: {fileID: 2254526354299184646, guid: b418c81c2e3e54e20bfabb93ac2b6cf2, type: 3}
 --- !u!1 &4046706711577303926
 GameObject:
