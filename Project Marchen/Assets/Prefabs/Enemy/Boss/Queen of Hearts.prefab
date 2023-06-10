@@ -2394,7 +2394,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 841
+  m_VersionIndex: 862
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4544,7 +4544,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 844
+  m_VersionIndex: 865
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4641,7 +4641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857652829020109714}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Missile Port A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6216,9 +6216,9 @@ GameObject:
   - component: {fileID: 1345380722892320147}
   - component: {fileID: 5538346410491921269}
   - component: {fileID: 4939362488011571764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Queen of Hearts
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6254,9 +6254,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.5
-  m_Height: 9
+  m_Height: 13
   m_Direction: 1
-  m_Center: {x: 0, y: 4.5, z: 0}
+  m_Center: {x: 0, y: 6.5, z: 0}
 --- !u!114 &1345380722892320147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6601,7 +6601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5005727268630772730}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Missile Port B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6934,7 +6934,7 @@ Transform:
   m_GameObject: {fileID: 8280269591718532002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2742552877117526408}
@@ -6955,7 +6955,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3d1292670b44c714baeb05cfc93b4d3c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

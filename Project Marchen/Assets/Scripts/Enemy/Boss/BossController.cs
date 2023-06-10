@@ -140,7 +140,7 @@ public class BossController : MonoBehaviour
         isChase = false;
         isAttack = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         int ranAction = Random.Range(0, 5);
 
         switch (ranAction)
@@ -167,23 +167,31 @@ public class BossController : MonoBehaviour
     {
         isChase = false;
         isAttack = true;
-        //yield return new WaitForSeconds(0.3f);
+
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("isAttackGuided", true);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         GameObject instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
         GuidedBullet bossMissileA = instantMissileA.GetComponent<GuidedBullet>();
         bossMissileA.setTarget(target);
+
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isAttackGuided2", true);
 
         yield return new WaitForSeconds(0.3f);
         GameObject instantMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
         GuidedBullet bossMissileB = instantMissileB.GetComponent<GuidedBullet>();
         bossMissileB.setTarget(target);
 
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isAttackGuided", false);
+        anim.SetBool("isAttackGuided2", false);
+
         yield return new WaitForSeconds(2f);
+
         isChase = true;
         isAttack = false;
-        anim.SetBool("isAttackGuided", false);
     }
     
     IEnumerator AttackStraigh()
@@ -192,11 +200,12 @@ public class BossController : MonoBehaviour
         isAttack = true;
         anim.SetBool("isAttackStraight", true);
 
+        yield return new WaitForSeconds(0.5f);
         GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
         rigidBullet.velocity = transform.forward * 20;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttackStraight", false);
