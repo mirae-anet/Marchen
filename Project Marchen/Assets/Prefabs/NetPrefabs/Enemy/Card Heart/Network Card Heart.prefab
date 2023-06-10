@@ -677,6 +677,7 @@ Transform:
   - {fileID: 1358697814366880435}
   - {fileID: 2674091479995355748}
   - {fileID: 4161652034474296782}
+  - {fileID: 7905145884807899971}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -805,6 +806,7 @@ MonoBehaviour:
   skipSettingStartValues: 0
   knockbackForce: 0.3
   Spawner: {fileID: 0}
+  deathSource: {fileID: 3042972322740056582}
 --- !u!114 &6369491305781678750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +858,7 @@ MonoBehaviour:
   anchorPoint: {fileID: 4161652034474296782}
   detectionPos: {fileID: 4161652034474296782}
   bulletPrefab: {fileID: 2254526354299184646, guid: 3953ccbee17f141fca7098f59bea2566, type: 3}
+  attackSound: {fileID: 4950294581335440095}
 --- !u!1 &4169062062952033742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +1987,39 @@ Transform:
   m_Father: {fileID: 3813850572301822151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8897174816920242708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7905145884807899971}
+  m_Layer: 0
+  m_Name: Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7905145884807899971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8897174816920242708}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.41, y: 3.5, z: 2.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4950294581335440092}
+  - {fileID: 3042972322740056581}
+  m_Father: {fileID: 2062362018885022397}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9058076074889898977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,3 +2128,137 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &2622026947828552698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7905145884807899971}
+    m_Modifications:
+    - target: {fileID: 1033999054785651198, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_Name
+      value: Card Heart Dead Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cd8043c667254384680b95613b5452b0, type: 3}
+--- !u!4 &3042972322740056581 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1033999054785651199, guid: cd8043c667254384680b95613b5452b0, type: 3}
+  m_PrefabInstance: {fileID: 2622026947828552698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3042972322740056582 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1033999054785651196, guid: cd8043c667254384680b95613b5452b0, type: 3}
+  m_PrefabInstance: {fileID: 2622026947828552698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2946595005464292588
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7905145884807899971}
+    m_Modifications:
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806587782228973105, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+      propertyPath: m_Name
+      value: Card Heart Attack Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+--- !u!4 &4950294581335440092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7806587782228973104, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+  m_PrefabInstance: {fileID: 2946595005464292588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &4950294581335440095 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7806587782228973107, guid: 982fd111519efef42bd5220385c7f9b3, type: 3}
+  m_PrefabInstance: {fileID: 2946595005464292588}
+  m_PrefabAsset: {fileID: 0}

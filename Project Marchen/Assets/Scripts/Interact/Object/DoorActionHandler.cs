@@ -13,11 +13,12 @@ public class DoorActionHandler : InteractionHandler
     [Networked]
     private bool missionCompleted {get; set;}
 
+    //other componet
     public GameObject doorWing;
     public GameObject KeyImage;
     public GameObject explosionParticleSystemPrefab;
+    public AudioSource openingSound;
 
-    //other componet
 
     void Start()
     {
@@ -46,10 +47,12 @@ public class DoorActionHandler : InteractionHandler
         PlayerActionHandler playerActionHandler = other.transform.root.GetComponent<PlayerActionHandler>();
         if(playerActionHandler != null)
         {
-            this.Key = true;
-            playerActionHandler.Key = false;
+            if(playerActionHandler.Key)
+            {
+                this.Key = true;
+                playerActionHandler.Key = false;
+            }
         }
-        
     }
 
     static void OnValueChanged(Changed<DoorActionHandler> changed)
@@ -76,6 +79,7 @@ public class DoorActionHandler : InteractionHandler
 
     IEnumerator OpenDoorCO()
     {
+        openingSound.Play();
         while(doorWing.transform.localRotation.eulerAngles.y < 90)
         {
             Vector3 oldRotation = doorWing.transform.rotation.eulerAngles;

@@ -29,6 +29,7 @@ public class EnemyHPHandler : NetworkBehaviour
     TargetHandler targetHandler;
     EnemyAttackHandler enemyAttackHandler; 
     HeartBar heartBar;
+    public AudioSource deathSource;
 
     protected virtual void Awake()
     {
@@ -72,6 +73,7 @@ public class EnemyHPHandler : NetworkBehaviour
     {
         // 피격시 효과
         isDamage = true;
+        deathSource.Play();
         anim.SetBool("isWalk", false);
 
         foreach (MeshRenderer mesh in meshs)

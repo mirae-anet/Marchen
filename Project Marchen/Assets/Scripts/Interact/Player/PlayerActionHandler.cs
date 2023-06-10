@@ -36,6 +36,7 @@ public class PlayerActionHandler : InteractionHandler
     public GameObject myBlueBatteryImage;
     public GameObject myGreenBatteryImage;
     public GameObject myKeyImage;
+    public AudioSource pickUpSound;
     // public GameObject myKey;
 
     void Start()
@@ -110,6 +111,7 @@ public class PlayerActionHandler : InteractionHandler
                     redBook = true;
                     break;
             }
+            RPC_AudioPlay("pickUp");
         }
     }
 
@@ -143,5 +145,11 @@ public class PlayerActionHandler : InteractionHandler
         changed.Behaviour.image2.SetActive(changed.Behaviour.redBook);
         changed.Behaviour.myImage1.SetActive(changed.Behaviour.greenBook);
         changed.Behaviour.myImage2.SetActive(changed.Behaviour.redBook);
+    }
+
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_AudioPlay(string audioType)
+    {
+        pickUpSound.Play();
     }
 }

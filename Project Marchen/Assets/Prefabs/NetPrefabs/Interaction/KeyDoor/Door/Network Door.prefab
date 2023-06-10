@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 5820878526514361435}
   - {fileID: 7924456799455812105}
+  - {fileID: 5753104698513004763}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,6 +121,7 @@ MonoBehaviour:
   doorWing: {fileID: 7922519999092340315}
   KeyImage: {fileID: 3643471804592408875}
   explosionParticleSystemPrefab: {fileID: 3024599546387762972, guid: 48f67c645a07b433783c7ab039f8b7fb, type: 3}
+  openingSound: {fileID: 5753104698513004740}
 --- !u!1 &2965125967202965285
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,4 +558,71 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2729725392725438891, guid: 57736fa45c381417586a4f6d36726234, type: 3}
   m_PrefabInstance: {fileID: 5195110738460240802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5955956103851434587
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5837670112941160378}
+    m_Modifications:
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121455702959323806, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+      propertyPath: m_Name
+      value: Door Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+--- !u!82 &5753104698513004740 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2121455702959323807, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+  m_PrefabInstance: {fileID: 5955956103851434587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5753104698513004763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2121455702959323776, guid: c54d62c29e11e0646b25938896b01ecb, type: 3}
+  m_PrefabInstance: {fileID: 5955956103851434587}
   m_PrefabAsset: {fileID: 0}

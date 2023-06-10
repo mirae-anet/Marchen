@@ -16,6 +16,7 @@ public class HammerHandler : WeaponHandler
     public int damageAmount = 25;
     [Range(0f, 5f)]
     public float delay = 0.6f;
+    public AudioSource swingSource;
 
     //other compomponet
     Animator anim;
@@ -38,6 +39,7 @@ public class HammerHandler : WeaponHandler
     public override void Attack(Vector3 aimDir)
     {
         RPC_animatonSetTrigger("doSwing");
+        RPC_AudioPlay("swing");
         StartCoroutine("Swing");
     }
 
@@ -84,5 +86,10 @@ public class HammerHandler : WeaponHandler
     private void RPC_SetTrailEffect(bool bol)
     {
         trailEffect.enabled = bol;
+    }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_AudioPlay(string audioType)
+    {
+        swingSource.Play();
     }
 }

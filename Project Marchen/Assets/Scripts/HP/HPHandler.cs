@@ -31,6 +31,9 @@ public class HPHandler : NetworkBehaviour
     Rigidbody rigid;
     public HeartBar heartBar;
     public HeartBar myHeartBar;
+    public AudioSource deadSound;
+    public AudioSource hitSound;
+    public AudioSource healSound;
 
     private void Awake()
     {
@@ -67,6 +70,7 @@ public class HPHandler : NetworkBehaviour
 
     IEnumerator OnHealCO()
     {
+        healSound.Play();
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.green;
 
@@ -80,6 +84,8 @@ public class HPHandler : NetworkBehaviour
     {
         // 피격시 효과
         isDamage = true;
+        hitSound.Play();
+
         if(Object != null && Object.HasInputAuthority)
             hitboxRoot.HitboxRootActive = false;
 
@@ -110,6 +116,7 @@ public class HPHandler : NetworkBehaviour
     IEnumerator OnDeadCO()
     {
         anim.SetTrigger("doDie");
+        deadSound.Play();
 
         yield return new WaitForSeconds(2.0f);
 
