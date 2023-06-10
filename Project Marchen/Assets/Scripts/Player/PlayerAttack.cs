@@ -18,6 +18,18 @@ public class PlayerAttack : MonoBehaviour
     [Header("오브젝트 연결")]
     [SerializeField]
     private GameObject[] weapons;
+    [SerializeField]
+    private AudioSource shotSource;
+    [SerializeField]
+    private AudioClip shotClip;
+    [SerializeField]
+    private AudioSource reloadSource;
+    [SerializeField]
+    private AudioClip reloadClip;
+    [SerializeField]
+    private AudioSource swingSource;
+    [SerializeField]
+    private AudioClip swingClip;
 
     [Header("설정")]
     public Type weaponType;
@@ -65,15 +77,21 @@ public class PlayerAttack : MonoBehaviour
             {
                 playerController.SetIsAttack(false);
                 DoReload();
+
+                ReloadSound();
                 yield break;
             }
 
             playerController.SetForward(camDir);
             anim.SetTrigger("doShot");
+
+            ShotSound();
         }
         else
         {
             anim.SetTrigger("doSwing");
+
+            SwingSound();
         }
         
         weaponMain.Attack();
@@ -89,6 +107,7 @@ public class PlayerAttack : MonoBehaviour
             return;
         
         anim.SetTrigger("doReload");
+        ReloadSound();
         playerController.SetIsReload(true);
 
         StartCoroutine("ReloadOut", 0.8f);
@@ -106,5 +125,20 @@ public class PlayerAttack : MonoBehaviour
     {
         StopCoroutine("ReloadOut");
         playerController.SetIsReload(false);
+    }
+
+    private void ShotSound()
+    {
+        shotSource.PlayOneShot(shotClip);
+    }
+    
+    private void ReloadSound()
+    {
+        reloadSource.PlayOneShot(reloadClip);
+    }
+
+    private void SwingSound()
+    {
+        swingSource.PlayOneShot(swingClip);
     }
 }

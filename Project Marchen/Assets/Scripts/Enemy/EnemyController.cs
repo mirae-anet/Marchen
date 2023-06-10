@@ -29,6 +29,10 @@ public class EnemyController : MonoBehaviour
     private GameObject agrroPulling;
     [SerializeField]
     private Transform anchorPoint;
+    [SerializeField]
+    private AudioSource swingSource;
+    [SerializeField]
+    private AudioClip swingClip;
 
     [Header("설정")]
     public float moveDis = 3f;
@@ -208,6 +212,8 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         anim.SetBool("isAttack", true);
 
+        SwingSound();
+
         switch (enemyMain.GetEnemyType())
         {
             case EnemyMain.Type.Melee:
@@ -254,6 +260,11 @@ public class EnemyController : MonoBehaviour
             if (meleeArea != null)
                 meleeArea.enabled = false;
         }
+    }
+
+    private void SwingSound()
+    {
+        swingSource.PlayOneShot(swingClip);
     }
 
     // --------------------------- 외부 참조 함수 ------------------------
