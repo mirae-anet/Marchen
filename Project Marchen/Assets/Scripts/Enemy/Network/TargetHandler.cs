@@ -47,7 +47,6 @@ public class TargetHandler : NetworkBehaviour
         yield return new WaitForSeconds(0.1f);
         networkEnemyController.SetIsChase(true); //single code에선 SetTarget에서 이미 호출함 그래서 효과없음.
         RPC_animatonSetBool("isWalk", true);
-        Debug.Log(gameObject.name + " ChaseStart");
     }
 
     public void TargetisAlive() // 타겟 죽는거 확인

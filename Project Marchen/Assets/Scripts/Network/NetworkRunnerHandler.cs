@@ -31,8 +31,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             networkRunner.name = "Network runner";
 
             // 자동으로 방 입장. 호스트, 클라이언트 자동 설정
-            //if(SceneManager.GetActiveScene().name != "Scene_1")//추가
-            if(SceneManager.GetActiveScene().name != "Lobby")//추가
+            if(SceneManager.GetActiveScene().name != "Scene_1")//추가
             {
                 var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient,"TestSession" ,GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
             }
@@ -170,7 +169,17 @@ public class NetworkRunnerHandler : MonoBehaviour
                     }
                 });
             }
-            // Dynamic spawner
+            else if(resumeNetworkObject.TryGetBehaviour<CountSpawnHandler>(out var oldCountSpawner))
+            {
+                runner.Spawn(resumeNetworkObject, position: oldCountSpawner.transform.position, oldCountSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    //Copy state
+                    CountSpawnHandler newCountSpawner = newNetworkObject.GetComponent<CountSpawnHandler>();
+                    newCountSpawner.CopyStateFrom(oldCountSpawner);
+                    newCountSpawner.skipSettingStartValues = true;
+                });
+            }
             else if(resumeNetworkObject.TryGetBehaviour<SpawnHandler>(out var oldSpawner))
             {
                 runner.Spawn(resumeNetworkObject, position: oldSpawner.transform.position, oldSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -213,6 +222,28 @@ public class NetworkRunnerHandler : MonoBehaviour
                     //Copy state
                     RocketHandler newRocket = newNetworkObject.GetComponent<RocketHandler>();
                     newRocket.CopyStateFrom(oldRocket);
+                });
+            }
+            else if(resumeNetworkObject.TryGetBehaviour<DoorActionHandler>(out var oldDoor))
+            {
+                Transform oldDoorTrans = oldDoor.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldDoorTrans.position, oldDoorTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    DoorActionHandler newDoor = newNetworkObject.GetComponent<DoorActionHandler>();
+                    newDoor.CopyStateFrom(oldDoor);
+                    newDoor.skipSettingStartValues = true;
+                });
+            }
+            else if(resumeNetworkObject.TryGetBehaviour<ClockActionHandler>(out var oldClock))
+            {
+                Transform oldClockTrans = oldClock.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldClockTrans.position, oldClockTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    ClockActionHandler newClock = newNetworkObject.GetComponent<ClockActionHandler>();
+                    newClock.CopyStateFrom(oldClock);
+                    newClock.skipSettingStartValues = true;
                 });
             }
             else if(resumeNetworkObject.TryGetBehaviour<ShelfActionHandler>(out var oldShelf))

@@ -181,6 +181,7 @@ public class NetworkPlayerController : NetworkBehaviour
             if(Object.HasStateAuthority)
             {
                 attackHandler.StopReload();
+                rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }
 
