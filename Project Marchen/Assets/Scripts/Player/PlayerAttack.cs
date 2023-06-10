@@ -140,5 +140,5 @@ public class PlayerAttack : MonoBehaviour
     private void SwingSound()
     {
         swingSource.PlayOneShot(swingClip);
-    }    
+    }
 }

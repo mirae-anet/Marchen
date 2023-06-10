@@ -212,8 +212,7 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         anim.SetBool("isAttack", true);
 
-        yield return new WaitForSeconds(0.5f);
-        SwingSound();
+        SwingSound();  // (하트 병정, 다이아몬드 병정) 0.5초 지연 필요
 
         switch (enemyMain.GetEnemyType())
         {
