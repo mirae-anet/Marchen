@@ -2394,7 +2394,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 865
+  m_VersionIndex: 904
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4544,7 +4544,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 868
+  m_VersionIndex: 907
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4642,7 +4642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1857652829020109714}
   m_Layer: 0
-  m_Name: Missile Port A
+  m_Name: Guided Bullet Port L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4656,12 +4656,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197683052002809867}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 6, z: 3}
+  m_LocalPosition: {x: -2.5, y: 7.5, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2742211013390590318}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &765289236289844298
 GameObject:
@@ -6236,9 +6236,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1498581709711293050}
-  - {fileID: 2125137962849909518}
   - {fileID: 1857652829020109714}
   - {fileID: 5005727268630772730}
+  - {fileID: 3999556994689058110}
   - {fileID: 5644986228212306379}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -6285,14 +6285,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167f642a43d58804d8dc0409f71d2341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeArea: {fileID: 7070186612204913029}
-  bullet: {fileID: 8517147483184773383, guid: cec00fc40acd0bf4b98eb1363f6b521d, type: 3}
-  missile: {fileID: 3533313218899643882, guid: a39c4f0065b4a2d4bbb6fa2ef4cb9e30, type: 3}
-  missilePortA: {fileID: 1857652829020109714}
-  missilePortB: {fileID: 5005727268630772730}
+  guidedBullet: {fileID: 3533313218899643882, guid: 4adbe65ba29b00647acb3d3ff761afd5, type: 3}
+  straightBullet: {fileID: 1009087019869163579, guid: c64fcc6e61188294796cb0e0a1c12be1, type: 3}
+  AreaBullet: {fileID: 120318413299109445, guid: 6f65fc7c83a4fdc44b57ffc7ccfe8afa, type: 3}
+  gBulletPortL: {fileID: 1857652829020109714}
+  gBulletPortR: {fileID: 5005727268630772730}
+  sBulletPort: {fileID: 3999556994689058110}
   agrroPulling: {fileID: 3283745883724297598}
   targetRadius: 5
-  targetRange: 55
+  targetRange: 30
   attackCancel: 0
 --- !u!195 &4939362488011571764
 NavMeshAgent:
@@ -6602,7 +6603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5005727268630772730}
   m_Layer: 0
-  m_Name: Missile Port B
+  m_Name: Guided Bullet Port R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6616,12 +6617,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3282328472260646816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 6, z: 3}
+  m_LocalPosition: {x: 2.5, y: 7.5, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2742211013390590318}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3283745883724297598
 GameObject:
@@ -6681,6 +6682,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1465caa4c6c95fd43a93fd16158d0b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3785159676225810304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3999556994689058110}
+  m_Layer: 0
+  m_Name: Straight Bullet Port
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3999556994689058110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785159676225810304}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.5, z: 3}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2742211013390590318}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3964721975215999954
 GameObject:
   m_ObjectHideFlags: 0
@@ -6764,67 +6796,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4056769564666855139
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2125137962849909518}
-  - component: {fileID: 7070186612204913029}
-  - component: {fileID: 4732331087441352957}
-  m_Layer: 8
-  m_Name: Boss Melee Area
-  m_TagString: EnemyBullet
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2125137962849909518
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056769564666855139}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2742211013390590318}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7070186612204913029
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056769564666855139}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 3.5, y: 0.5, z: 3.5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4732331087441352957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4056769564666855139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c3cb606223af5a4e8c243e4b3670b66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 25
-  groundDestroy: 0
-  isMelee: 1
 --- !u!1 &5515174198543901933
 GameObject:
   m_ObjectHideFlags: 0

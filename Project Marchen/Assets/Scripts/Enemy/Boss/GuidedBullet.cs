@@ -13,7 +13,7 @@ public class GuidedBullet : BulletMain
         nav = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         move();
     }

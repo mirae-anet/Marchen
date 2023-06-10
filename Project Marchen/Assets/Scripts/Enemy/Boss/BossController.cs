@@ -17,15 +17,17 @@ public class BossController : MonoBehaviour
 
     [Header("오브젝트 연결")]
     [SerializeField]
-    private BoxCollider meleeArea;
+    public GameObject guidedBullet; // 유도탄
     [SerializeField]
-    private GameObject bullet; // 바위
+    private GameObject straightBullet; // 차지탄
     [SerializeField]
-    public GameObject missile; // 미사일
+    private GameObject AreaBullet; // 전체공격
     [SerializeField]
-    private Transform missilePortA;
+    private Transform gBulletPortL;
     [SerializeField]
-    private Transform missilePortB;
+    private Transform gBulletPortR;
+    [SerializeField]
+    private Transform sBulletPort;
     [SerializeField]
     private GameObject agrroPulling;
 
@@ -33,7 +35,7 @@ public class BossController : MonoBehaviour
     [Range(0f, 10f)]
     public float targetRadius = 5f;
     [Range(1f, 100f)]
-    public float targetRange = 55f; // 공격 사정 거리
+    public float targetRange = 30f; // 공격 사정 거리
     [SerializeField]
     private bool attackCancel = false; // 피격 시 공격 멈출지
 
@@ -148,17 +150,17 @@ public class BossController : MonoBehaviour
             case 0:
 
             case 1:
-                StartCoroutine(AttackGuided()); // 미사일 발사 패턴
+                StartCoroutine(AttackGuided()); // 유도탄 발사
                 break;
 
             case 2:
 
             case 3:
-                StartCoroutine(AttackStraight()); // 돌 굴러가는 패턴
+                StartCoroutine(AttackStraight()); // 차지(직선)탄 발사
                 break;
 
             case 4:
-                StartCoroutine(AttackArea()); // 점프 공격 패턴
+                StartCoroutine(AttackArea()); // 전체 공격(16개)
                 break;
         }
     }
@@ -172,23 +174,21 @@ public class BossController : MonoBehaviour
         anim.SetBool("isAttackGuided", true);
 
         yield return new WaitForSeconds(0.3f);
-        GameObject instantMissileA = Instantiate(missile, missilePortA.position, missilePortA.rotation);
-        GuidedBullet bossMissileA = instantMissileA.GetComponent<GuidedBullet>();
-        bossMissileA.setTarget(target);
+        GameObject instantBulletA = Instantiate(guidedBullet, gBulletPortL.position, gBulletPortL.rotation);
+        GuidedBullet bossBulletA = instantBulletA.GetComponent<GuidedBullet>();
+        bossBulletA.setTarget(target);
 
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isAttackGuided2", true);
 
         yield return new WaitForSeconds(0.3f);
-        GameObject instantMissileB = Instantiate(missile, missilePortB.position, missilePortB.rotation);
-        GuidedBullet bossMissileB = instantMissileB.GetComponent<GuidedBullet>();
-        bossMissileB.setTarget(target);
+        GameObject instantBulletB = Instantiate(guidedBullet, gBulletPortR.position, gBulletPortR.rotation);
+        GuidedBullet bossBulletB = instantBulletB.GetComponent<GuidedBullet>();
+        bossBulletB.setTarget(target);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         anim.SetBool("isAttackGuided", false);
         anim.SetBool("isAttackGuided2", false);
-
-        yield return new WaitForSeconds(2f);
 
         isChase = true;
         isAttack = false;
@@ -200,12 +200,15 @@ public class BossController : MonoBehaviour
         isAttack = true;
         anim.SetBool("isAttackStraight", true);
 
+        yield return new WaitForSeconds(0.8f);
+        GameObject instantBullet = Instantiate(straightBullet, sBulletPort.position, sBulletPort.rotation);
+
         yield return new WaitForSeconds(0.5f);
-        GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
-        Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
-        rigidBullet.velocity = transform.forward * 20;
+        instantBullet.GetComponent<CapsuleCollider>().enabled = true;
 
         yield return new WaitForSeconds(1f);
+        Destroy(instantBullet);
+
         isChase = true;
         isAttack = false;
         anim.SetBool("isAttackStraight", false);
@@ -218,19 +221,19 @@ public class BossController : MonoBehaviour
         anim.SetBool("isAttackArea", true);
 
         yield return new WaitForSeconds(0.5f);
-        GameObject instantBullet = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject instantBullet = Instantiate(AreaBullet, transform.position, transform.rotation);
         Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
         rigidBullet.velocity = transform.forward * 20;
 
-        GameObject instantBullet2 = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject instantBullet2 = Instantiate(AreaBullet, transform.position, transform.rotation);
         Rigidbody rigidBullet2 = instantBullet2.GetComponent<Rigidbody>();
         rigidBullet2.velocity = transform.forward * -20;
 
-        GameObject instantBullet3 = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject instantBullet3 = Instantiate(AreaBullet, transform.position, transform.rotation);
         Rigidbody rigidBullet3 = instantBullet3.GetComponent<Rigidbody>();
         rigidBullet3.velocity = transform.right * 20;
 
-        GameObject instantBullet4 = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject instantBullet4 = Instantiate(AreaBullet, transform.position, transform.rotation);
         Rigidbody rigidBullet4 = instantBullet4.GetComponent<Rigidbody>();
         rigidBullet4.velocity = transform.right * -20;
 
@@ -253,9 +256,6 @@ public class BossController : MonoBehaviour
             isAttack = false;
 
             anim.SetBool("isAttack", false);
-
-            if (meleeArea != null)
-                meleeArea.enabled = false;
         }
     }
 
