@@ -30,6 +30,12 @@ public class BossController : MonoBehaviour
     private Transform sBulletPort;
     [SerializeField]
     private GameObject agrroPulling;
+    [SerializeField]
+    private AudioSource attackGuidedSound;
+    [SerializeField]
+    private AudioSource attackStraightSound;
+    [SerializeField]
+    private AudioSource attackAreaSound;
 
     [Header("설정")]
     [Range(0f, 10f)]
@@ -177,6 +183,7 @@ public class BossController : MonoBehaviour
         GameObject instantBulletA = Instantiate(guidedBullet, gBulletPortL.position, gBulletPortL.rotation);
         GuidedBullet bossBulletA = instantBulletA.GetComponent<GuidedBullet>();
         bossBulletA.setTarget(target);
+        attackGuidedSound.Play();
 
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isAttackGuided2", true);
@@ -185,6 +192,7 @@ public class BossController : MonoBehaviour
         GameObject instantBulletB = Instantiate(guidedBullet, gBulletPortR.position, gBulletPortR.rotation);
         GuidedBullet bossBulletB = instantBulletB.GetComponent<GuidedBullet>();
         bossBulletB.setTarget(target);
+        attackGuidedSound.Play();
 
         yield return new WaitForSeconds(1f);
         anim.SetBool("isAttackGuided", false);
@@ -202,6 +210,7 @@ public class BossController : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
         GameObject instantBullet = Instantiate(straightBullet, sBulletPort.position, sBulletPort.rotation);
+        attackStraightSound.Play();
 
         yield return new WaitForSeconds(0.5f);
         instantBullet.GetComponent<CapsuleCollider>().enabled = true;
@@ -227,6 +236,8 @@ public class BossController : MonoBehaviour
             Rigidbody rigidBullet = instantBullet.GetComponent<Rigidbody>();
             rigidBullet.velocity = instantBullet.transform.forward * 20;
         }
+
+        attackAreaSound.Play();
 
         yield return new WaitForSeconds(1f);
         isChase = true;
