@@ -48,7 +48,7 @@ public class CharacterRespawnHandler : NetworkBehaviour
 
     void Respawn()
     {
-        transform.position = Utils.GetRandomSpawnPoint(spawnPoint);
+        transform.position = Utils.GetRandomSpawnPoint(spawnPoint, 5f);
         hpHandler.OnRespawned();
         isRespawnRequested = false;
     }

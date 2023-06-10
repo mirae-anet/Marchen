@@ -19,8 +19,8 @@ public class ClockActionHandler : InteractionHandler
     public GameObject Green;
     public GameObject MinuteHand;
     public GameObject MinuteHand_Next;
-    // public GameObject Block;
     public GameObject explosionParticleSystemPrefab;
+    public GameObject Block;
 
     //other componet
 
@@ -40,7 +40,7 @@ public class ClockActionHandler : InteractionHandler
         Blue.SetActive(BlueBattery);
         MinuteHand.SetActive(!missionCompleted);
         MinuteHand_Next.SetActive(missionCompleted);
-        // Block.SetActive(!missionCompleted);
+        Block.SetActive(!missionCompleted);
     }
 
     public override void action(Transform other)
@@ -87,7 +87,7 @@ public class ClockActionHandler : InteractionHandler
 
         MinuteHand.SetActive(false);
         MinuteHand_Next.SetActive(true);
-        // Block.SetActive(false);
+        Block.SetActive(false);
 
         if(Object != null && Object.HasStateAuthority)
             missionCompleted = true;
