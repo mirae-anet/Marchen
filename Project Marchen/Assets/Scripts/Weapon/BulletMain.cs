@@ -42,7 +42,7 @@ public class BulletMain : MonoBehaviour
         if (isMelee)
             return;
 
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Player")
             Destroy(gameObject);
     }
 

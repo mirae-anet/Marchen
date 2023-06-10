@@ -59,7 +59,7 @@ public class PlayerMain : MonoBehaviour
                 health -= enemyBullet.GetDamage();
                 //Debug.Log(other.GetComponent<BulletMain>().getParent());
 
-                bool isBossAttack = other.name == "Boss Melee Area";
+                //bool isBossAttack = other.name == "Boss Melee Area";
 
                 //if (other != null && other.GetComponent<Rigidbody>() != null)
                 if (other != null)
@@ -70,15 +70,14 @@ public class PlayerMain : MonoBehaviour
                     rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
                 }
 
-                StartCoroutine(OnDamage(isBossAttack));
+                //StartCoroutine(OnDamage(isBossAttack));
+                StartCoroutine(OnDamage());
             }
-
-            if (other.GetComponent<Rigidbody>() != null) // Bullet 이면 해당 오브젝트 파괴
-                Destroy(other.gameObject);
         }
     }
     
-    IEnumerator OnDamage(bool isBossAttack)
+    //IEnumerator OnDamage(bool isBossAttack)
+    IEnumerator OnDamage()
     {
         if (health <= 0)
             OnDie();
@@ -88,8 +87,8 @@ public class PlayerMain : MonoBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.yellow;
 
-        if (isBossAttack)
-            rigid.AddForce(transform.forward * -25, ForceMode.Impulse);
+        //if (isBossAttack)
+        //    rigid.AddForce(transform.forward * -25, ForceMode.Impulse);
 
         yield return new WaitForSeconds(0.6f);
 
@@ -98,8 +97,8 @@ public class PlayerMain : MonoBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
 
-        if (isBossAttack)
-            rigid.velocity = Vector3.zero;
+        //if (isBossAttack)
+        //    rigid.velocity = Vector3.zero;
     }
 
     void OnDie()
