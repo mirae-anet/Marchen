@@ -2988,13 +2988,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294342572}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 543450651994927287}
-  m_RootOrder: 3
+  m_Father: {fileID: 543450652172418442}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1294342574
 AudioSource:
@@ -4251,13 +4251,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656272818}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 543450652172418442}
-  m_RootOrder: 4
+  m_Father: {fileID: 543450651994927287}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1656272820
 AudioSource:
@@ -5690,11 +5690,11 @@ PrefabInstance:
     - target: {fileID: 543450651994927288, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: deadClip
       value: 
-      objectReference: {fileID: 8300000, guid: 4b4a8793b8ba95e459dd09718f856151, type: 3}
+      objectReference: {fileID: 8300000, guid: ecc517e7a0e396e42a4f3012969ff7d3, type: 3}
     - target: {fileID: 543450651994927288, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: deadSource
       value: 
-      objectReference: {fileID: 1294342574}
+      objectReference: {fileID: 1656272820}
     - target: {fileID: 543450651994927289, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: swingClip
       value: 
@@ -5709,7 +5709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1439161317686407493, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1779833603260034047, guid: 57a63647416f2b74197c38a8ff091f4b, type: 3}
       propertyPath: m_RootOrder
@@ -5997,11 +5997,11 @@ PrefabInstance:
     - target: {fileID: 543450652172418443, guid: e10865df05e94324ab6207f87a49d4ed, type: 3}
       propertyPath: deadClip
       value: 
-      objectReference: {fileID: 8300000, guid: ecc517e7a0e396e42a4f3012969ff7d3, type: 3}
+      objectReference: {fileID: 8300000, guid: 4b4a8793b8ba95e459dd09718f856151, type: 3}
     - target: {fileID: 543450652172418443, guid: e10865df05e94324ab6207f87a49d4ed, type: 3}
       propertyPath: deadSource
       value: 
-      objectReference: {fileID: 1656272820}
+      objectReference: {fileID: 1294342574}
     - target: {fileID: 543450652172418444, guid: e10865df05e94324ab6207f87a49d4ed, type: 3}
       propertyPath: swingClip
       value: 
