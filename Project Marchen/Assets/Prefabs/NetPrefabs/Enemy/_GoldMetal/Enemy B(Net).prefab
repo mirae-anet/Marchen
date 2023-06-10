@@ -305,6 +305,7 @@ MonoBehaviour:
   skipSettingStartValues: 0
   knockbackForce: 0.3
   Spawner: {fileID: 0}
+  deathSource: {fileID: 0}
 --- !u!114 &6369491305781678750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,8 +355,9 @@ MonoBehaviour:
   targetRadius: 0.5
   targetRange: 25
   anchorPoint: {fileID: 5530762273434116446}
-  detectionPos: {fileID: 0}
+  detectionPos: {fileID: 5530762273434116446}
   bulletPrefab: {fileID: 2254526354299184646, guid: b418c81c2e3e54e20bfabb93ac2b6cf2, type: 3}
+  attackSound: {fileID: 0}
 --- !u!1 &4046706711577303926
 GameObject:
   m_ObjectHideFlags: 0
