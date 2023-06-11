@@ -6,12 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PortalHandler : InteractionHandler
 {
-    private ReadyUIHandler readyUIHandler;
-    public Camera localCamera;
-    CharacterInputHandler inputHandler;
     public GameObject ReadyUiCanvas;
-    EscHandler escHandler;
-    NetworkObject spawnCanvas;//추가
 
     private void OnTriggerEnter(Collider other)
     {
