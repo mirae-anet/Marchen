@@ -43,16 +43,14 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
 
         if(Object.HasStateAuthority)
         {
+            if(Spawner != null)
+            {
+                Spawner.gameObject.SetActive(true);
+                Spawner.GetComponent<SpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
+            }
             Runner.Despawn(Object);
         }
     }
     private void OnDestroy() {
-        if(Object != null && Object.HasStateAuthority)
-        {
-            //spawn the portal
-            // Runner.Spawn(prefab, transform.position - transform.forward.normalized * 2, Quaternion.LookRotation(transform.forward));
-            //spawn the text
-            // Runner.Spawn(prefab, transform.position + transform.forward.normalized * 2, Quaternion.LookRotation(transform.forward));
-        }
     }
 }
