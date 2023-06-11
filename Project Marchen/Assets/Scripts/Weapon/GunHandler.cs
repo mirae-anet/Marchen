@@ -35,6 +35,8 @@ public class GunHandler : WeaponHandler
     NetworkPlayerController networkPlayerController;
     NetworkPlayer networkPlayer;
     NetworkObject networkObject;
+    public AudioSource shotSource;
+    public AudioSource reloadSource;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class GunHandler : WeaponHandler
 
         networkPlayerController.RPC_LookForward(aimDir);
         RPC_animatonSetTrigger("doShot");
+        RPC_AudioPlay("shot");
 
         curAmmo--;
         StartCoroutine("Shot");
@@ -82,6 +85,7 @@ public class GunHandler : WeaponHandler
     public override void Reload()
     {
         RPC_animatonSetTrigger("doReload");
+        RPC_AudioPlay("reload");
         networkPlayerController.SetIsReload(true);
         StartCoroutine(ReloadOut(reloadTime));
     }
@@ -117,5 +121,20 @@ public class GunHandler : WeaponHandler
         Vector3 caseVec = bulletCasePos.forward * Random.Range(-3, -2) + Vector3.up * Random.Range(2, 3);
         caseRigid.AddForce(caseVec, ForceMode.Impulse);
         caseRigid.AddTorque(Vector3.up * 10, ForceMode.Impulse);
+    }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_AudioPlay(string audioType)
+    {
+        switch (audioType)
+        {
+            case "shot":
+                shotSource.Play();
+                break;
+
+            case "reload":
+                reloadSource.Play();
+                break;
+        }
+
     }
 }

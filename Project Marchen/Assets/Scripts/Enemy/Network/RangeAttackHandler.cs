@@ -21,6 +21,7 @@ public class RangeAttackHandler : EnemyAttackHandler
     private Animator anim;
     private EnemyHPHandler enemyHPHandler;
     private TargetHandler targetHandler;
+    public AudioSource attackSound;
 
     void Start()
     {
@@ -103,5 +104,10 @@ public class RangeAttackHandler : EnemyAttackHandler
     private void RPC_animatonSetTrigger(string action)
     {
         anim.SetTrigger(action);
+    }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_AudioPlay(string audioType)
+    {
+        attackSound.Play();
     }
 }

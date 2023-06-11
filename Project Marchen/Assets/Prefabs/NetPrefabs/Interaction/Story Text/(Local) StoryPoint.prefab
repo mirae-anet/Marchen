@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6487694065727322818}
   - component: {fileID: 6487694065727322819}
-  - component: {fileID: 3337408466606947885}
   - component: {fileID: 894274163902846492}
   m_Layer: 16
   m_Name: (Local) StoryPoint
@@ -131,18 +130,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3337408466606947885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6487694065727322822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53016eab78c8b4635a5e7eb605dc8c46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &894274163902846492
 MonoBehaviour:
   m_ObjectHideFlags: 0

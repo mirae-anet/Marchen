@@ -18,6 +18,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
     private Animator anim;
     private EnemyHPHandler enemyHPHandler;
     TargetHandler targetHandler;
+    public AudioSource attackSound;
 
     void Start()
     {
@@ -29,11 +30,6 @@ public class MeleeAttackHandler : EnemyAttackHandler
 
     public override void Aiming() // 레이캐스트로 플레이어 위치 특정
     {
-        // if(Physics.BoxCast(transform.position, boxSize/2, transform.forward, Quaternion.identity, targetRange, LayerMask.GetMask("Player")) )
-        // {
-        //     if(!isAttack && !enemyHPHandler.GetIsDamage())
-        //         StartCoroutine("AttackCO");
-        // }
         if(enemyHPHandler == null)
             return;
 
@@ -66,6 +62,7 @@ public class MeleeAttackHandler : EnemyAttackHandler
         yield return new WaitForSeconds(0.3f);
 
         RPC_animatonSetBool("isAttack", true);
+        RPC_AudioPlay("attack");
         yield return new WaitForSeconds(0.5f);
 
         List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
@@ -117,4 +114,10 @@ public class MeleeAttackHandler : EnemyAttackHandler
     {
         anim.SetTrigger(action);
     }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_AudioPlay(string audioType)
+    {
+        attackSound.Play();
+    }
+
 }

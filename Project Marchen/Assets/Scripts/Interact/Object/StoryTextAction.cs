@@ -19,7 +19,7 @@ public class StoryTextAction : InteractionHandler
         PrintStory();
 
         // this.GetComponent<SphereCollider>().radius = 3f;
-        this.GetComponent<SphereCollider>().enabled = false;
+        this.GetComponent<Collider>().enabled = false;
     }
 
     public override void action(Transform other)

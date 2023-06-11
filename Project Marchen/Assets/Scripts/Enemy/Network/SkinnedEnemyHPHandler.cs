@@ -5,7 +5,7 @@ using Fusion;
 
 public class SkinnedEnemyHPHandler : EnemyHPHandler
 {
-    private SkinnedMeshRenderer[] skinnedMeshs;
+    protected SkinnedMeshRenderer[] skinnedMeshs;
     
     protected override void Awake()
     {

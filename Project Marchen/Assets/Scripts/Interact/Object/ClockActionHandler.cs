@@ -21,6 +21,7 @@ public class ClockActionHandler : InteractionHandler
     public GameObject MinuteHand_Next;
     public GameObject explosionParticleSystemPrefab;
     public GameObject Block;
+    public AudioSource batteryEquipSound;
 
     //other componet
 
@@ -71,6 +72,7 @@ public class ClockActionHandler : InteractionHandler
     {
         changed.Behaviour.Green.SetActive(changed.Behaviour.GreenBattery);
         changed.Behaviour.Blue.SetActive(changed.Behaviour.BlueBattery);
+        changed.Behaviour.batteryEquipSound.Play();
 
         if(changed.Behaviour.Object.HasStateAuthority)
         {

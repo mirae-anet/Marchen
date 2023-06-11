@@ -6,17 +6,17 @@ using Fusion;
 public class EnemyHPHandler : NetworkBehaviour
 {
     public bool skipSettingStartValues = false;
-    bool isInitialized = false;
+    protected bool isInitialized = false;
     [Range(1f, 1000f)]
     const int startingHP = 100;
 
     protected bool isDamage = false;
 
     [Networked(OnChanged = nameof(OnStateChanged))]
-    private bool isDead {get; set;}
+    protected bool isDead {get; set;}
 
     [Networked(OnChanged = nameof(OnHPChanged))]
-    int HP {get; set;}
+    protected int HP {get; set;}
 
     [Range(0f, 5f)]
     public float knockbackForce = 0.3f;
@@ -25,10 +25,11 @@ public class EnemyHPHandler : NetworkBehaviour
     public NetworkObject Spawner;
     private MeshRenderer[] meshs;
     protected Animator anim;
-    HitboxRoot hitboxRoot;
+    protected HitboxRoot hitboxRoot;
     TargetHandler targetHandler;
     EnemyAttackHandler enemyAttackHandler; 
-    HeartBar heartBar;
+    protected HeartBar heartBar;
+    public AudioSource deathSource;
 
     protected virtual void Awake()
     {
@@ -40,7 +41,7 @@ public class EnemyHPHandler : NetworkBehaviour
         heartBar = GetComponentInChildren<HeartBar>();
     }
 
-    void Start()
+    protected virtual void Start()
     {
         if(!skipSettingStartValues)
         {
@@ -72,6 +73,7 @@ public class EnemyHPHandler : NetworkBehaviour
     {
         // 피격시 효과
         isDamage = true;
+        deathSource.Play();
         anim.SetBool("isWalk", false);
 
         foreach (MeshRenderer mesh in meshs)
@@ -85,7 +87,7 @@ public class EnemyHPHandler : NetworkBehaviour
         foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.white;
     }
-    IEnumerator OnDeadCO()
+    protected virtual IEnumerator OnDeadCO()
     {
         anim.SetTrigger("doDie");
 
@@ -191,17 +193,4 @@ public class EnemyHPHandler : NetworkBehaviour
         transform.position += reactDir * knockbackForce;
     }
 
-    //animation
-    // [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    // private void RPC_animatonSetBool(string action, bool isDone)
-    // {
-    //     anim.SetBool(action, isDone);
-    //     // anim.SetTrigger("doJump");
-    // }
-
-    // [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
-    // private void RPC_animatonSetTrigger(string action)
-    // {
-    //     anim.SetTrigger(action);
-    // }
 }
