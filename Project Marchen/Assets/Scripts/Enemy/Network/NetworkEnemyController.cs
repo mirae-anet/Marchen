@@ -48,6 +48,7 @@ public class NetworkEnemyController : NetworkBehaviour
         if (enemyHPHandler.GetIsDead())
         {
             nav.isStopped = true;
+            StopAllCoroutines();
             return;
         }
 

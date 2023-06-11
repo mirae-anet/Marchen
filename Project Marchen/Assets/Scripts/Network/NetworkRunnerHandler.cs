@@ -148,6 +148,27 @@ public class NetworkRunnerHandler : MonoBehaviour
 
                 });
             }
+            //HeartQueen
+            else if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueen))
+            {
+                Transform oldTransform = oldHeartQueen.gameObject.transform;
+                runner.Spawn(resumeNetworkObject, position: oldTransform.position, oldTransform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
+                {
+                    newNetworkObject.CopyStateFrom(resumeNetworkObject);
+                    //Copy Enemy HP state
+                    if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueenHPHandler))
+                    {
+                        HeartQueenHPHandler newHPHandler = newNetworkObject.GetComponent<HeartQueenHPHandler>();
+                        newHPHandler.CopyStateFrom(oldHeartQueenHPHandler);
+                        newHPHandler.skipSettingStartValues = true;
+                    }
+                    if(resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
+                    {
+                        TargetHandler newTargetHandler = newNetworkObject.GetComponent<TargetHandler>();
+                        newTargetHandler.CopyStateFrom(oldTargetHandler);
+                    }
+                });
+            }
             //enemy
             else if(resumeNetworkObject.TryGetBehaviour<NetworkEnemyController>(out var oldEnemy))
             {

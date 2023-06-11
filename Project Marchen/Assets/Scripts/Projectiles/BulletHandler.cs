@@ -32,7 +32,9 @@ public class BulletHandler : NetworkBehaviour
     [SerializeField]
     int damageAmount;
     [SerializeField]
-    float radius = 4;
+    float checkRadius = 0.5f;
+    [SerializeField]
+    float damageRadius = 4;
     [SerializeField]
     int bulletSpeed;
 
@@ -66,7 +68,7 @@ public class BulletHandler : NetworkBehaviour
 
             bool isValidHit = false;
 
-            int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, 0.5f, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
+            int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, checkRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
 
             if(hitCount > 0)
                 isValidHit = true;
@@ -74,7 +76,7 @@ public class BulletHandler : NetworkBehaviour
             if(isValidHit)
             {
                 //Now we need to figure out of anything was within the blast radius
-                hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, radius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
+                hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, damageRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
 
                 //Deal damage to anything within the hit radius
                 for(int i = 0; i < hitCount; i++)

@@ -47,6 +47,12 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
         }
     }
     private void OnDestroy() {
-        //spawn the portal
+        if(Object != null && Object.HasStateAuthority)
+        {
+            //spawn the portal
+            // Runner.Spawn(prefab, transform.position - transform.forward.normalized * 2, Quaternion.LookRotation(transform.forward));
+            //spawn the text
+            // Runner.Spawn(prefab, transform.position + transform.forward.normalized * 2, Quaternion.LookRotation(transform.forward));
+        }
     }
 }

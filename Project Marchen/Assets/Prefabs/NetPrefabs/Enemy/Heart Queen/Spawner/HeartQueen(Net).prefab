@@ -159,7 +159,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4706119867053234246
 MonoBehaviour:
@@ -262,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787835220707240847}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: 3}
+  m_LocalPosition: {x: 0, y: 5, z: 3}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -535,7 +535,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301578795310121366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 7.5, z: 2}
+  m_LocalPosition: {x: 2.5, y: 3, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3080,7 +3080,7 @@ GameObject:
   - component: {fileID: 899966318153029135}
   - component: {fileID: 5426978172050559822}
   - component: {fileID: 8614288081554649415}
-  - component: {fileID: 5097137231529076214}
+  - component: {fileID: 6151939241955228142}
   m_Layer: 8
   m_Name: HeartQueen(Net)
   m_TagString: Enemy
@@ -3139,7 +3139,7 @@ MonoBehaviour:
   - {fileID: 899966318153029135}
   - {fileID: 5426978172050559822}
   - {fileID: 8614288081554649415}
-  - {fileID: 5097137231529076214}
+  - {fileID: 6151939241955228142}
   - {fileID: 4706119867053234246}
   SimulationBehaviours: []
 --- !u!114 &4897826830327110097
@@ -3184,7 +3184,7 @@ NavMeshAgent:
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -3257,7 +3257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   agrroPulling: {fileID: 424008714869244661}
---- !u!114 &5097137231529076214
+--- !u!114 &6151939241955228142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3266,17 +3266,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3320669544841490502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ee57138bf254d39b946c8d12df44ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 683bb5a4016ee4a77a1af2a96e3e6267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  attackCancel: 1
-  targetRadius: 1.5
-  targetRange: 25
-  anchorPoint: {fileID: 326955666156860468}
+  attackCancel: 0
+  targetRadius: 3
+  targetRange: 30
   detectionPos: {fileID: 1977220121225792423}
-  bulletPrefab: {fileID: 2254526354299184646, guid: b418c81c2e3e54e20bfabb93ac2b6cf2, type: 3}
-  attackSound: {fileID: 3622656983331106885}
+  guidedBullet: {fileID: 1015152965195541916, guid: a19afd9f5073d4fe8b5ee4b2adf51c0c, type: 3}
+  straightBullet: {fileID: 1425055772927533949, guid: b8ac6abbc2d1b44e1b5ef40f05dc9cc9, type: 3}
+  areaBullet: {fileID: 9099432913296417608, guid: 4a65f0291bb9a401b82135b66660e741, type: 3}
+  gBulletPortL: {fileID: 1748007413154579741}
+  gBulletPortR: {fileID: 2608990092826897372}
+  sBulletPort: {fileID: 326955666156860468}
+  attackGuidedSound: {fileID: 3715183272756417532}
+  attackStraightSound: {fileID: 3622656983331106885}
+  attackAreaSound: {fileID: 611306887220856558}
 --- !u!1 &3694855258663696297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,7 +3971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4898093735425143803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 7.5, z: 2}
+  m_LocalPosition: {x: -2.5, y: 3, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7743,6 +7749,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3818662079155762785, guid: 242bea59d1df57c498dd170c02b16bd8, type: 3}
   m_PrefabInstance: {fileID: 536042075541202330}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &3715183272756417532 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3818662079155762790, guid: 242bea59d1df57c498dd170c02b16bd8, type: 3}
+  m_PrefabInstance: {fileID: 536042075541202330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1732259692770191533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7800,6 +7811,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa80668817dc06a46b38cc2c25130449, type: 3}
+--- !u!82 &611306887220856558 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1184997983528676931, guid: aa80668817dc06a46b38cc2c25130449, type: 3}
+  m_PrefabInstance: {fileID: 1732259692770191533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &611306887220856559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1184997983528676930, guid: aa80668817dc06a46b38cc2c25130449, type: 3}
