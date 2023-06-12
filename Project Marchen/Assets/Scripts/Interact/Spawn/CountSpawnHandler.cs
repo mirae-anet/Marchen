@@ -46,7 +46,7 @@ public class CountSpawnHandler : SpawnHandler
         foreach(NetworkBehaviour prefab in prefabs)
         {
             Debug.Log($"Count Spawner");
-            Vector3 randomSpawnPoint = Utils.GetRandomSpawnPoint(anchorPoint.position, sphereCollider.radius * 2/3);
+            Vector3 randomSpawnPoint = Utils.GetRandomSpawnPoint(anchorPoint.position, sphereCollider.radius * 1/2);
             NetworkBehaviour spawned = Runner.Spawn(prefab, randomSpawnPoint, Quaternion.LookRotation(UnityEngine.Random.insideUnitCircle.normalized),null, (runner, networkObject) => {
                 if(networkObject.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
                     navMeshAgent.Warp(randomSpawnPoint);

@@ -9,6 +9,7 @@ public class HeartQueenMissionComplete : MissionComplete
     public NetworkBehaviour potalPrefab; 
     public override void OnMissionComplete(NetworkObject networkObject)
     {
+
         if(Runner != null && Object.HasStateAuthority)
         {
             //spawn the portal
