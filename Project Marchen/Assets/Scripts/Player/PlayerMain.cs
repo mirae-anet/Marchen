@@ -16,10 +16,6 @@ public class PlayerMain : MonoBehaviour
     [Header("오브젝트 연결")]
     [SerializeField]
     private GameObject playerBody;
-    [SerializeField]
-    private AudioSource deadSource;
-    [SerializeField]
-    private AudioClip deadClip;
 
     [Header("설정")]
     [Range(1f, 100f)]
@@ -107,16 +103,9 @@ public class PlayerMain : MonoBehaviour
         playerBody.layer = 10; // 슈퍼아머
         anim.SetTrigger("doDie");
 
-        DeadSound();
-
         rigid.velocity = Vector3.zero;
 
         isDead = true;
-    }
-
-    private void DeadSound()
-    {
-        deadSource.PlayOneShot(deadClip);
     }
 
     public bool GetIsHit()

@@ -38,6 +38,20 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
     protected override IEnumerator OnDeadCO()
     {
         anim.SetTrigger("doDie");
+        if(Object.HasStateAuthority)
+        {
+            EnemyHPHandler[] enemyHPHandlers = FindObjectsOfType<EnemyHPHandler>();
+            if(enemyHPHandlers.Length > 0)
+            {
+                for(int i = 0; i < enemyHPHandlers.Length; i++)
+                {
+                    if(enemyHPHandlers[i] != null)
+                    {
+                        enemyHPHandlers[i].OnTakeDamage("", Object, 255, transform.position); //MAX 즉사
+                    }
+                }
+            }
+        }
 
         yield return new WaitForSeconds(10.0f);
 
