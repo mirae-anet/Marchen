@@ -66,6 +66,8 @@ public class ReadyUIHandler : NetworkBehaviour
             RPC_SetActiveReadyUI(false);
             isReady = false;
             buttonReadyText.text = "게임시작";
+            PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
+            potalHandler.gameObject.GetComponent<Collider>().enabled = false;
             Runner.SetActiveScene("Scene_3");
         }
         else
@@ -102,14 +104,15 @@ public class ReadyUIHandler : NetworkBehaviour
             {
                 countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 5);
                 buttonReadyText.text = "취소";
+                LeftBtn.SetActive(false);
             }
             else
             {
                 countdownTickTimer = TickTimer.None;
                 countDown = 0;
                 buttonReadyText.text = "게임시작";
-                countDown = 0;
                 RPC_SetCountDown(countDown);
+                LeftBtn.SetActive(true);
             }
         }
         EventSystem.current.SetSelectedGameObject(null);

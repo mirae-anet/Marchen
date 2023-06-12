@@ -23,6 +23,7 @@ public class PortalHandler : InteractionHandler
                 readyUIHandler.RPC_MouseSet(true);
                 readyUIHandler.RPC_RotateCamera(false);
                 readyUIHandler.SetActive();
+
             }
             else
             {
