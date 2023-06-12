@@ -59,3 +59,15 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# 김의근 추가
+# Photon fusion assets 제외하고 싶을때
+#Assets/Photon/
+#Assets/Photon.meta
+#불필요 파일 제외
+.vscode
+.DS_Store
+
+# Store Asset
+# Low Poly Complete Collection
+Ignore Assets/
+Ignore Assets.meta

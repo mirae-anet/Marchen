@@ -3,26 +3,39 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerAttack
+  - PlayerBullet
+  - Enemy
+  - EnemyAttack
+  - EnemyBullet
+  - Item
+  - Wall
+  - Ground
+  - IgnoreLayerChange
+  - AoE
+  - OutLine
+  - Boss
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerAttack
+  - Enemy
+  - EnemyAttack
+  - SuperArmor
+  - Item
+  - GroundCheck
+  - PlayerHitBox
+  - EnemyHitBox
+  - LocalPlayerModel
+  - IgnoreCamera
+  - IgnoreLayerChange
+  - CheckArea
   - 
   - 
   - 
