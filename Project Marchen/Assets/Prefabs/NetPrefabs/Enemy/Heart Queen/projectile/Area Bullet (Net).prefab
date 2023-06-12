@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4617987548008098859}
   - component: {fileID: 7049873516466016337}
   - component: {fileID: 5156807689004949340}
-  - component: {fileID: 9099432913296417608}
+  - component: {fileID: 8088866612129430687}
   m_Layer: 9
   m_Name: Area Bullet (Net)
   m_TagString: EnemyBullet
@@ -62,7 +62,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5156807689004949340}
-  - {fileID: 9099432913296417608}
+  - {fileID: 8088866612129430687}
   SimulationBehaviours: []
 --- !u!114 &5156807689004949340
 MonoBehaviour:
@@ -92,7 +92,7 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
---- !u!114 &9099432913296417608
+--- !u!114 &8088866612129430687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 120318413299109445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7beee569f9f541809d499fa057a6857, type: 3}
+  m_Script: {fileID: 11500000, guid: b776e890cbc32441f9d5bceb82d0748b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0

@@ -41,7 +41,7 @@ public class BulletHandler : NetworkBehaviour
     //other components
     NetworkObject networkObject;
 
-    public void Fire(PlayerRef firedByPlayerRef, NetworkObject firedByNetworkObject, string firedByName)
+    public virtual void Fire(PlayerRef firedByPlayerRef, NetworkObject firedByNetworkObject, string firedByName)
     {
         this.firedByName = firedByName;;
         this.firedByPlayerRef = firedByPlayerRef;
@@ -55,50 +55,57 @@ public class BulletHandler : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        transform.position += transform.forward * Runner.DeltaTime * bulletSpeed;
-
         if(Object.HasStateAuthority)
         {
-            //Check if the rocket has reached the end of its life
+            Move();
+
             if(maxLiveDurationTickTimer.Expired(Runner))
             {
                 Runner.Despawn(networkObject);
                 return;
             }
 
-            bool isValidHit = false;
-
-            int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, checkRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
-
-            if(hitCount > 0)
-                isValidHit = true;
-
-            if(isValidHit)
-            {
-                //Now we need to figure out of anything was within the blast radius
-                hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, damageRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
-
-                //Deal damage to anything within the hit radius
-                for(int i = 0; i < hitCount; i++)
-                {
-                    if(hits[i].Hitbox.Root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
-                    {
-                        if(firedByNetworkObject != null)
-                            hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
-                    }
-                    if(hits[i].Hitbox.Root.transform.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
-                    {
-                        if(firedByNetworkObject != null)
-                            enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
-                    }
-                }
-
-                Runner.Despawn(networkObject);
-            }
-
+            CheckForImpactPoint();
         }
     }
 
+    protected virtual void Move()
+    {
+        transform.position += transform.forward * Runner.DeltaTime * bulletSpeed;
+    }
+
+    protected virtual void CheckForImpactPoint()
+    {
+        bool isValidHit = false;
+
+        int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, checkRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
+
+        if(hitCount > 0)
+            isValidHit = true;
+
+        if(isValidHit)
+        {
+            //Now we need to figure out of anything was within the blast radius
+            hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, damageRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
+
+            //Deal damage to anything within the hit radius
+            for(int i = 0; i < hitCount; i++)
+            {
+                if(hits[i].Hitbox.Root.TryGetComponent<HPHandler>(out HPHandler hpHandler))
+                {
+                    if(firedByNetworkObject != null)
+                        hpHandler.OnTakeDamage(firedByName, damageAmount, transform.position);
+                }
+                if(hits[i].Hitbox.Root.transform.TryGetComponent<EnemyHPHandler>(out EnemyHPHandler enemyHPHandler))
+                {
+                    if(firedByNetworkObject != null)
+                        enemyHPHandler.OnTakeDamage(firedByName, firedByNetworkObject, damageAmount, transform.position);
+                }
+            }
+
+            Runner.Despawn(networkObject);
+        }
+    }
     //When despawning the object we want to create a visual explosion
     public override void Despawned(NetworkRunner runner, bool hasState)
     {

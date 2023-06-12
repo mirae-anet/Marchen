@@ -156,7 +156,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
     {
         RPC_animatonSetBool("isAttackArea", true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < 17; i++)
         {
             Runner.Spawn(areaBullet, transform.position, Quaternion.Euler(0f, 22.5f * i, 0f), Object.StateAuthority, (runner, spawnedBullet) =>
