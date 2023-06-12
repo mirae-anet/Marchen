@@ -5,7 +5,7 @@ using Fusion;
 
 public class HeartQueenHPHandler : SkinnedEnemyHPHandler
 {
-    const int BossStartHP = 1000;
+    const int BossStartHP = 5000;
 
     protected override void Start()
     {
