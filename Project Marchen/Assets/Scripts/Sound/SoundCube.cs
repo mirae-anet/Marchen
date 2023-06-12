@@ -9,17 +9,28 @@ public class SoundCube : MonoBehaviour
     [SerializeField]
     private AudioSource StartAudioSource;
     [SerializeField]
-    private AudioSource StopAudioSource;
+    private AudioSource[] StopAudioSource;
+
+    [Header("설정")]
+    public bool isDestroy = true;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (StopAudioSource != null)         
-                StopAudioSource.Stop();
+            if (StopAudioSource != null)
+            {
+                for (int i = 0; i < StopAudioSource.Length; i++)
+                {
+                    StopAudioSource[i].Stop();
+                }
+            }
 
             if (StartAudioSource != null)
                 StartAudioSource.Play();
+
+            if (isDestroy)
+                Destroy(gameObject);
         }
     }
 }
