@@ -182,7 +182,10 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
-        RPC_animatonSetBool("isAttack", false);
+        RPC_animatonSetBool("isAttackGuided", false);
+        RPC_animatonSetBool("isAttackGuided2", false);
+        RPC_animatonSetBool("isAttackStraight", false);
+        RPC_animatonSetBool("isAttackArea", false);
     }
 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]

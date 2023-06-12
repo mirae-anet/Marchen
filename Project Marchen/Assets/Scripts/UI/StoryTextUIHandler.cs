@@ -48,7 +48,7 @@ public class StoryTextUIHandler : MonoBehaviour
         while(lineQueue.TryDequeue(out string result))
         {
             storyText.text = result;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2f);
         }
         EndStory();
     }
