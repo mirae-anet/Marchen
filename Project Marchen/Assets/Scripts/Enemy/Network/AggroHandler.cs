@@ -7,8 +7,7 @@ public class AggroHandler : NetworkBehaviour
 {
     private void OnTriggerEnter(Collider target)
     {
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-        if(!networkRunner.IsServer)
+        if(!Runner.IsServer)
             return;
 
         if (target.tag == "Player")
