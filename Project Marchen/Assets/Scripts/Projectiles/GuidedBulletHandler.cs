@@ -59,14 +59,9 @@ public class GuidedBulletHandler : NetworkBehaviour
                 return;
             }
 
-            bool isValidHit = false;
-
             int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, 1.25f, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
 
             if(hitCount > 0)
-                isValidHit = true;
-
-            if(isValidHit)
             {
                 //Now we need to figure out of anything was within the blast radius
                 hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, radius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);

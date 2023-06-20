@@ -76,14 +76,9 @@ public class BulletHandler : NetworkBehaviour
 
     protected virtual void CheckForImpactPoint()
     {
-        bool isValidHit = false;
-
         int hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, checkRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.IncludePhysX);
 
         if(hitCount > 0)
-            isValidHit = true;
-
-        if(isValidHit)
         {
             //Now we need to figure out of anything was within the blast radius
             hitCount = Runner.LagCompensation.OverlapSphere(checkForImpactPoint.position, damageRadius, firedByPlayerRef, hits, collisionLayers, HitOptions.None);
