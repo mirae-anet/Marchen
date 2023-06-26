@@ -24,12 +24,25 @@
 */
 var NAVTREE =
 [
-  [ "Marhen", "index.html", ]
+  [ "Marhen", "index.html", [
+    [ "클래스", "annotated.html", [
+      [ "클래스 목록", "annotated.html", "annotated_dup" ],
+      [ "클래스 색인", "classes.html", null ],
+      [ "클래스 계통도", "hierarchy.html", "hierarchy" ],
+      [ "클래스 멤버", "functions.html", [
+        [ "모두", "functions.html", null ],
+        [ "함수", "functions_func.html", null ],
+        [ "변수", "functions_vars.html", null ]
+      ] ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"annotated.html",
+"classLocalCameraHandler.html#ad0bbb74224c1cb7ac7294e3ea43ace12",
+"classSpawner.html#ae35695b61941212d06f78065039282df"
 ];
 
 var SYNCONMSG = '패널 동기화를 비활성화하기 위해 클릭하십시오';
