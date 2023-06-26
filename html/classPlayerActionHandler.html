@@ -83,9 +83,6 @@ $(document).ready(function(){initNavTree('classPlayerActionHandler.html',''); in
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public 멤버 함수</a> &#124;
-<a href="#pub-attribs">Public 속성</a> &#124;
-<a href="#properties">속성</a> &#124;
 <a href="classPlayerActionHandler-members.html">모든 멤버 목록</a>  </div>
   <div class="headertitle">
 <div class="title">PlayerActionHandler 클래스 참조</div>  </div>
@@ -106,88 +103,23 @@ PlayerActionHandler에 대한 협력 다이어그램:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayerActionHandler__coll__graph.png" border="0" usemap="#aPlayerActionHandler_coll__map" alt="Collaboration graph"/></div>
 <map name="aPlayerActionHandler_coll__map" id="aPlayerActionHandler_coll__map">
-<area shape="rect" title=" " alt="" coords="5,155,160,181"/>
-<area shape="rect" href="classInteractionHandler.html" title=" " alt="" coords="11,80,154,107"/>
-<area shape="rect" title=" " alt="" coords="11,5,154,32"/>
+<area shape="rect" title=" " alt="" coords="339,183,493,209"/>
+<area shape="rect" href="classNetworkPlayerController.html" title=" " alt="" coords="430,285,613,312"/>
+<area shape="rect" href="classInteractionHandler.html" title=" " alt="" coords="345,81,487,108"/>
+<area shape="rect" title=" " alt="" coords="210,5,353,32"/>
+<area shape="rect" href="classNetworkInGameMessages.html" title=" " alt="" coords="786,183,979,209"/>
+<area shape="rect" href="classHPHandler.html" title=" " alt="" coords="775,376,865,403"/>
+<area shape="rect" href="classNetworkPlayer.html" title=" " alt="" coords="1081,285,1199,312"/>
+<area shape="rect" href="classCharacterRespawnHandler.html" title=" " alt="" coords="721,465,916,492"/>
+<area shape="rect" href="classAttackHandler.html" title=" " alt="" coords="109,183,224,209"/>
+<area shape="rect" href="classWeaponHandler.html" title=" " alt="" coords="93,81,219,108"/>
+<area shape="rect" href="classInGameMessagesUIHandler.html" title=" " alt="" coords="1104,81,1307,108"/>
+<area shape="rect" title=" " alt="" coords="1301,5,1425,32"/>
+<area shape="rect" href="classLocalCameraHandler.html" title="@breif 로컬 카메라 관련 클래스" alt="" coords="1283,132,1442,159"/>
+<area shape="rect" href="classHeartBar.html" title=" " alt="" coords="1416,233,1496,260"/>
+<area shape="rect" title=" " alt="" coords="1025,183,1116,209"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">범례</a>]</span></center></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public 멤버 함수</h2></td></tr>
-<tr class="memitem:a8cb28a77c3da9faf0e674382170e4c7e"><td class="memItemLeft" align="right" valign="top"><a id="a8cb28a77c3da9faf0e674382170e4c7e"></a>
-override void&#160;</td><td class="memItemRight" valign="bottom"><b>action</b> (Transform other)</td></tr>
-<tr class="separator:a8cb28a77c3da9faf0e674382170e4c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f9eb462976e22ef157a5bc86e88edb"><td class="memItemLeft" align="right" valign="top"><a id="aa3f9eb462976e22ef157a5bc86e88edb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Interact</b> ()</td></tr>
-<tr class="separator:aa3f9eb462976e22ef157a5bc86e88edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classInteractionHandler"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classInteractionHandler')"><img src="closed.png" alt="-"/>&#160;<a class="el" href="classInteractionHandler.html">InteractionHandler</a>(으)로부터 상속된 Public 멤버 함수</td></tr>
-<tr class="memitem:a90d4d0a735291404f72dee9f9dd7e768 inherit pub_methods_classInteractionHandler"><td class="memItemLeft" align="right" valign="top"><a id="a90d4d0a735291404f72dee9f9dd7e768"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestSpawn</b> (NetworkBehaviour prefab, Vector3 position, Quaternion quaternion)</td></tr>
-<tr class="separator:a90d4d0a735291404f72dee9f9dd7e768 inherit pub_methods_classInteractionHandler"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public 속성</h2></td></tr>
-<tr class="memitem:aea7baa2e00c041f47009d4c883ad5621"><td class="memItemLeft" align="right" valign="top"><a id="aea7baa2e00c041f47009d4c883ad5621"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>skipSettingStartValues</b> = false</td></tr>
-<tr class="separator:aea7baa2e00c041f47009d4c883ad5621"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a070e4eaf39620bee8d2760e0de8d105e"><td class="memItemLeft" align="right" valign="top"><a id="a070e4eaf39620bee8d2760e0de8d105e"></a>
-LayerMask&#160;</td><td class="memItemRight" valign="bottom"><b>layerMask</b></td></tr>
-<tr class="separator:a070e4eaf39620bee8d2760e0de8d105e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8fbeab7dba1f2ab1a42a25b8bb5d41e"><td class="memItemLeft" align="right" valign="top"><a id="aa8fbeab7dba1f2ab1a42a25b8bb5d41e"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>BodyAnchor</b></td></tr>
-<tr class="separator:aa8fbeab7dba1f2ab1a42a25b8bb5d41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d99733cc5ef04a3bda5ae2011ab7d6c"><td class="memItemLeft" align="right" valign="top"><a id="a8d99733cc5ef04a3bda5ae2011ab7d6c"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>image1</b></td></tr>
-<tr class="separator:a8d99733cc5ef04a3bda5ae2011ab7d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a101423f8b92ab23725c8a3ecd4ae74a7"><td class="memItemLeft" align="right" valign="top"><a id="a101423f8b92ab23725c8a3ecd4ae74a7"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>image2</b></td></tr>
-<tr class="separator:a101423f8b92ab23725c8a3ecd4ae74a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a438c20453d4f2c117f4cce2701704f"><td class="memItemLeft" align="right" valign="top"><a id="a2a438c20453d4f2c117f4cce2701704f"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>BlueBatteryImage</b></td></tr>
-<tr class="separator:a2a438c20453d4f2c117f4cce2701704f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b49d4f3b504fca3960359e42ab1ec9d"><td class="memItemLeft" align="right" valign="top"><a id="a5b49d4f3b504fca3960359e42ab1ec9d"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>GreenBatteryImage</b></td></tr>
-<tr class="separator:a5b49d4f3b504fca3960359e42ab1ec9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe941465fb8fccfd16b1cd8102803055"><td class="memItemLeft" align="right" valign="top"><a id="abe941465fb8fccfd16b1cd8102803055"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>KeyImage</b></td></tr>
-<tr class="separator:abe941465fb8fccfd16b1cd8102803055"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65ec17241febbea1765f2e59d645f13c"><td class="memItemLeft" align="right" valign="top"><a id="a65ec17241febbea1765f2e59d645f13c"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>myImage1</b></td></tr>
-<tr class="separator:a65ec17241febbea1765f2e59d645f13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab99a62c8a7fd6591426144df13c68839"><td class="memItemLeft" align="right" valign="top"><a id="ab99a62c8a7fd6591426144df13c68839"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>myImage2</b></td></tr>
-<tr class="separator:ab99a62c8a7fd6591426144df13c68839"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58184eb999ef37b61682514f39c02d12"><td class="memItemLeft" align="right" valign="top"><a id="a58184eb999ef37b61682514f39c02d12"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>myBlueBatteryImage</b></td></tr>
-<tr class="separator:a58184eb999ef37b61682514f39c02d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3b41ea0199c51172ff85a1d94e2b918"><td class="memItemLeft" align="right" valign="top"><a id="aa3b41ea0199c51172ff85a1d94e2b918"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>myGreenBatteryImage</b></td></tr>
-<tr class="separator:aa3b41ea0199c51172ff85a1d94e2b918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43f59426479b5906825c9866b6b2b750"><td class="memItemLeft" align="right" valign="top"><a id="a43f59426479b5906825c9866b6b2b750"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>myKeyImage</b></td></tr>
-<tr class="separator:a43f59426479b5906825c9866b6b2b750"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45303b27a770ad22368e8f1abb7ecf1d"><td class="memItemLeft" align="right" valign="top"><a id="a45303b27a770ad22368e8f1abb7ecf1d"></a>
-AudioSource&#160;</td><td class="memItemRight" valign="bottom"><b>pickUpSound</b></td></tr>
-<tr class="separator:a45303b27a770ad22368e8f1abb7ecf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
-속성</h2></td></tr>
-<tr class="memitem:a9b57051d8b25c91207aff438c5cf9b1f"><td class="memItemLeft" align="right" valign="top"><a id="a9b57051d8b25c91207aff438c5cf9b1f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Key</b><code> [get, set]</code></td></tr>
-<tr class="separator:a9b57051d8b25c91207aff438c5cf9b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6ab47e81baf7465710af1cee94cddad"><td class="memItemLeft" align="right" valign="top"><a id="af6ab47e81baf7465710af1cee94cddad"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>GreenBattery</b><code> [get, set]</code></td></tr>
-<tr class="separator:af6ab47e81baf7465710af1cee94cddad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5201f007fa9587b499e0039f4e761083"><td class="memItemLeft" align="right" valign="top"><a id="a5201f007fa9587b499e0039f4e761083"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>BlueBattery</b><code> [get, set]</code></td></tr>
-<tr class="separator:a5201f007fa9587b499e0039f4e761083"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab43ed2c75f54d1e537c99f4046a3e8d"><td class="memItemLeft" align="right" valign="top"><a id="aab43ed2c75f54d1e537c99f4046a3e8d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>greenBook</b><code> [get, set]</code></td></tr>
-<tr class="separator:aab43ed2c75f54d1e537c99f4046a3e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13f346e1d378c3233be03eff17a3cbd2"><td class="memItemLeft" align="right" valign="top"><a id="a13f346e1d378c3233be03eff17a3cbd2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>redBook</b><code> [get, set]</code></td></tr>
-<tr class="separator:a13f346e1d378c3233be03eff17a3cbd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.:<ul>
 <li>Project Marchen/Assets/Scripts/Interact/Player/PlayerActionHandler.cs</li>
 </ul>

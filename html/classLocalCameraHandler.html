@@ -86,6 +86,8 @@ $(document).ready(function(){initNavTree('classLocalCameraHandler.html',''); ini
 <a href="#pub-methods">Public 멤버 함수</a> &#124;
 <a href="#pub-attribs">Public 속성</a> &#124;
 <a href="#pub-static-attribs">정적 Public 속성</a> &#124;
+<a href="#pri-methods">Private 멤버 함수</a> &#124;
+<a href="#pri-attribs">Private 속성</a> &#124;
 <a href="classLocalCameraHandler-members.html">모든 멤버 목록</a>  </div>
   <div class="headertitle">
 <div class="title">LocalCameraHandler 클래스 참조</div>  </div>
@@ -139,18 +141,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public 속성</h2></td></tr>
-<tr class="memitem:a3bd3594b22b6bf895b85c0eb391a4d31"><td class="memItemLeft" align="right" valign="top"><a id="a3bd3594b22b6bf895b85c0eb391a4d31"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>cameraSpeed</b> = 200f</td></tr>
-<tr class="separator:a3bd3594b22b6bf895b85c0eb391a4d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a732d59e31437d860b3f926ef7e30b85f"><td class="memItemLeft" align="right" valign="top"><a id="a732d59e31437d860b3f926ef7e30b85f"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>cameraAnchorPoint</b></td></tr>
-<tr class="separator:a732d59e31437d860b3f926ef7e30b85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d919f7fe9ebc2020e6b9c9804d77056"><td class="memItemLeft" align="right" valign="top"><a id="a7d919f7fe9ebc2020e6b9c9804d77056"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>bodyAnchorPoint</b></td></tr>
-<tr class="separator:a7d919f7fe9ebc2020e6b9c9804d77056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93e56695a4d261f76915fba3db890a87"><td class="memItemLeft" align="right" valign="top"><a id="a93e56695a4d261f76915fba3db890a87"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>BulletPos</b></td></tr>
-<tr class="separator:a93e56695a4d261f76915fba3db890a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8106c7dda7bb1ac5b374ab978e9d2dcd"><td class="memItemLeft" align="right" valign="top"><a id="a8106c7dda7bb1ac5b374ab978e9d2dcd"></a>
 LayerMask&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalCameraHandler.html#a8106c7dda7bb1ac5b374ab978e9d2dcd">layerMask</a></td></tr>
 <tr class="memdesc:a8106c7dda7bb1ac5b374ab978e9d2dcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 조준할 수 있는 레이어 <br /></td></tr>
@@ -167,6 +157,27 @@ static <a class="el" href="classLocalCameraHandler.html">LocalCameraHandler</a>&
 <tr class="memdesc:a1e6c1b34dee9290c610fed568df3c364"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 로컬 플레이어 각자의 카메라. static 변수. <br  />
  <br /></td></tr>
 <tr class="separator:a1e6c1b34dee9290c610fed568df3c364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 멤버 함수</h2></td></tr>
+<tr class="memitem:a8c836e630ab9992028d4273df87a033c"><td class="memItemLeft" align="right" valign="top"><a id="a8c836e630ab9992028d4273df87a033c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalCameraHandler.html#a8c836e630ab9992028d4273df87a033c">CamControl</a> ()</td></tr>
+<tr class="memdesc:a8c836e630ab9992028d4273df87a033c"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 카메라 회전, 이동 <br /></td></tr>
+<tr class="separator:a8c836e630ab9992028d4273df87a033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a545aef493e8286149c0d56336907d851"><td class="memItemLeft" align="right" valign="top"><a id="a545aef493e8286149c0d56336907d851"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalCameraHandler.html#a545aef493e8286149c0d56336907d851">setAimForwardVector</a> ()</td></tr>
+<tr class="memdesc:a545aef493e8286149c0d56336907d851"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 조준점 계산. 3차원에서 보는 바라보는 곳으로 aimForwardVector 갱신 <br /></td></tr>
+<tr class="separator:a545aef493e8286149c0d56336907d851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ff4eb61532006c7c71097b23aa3ab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalCameraHandler.html#a27ff4eb61532006c7c71097b23aa3ab4">OnDestroy</a> ()</td></tr>
+<tr class="memdesc:a27ff4eb61532006c7c71097b23aa3ab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 카메라 파괴 시 바라보는 방향을 게임 매니저에 저장.  <a href="classLocalCameraHandler.html#a27ff4eb61532006c7c71097b23aa3ab4">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:a27ff4eb61532006c7c71097b23aa3ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 속성</h2></td></tr>
+<tr class="memitem:aef7c021a258649af446f17fe5b6c7945"><td class="memItemLeft" align="right" valign="top"><a id="aef7c021a258649af446f17fe5b6c7945"></a>
+Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalCameraHandler.html#aef7c021a258649af446f17fe5b6c7945">aimForwardVector</a></td></tr>
+<tr class="memdesc:aef7c021a258649af446f17fe5b6c7945"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 조준 방향 <br /></td></tr>
+<tr class="separator:aef7c021a258649af446f17fe5b6c7945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">상세한 설명</h2>
 <div class="textblock"><p>@breif 로컬 카메라 관련 클래스 </p>
@@ -227,6 +238,34 @@ static <a class="el" href="classLocalCameraHandler.html">LocalCameraHandler</a>&
 <p>@breif 아바타의 이동에 관한 정보를 반환한다. </p>
 <dl class="section return"><dt>반환값</dt><dd>Vector3 moveDir </dd></dl>
 <dl class="section see"><dt>참고</dt><dd>CharacterInputHandler.GetNetworkInput() </dd></dl>
+
+</div>
+</div>
+<a id="a27ff4eb61532006c7c71097b23aa3ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27ff4eb61532006c7c71097b23aa3ab4">&#9670;&nbsp;</a></span>OnDestroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LocalCameraHandler.OnDestroy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 카메라 파괴 시 바라보는 방향을 게임 매니저에 저장. </p>
+<p>호스트마이그레이션 시에 저장된 정보를 바탕으로 바라보는 방향을 복원. </p>
 
 </div>
 </div>

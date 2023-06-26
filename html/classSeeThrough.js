@@ -1,6 +1,7 @@
 var classSeeThrough =
 [
-    [ "layerMask", "classSeeThrough.html#a53c18f3e9804c7af156e71dccee14b1f", null ],
-    [ "offest", "classSeeThrough.html#a9ff1986e6926b55a4a5800f2ee7b9bd6", null ],
-    [ "player", "classSeeThrough.html#a602abfe49470e051fe9b185fd1c2410f", null ]
+    [ "HideObstruction", "classSeeThrough.html#a3ea8c01adda58841da74049db9152dc0", null ],
+    [ "ManageBlockingView", "classSeeThrough.html#a85071ea3cfae62e1959ffe4911e7761c", null ],
+    [ "ShowObstruction", "classSeeThrough.html#a8e3650d35da60be282454888bc37e991", null ],
+    [ "layerMask", "classSeeThrough.html#a53c18f3e9804c7af156e71dccee14b1f", null ]
 ];

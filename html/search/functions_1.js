@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getaimforwardvector_183',['getAimForwardVector',['../classLocalCameraHandler.html#a9d7cca1c6515ba895389e11b114ce6ea',1,'LocalCameraHandler']]],
-  ['getmovedir_184',['getMoveDir',['../classLocalCameraHandler.html#aded666e0aa1050629abc3b3e1a2e1d21',1,'LocalCameraHandler']]]
+  ['enablerotationesc_196',['EnableRotationEsc',['../classLocalCameraHandler.html#add3bd88f88a2c76b2d59d77b540c07db',1,'LocalCameraHandler']]],
+  ['enablerotationready_197',['EnableRotationReady',['../classLocalCameraHandler.html#ad0bbb74224c1cb7ac7294e3ea43ace12',1,'LocalCameraHandler']]]
 ];

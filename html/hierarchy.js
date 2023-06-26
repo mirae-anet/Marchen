@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "ConnectionTokenUtils", "classConnectionTokenUtils.html", null ],
     [ "INetworkInput", null, [
       [ "NetworkInputData", "structNetworkInputData.html", null ]
     ] ],
@@ -106,5 +107,6 @@ var hierarchy =
         [ "HammerHandler", "classHammerHandler.html", null ]
       ] ]
     ] ],
-    [ "Startup", "classStartup.html", null ]
+    [ "Startup", "classStartup.html", null ],
+    [ "Utils", "classUtils.html", null ]
 ];

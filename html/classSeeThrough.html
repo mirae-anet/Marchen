@@ -84,6 +84,7 @@ $(document).ready(function(){initNavTree('classSeeThrough.html',''); initResizab
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public 속성</a> &#124;
+<a href="#pri-methods">Private 멤버 함수</a> &#124;
 <a href="classSeeThrough-members.html">모든 멤버 목록</a>  </div>
   <div class="headertitle">
 <div class="title">SeeThrough 클래스 참조</div>  </div>
@@ -113,16 +114,25 @@ SeeThrough에 대한 협력 다이어그램:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public 속성</h2></td></tr>
-<tr class="memitem:a602abfe49470e051fe9b185fd1c2410f"><td class="memItemLeft" align="right" valign="top"><a id="a602abfe49470e051fe9b185fd1c2410f"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>player</b></td></tr>
-<tr class="separator:a602abfe49470e051fe9b185fd1c2410f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ff1986e6926b55a4a5800f2ee7b9bd6"><td class="memItemLeft" align="right" valign="top"><a id="a9ff1986e6926b55a4a5800f2ee7b9bd6"></a>
-Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>offest</b></td></tr>
-<tr class="separator:a9ff1986e6926b55a4a5800f2ee7b9bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53c18f3e9804c7af156e71dccee14b1f"><td class="memItemLeft" align="right" valign="top"><a id="a53c18f3e9804c7af156e71dccee14b1f"></a>
 LayerMask&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSeeThrough.html#a53c18f3e9804c7af156e71dccee14b1f">layerMask</a></td></tr>
 <tr class="memdesc:a53c18f3e9804c7af156e71dccee14b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 투명화할 레이어 정보 <br /></td></tr>
 <tr class="separator:a53c18f3e9804c7af156e71dccee14b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 멤버 함수</h2></td></tr>
+<tr class="memitem:a85071ea3cfae62e1959ffe4911e7761c"><td class="memItemLeft" align="right" valign="top"><a id="a85071ea3cfae62e1959ffe4911e7761c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSeeThrough.html#a85071ea3cfae62e1959ffe4911e7761c">ManageBlockingView</a> ()</td></tr>
+<tr class="memdesc:a85071ea3cfae62e1959ffe4911e7761c"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 투명화할 지형, 지물을 관리한다. 추가 혹은 제외. <br /></td></tr>
+<tr class="separator:a85071ea3cfae62e1959ffe4911e7761c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ea8c01adda58841da74049db9152dc0"><td class="memItemLeft" align="right" valign="top"><a id="a3ea8c01adda58841da74049db9152dc0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSeeThrough.html#a3ea8c01adda58841da74049db9152dc0">HideObstruction</a> (Transform obstruction)</td></tr>
+<tr class="memdesc:a3ea8c01adda58841da74049db9152dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 방해물을 투명화한다. <br /></td></tr>
+<tr class="separator:a3ea8c01adda58841da74049db9152dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3650d35da60be282454888bc37e991"><td class="memItemLeft" align="right" valign="top"><a id="a8e3650d35da60be282454888bc37e991"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSeeThrough.html#a8e3650d35da60be282454888bc37e991">ShowObstruction</a> (Transform obstruction)</td></tr>
+<tr class="memdesc:a8e3650d35da60be282454888bc37e991"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 더이상 방해물이 아닌 경우 투명화를 해제한다. <br /></td></tr>
+<tr class="separator:a8e3650d35da60be282454888bc37e991"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">상세한 설명</h2>
 <div class="textblock"><p>@breif 지형, 지물에 의해 시야가 가려지는 것을 방지. </p>

@@ -83,8 +83,6 @@ $(document).ready(function(){initNavTree('classSpawner.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public 멤버 함수</a> &#124;
-<a href="#pub-attribs">Public 속성</a> &#124;
 <a href="classSpawner-members.html">모든 멤버 목록</a>  </div>
   <div class="headertitle">
 <div class="title">Spawner 클래스 참조</div>  </div>
@@ -105,75 +103,27 @@ Spawner에 대한 협력 다이어그램:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSpawner__coll__graph.png" border="0" usemap="#aSpawner_coll__map" alt="Collaboration graph"/></div>
 <map name="aSpawner_coll__map" id="aSpawner_coll__map">
-<area shape="rect" title=" " alt="" coords="119,80,197,107"/>
-<area shape="rect" title=" " alt="" coords="5,5,129,32"/>
-<area shape="rect" title=" " alt="" coords="153,5,344,32"/>
+<area shape="rect" title=" " alt="" coords="2583,93,2661,120"/>
+<area shape="rect" title=" " alt="" coords="5,191,129,217"/>
+<area shape="rect" href="classSessionListUIHandler.html" title=" " alt="" coords="418,99,578,125"/>
+<area shape="rect" href="classInGameMessagesUIHandler.html" title=" " alt="" coords="179,413,381,440"/>
+<area shape="rect" href="classLocalCameraHandler.html" title="@breif 로컬 카메라 관련 클래스" alt="" coords="632,244,791,271"/>
+<area shape="rect" href="classCharacterInputHandler.html" title=" " alt="" coords="2205,187,2375,213"/>
+<area shape="rect" href="classHeartBar.html" title=" " alt="" coords="879,345,959,372"/>
+<area shape="rect" title=" " alt="" coords="2195,43,2385,69"/>
+<area shape="rect" href="classNetworkPlayer.html" title=" " alt="" coords="1057,320,1175,347"/>
+<area shape="rect" href="classHPHandler.html" title=" " alt="" coords="1449,453,1540,480"/>
+<area shape="rect" href="classCharacterRespawnHandler.html" title=" " alt="" coords="1789,431,1984,457"/>
+<area shape="rect" title=" " alt="" coords="209,641,351,668"/>
+<area shape="rect" href="classNetworkInGameMessages.html" title=" " alt="" coords="615,457,808,484"/>
+<area shape="rect" href="classNetworkPlayerController.html" title=" " alt="" coords="1795,621,1978,648"/>
+<area shape="rect" href="classInteractionHandler.html" title=" " alt="" coords="1242,808,1385,835"/>
+<area shape="rect" href="classAttackHandler.html" title=" " alt="" coords="1059,719,1173,745"/>
+<area shape="rect" href="classWeaponHandler.html" title=" " alt="" coords="649,768,774,795"/>
+<area shape="rect" title=" " alt="" coords="666,295,757,321"/>
+<area shape="rect" href="classPlayerActionHandler.html" title=" " alt="" coords="2213,667,2367,693"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">범례</a>]</span></center></div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public 멤버 함수</h2></td></tr>
-<tr class="memitem:a576f3a03112a78ebceee61ca5a8b0e9e"><td class="memItemLeft" align="right" valign="top"><a id="a576f3a03112a78ebceee61ca5a8b0e9e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetConnectionTokenMapping</b> (int token, <a class="el" href="classNetworkPlayer.html">NetworkPlayer</a> networkPlayer)</td></tr>
-<tr class="separator:a576f3a03112a78ebceee61ca5a8b0e9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bc72f6fdfe49cfe9b16334ce228bc23"><td class="memItemLeft" align="right" valign="top"><a id="a3bc72f6fdfe49cfe9b16334ce228bc23"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnPlayerJoined</b> (NetworkRunner runner, PlayerRef player)</td></tr>
-<tr class="separator:a3bc72f6fdfe49cfe9b16334ce228bc23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4434068316bfb1d84c7c603643052b48"><td class="memItemLeft" align="right" valign="top"><a id="a4434068316bfb1d84c7c603643052b48"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnPlayerLeft</b> (NetworkRunner runner, PlayerRef player)</td></tr>
-<tr class="separator:a4434068316bfb1d84c7c603643052b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34e097fa0690102eff817014ae421f8f"><td class="memItemLeft" align="right" valign="top"><a id="a34e097fa0690102eff817014ae421f8f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnInput</b> (NetworkRunner runner, NetworkInput input)</td></tr>
-<tr class="separator:a34e097fa0690102eff817014ae421f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a284d7e88f7b65514ce30510abba1c8c0"><td class="memItemLeft" align="right" valign="top"><a id="a284d7e88f7b65514ce30510abba1c8c0"></a>
-async void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHostMigration</b> (NetworkRunner runner, HostMigrationToken hostMigrationToken)</td></tr>
-<tr class="separator:a284d7e88f7b65514ce30510abba1c8c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01baa9ab6659fc0974fe442a5e1e7505"><td class="memItemLeft" align="right" valign="top"><a id="a01baa9ab6659fc0974fe442a5e1e7505"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnHostMigrationCleanUp</b> ()</td></tr>
-<tr class="separator:a01baa9ab6659fc0974fe442a5e1e7505"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf33d733959283de13c19766282b620d"><td class="memItemLeft" align="right" valign="top"><a id="acf33d733959283de13c19766282b620d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnConnectedToServer</b> (NetworkRunner runner)</td></tr>
-<tr class="separator:acf33d733959283de13c19766282b620d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acee7b7b309e0f3a7b6ad76cf23300457"><td class="memItemLeft" align="right" valign="top"><a id="acee7b7b309e0f3a7b6ad76cf23300457"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnConnectFailed</b> (NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)</td></tr>
-<tr class="separator:acee7b7b309e0f3a7b6ad76cf23300457"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a909b63361693fcd40a6bd43c57e3ce0c"><td class="memItemLeft" align="right" valign="top"><a id="a909b63361693fcd40a6bd43c57e3ce0c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnConnectRequest</b> (NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token)</td></tr>
-<tr class="separator:a909b63361693fcd40a6bd43c57e3ce0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae35695b61941212d06f78065039282df"><td class="memItemLeft" align="right" valign="top"><a id="ae35695b61941212d06f78065039282df"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnCustomAuthenticationResponse</b> (NetworkRunner runner, Dictionary&lt; string, object &gt; data)</td></tr>
-<tr class="separator:ae35695b61941212d06f78065039282df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bdd287a1125ce5fce5d445d3706a1b4"><td class="memItemLeft" align="right" valign="top"><a id="a4bdd287a1125ce5fce5d445d3706a1b4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnDisconnectedFromServer</b> (NetworkRunner runner)</td></tr>
-<tr class="separator:a4bdd287a1125ce5fce5d445d3706a1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade581330eb520292ae6e755a14ed41f5"><td class="memItemLeft" align="right" valign="top"><a id="ade581330eb520292ae6e755a14ed41f5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnInputMissing</b> (NetworkRunner runner, PlayerRef player, NetworkInput input)</td></tr>
-<tr class="separator:ade581330eb520292ae6e755a14ed41f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c60651584d99283cf4561ba2ac29321"><td class="memItemLeft" align="right" valign="top"><a id="a6c60651584d99283cf4561ba2ac29321"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnReliableDataReceived</b> (NetworkRunner runner, PlayerRef player, ArraySegment&lt; byte &gt; data)</td></tr>
-<tr class="separator:a6c60651584d99283cf4561ba2ac29321"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a841beaee2915021fbe50c4c25979f8"><td class="memItemLeft" align="right" valign="top"><a id="a9a841beaee2915021fbe50c4c25979f8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnSceneLoadDone</b> (NetworkRunner runner)</td></tr>
-<tr class="separator:a9a841beaee2915021fbe50c4c25979f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f5f6deeb2e192fab02030ecbc94c8f"><td class="memItemLeft" align="right" valign="top"><a id="a72f5f6deeb2e192fab02030ecbc94c8f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnSceneLoadStart</b> (NetworkRunner runner)</td></tr>
-<tr class="separator:a72f5f6deeb2e192fab02030ecbc94c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73271e03f75b160440716e89dc643515"><td class="memItemLeft" align="right" valign="top"><a id="a73271e03f75b160440716e89dc643515"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnSessionListUpdated</b> (NetworkRunner runner, List&lt; SessionInfo &gt; sessionList)</td></tr>
-<tr class="separator:a73271e03f75b160440716e89dc643515"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa95c45d552c7699fb4409824ab28c0f6"><td class="memItemLeft" align="right" valign="top"><a id="aa95c45d552c7699fb4409824ab28c0f6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnShutdown</b> (NetworkRunner runner, ShutdownReason shutdownReason)</td></tr>
-<tr class="separator:aa95c45d552c7699fb4409824ab28c0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c7be2d5e32e44a962f0742a0a10c898"><td class="memItemLeft" align="right" valign="top"><a id="a1c7be2d5e32e44a962f0742a0a10c898"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnUserSimulationMessage</b> (NetworkRunner runner, SimulationMessagePtr message)</td></tr>
-<tr class="separator:a1c7be2d5e32e44a962f0742a0a10c898"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public 속성</h2></td></tr>
-<tr class="memitem:aea3c3591d6467a77c2cc8bd6fee99b9e"><td class="memItemLeft" align="right" valign="top"><a id="aea3c3591d6467a77c2cc8bd6fee99b9e"></a>
-Dictionary&lt; int, <a class="el" href="classNetworkPlayer.html">NetworkPlayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mapTokenIDWithNetworkPlayer</b></td></tr>
-<tr class="separator:aea3c3591d6467a77c2cc8bd6fee99b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <hr/>이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.:<ul>
 <li>Project Marchen/Assets/Scripts/Network/Spawner.cs</li>
 </ul>

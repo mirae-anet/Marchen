@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['layermask_187',['layerMask',['../classLocalCameraHandler.html#a8106c7dda7bb1ac5b374ab978e9d2dcd',1,'LocalCameraHandler.layerMask()'],['../classSeeThrough.html#a53c18f3e9804c7af156e71dccee14b1f',1,'SeeThrough.layerMask()']]],
-  ['local_188',['Local',['../classLocalCameraHandler.html#a1e6c1b34dee9290c610fed568df3c364',1,'LocalCameraHandler']]]
+  ['aimforwardvector_210',['aimForwardVector',['../classLocalCameraHandler.html#aef7c021a258649af446f17fe5b6c7945',1,'LocalCameraHandler']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['localcameraenable_185',['localCameraEnable',['../classLocalCameraHandler.html#a477573fe5346a8547ec3e300fd7a98f1',1,'LocalCameraHandler']]]
+  ['getaimforwardvector_198',['getAimForwardVector',['../classLocalCameraHandler.html#a9d7cca1c6515ba895389e11b114ce6ea',1,'LocalCameraHandler']]],
+  ['getmovedir_199',['getMoveDir',['../classLocalCameraHandler.html#aded666e0aa1050629abc3b3e1a2e1d21',1,'LocalCameraHandler']]]
 ];
