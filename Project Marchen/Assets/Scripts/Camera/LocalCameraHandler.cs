@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// @breif 로컬 카메라 관련 클래스
+/**
+* @breif 로컬 카메라 관련 클래스
+*/
 public class LocalCameraHandler : MonoBehaviour
 {
     /// @breif 로컬 플레이어 각자의 카메라. static 변수.  
