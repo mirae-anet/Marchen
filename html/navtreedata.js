@@ -28,7 +28,6 @@ var NAVTREE =
     [ "클래스", "annotated.html", [
       [ "클래스 목록", "annotated.html", "annotated_dup" ],
       [ "클래스 색인", "classes.html", null ],
-      [ "클래스 계통도", "hierarchy.html", "hierarchy" ],
       [ "클래스 멤버", "functions.html", [
         [ "모두", "functions.html", null ],
         [ "함수", "functions_func.html", null ],
