@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['localcamerahandler_18',['LocalCameraHandler',['../classLocalCameraHandler.html',1,'']]]
+  ['aggrohandler_76',['AggroHandler',['../classAggroHandler.html',1,'']]]
 ];

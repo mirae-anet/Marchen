@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ondestroy_28',['OnDestroy',['../classLocalCameraHandler.html#a27ff4eb61532006c7c71097b23aa3ab4',1,'LocalCameraHandler']]]
+  ['knockback_109',['KnockBack',['../classEnemyHPHandler.html#a5c2c12bd1ec8502f296a7b71f752c8d2',1,'EnemyHPHandler']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['maxdistance_35',['maxDistance',['../classLocalCameraHandler.html#ac25ef287d57108140ee8074a51b6f17e',1,'LocalCameraHandler']]]
+  ['damageamount_135',['damageAmount',['../classMeleeAttackHandler.html#a563833ae0a83262718b8d65a6c7d3e69',1,'MeleeAttackHandler']]]
 ];

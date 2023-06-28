@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['seethrough_19',['SeeThrough',['../classSeeThrough.html',1,'']]]
+  ['enemyattackhandler_77',['EnemyAttackHandler',['../classEnemyAttackHandler.html',1,'']]],
+  ['enemyhphandler_78',['EnemyHPHandler',['../classEnemyHPHandler.html',1,'']]]
 ];

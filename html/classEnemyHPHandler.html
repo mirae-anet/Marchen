@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Marhen: EnemyHPHandler 클래스 참조</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Marhen
+   </div>
+   <div id="projectbrief">by mirae-anet</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'검색','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','검색');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classEnemyHPHandler.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 멤버 함수</a> &#124;
+<a href="#pub-attribs">Public 속성</a> &#124;
+<a href="#pro-methods">Protected 멤버 함수</a> &#124;
+<a href="#pro-attribs">Protected 속성</a> &#124;
+<a href="#properties">속성</a> &#124;
+<a href="#pri-methods">Private 멤버 함수</a> &#124;
+<a href="#pri-static-methods">정적 Private 멤버 함수</a> &#124;
+<a href="#pri-static-attribs">정적 Private 속성</a> &#124;
+<a href="classEnemyHPHandler-members.html">모든 멤버 목록</a>  </div>
+  <div class="headertitle">
+<div class="title">EnemyHPHandler 클래스 참조</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>@breif 에너미 HP 관련 클래스.  
+ <a href="classEnemyHPHandler.html#details">더 자세히 ...</a></p>
+<div class="dynheader">
+EnemyHPHandler에 대한 상속 다이어그램 : </div>
+<div class="dyncontent">
+<div class="center"><img src="classEnemyHPHandler__inherit__graph.png" border="0" usemap="#aEnemyHPHandler_inherit__map" alt="Inheritance graph"/></div>
+<map name="aEnemyHPHandler_inherit__map" id="aEnemyHPHandler_inherit__map">
+<area shape="rect" title="@breif 에너미 HP 관련 클래스." alt="" coords="31,5,167,32"/>
+<area shape="rect" href="classSkinnedEnemyHPHandler.html" title="@breif SkinnedMesh를 사용하는 에너미 HP 관련 클래스." alt="" coords="5,80,193,107"/>
+<area shape="rect" href="classHeartQueenHPHandler.html" title="@breif 1 stage의 boss인 HeartQueen의 HP와 관련된 클래스" alt="" coords="15,155,184,181"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">범례</a>]</span></center></div>
+<div class="dynheader">
+EnemyHPHandler에 대한 협력 다이어그램:</div>
+<div class="dyncontent">
+<div class="center"><img src="classEnemyHPHandler__coll__graph.png" border="0" usemap="#aEnemyHPHandler_coll__map" alt="Collaboration graph"/></div>
+<map name="aEnemyHPHandler_coll__map" id="aEnemyHPHandler_coll__map">
+<area shape="rect" title="@breif 에너미 HP 관련 클래스." alt="" coords="5,95,141,121"/>
+<area shape="rect" href="classNetworkEnemyController.html" title="@breif 에너미 움직임에 관한 클래스." alt="" coords="143,184,329,211"/>
+<area shape="rect" href="classTargetHandler.html" title="@breif 에너미의 타겟을 관리하는 클래스" alt="" coords="54,273,167,300"/>
+<area shape="rect" href="classEnemyAttackHandler.html" title="@breif Melee, Range, HeartQueen의 AttackHandler의 부모 클래스" alt="" coords="75,5,235,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">범례</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 멤버 함수</h2></td></tr>
+<tr class="memitem:ab236d095d0f5534646e941622dfd468a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#ab236d095d0f5534646e941622dfd468a">OnTakeDamage</a> (string damagedByNickname, NetworkObject damagedByNetworkObject, int damageAmount, Vector3 AttackPostion)</td></tr>
+<tr class="memdesc:ab236d095d0f5534646e941622dfd468a"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 해당 에너미를 HP를 감소시키는 메서드.  <a href="classEnemyHPHandler.html#ab236d095d0f5534646e941622dfd468a">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:ab236d095d0f5534646e941622dfd468a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe65962d6ba75e29e8f0eed691adfe56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#afe65962d6ba75e29e8f0eed691adfe56">GetIsDead</a> ()</td></tr>
+<tr class="memdesc:afe65962d6ba75e29e8f0eed691adfe56"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif isDead 값에 리턴  <a href="classEnemyHPHandler.html#afe65962d6ba75e29e8f0eed691adfe56">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:afe65962d6ba75e29e8f0eed691adfe56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4379ba00c0db8ec7b2831c2bb1477b64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a4379ba00c0db8ec7b2831c2bb1477b64">GetIsDamage</a> ()</td></tr>
+<tr class="memdesc:a4379ba00c0db8ec7b2831c2bb1477b64"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif isDamaged 값에 리턴  <a href="classEnemyHPHandler.html#a4379ba00c0db8ec7b2831c2bb1477b64">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:a4379ba00c0db8ec7b2831c2bb1477b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c2c12bd1ec8502f296a7b71f752c8d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a5c2c12bd1ec8502f296a7b71f752c8d2">KnockBack</a> (Vector3 AttackPostion)</td></tr>
+<tr class="memdesc:a5c2c12bd1ec8502f296a7b71f752c8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 넉백 효과.  <a href="classEnemyHPHandler.html#a5c2c12bd1ec8502f296a7b71f752c8d2">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:a5c2c12bd1ec8502f296a7b71f752c8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public 속성</h2></td></tr>
+<tr class="memitem:abde03317e8c4e409419173a93484e1d1"><td class="memItemLeft" align="right" valign="top"><a id="abde03317e8c4e409419173a93484e1d1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#abde03317e8c4e409419173a93484e1d1">skipSettingStartValues</a> = false</td></tr>
+<tr class="memdesc:abde03317e8c4e409419173a93484e1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 호스트마이그레션 시 초기화하지 않도록 하기 위함. <br /></td></tr>
+<tr class="separator:abde03317e8c4e409419173a93484e1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a985a72a7680fc053a8815d786d81bc3f"><td class="memItemLeft" align="right" valign="top"><a id="a985a72a7680fc053a8815d786d81bc3f"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a985a72a7680fc053a8815d786d81bc3f">knockbackForce</a> = 0.3f</td></tr>
+<tr class="memdesc:a985a72a7680fc053a8815d786d81bc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 데미지 받으면 밀려나는 정도 <br /></td></tr>
+<tr class="separator:a985a72a7680fc053a8815d786d81bc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected 멤버 함수</h2></td></tr>
+<tr class="memitem:af78c8f1bc1d8e3c8efd6a0f79f7d095e"><td class="memItemLeft" align="right" valign="top">virtual IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#af78c8f1bc1d8e3c8efd6a0f79f7d095e">OnHitCO</a> ()</td></tr>
+<tr class="memdesc:af78c8f1bc1d8e3c8efd6a0f79f7d095e"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 피격시 동작  <a href="classEnemyHPHandler.html#af78c8f1bc1d8e3c8efd6a0f79f7d095e">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:af78c8f1bc1d8e3c8efd6a0f79f7d095e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe32d9ecb417d9fa417f08214b690ae"><td class="memItemLeft" align="right" valign="top">virtual IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#aafe32d9ecb417d9fa417f08214b690ae">OnDeadCO</a> ()</td></tr>
+<tr class="memdesc:aafe32d9ecb417d9fa417f08214b690ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 사망시 동작  <a href="classEnemyHPHandler.html#aafe32d9ecb417d9fa417f08214b690ae">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:aafe32d9ecb417d9fa417f08214b690ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected 속성</h2></td></tr>
+<tr class="memitem:a900789cfd372c9dd53730ca6810b3e1d"><td class="memItemLeft" align="right" valign="top"><a id="a900789cfd372c9dd53730ca6810b3e1d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a900789cfd372c9dd53730ca6810b3e1d">isDamage</a> = false</td></tr>
+<tr class="memdesc:a900789cfd372c9dd53730ca6810b3e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 현재 데미지를 받았는지 나타내는 변수 <br /></td></tr>
+<tr class="separator:a900789cfd372c9dd53730ca6810b3e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+속성</h2></td></tr>
+<tr class="memitem:a5922bc260a10fc4105122330177dc13a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a">isDead</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a5922bc260a10fc4105122330177dc13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 현재 죽었는지 살았는지 나타내는 변수  <a href="classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:a5922bc260a10fc4105122330177dc13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a017aaa4c18c13e89d136d375c5350b93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a017aaa4c18c13e89d136d375c5350b93">HP</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:a017aaa4c18c13e89d136d375c5350b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 현재 HP를 나타내는 변수  <a href="classEnemyHPHandler.html#a017aaa4c18c13e89d136d375c5350b93">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:a017aaa4c18c13e89d136d375c5350b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 멤버 함수</h2></td></tr>
+<tr class="memitem:ac2a24cd4ebf4298f4a3a279ffc9a29b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#ac2a24cd4ebf4298f4a3a279ffc9a29b4">OnDeath</a> ()</td></tr>
+<tr class="memdesc:ac2a24cd4ebf4298f4a3a279ffc9a29b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 사망 시 처리.  <a href="classEnemyHPHandler.html#ac2a24cd4ebf4298f4a3a279ffc9a29b4">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:ac2a24cd4ebf4298f4a3a279ffc9a29b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa670162acb6219be165d192ac903a2d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#aa670162acb6219be165d192ac903a2d4">OnHPReduced</a> ()</td></tr>
+<tr class="memdesc:aa670162acb6219be165d192ac903a2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif HP 감소 시 처리.  <a href="classEnemyHPHandler.html#aa670162acb6219be165d192ac903a2d4">더 자세히 ...</a><br /></td></tr>
+<tr class="separator:aa670162acb6219be165d192ac903a2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+정적 Private 멤버 함수</h2></td></tr>
+<tr class="memitem:aac2f8ac60d7898e049a92baf6f5f152c"><td class="memItemLeft" align="right" valign="top"><a id="aac2f8ac60d7898e049a92baf6f5f152c"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#aac2f8ac60d7898e049a92baf6f5f152c">OnStateChanged</a> (Changed&lt; <a class="el" href="classEnemyHPHandler.html">EnemyHPHandler</a> &gt; changed)</td></tr>
+<tr class="memdesc:aac2f8ac60d7898e049a92baf6f5f152c"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif isDead의 값이 변화할 시 호출되는 콜백함수. <br /></td></tr>
+<tr class="separator:aac2f8ac60d7898e049a92baf6f5f152c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86242d1a7d69b286151a1112e0fb7261"><td class="memItemLeft" align="right" valign="top"><a id="a86242d1a7d69b286151a1112e0fb7261"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a86242d1a7d69b286151a1112e0fb7261">OnHPChanged</a> (Changed&lt; <a class="el" href="classEnemyHPHandler.html">EnemyHPHandler</a> &gt; changed)</td></tr>
+<tr class="memdesc:a86242d1a7d69b286151a1112e0fb7261"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif HP의 값이 변화할 시 호출되는 콜백함수. <br /></td></tr>
+<tr class="separator:a86242d1a7d69b286151a1112e0fb7261"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+정적 Private 속성</h2></td></tr>
+<tr class="memitem:a845b1b352036646bb25b8992cefa8e7f"><td class="memItemLeft" align="right" valign="top"><a id="a845b1b352036646bb25b8992cefa8e7f"></a>
+const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEnemyHPHandler.html#a845b1b352036646bb25b8992cefa8e7f">startingHP</a> = 100</td></tr>
+<tr class="memdesc:a845b1b352036646bb25b8992cefa8e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif 시작 HP <br /></td></tr>
+<tr class="separator:a845b1b352036646bb25b8992cefa8e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">상세한 설명</h2>
+<div class="textblock"><p>@breif 에너미 HP 관련 클래스. </p>
+</div><h2 class="groupheader">멤버 함수 문서화</h2>
+<a id="a4379ba00c0db8ec7b2831c2bb1477b64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4379ba00c0db8ec7b2831c2bb1477b64">&#9670;&nbsp;</a></span>GetIsDamage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EnemyHPHandler.GetIsDamage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif isDamaged 값에 리턴 </p>
+<dl class="section return"><dt>반환값</dt><dd>bool isDamaged </dd></dl>
+
+</div>
+</div>
+<a id="afe65962d6ba75e29e8f0eed691adfe56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe65962d6ba75e29e8f0eed691adfe56">&#9670;&nbsp;</a></span>GetIsDead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EnemyHPHandler.GetIsDead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif isDead 값에 리턴 </p>
+<dl class="section return"><dt>반환값</dt><dd>bool isDead </dd></dl>
+
+</div>
+</div>
+<a id="a5c2c12bd1ec8502f296a7b71f752c8d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c2c12bd1ec8502f296a7b71f752c8d2">&#9670;&nbsp;</a></span>KnockBack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyHPHandler.KnockBack </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>AttackPostion</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 넉백 효과. </p>
+<dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">AttackPosition</td><td>공격 받은 방향 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aafe32d9ecb417d9fa417f08214b690ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe32d9ecb417d9fa417f08214b690ae">&#9670;&nbsp;</a></span>OnDeadCO()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual IEnumerator EnemyHPHandler.OnDeadCO </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 사망시 동작 </p>
+<p>모든 컴퓨터에서 동작함. despawn 및 spawner의 타이머를 재설정. </p>
+
+<p><a class="el" href="classHeartQueenHPHandler.html#a80eef72238ce9e9cbf887744594a9d68">HeartQueenHPHandler</a>에서 재구현되었습니다.</p>
+
+</div>
+</div>
+<a id="ac2a24cd4ebf4298f4a3a279ffc9a29b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2a24cd4ebf4298f4a3a279ffc9a29b4">&#9670;&nbsp;</a></span>OnDeath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyHPHandler.OnDeath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 사망 시 처리. </p>
+<p><a class="el" href="classEnemyHPHandler.html#aafe32d9ecb417d9fa417f08214b690ae" title="@breif 사망시 동작">OnDeadCO()</a> 실행. </p><dl class="section see"><dt>참고</dt><dd><a class="el" href="classEnemyHPHandler.html#aafe32d9ecb417d9fa417f08214b690ae" title="@breif 사망시 동작">OnDeadCO()</a> </dd></dl>
+
+</div>
+</div>
+<a id="af78c8f1bc1d8e3c8efd6a0f79f7d095e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78c8f1bc1d8e3c8efd6a0f79f7d095e">&#9670;&nbsp;</a></span>OnHitCO()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual IEnumerator EnemyHPHandler.OnHitCO </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 피격시 동작 </p>
+<p>모든 컴퓨터에서 동작함. mesh의 색상 변화, isDamage 변수값 변경. </p>
+
+<p><a class="el" href="classSkinnedEnemyHPHandler.html#a85ce9b2b0dbdb2a1467ae745a173442b">SkinnedEnemyHPHandler</a>에서 재구현되었습니다.</p>
+
+</div>
+</div>
+<a id="aa670162acb6219be165d192ac903a2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa670162acb6219be165d192ac903a2d4">&#9670;&nbsp;</a></span>OnHPReduced()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyHPHandler.OnHPReduced </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif HP 감소 시 처리. </p>
+<p><a class="el" href="classEnemyHPHandler.html#af78c8f1bc1d8e3c8efd6a0f79f7d095e" title="@breif 피격시 동작">OnHitCO()</a>호출. </p><dl class="section see"><dt>참고</dt><dd><a class="el" href="classEnemyHPHandler.html#af78c8f1bc1d8e3c8efd6a0f79f7d095e" title="@breif 피격시 동작">OnHitCO()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab236d095d0f5534646e941622dfd468a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab236d095d0f5534646e941622dfd468a">&#9670;&nbsp;</a></span>OnTakeDamage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyHPHandler.OnTakeDamage </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>damagedByNickname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">NetworkObject&#160;</td>
+          <td class="paramname"><em>damagedByNetworkObject</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>damageAmount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>AttackPostion</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 해당 에너미를 HP를 감소시키는 메서드. </p>
+<p>HP를 감소, 죽었는지 확인, KnockBack 호출, 공격 캔슬, 타겟 변경. </p><dl class="params"><dt>매개변수</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">damagedByNickname</td><td>공격한 플레이어의 닉네임. </td></tr>
+    <tr><td class="paramname">damagedByNetworkObject</td><td>공격한 플레이어의 NetworkObject. </td></tr>
+    <tr><td class="paramname">damageAmount</td><td>받은 피해량 </td></tr>
+    <tr><td class="paramname">AttackPosition</td><td>공격 위치. KnockBack 방향 계산을 위해서 필요함. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">속성 문서화</h2>
+<a id="a017aaa4c18c13e89d136d375c5350b93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a017aaa4c18c13e89d136d375c5350b93">&#9670;&nbsp;</a></span>HP</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyHPHandler.HP</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 현재 HP를 나타내는 변수 </p>
+<p>동기화 되어있음. 값은 서버만 변경할 수 있다. 값의 변화가 생기면 모두 OnHPChanged라는 콜백 함수를 호출한다. </p>
+
+</div>
+</div>
+<a id="a5922bc260a10fc4105122330177dc13a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5922bc260a10fc4105122330177dc13a">&#9670;&nbsp;</a></span>isDead</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EnemyHPHandler.isDead</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>@breif 현재 죽었는지 살았는지 나타내는 변수 </p>
+<p>동기화 되어있음. 값은 서버만 변경할 수 있다. 값의 변화가 생기면 모두 OnStateChanged라는 콜백 함수를 호출한다. </p>
+
+</div>
+</div>
+<hr/>이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.:<ul>
+<li>Project Marchen/Assets/Scripts/Enemy/Network/EnemyHPHandler.cs</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classEnemyHPHandler.html">EnemyHPHandler</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
+</body>
+</html>

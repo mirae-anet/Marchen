@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['setaimforwardvector_29',['setAimForwardVector',['../classLocalCameraHandler.html#a545aef493e8286149c0d56336907d851',1,'LocalCameraHandler']]],
-  ['setviewinputvector_30',['SetViewInputVector',['../classLocalCameraHandler.html#a8328c942d106e50ab53d630717af9a6b',1,'LocalCameraHandler']]],
-  ['showobstruction_31',['ShowObstruction',['../classSeeThrough.html#a8e3650d35da60be282454888bc37e991',1,'SeeThrough']]]
+  ['localcameraenable_110',['localCameraEnable',['../classLocalCameraHandler.html#a477573fe5346a8547ec3e300fd7a98f1',1,'LocalCameraHandler']]]
 ];
