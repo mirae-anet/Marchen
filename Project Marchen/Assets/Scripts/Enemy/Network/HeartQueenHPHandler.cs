@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @breif 1 stage의 boss인 HeartQueen의 HP와 관련된 클래스
 public class HeartQueenHPHandler : SkinnedEnemyHPHandler
 {
+    /// @breif 시작 HP
     const int BossStartHP = 5000;
 
     protected override void Start()
@@ -35,6 +37,9 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
         isInitialized = true;
     }
 
+    /// @breif 사망 시 동작.
+    /// @details 모든 에너미 사망, spawner에게 사망 시 동작을 수행하도록 지시.
+    /// @see CountSpawnHandler
     protected override IEnumerator OnDeadCO()
     {
         anim.SetTrigger("doDie");
@@ -60,7 +65,7 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
             if(Spawner != null)
             {
                 Spawner.gameObject.SetActive(true);
-                Spawner.GetComponent<SpawnHandler>().SetTimer(); //host mirgation 때도 실행됨. 추후에 옳기기.
+                Spawner.GetComponent<SpawnHandler>().SetTimer(); //host mirgation 때도 실행?
             }
             Runner.Despawn(Object);
         }

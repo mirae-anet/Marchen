@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using Fusion;
 
+/// @breif 에너미의 타겟을 관리하는 클래스
 public class TargetHandler : NetworkBehaviour
 {
+    /// @breif 지정된 타겟
     private Transform target;
+    /// @breif 지정된 타겟의 존재 여부
     private bool isAggro = false;
 
     [SerializeField]
@@ -27,12 +30,14 @@ public class TargetHandler : NetworkBehaviour
     {
         
     }
-
+거
     void Update()
     {
         
     }
 
+    /// @breif 타겟을 설정.
+    /// @param target 새로 설정할 타겟.
     public void SetTarget(Transform target) // 타겟 (재)설정
     {
         Debug.Log(gameObject.name + " target set");
@@ -42,16 +47,17 @@ public class TargetHandler : NetworkBehaviour
         StartCoroutine(ChaseStartCO());
     }
 
+    /// @breif 타겟을 추적하기 시작. 
     IEnumerator ChaseStartCO()
     {
         yield return new WaitForSeconds(0.1f);
         networkEnemyController.SetIsChase(true); //single code에선 SetTarget에서 이미 호출함 그래서 효과없음.
         RPC_animatonSetBool("isWalk", true);
     }
-
-    public void TargetisAlive() // 타겟 죽는거 확인
+    
+    /// @breif 타겟의 사라지거나, 죽은거 확인
+    public void TargetisAlive() 
     {
-        //Debug.Log(target.ToString());
         if (target == null) // 타겟이 없으면
         {
             TargetOff();
@@ -66,7 +72,8 @@ public class TargetHandler : NetworkBehaviour
             return;
     }
 
-    void TargetOff() // 타겟 해제
+    /// @breif 타겟 해제
+    void TargetOff() 
     {
         RPC_animatonSetBool("isWalk", false);
         RPC_animatonSetBool("isAttack", false);
@@ -77,21 +84,27 @@ public class TargetHandler : NetworkBehaviour
         Debug.Log("TargetOff");
     }
 
+    /// @return Transform target
     public Transform GetTarget()
     {
         return target;
     }
+    /// @return bool isAggro
     public bool GetIsAggro()
     {
         return isAggro;
     }
 
+    /// @breif 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
     {
         anim.SetBool(action, isDone);
     }
 
+    /// @breif 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)
     {
