@@ -211,8 +211,8 @@ public class EnemyHPHandler : NetworkBehaviour
         return isDead;
     }
 
-    /// @breif isDamaged 값에 리턴
-    /// @return bool isDamaged
+    /// @breif isDamage 값에 리턴
+    /// @return bool isDamage
     public bool GetIsDamage()
     {
         return isDamage;
