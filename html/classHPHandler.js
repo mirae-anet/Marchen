@@ -1,0 +1,26 @@
+var classHPHandler =
+[
+    [ "GetIsDead", "classHPHandler.html#ae36c90456baff21d761d59786428925f", null ],
+    [ "getIsHit", "classHPHandler.html#a3136eeafe53c586cd2642618226d3fac", null ],
+    [ "KnockBack", "classHPHandler.html#af331ff8722f7b7f43870ae838fe4e1d7", null ],
+    [ "OnDeadCO", "classHPHandler.html#a5d4532470081ec53532d6644eff3dc41", null ],
+    [ "OnDeath", "classHPHandler.html#ab2cc0f5d178eba752e12a422229e4783", null ],
+    [ "OnHeal", "classHPHandler.html#a21c5696f11e30f83c4f1218fd7ecea11", null ],
+    [ "OnHealCO", "classHPHandler.html#a0559d64f51d7faec525df5687a21734f", null ],
+    [ "OnHitCO", "classHPHandler.html#a8dcc0348fb9ffb0885a3b4eebb054bba", null ],
+    [ "OnHPChanged", "classHPHandler.html#ae265b2d5c5abece8cd6035358a7306a7", null ],
+    [ "OnHPReduced", "classHPHandler.html#ad179dc7266d9fe29369621de74773564", null ],
+    [ "OnRespawned", "classHPHandler.html#a4e161c4385ab4cd0ff58b83c376a5ed1", null ],
+    [ "OnRevive", "classHPHandler.html#a581d94c9d464a208a7a8896ac31d42d0", null ],
+    [ "OnStateChanged", "classHPHandler.html#a093bb6488b17b6e505e382047ae49c2e", null ],
+    [ "OnTakeDamage", "classHPHandler.html#a9415e80c3337aedc6450319e4452e1cb", null ],
+    [ "RPC_OnHPIncreased", "classHPHandler.html#a611a6bf32e92abb17fd55f4efcc609ef", null ],
+    [ "ServerReviveCO", "classHPHandler.html#a8bff58ea169eb037b00b0c314b5e887c", null ],
+    [ "isDamage", "classHPHandler.html#a35b12aa859408c104efb4349fc6ed319", null ],
+    [ "skipSettingStartValues", "classHPHandler.html#ac49a2952926a1eddbb4a016bdca6a4be", null ],
+    [ "startingHP", "classHPHandler.html#aafe4d69d544a29014194118c7fabd491", null ],
+    [ "uiOnHitColor", "classHPHandler.html#a1f7618f8c13e699a739d938307a8f5c4", null ],
+    [ "uiOnHitImage", "classHPHandler.html#a75d0966fb254bcb0210422766f024a1e", null ],
+    [ "HP", "classHPHandler.html#a36f6f306f60fc0bf23122ac510838b7e", null ],
+    [ "isDead", "classHPHandler.html#aa69ef020f22dcaeb4f17203b7e3d8e33", null ]
+];

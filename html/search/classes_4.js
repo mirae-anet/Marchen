@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['meleeattackhandler_82',['MeleeAttackHandler',['../classMeleeAttackHandler.html',1,'']]]
+  ['interactionhandler_117',['InteractionHandler',['../classInteractionHandler.html',1,'']]]
 ];

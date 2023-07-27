@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['heartqueenattackhandler_79',['HeartQueenAttackHandler',['../classHeartQueenAttackHandler.html',1,'']]],
-  ['heartqueenhphandler_80',['HeartQueenHPHandler',['../classHeartQueenHPHandler.html',1,'']]]
+  ['enemyattackhandler_111',['EnemyAttackHandler',['../classEnemyAttackHandler.html',1,'']]],
+  ['enemyhphandler_112',['EnemyHPHandler',['../classEnemyHPHandler.html',1,'']]]
 ];

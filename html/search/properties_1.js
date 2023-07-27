@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isdead_150',['isDead',['../classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a',1,'EnemyHPHandler']]]
+  ['greenbattery_211',['GreenBattery',['../classClockActionHandler.html#a6f380b884f0e2883320a46c0d28007ac',1,'ClockActionHandler']]]
 ];

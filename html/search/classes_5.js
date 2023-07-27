@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['networkenemycontroller_83',['NetworkEnemyController',['../classNetworkEnemyController.html',1,'']]]
+  ['localcamerahandler_118',['LocalCameraHandler',['../classLocalCameraHandler.html',1,'']]]
 ];

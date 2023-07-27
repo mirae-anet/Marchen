@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['enemyattackhandler_77',['EnemyAttackHandler',['../classEnemyAttackHandler.html',1,'']]],
-  ['enemyhphandler_78',['EnemyHPHandler',['../classEnemyHPHandler.html',1,'']]]
+  ['characterinputhandler_109',['CharacterInputHandler',['../classCharacterInputHandler.html',1,'']]],
+  ['clockactionhandler_110',['ClockActionHandler',['../classClockActionHandler.html',1,'']]]
 ];
