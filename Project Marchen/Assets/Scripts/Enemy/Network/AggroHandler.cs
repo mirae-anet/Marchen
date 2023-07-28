@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-/// @breif 일정한 범위 안에 플레이어가 있으면 타겟으로 설정.
+/// @brief 일정한 범위 안에 플레이어가 있으면 타겟으로 설정.
 /// @see TargetHanlder
 public class AggroHandler : NetworkBehaviour
 {

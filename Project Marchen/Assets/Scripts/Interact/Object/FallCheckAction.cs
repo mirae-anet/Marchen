@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// @brief 낙사 체크.
 public class FallCheckAction : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

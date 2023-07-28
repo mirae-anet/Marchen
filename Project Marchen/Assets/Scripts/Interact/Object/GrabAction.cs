@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// @brief RigidBody를 잡아서 옮기는 기능 추가.
 public class GrabAction : InteractionHandler
 {
+    /// @brief 잡고있는지 여부.
     private bool isGrab = false;
+    /// @brief 해당 오브젝트의 rigidbody
     private Rigidbody rigid;
 
     private void Awake() {
