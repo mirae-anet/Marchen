@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['damageamount_191',['damageAmount',['../classMeleeAttackHandler.html#a563833ae0a83262718b8d65a6c7d3e69',1,'MeleeAttackHandler']]]
+  ['damageamount_228',['damageAmount',['../classMeleeAttackHandler.html#a563833ae0a83262718b8d65a6c7d3e69',1,'MeleeAttackHandler']]]
 ];

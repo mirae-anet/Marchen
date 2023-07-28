@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['enemyattackhandler_111',['EnemyAttackHandler',['../classEnemyAttackHandler.html',1,'']]],
-  ['enemyhphandler_112',['EnemyHPHandler',['../classEnemyHPHandler.html',1,'']]]
+  ['despawnaction_134',['DespawnAction',['../classDespawnAction.html',1,'']]],
+  ['dooractionhandler_135',['DoorActionHandler',['../classDoorActionHandler.html',1,'']]]
 ];

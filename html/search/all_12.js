@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['viewinputvector_107',['viewInputVector',['../classCharacterInputHandler.html#aa5cd0c75602cbb6ba473bf5ab6d131d8',1,'CharacterInputHandler']]]
+  ['uionhitcolor_127',['uiOnHitColor',['../classHPHandler.html#a1f7618f8c13e699a739d938307a8f5c4',1,'HPHandler']]],
+  ['uionhitimage_128',['uiOnHitImage',['../classHPHandler.html#a75d0966fb254bcb0210422766f024a1e',1,'HPHandler']]],
+  ['update_129',['Update',['../classCharacterInputHandler.html#a45888f3e37cd24d1cfb63885c9425566',1,'CharacterInputHandler']]]
 ];

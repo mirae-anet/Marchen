@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['target_204',['target',['../classTargetHandler.html#a0c072df02ecb4875eefe863cfa6c8571',1,'TargetHandler']]],
-  ['targetradius_205',['targetRadius',['../classHeartQueenAttackHandler.html#a9be09bfa23b0e89e6fc6758421f08e32',1,'HeartQueenAttackHandler.targetRadius()'],['../classRangeAttackHandler.html#a7cc82bca265e668a7aee120019d94bc6',1,'RangeAttackHandler.targetRadius()']]],
-  ['targetrange_206',['targetRange',['../classHeartQueenAttackHandler.html#ab06991d8f6bfdae5d34ca6c7ac7fec71',1,'HeartQueenAttackHandler.targetRange()'],['../classMeleeAttackHandler.html#ae10242b7cc459ca74fce95f62d52074a',1,'MeleeAttackHandler.targetRange()'],['../classRangeAttackHandler.html#aa58bb8c690f340ca9eafa8ab7241ddb2',1,'RangeAttackHandler.targetRange()']]]
+  ['skipsettingstartvalues_243',['skipSettingStartValues',['../classEnemyHPHandler.html#abde03317e8c4e409419173a93484e1d1',1,'EnemyHPHandler.skipSettingStartValues()'],['../classHPHandler.html#ac49a2952926a1eddbb4a016bdca6a4be',1,'HPHandler.skipSettingStartValues()']]],
+  ['spawner_244',['Spawner',['../classPickUpAction.html#acaa0b4ae444267c2098422676a9c9ee1',1,'PickUpAction']]],
+  ['startinghp_245',['startingHP',['../classEnemyHPHandler.html#a845b1b352036646bb25b8992cefa8e7f',1,'EnemyHPHandler.startingHP()'],['../classHPHandler.html#aafe4d69d544a29014194118c7fabd491',1,'HPHandler.startingHP()']]]
 ];
