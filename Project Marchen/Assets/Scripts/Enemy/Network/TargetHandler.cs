@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using Fusion;
 
-/// @breif 에너미의 타겟을 관리하는 클래스
+/// @brief 에너미의 타겟을 관리하는 클래스
 public class TargetHandler : NetworkBehaviour
 {
-    /// @breif 지정된 타겟
+    /// @brief 지정된 타겟
     private Transform target;
-    /// @breif 지정된 타겟의 존재 여부
+    /// @brief 지정된 타겟의 존재 여부
     private bool isAggro = false;
 
     [SerializeField]
@@ -36,7 +36,7 @@ public class TargetHandler : NetworkBehaviour
         
     }
 
-    /// @breif 타겟을 설정.
+    /// @brief 타겟을 설정.
     /// @param target 새로 설정할 타겟.
     public void SetTarget(Transform target) // 타겟 (재)설정
     {
@@ -47,7 +47,7 @@ public class TargetHandler : NetworkBehaviour
         StartCoroutine(ChaseStartCO());
     }
 
-    /// @breif 타겟을 추적하기 시작. 
+    /// @brief 타겟을 추적하기 시작. 
     IEnumerator ChaseStartCO()
     {
         yield return new WaitForSeconds(0.1f);
@@ -55,7 +55,7 @@ public class TargetHandler : NetworkBehaviour
         RPC_animatonSetBool("isWalk", true);
     }
     
-    /// @breif 타겟의 사라지거나, 죽은거 확인
+    /// @brief 타겟의 사라지거나, 죽은거 확인
     public void TargetisAlive() 
     {
         if (target == null) // 타겟이 없으면
@@ -72,7 +72,7 @@ public class TargetHandler : NetworkBehaviour
             return;
     }
 
-    /// @breif 타겟 해제
+    /// @brief 타겟 해제
     void TargetOff() 
     {
         RPC_animatonSetBool("isWalk", false);
@@ -95,7 +95,7 @@ public class TargetHandler : NetworkBehaviour
         return isAggro;
     }
 
-    /// @breif 애니메이션 동기화.
+    /// @brief 애니메이션 동기화.
     /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
@@ -103,7 +103,7 @@ public class TargetHandler : NetworkBehaviour
         anim.SetBool(action, isDone);
     }
 
-    /// @breif 애니메이션 동기화.
+    /// @brief 애니메이션 동기화.
     /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)

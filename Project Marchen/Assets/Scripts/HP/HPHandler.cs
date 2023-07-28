@@ -4,31 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
 
-/// @breif 플레이어 HP 관련 클래스
+/// @brief 플레이어 HP 관련 클래스
 public class HPHandler : NetworkBehaviour
 {
-    /// @breif 현재 HP를 나타내는 변수
+    /// @brief 현재 HP를 나타내는 변수
     /// @details 동기화 되어있음. 값은 서버만 변경할 수 있다. 값의 변화가 생기면 모두 OnHPChanged라는 콜백 함수를 호출한다.
     [Networked(OnChanged = nameof(OnHPChanged))]
     int HP {get; set;}
 
-    /// @breif 현재 죽었는지 살았는지 나타내는 변수
+    /// @brief 현재 죽었는지 살았는지 나타내는 변수
     /// @details 동기화 되어있음. 값은 서버만 변경할 수 있다. 값의 변화가 생기면 모두 OnStateChanged라는 콜백 함수를 호출한다.
     [Networked(OnChanged = nameof(OnStateChanged))]
     private bool isDead {get; set;}
-    /// @breif 현재 데미지를 받았는지 나타내는 변수
+    /// @brief 현재 데미지를 받았는지 나타내는 변수
     bool isDamage = false;
     bool isInitialized = false;
-    /// @breif 시작 HP
+    /// @brief 시작 HP
     const int startingHP = 100;
 
-    /// @breif 피격 시 화면 효과 (색상)
+    /// @brief 피격 시 화면 효과 (색상)
     public Color uiOnHitColor;
-    /// @breif 피격 시 화면 효과
+    /// @brief 피격 시 화면 효과
     public Image uiOnHitImage;
 
     public GameObject playerModel;
-    /// @breif 호스트마이그레션 시 초기화하지 않도록 하기 위함.
+    /// @brief 호스트마이그레션 시 초기화하지 않도록 하기 위함.
     public bool skipSettingStartValues = false; //Use when HostMirgration copy HP
 
     //other components
@@ -79,7 +79,7 @@ public class HPHandler : NetworkBehaviour
         isInitialized = true;
     }
 
-    /// @breif 회복 시 동작 
+    /// @brief 회복 시 동작 
     /// @details 모든 컴퓨터에서 동작함. mesh의 색상 변화.
     IEnumerator OnHealCO()
     {
@@ -93,7 +93,7 @@ public class HPHandler : NetworkBehaviour
             mesh.material.color = Color.white;
     }
 
-    /// @breif 피격시 동작 
+    /// @brief 피격시 동작 
     /// @details 모든 컴퓨터에서 동작함. mesh, 플레이어 화면의 색상 변화, isDamage 변수값 변경, 효과음.
     IEnumerator OnHitCO()
     {
@@ -128,7 +128,7 @@ public class HPHandler : NetworkBehaviour
         if(Object != null && Object.HasInputAuthority)
             hitboxRoot.HitboxRootActive = true;
     }
-    /// @breif 사망시 동작 
+    /// @brief 사망시 동작 
     /// @details 모든 컴퓨터에서 동작함. 아바타 비활성화, 애니매이션, 효과음.
     IEnumerator OnDeadCO()
     {
@@ -140,7 +140,7 @@ public class HPHandler : NetworkBehaviour
         playerModel.gameObject.SetActive(false);
     }
 
-    /// @breif 사망으로부터 일정시간이 지난 후 리스폰 요청함.
+    /// @brief 사망으로부터 일정시간이 지난 후 리스폰 요청함.
     /// @details 서버에서만 실행함.
     IEnumerator ServerReviveCO()
     {
@@ -149,7 +149,7 @@ public class HPHandler : NetworkBehaviour
         characterRespawnHandler.RequestRespawn();
     }
 
-    /// @breif 해당 플레이어의 HP를 감소시키는 메서드.
+    /// @brief 해당 플레이어의 HP를 감소시키는 메서드.
     /// @details HP를 감소, 죽었는지 확인, KnockBack 호출.
     /// @param damagedByNickname 공격한 오브젝트의 닉네임.
     /// @param damageAmount 받은 피해량
@@ -183,7 +183,7 @@ public class HPHandler : NetworkBehaviour
         }
     }
 
-    /// @breif 회복 시 동작 
+    /// @brief 회복 시 동작 
     /// @details 서버에서만 동작함. 플레이어의 HP 상승.
     public void OnHeal(int HealAmount)
     {
@@ -202,7 +202,7 @@ public class HPHandler : NetworkBehaviour
         Debug.Log($"{Time.time} {transform.name} healed got {HP} left");
     }
 
-    /// @breif HP의 값이 변화할 시 호출되는 콜백함수.
+    /// @brief HP의 값이 변화할 시 호출되는 콜백함수.
     /// @details 모든 컴퓨터에서 동작.
     static void OnHPChanged(Changed<HPHandler> changed)
     {
@@ -221,7 +221,7 @@ public class HPHandler : NetworkBehaviour
             changed.Behaviour.OnHPReduced();
     }
 
-    /// @breif 회복 시 OnHeal 메서드에서 호출. 
+    /// @brief 회복 시 OnHeal 메서드에서 호출. 
     /// @details 서버에서 모든 컴퓨터에게 OnHealCO를 실행하도록 함.
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_OnHPIncreased()
@@ -232,7 +232,7 @@ public class HPHandler : NetworkBehaviour
     }
 
     
-    /// @breif HP 감소 시 처리. OnHitCO()호출.
+    /// @brief HP 감소 시 처리. OnHitCO()호출.
     /// @see OnHitCO()
     private void OnHPReduced()
     {
@@ -242,7 +242,7 @@ public class HPHandler : NetworkBehaviour
         StartCoroutine(OnHitCO());
     }
 
-    /// @breif isDead의 값이 변화할 시 호출되는 콜백함수.
+    /// @brief isDead의 값이 변화할 시 호출되는 콜백함수.
     static void OnStateChanged(Changed<HPHandler> changed)
     {
         Debug.Log($"{Time.time} OnStateChanged isDead {changed.Behaviour.isDead}");
@@ -258,7 +258,7 @@ public class HPHandler : NetworkBehaviour
             changed.Behaviour.OnRevive();
     }
 
-    /// @breif 사망 시 처리. OnDeadCO() 실행.
+    /// @brief 사망 시 처리. OnDeadCO() 실행.
     /// @details rigid body가 움직이지 않도록 처리. hitbox를 비활성화. 아바타를 조종할 수 없도록 처리. ServerReviveCO 실행.
     /// @see OnDeadCO(), ServerReviveCO()
     private void OnDeath()
@@ -277,7 +277,7 @@ public class HPHandler : NetworkBehaviour
         }
     }
 
-    /// @breif 부활 시 처리.
+    /// @brief 부활 시 처리.
     /// @details 모든 컴퓨터에서 실행
     private void OnRevive()
     {
@@ -293,7 +293,7 @@ public class HPHandler : NetworkBehaviour
         networkPlayerController.SetCharacterControllerEnabled(true);
     }
 
-    /// @breif 부활 시 처리.
+    /// @brief 부활 시 처리.
     /// @see CharacterRespawnHandler.Respawn()
     public void OnRespawned()
     {
@@ -301,14 +301,14 @@ public class HPHandler : NetworkBehaviour
         isDead = false;
     }
 
-    /// @breif isDamage 값에 리턴
+    /// @brief isDamage 값에 리턴
     /// @return bool isDamage
     public bool getIsHit()
     {
         return isDamage;
     }
 
-    /// @breif 넉백 효과.
+    /// @brief 넉백 효과.
     /// @param AttackPosition 공격 받은 방향
     public void KnockBack(Vector3 AttackPostion)
     {
@@ -318,7 +318,7 @@ public class HPHandler : NetworkBehaviour
         rigid.AddForce(reactDir * 10f, ForceMode.Impulse);
     }
 
-    /// @breif isDead 값에 리턴
+    /// @brief isDead 값에 리턴
     /// @return bool isDead
     public bool GetIsDead()
     {

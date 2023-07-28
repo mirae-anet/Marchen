@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// @breif 1 스테이지의 보스인 하트퀸을 처치하면 실행되는 동작들.
+/// @brief 1 스테이지의 보스인 하트퀸을 처치하면 실행되는 동작들.
 public class HeartQueenMissionComplete : MissionComplete
 {
     public NetworkBehaviour storyTextPrefab; 
     public NetworkBehaviour potalPrefab; 
 
-    /// @breif 도서관 내부로 돌아가는 포탈 생성, 관련된 스토리 텍스트 출력.
+    /// @brief 도서관 내부로 돌아가는 포탈 생성, 관련된 스토리 텍스트 출력.
     public override void OnMissionComplete(NetworkObject networkObject)
     {
 

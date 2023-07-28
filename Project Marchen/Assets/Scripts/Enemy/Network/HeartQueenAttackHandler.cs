@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.AI;
 using Fusion;
 
-/// @breif 1 stage의 boss인 HeartQueen의 공격과 관련된 클래스
+/// @brief 1 stage의 boss인 HeartQueen의 공격과 관련된 클래스
 public class HeartQueenAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
 
-    /// @breif 에너미의 공격이 취소될 수 있는지 설정. default는 false.
+    /// @brief 에너미의 공격이 취소될 수 있는지 설정. default는 false.
     public bool attackCancel = false;
-    /// @breif 타겟이 해당 범위에 들어오면 공격을 수행. (반지름)
+    /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (반지름)
     public float targetRadius =  3f;
-    /// @breif 타겟이 해당 범위에 들어오면 공격을 수행. (최대 거리)
+    /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (최대 거리)
     public float targetRange = 30f;
     public Transform detectionPos;
     private Vector3 aimVec;
@@ -44,7 +44,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         targetHandler = GetComponent<TargetHandler>();
     }
 
-    /// @breif 타겟을 향해서 공격을 준비.
+    /// @brief 타겟을 향해서 공격을 준비.
     /// @details 레이캐스트로 타겟을 탐색. hit 시 AttackThick를 호출.
     public override void Aiming() 
     {
@@ -70,7 +70,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         }
     }
 
-    /// @breif 공격 패턴을 선택.
+    /// @brief 공격 패턴을 선택.
     /// @details 유도 공격 40%, 직선 공격 40%, 전방향 공격 20% 확률. 
     IEnumerator AttackThink()
     {
@@ -100,7 +100,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         }
     }
 
-    /// @breif 유도 공격.
+    /// @brief 유도 공격.
     /// @see GuidedBulletHandler
     IEnumerator AttackGuided()
     {
@@ -142,7 +142,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         isAttack = false;
     }
 
-    /// @breif 직선 공격.
+    /// @brief 직선 공격.
     /// @see StraightBulletHandler
     IEnumerator AttackStraight()
     {
@@ -165,7 +165,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         isAttack = false;
     }
 
-    /// @breif 전방향 공격.
+    /// @brief 전방향 공격.
     /// @see AreaBulletHandler
     IEnumerator AttackArea()
     {
@@ -190,7 +190,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
     }
 
     // --------------------------------------------------
-    /// @breif 공격 취소.
+    /// @brief 공격 취소.
     public override void AttackCancel()
     {
         if (!attackCancel)
@@ -204,7 +204,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         RPC_animatonSetBool("isAttackArea", false);
     }
 
-    /// @breif 애니메이션 동기화.
+    /// @brief 애니메이션 동기화.
     /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
@@ -212,7 +212,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         anim.SetBool(action, isDone);
     }
 
-    /// @breif 애니메이션 동기화.
+    /// @brief 애니메이션 동기화.
     /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)
@@ -220,7 +220,7 @@ public class HeartQueenAttackHandler : EnemyAttackHandler
         anim.SetTrigger(action);
     }
 
-    /// @breif 효과음 동기화.
+    /// @brief 효과음 동기화.
     /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_AudioPlay(string audioType)

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 1 스테이지의 문과 상호작용을 위한 클래스
 public class DoorActionHandler : InteractionHandler
 {
     public bool skipSettingStartValues = false;
-
+    /// @brief 열쇠의 유무. 동기화 되어있음.
     [Networked(OnChanged = nameof(OnValueChanged))]
     private bool Key {get; set;}
-
+    /// @brief 미션 성공 여부. 동기화 되어있음.
     [Networked]
     private bool missionCompleted {get; set;}
 
@@ -36,7 +37,8 @@ public class DoorActionHandler : InteractionHandler
         if(missionCompleted)
             StartCoroutine(OpenDoorCO());
     }
-
+    /// @brief 문과 상호작용하기 위하여 호출하는 메서드.
+    /// @details 플레이어가 열쇠를 가지고서 상호작용하면 해당 문을 열 수 있다.
     public override void action(Transform other)
     {
         Debug.Log("OnAction");
@@ -55,6 +57,7 @@ public class DoorActionHandler : InteractionHandler
         }
     }
 
+    /// @brief Key의 값이 변하면 호출되는 콜백.
     static void OnValueChanged(Changed<DoorActionHandler> changed)
     {
         changed.Behaviour.KeyImage.SetActive(changed.Behaviour.Key);
@@ -66,6 +69,8 @@ public class DoorActionHandler : InteractionHandler
         }
     }
 
+    /// @brief OnValueChanged에서 호출되는 RPC. 모든 컴퓨터에서 실행.
+    /// @see DoorActionHandler.OnValueChanged
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_MissionComplete()
     {
@@ -77,6 +82,7 @@ public class DoorActionHandler : InteractionHandler
             missionCompleted = true;
     }
 
+    /// @brief 시,청각적인 효과.
     IEnumerator OpenDoorCO()
     {
         openingSound.Play();
