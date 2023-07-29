@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 플레이어의 상호작용을 담당하는 클래스
 public class PlayerActionHandler : InteractionHandler
 {
     public bool skipSettingStartValues = false;
+
+    /// @brief 상호작용 가능한 대상의 레이어값.
     public LayerMask layerMask;
+
+    /// @brief 상호작용 범위(박스)를 설정하는 기준점.
     public Transform BodyAnchor;
+
+    /// @brief 상호작용 범위(박스)의 크기를 설정. 
     Vector3 boxSize = new Vector3(2,2,2);
 
+    /// @brief 플레이어가 Key를 가지고 있는지.
     [Networked(OnChanged = nameof(OnValueChanged))]
     public bool Key {get; set;}
 
+    /// @brief 플레이어가 GreenBattery를 가지고 있는지.
     [Networked(OnChanged = nameof(OnValueChanged))]
     public bool GreenBattery {get; set;}
+
+    /// @brief 플레이어가 BlueBattery를 가지고 있는지.
     [Networked(OnChanged = nameof(OnValueChanged))]
     public bool BlueBattery {get; set;}
 
@@ -68,6 +79,9 @@ public class PlayerActionHandler : InteractionHandler
         networkPlayerController = GetComponent<NetworkPlayerController>();
     }
 
+    /// @brief 플레이어와의 상호작용을 위해서 호출하는 메서드
+    /// @details 호출한 게임 오브젝트(other)에 따라서 다른 동작을 수행.
+    /// @see DespawnAction, PickUpAction
     public override void action(Transform other)
     {
         if(!Object.HasStateAuthority)
@@ -115,6 +129,8 @@ public class PlayerActionHandler : InteractionHandler
         }
     }
 
+    /// @brief f를 눌러서 상호작용을 시도할 때 호출하는 메서드.
+    /// @details 일정한 크기의 박스(OverlapBox)를 생성한다. 박스 안에 상호작용 가능한 레이어가 존재하면 해당 오브젝트와 상호작용 시작(action() 호출).
     public void Interact()
     {
         Collider[] colliders  = Physics.OverlapBox(BodyAnchor.position, boxSize/2, Quaternion.LookRotation(transform.forward), layerMask);
@@ -131,6 +147,8 @@ public class PlayerActionHandler : InteractionHandler
         }
     }
 
+    /// @brief 아이템을 습득한 경우 실행되는 콜백함수.
+    /// @details 획득한 아이템을 UI에 표시.
     static void OnValueChanged(Changed<PlayerActionHandler> changed)
     {
         changed.Behaviour.KeyImage.SetActive(changed.Behaviour.Key);
@@ -147,6 +165,7 @@ public class PlayerActionHandler : InteractionHandler
         changed.Behaviour.myImage2.SetActive(changed.Behaviour.redBook);
     }
 
+    /// @brief 아이템 습득 소리가 다른 컴퓨터에서도 실행되도록 함.
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_AudioPlay(string audioType)
     {
