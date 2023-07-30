@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pickupaction_150',['PickUpAction',['../classPickUpAction.html',1,'']]]
+  ['pickupaction_170',['PickUpAction',['../classPickUpAction.html',1,'']]],
+  ['playeractionhandler_171',['PlayerActionHandler',['../classPlayerActionHandler.html',1,'']]]
 ];

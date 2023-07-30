@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['viewinputvector_253',['viewInputVector',['../classCharacterInputHandler.html#aa5cd0c75602cbb6ba473bf5ab6d131d8',1,'CharacterInputHandler']]]
+  ['uionhitcolor_284',['uiOnHitColor',['../classHPHandler.html#a1f7618f8c13e699a739d938307a8f5c4',1,'HPHandler']]],
+  ['uionhitimage_285',['uiOnHitImage',['../classHPHandler.html#a75d0966fb254bcb0210422766f024a1e',1,'HPHandler']]]
 ];

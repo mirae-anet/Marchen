@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isdead_257',['isDead',['../classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a',1,'EnemyHPHandler.isDead()'],['../classHPHandler.html#aa69ef020f22dcaeb4f17203b7e3d8e33',1,'HPHandler.isDead()']]]
+  ['hp_291',['HP',['../classEnemyHPHandler.html#a017aaa4c18c13e89d136d375c5350b93',1,'EnemyHPHandler.HP()'],['../classHPHandler.html#a36f6f306f60fc0bf23122ac510838b7e',1,'HPHandler.HP()']]]
 ];

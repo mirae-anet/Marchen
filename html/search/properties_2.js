@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hp_256',['HP',['../classEnemyHPHandler.html#a017aaa4c18c13e89d136d375c5350b93',1,'EnemyHPHandler.HP()'],['../classHPHandler.html#a36f6f306f60fc0bf23122ac510838b7e',1,'HPHandler.HP()']]]
+  ['greenbattery_290',['GreenBattery',['../classClockActionHandler.html#a6f380b884f0e2883320a46c0d28007ac',1,'ClockActionHandler.GreenBattery()'],['../classPlayerActionHandler.html#af6ab47e81baf7465710af1cee94cddad',1,'PlayerActionHandler.GreenBattery()']]]
 ];

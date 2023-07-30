@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['manageblockingview_186',['ManageBlockingView',['../classSeeThrough.html#a85071ea3cfae62e1959ffe4911e7761c',1,'SeeThrough']]]
+  ['localcameraenable_210',['localCameraEnable',['../classLocalCameraHandler.html#a477573fe5346a8547ec3e300fd7a98f1',1,'LocalCameraHandler']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['knockback_184',['KnockBack',['../classEnemyHPHandler.html#a5c2c12bd1ec8502f296a7b71f752c8d2',1,'EnemyHPHandler.KnockBack()'],['../classHPHandler.html#af331ff8722f7b7f43870ae838fe4e1d7',1,'HPHandler.KnockBack()']]]
+  ['initspawnpoint_207',['initSpawnPoint',['../classSpawnHandler.html#aa14fa6ec3d5ca7d567a3d680e61d2dba',1,'SpawnHandler']]],
+  ['interact_208',['Interact',['../classPlayerActionHandler.html#aa3f9eb462976e22ef157a5bc86e88edb',1,'PlayerActionHandler']]]
 ];

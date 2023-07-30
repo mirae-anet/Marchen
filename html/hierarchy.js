@@ -14,6 +14,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "FallCheckAction", "classFallCheckAction.html", null ],
+    [ "HeartHandler", "classHeartHandler.html", null ],
     [ "HPHandler", "classHPHandler.html", null ],
     [ "InteractionHandler", "classInteractionHandler.html", [
       [ "ClockActionHandler", "classClockActionHandler.html", null ],
@@ -21,8 +22,10 @@ var hierarchy =
       [ "GrabAction", "classGrabAction.html", null ],
       [ "MovingGroundAction", "classMovingGroundAction.html", null ],
       [ "PickUpAction", "classPickUpAction.html", null ],
+      [ "PlayerActionHandler", "classPlayerActionHandler.html", null ],
       [ "StoryTextAction", "classStoryTextAction.html", null ]
     ] ],
+    [ "ItemRotate", "classItemRotate.html", null ],
     [ "LocalCameraHandler", "classLocalCameraHandler.html", null ],
     [ "MissionComplete", "classMissionComplete.html", [
       [ "HeartQueenMissionComplete", "classHeartQueenMissionComplete.html", null ],
@@ -32,5 +35,9 @@ var hierarchy =
     [ "NetworkEnemyController", "classNetworkEnemyController.html", null ],
     [ "SeeThrough", "classSeeThrough.html", null ],
     [ "SetSpawnAreaAction", "classSetSpawnAreaAction.html", null ],
+    [ "SpawnerSpawner", "classSpawnerSpawner.html", null ],
+    [ "SpawnHandler", "classSpawnHandler.html", [
+      [ "CountSpawnHandler", "classCountSpawnHandler.html", null ]
+    ] ],
     [ "TargetHandler", "classTargetHandler.html", null ]
 ];

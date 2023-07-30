@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['key_258',['Key',['../classDoorActionHandler.html#a644644c423db8a0ac8c80a2fc9a1743e',1,'DoorActionHandler']]]
+  ['isdead_292',['isDead',['../classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a',1,'EnemyHPHandler.isDead()'],['../classHPHandler.html#aa69ef020f22dcaeb4f17203b7e3d8e33',1,'HPHandler.isDead()']]]
 ];
