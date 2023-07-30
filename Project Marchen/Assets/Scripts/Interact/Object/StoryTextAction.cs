@@ -55,6 +55,7 @@ public class StoryTextAction : InteractionHandler
 
     /// @brief 텍스트 출력
     /// @details local player의 story text ui를 찾아서 텍스트를 출력한다.
+    /// @see StoryTextUIHandler
     private void PrintStory()
     {
         if(LocalCameraHandler.Local != null)

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 회복을 위한 아이템
+/// @see HPHandler.OnHeal()
 public class HeartHandler : NetworkBehaviour
 {
+    /// @brief 회복량
     [Header("설정")]
     [Range(1f, 100f)]
     public int value = 20;
