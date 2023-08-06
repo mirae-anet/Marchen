@@ -73,7 +73,7 @@ public class CharacterInputHandler : MonoBehaviour
     }
     /// @brief 각각의 플레이어가 속한 컴퓨터에서 입력값을 서버로 보낸다.
     /// @details NetworkInputData의 데이터 구조체로 보낸다. 보낸 후 입력값을 초기화 한다. localCamraHandler에서 이동방향과 3차원 조준 방향을 받아온다.
-    /// @see NetworkInputData
+    /// @see NetworkInputData, Spawner.OnInput()
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();

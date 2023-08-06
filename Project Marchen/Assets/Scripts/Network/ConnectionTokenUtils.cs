@@ -1,23 +1,18 @@
 using System;
 
+/// @brief 접속을 위해서 발급받는 토큰을 관리함. 접속자를 식별하기 위해서 접속때마다 생성하는 토큰.
 public static class ConnectionTokenUtils
 {
-    /// <summary>
-    /// Create new random Token
-    /// </summary>
+    /// @brief Create new random Token
     public static byte[] NewToken() => Guid.NewGuid().ToByteArray();
 
-    /// <summary>
-    /// Convert a Token into a Hash format
-    /// </summary>
-    /// <param name="token">Token to be hashed</param>
-    /// <returns> Token hash</returns>
+    /// @brief Convert a Token into a Hash format
+    /// @param token Token to be hashed
+    /// @return Token hash
     public static int HashToken(byte[] token) => new Guid(token).GetHashCode();
 
-    /// <summary>
-    /// Converts a Token into a String
-    /// </summary>
-    /// <param name="token">Token to be parsed</param>
-    /// <returns>Token as a string</returns>
+    /// @breif Converts a Token into a String
+    /// @param token Token to be parsed
+    /// @return Token as a string
     public static string TokenToString(byte[] token) => new Guid(token).ToString();
 }
