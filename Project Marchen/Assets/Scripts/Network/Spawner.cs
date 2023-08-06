@@ -153,11 +153,13 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data){Debug.Log("OnReliableDataReceived");}
     public void OnSceneLoadDone(NetworkRunner runner){Debug.Log("OnSceneLoadDone");}
     public void OnSceneLoadStart(NetworkRunner runner){Debug.Log("OnSceneLoadStart");}
+
+    // @brief 로비 세션 업데이트
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         if (sessionListUIHandler == null)
             return;
-
+        //생성된 세션이 없으면
         if(sessionList.Count==0)
         {
             sessionListUIHandler.OnNoSessionsFound();
@@ -170,7 +172,6 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
                 Debug.Log($"Found session {sessionInfo.Name} playerCount {sessionInfo.PlayerCount}");
             }
         }
-        
         
         Debug.Log("OnSessionListUpdated");
     }

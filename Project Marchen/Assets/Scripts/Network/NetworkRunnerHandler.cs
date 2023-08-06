@@ -312,18 +312,24 @@ public class NetworkRunnerHandler : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         FindObjectOfType<Spawner>().OnHostMigrationCleanUp();
     }
+
+    // @brief 비동기적으로 joinLobby실행
     public void OnJoinLobby()
     {
         var clientTask = JoinLobby();
     }
+
+    // @brief 로비에 입장 
     private async Task JoinLobby()
     {
         Debug.Log("JoinLobby started");
 
         string lobbyID = "OurLobbyID";
-
+        
+        //로비 접속 시도
         var result = await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyID);
 
+        //로비 접속 결과 출력 
         if (!result.Ok)
         {
             Debug.LogError($"Unable to join lobby {lobbyID}");
@@ -335,6 +341,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         }
     }
 
+    // @brief 세션 생성 
     public void CreateGame(String sessionName, string sceneName)
     {
         Debug.Log($"Create ssession {sessionName} scene {sceneName} build Index {SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}")}");
@@ -343,12 +350,12 @@ public class NetworkRunnerHandler : MonoBehaviour
         
     }
 
-
+    // @brief 세션 접속
     public void JoinGame(SessionInfo sessionInfo)
     {
         
         Debug.Log($"Join session {sessionInfo.Name}");
-
+        
         var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex,null);
 
     }
