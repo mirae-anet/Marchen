@@ -68,6 +68,7 @@ public class NetworkRunnerHandler : MonoBehaviour
     }
 
     /// @brief NetworkRunner 초기화
+    /// @details connection token을 GameManager로부터 받아와서 NetworkRunner에 입력함.
     protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, String sessionName, byte[] connectionToken, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
     {
         var sceneManager = GetSceneManager(runner);

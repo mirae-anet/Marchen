@@ -1,6 +1,6 @@
 using System;
 
-/// @brief 접속을 위해서 발급받는 토큰을 관리함. 접속자를 식별하기 위해서 접속때마다 생성하는 토큰.
+/// @brief 접속을 위해서 발급받는 connection token과 관련된 함수를 포함.
 public static class ConnectionTokenUtils
 {
     /// @brief Create new random Token

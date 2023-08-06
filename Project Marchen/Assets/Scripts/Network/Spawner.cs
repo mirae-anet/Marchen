@@ -36,6 +36,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     /// @brief Connection Token 가져오기.
+    /// @details 자신의 접속이면 자신의 GameManager에 저장된 connection token을, remote player의 접속이면 NetworkRunner에 저장된 connection token을 반환.
     /// @return 비정상적인 상황에서는 0을 반환
     int GetPlayerToken(NetworkRunner runner, PlayerRef player) 
     {
@@ -63,7 +64,7 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     /// @brief 새로운 플레이어가 접속했을때 실행.
-    /// @details Connection token을 바탕으로 재접속인지 확인. 최초의 접속이면 connection token 생성 및 저장.
+    /// @details Connection token을 바탕으로 재접속인지 확인. 재접속이면 기존의 아바타에 연결. 최초의 접속이면 아바타를 스폰.
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if(runner.IsServer)
