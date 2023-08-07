@@ -101,14 +101,25 @@ CharacterInputHandler에 대한 협력 다이어그램:</div>
 <div class="dyncontent">
 <div class="center"><img src="classCharacterInputHandler__coll__graph.png" border="0" usemap="#aCharacterInputHandler_coll__map" alt="Collaboration graph"/></div>
 <map name="aCharacterInputHandler_coll__map" id="aCharacterInputHandler_coll__map">
-<area shape="rect" title="플레이어의 마우스, 키보드 입력을 받아서 전달." alt="" coords="5,95,175,121"/>
-<area shape="rect" href="classLocalCameraHandler.html" title="로컬 카메라 관련 클래스" alt="" coords="11,5,169,32"/>
+<area shape="rect" title="플레이어의 마우스, 키보드 입력을 받아서 전달." alt="" coords="2017,116,2187,143"/>
+<area shape="rect" href="classLocalCameraHandler.html" title="로컬 카메라 관련 클래스" alt="" coords="459,44,617,71"/>
+<area shape="rect" href="classNetworkPlayer.html" title="플레이어 기본 설정 및 동기화 관련 클래스" alt="" coords="883,100,1002,127"/>
+<area shape="rect" href="classNetworkPlayerController.html" title="플레이어 컨트롤" alt="" coords="1618,257,1801,284"/>
+<area shape="rect" href="classHPHandler.html" title="플레이어 HP 관련 클래스" alt="" coords="1274,167,1365,193"/>
+<area shape="rect" href="classPlayerActionHandler.html" title="플레이어의 상호작용을 담당하는 클래스" alt="" coords="2025,255,2179,281"/>
+<area shape="rect" href="classNetworkInGameMessages.html" title="채팅 및 게임메시지 기능" alt="" coords="441,165,635,192"/>
+<area shape="rect" href="classInGameMessagesUIHandler.html" title="게임 메시지를 표시하는 UI(채팅창)." alt="" coords="5,165,208,192"/>
+<area shape="rect" href="classCharacterRespawnHandler.html" title="플레이어 리스폰 관련 클래스" alt="" coords="1612,121,1807,148"/>
+<area shape="rect" href="classHeartBar.html" title="HP를 표시하는 Bar." alt="" coords="903,227,983,253"/>
+<area shape="rect" href="classInteractionHandler.html" title="상호작용과 관련된 스크립트의 부모 클래스. 상속 받아서 구현." alt="" coords="1638,175,1781,201"/>
+<area shape="rect" href="classAttackHandler.html" title="플레이어 공격 관련 클래스" alt="" coords="1262,352,1377,379"/>
+<area shape="rect" href="classWeaponHandler.html" title="무기들이 기본적으로 상속받는 부모 클래스" alt="" coords="880,352,1005,379"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">범례</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 멤버 함수</h2></td></tr>
-<tr class="memitem:a75a3809382e7479962de868179da50af"><td class="memItemLeft" align="right" valign="top">NetworkInputData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCharacterInputHandler.html#a75a3809382e7479962de868179da50af">GetNetworkInput</a> ()</td></tr>
+<tr class="memitem:a75a3809382e7479962de868179da50af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structNetworkInputData.html">NetworkInputData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCharacterInputHandler.html#a75a3809382e7479962de868179da50af">GetNetworkInput</a> ()</td></tr>
 <tr class="memdesc:a75a3809382e7479962de868179da50af"><td class="mdescLeft">&#160;</td><td class="mdescRight">각각의 플레이어가 속한 컴퓨터에서 입력값을 서버로 보낸다.  <a href="classCharacterInputHandler.html#a75a3809382e7479962de868179da50af">더 자세히 ...</a><br /></td></tr>
 <tr class="separator:a75a3809382e7479962de868179da50af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51072dc06f1d38e8047c78aeb138fdf3"><td class="memItemLeft" align="right" valign="top"><a id="a51072dc06f1d38e8047c78aeb138fdf3"></a>
@@ -151,7 +162,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NetworkInputData CharacterInputHandler.GetNetworkInput </td>
+          <td class="memname"><a class="el" href="structNetworkInputData.html">NetworkInputData</a> CharacterInputHandler.GetNetworkInput </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -165,7 +176,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><div class="memdoc">
 
 <p>각각의 플레이어가 속한 컴퓨터에서 입력값을 서버로 보낸다. </p>
-<p>NetworkInputData의 데이터 구조체로 보낸다. 보낸 후 입력값을 초기화 한다. localCamraHandler에서 이동방향과 3차원 조준 방향을 받아온다. </p><dl class="section see"><dt>참고</dt><dd>NetworkInputData </dd></dl>
+<p>NetworkInputData의 데이터 구조체로 보낸다. 보낸 후 입력값을 초기화 한다. localCamraHandler에서 이동방향과 3차원 조준 방향을 받아온다. </p><dl class="section see"><dt>참고</dt><dd><a class="el" href="structNetworkInputData.html" title="각각의 클라이언트에서 서버에게 전달할 데이터구조.">NetworkInputData</a>, <a class="el" href="classSpawner.html#a34e097fa0690102eff817014ae421f8f" title="input 발생 시 CharacterInputHandler.GetNetworkInput()을 실행하도록 함.">Spawner.OnInput()</a> </dd></dl>
 
 </div>
 </div>

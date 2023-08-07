@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['fallcheckaction_156',['FallCheckAction',['../classFallCheckAction.html',1,'']]]
+  ['enemyattackhandler_302',['EnemyAttackHandler',['../classEnemyAttackHandler.html',1,'']]],
+  ['enemyhphandler_303',['EnemyHPHandler',['../classEnemyHPHandler.html',1,'']]]
 ];

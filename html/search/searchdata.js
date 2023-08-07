@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "abcdefghiklmnoprstuv",
-  1: "acdefghilmnprst",
-  2: "acefghiklmoprstu",
-  3: "abdiklmprstuv",
-  4: "bcghikms"
+  0: "abcdefghijklmnoprstuvw",
+  1: "abcdefghilmnprstuw",
+  2: "acdefghiklmnoprstuw",
+  3: "abcdefhijklmnprstuvw",
+  4: "t",
+  5: "bcghikmnstw"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "functions",
   3: "variables",
-  4: "properties"
+  4: "enums",
+  5: "properties"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "클래스",
   2: "함수",
   3: "변수",
-  4: "속성"
+  4: "열거형 타입",
+  5: "속성"
 };
 

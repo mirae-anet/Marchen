@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['knockbackforce_262',['knockbackForce',['../classEnemyHPHandler.html#a985a72a7680fc053a8815d786d81bc3f',1,'EnemyHPHandler']]]
+  ['explosionparticlesystemprefab_510',['explosionParticleSystemPrefab',['../classBulletHandler.html#a0d6badd93ab9db30476b8aed248a7db6',1,'BulletHandler']]]
 ];

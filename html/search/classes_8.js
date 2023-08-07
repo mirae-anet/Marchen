@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['localcamerahandler_165',['LocalCameraHandler',['../classLocalCameraHandler.html',1,'']]]
+  ['ingamemessagesuihandler_316',['InGameMessagesUIHandler',['../classInGameMessagesUIHandler.html',1,'']]],
+  ['interactionhandler_317',['InteractionHandler',['../classInteractionHandler.html',1,'']]],
+  ['itemrotate_318',['ItemRotate',['../classItemRotate.html',1,'']]]
 ];
