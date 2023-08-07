@@ -6,12 +6,15 @@ using Fusion.Sockets;
 using System;
 using UnityEngine.SceneManagement;
 
+/// @brief 플레이어 스폰 관련된 클래스
 public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 {
+    /// @brief 플레이어 아바타 프리팹
     [SerializeField]
     NetworkPlayer playerPrefab;
     
-    //Mapping between Token ID and Re-created Players
+    /// @brief connection token과 NetworkPlayer를 짝지어서 저장하는 맵
+    /// @details Mapping between Token ID and Re-created Players. 재접속 시 자신의 아바타에 대한 권한을 재획득하기 위해서 사용.
     public Dictionary<int, NetworkPlayer> mapTokenIDWithNetworkPlayer;
 
     //other components
@@ -32,6 +35,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         
     }
 
+    /// @brief Connection Token 가져오기.
+    /// @details 자신의 접속이면 자신의 GameManager에 저장된 connection token을, remote player의 접속이면 NetworkRunner에 저장된 connection token을 반환.
+    /// @return 비정상적인 상황에서는 0을 반환
     int GetPlayerToken(NetworkRunner runner, PlayerRef player) 
     {
         if(runner.LocalPlayer == player) // 접속한 플레이어가 본인인 경우 
@@ -50,12 +56,15 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    //Host migration 때 처음에 맵을 생성하기 위해서 필요함
+    /// @brief Host migration 때 처음에 맵을 생성하기 위해서 필요함
+    /// @see NetworkRunnerHandler.HostMigrationResume()
     public void SetConnectionTokenMapping(int token, NetworkPlayer networkPlayer)
     {
         mapTokenIDWithNetworkPlayer.Add(token, networkPlayer);
     }
 
+    /// @brief 새로운 플레이어가 접속했을때 실행.
+    /// @details Connection token을 바탕으로 재접속인지 확인. 재접속이면 기존의 아바타에 연결. 최초의 접속이면 아바타를 스폰.
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if(runner.IsServer)
@@ -85,11 +94,14 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         }
         else Debug.Log("OnPlayerJoined");
     }
+
+    /// @brief 플레이어 퇴장 시
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log("OnPlayerLeft");
     }
 
+    /// @brief input 발생 시 CharacterInputHandler.GetNetworkInput()을 실행하도록 함.
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         if(characterInputHandler == null && NetworkPlayer.Local != null)
@@ -102,6 +114,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    /// @brief 호스트마이그레이션 발생 시 최초로 실행되는 작업.
+    /// @details NetworkRunner를 shutdown하고 NetworkRunnerHandler.StartHostMigration()을 실행.
+    /// @see NetworkRunnerHandler.StartHostMigration()
     public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
         Debug.Log("OnHostMigration");
@@ -114,6 +129,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
+
+    /// @brief 호스트마이그레이션 단계에서 재연결되지 않은 플레이어 아바타 및 connectionToken 삭제.
+    /// @see NetworkRunnerHandler.CleanUpHostMigrationCO
     public void OnHostMigrationCleanUp()
     {
         Debug.Log("Spawner OnHostMigrationCleanUp started");
@@ -153,6 +171,9 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data){Debug.Log("OnReliableDataReceived");}
     public void OnSceneLoadDone(NetworkRunner runner){Debug.Log("OnSceneLoadDone");}
     public void OnSceneLoadStart(NetworkRunner runner){Debug.Log("OnSceneLoadStart");}
+
+    /// @brief 접속할 수 있는 방(세션)이 업데이트 될때 호출되는 함수.
+    /// @details SessionList의 정보를 갱신한다.
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         if (sessionListUIHandler == null)

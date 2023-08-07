@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 게임 UI가 플레이어를 향하도록 회전함.
 public class BillBoard : MonoBehaviour
 {
     public Camera localCamera;
@@ -22,6 +23,7 @@ public class BillBoard : MonoBehaviour
             localCamera = FindLocalCamera();
         }
     }
+    /// @brief 로컬 플레이어의 카메라를 찾음.
     private Camera FindLocalCamera()
     {
         if(LocalCameraHandler.Local != null)
