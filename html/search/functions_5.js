@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['getaimforwardvector_374',['getAimForwardVector',['../classLocalCameraHandler.html#a9d7cca1c6515ba895389e11b114ce6ea',1,'LocalCameraHandler']]],
-  ['getconnectiontoken_375',['GetConnectionToken',['../classGameManager.html#a0a45f7340a8b6acc2ec88634fd3c1e76',1,'GameManager']]],
-  ['getisaggro_376',['GetIsAggro',['../classTargetHandler.html#ae8adaa465f22131c73488175b6469c49',1,'TargetHandler']]],
-  ['getisdamage_377',['GetIsDamage',['../classEnemyHPHandler.html#a4379ba00c0db8ec7b2831c2bb1477b64',1,'EnemyHPHandler']]],
-  ['getisdead_378',['GetIsDead',['../classEnemyHPHandler.html#afe65962d6ba75e29e8f0eed691adfe56',1,'EnemyHPHandler.GetIsDead()'],['../classHPHandler.html#ae36c90456baff21d761d59786428925f',1,'HPHandler.GetIsDead()']]],
-  ['getishit_379',['getIsHit',['../classHPHandler.html#a3136eeafe53c586cd2642618226d3fac',1,'HPHandler']]],
-  ['getmovedir_380',['getMoveDir',['../classLocalCameraHandler.html#aded666e0aa1050629abc3b3e1a2e1d21',1,'LocalCameraHandler']]],
-  ['getnetworkinput_381',['GetNetworkInput',['../classCharacterInputHandler.html#a75a3809382e7479962de868179da50af',1,'CharacterInputHandler']]],
-  ['getplayertoken_382',['GetPlayerToken',['../classSpawner.html#a636c5c8afcb5e593a5c92db2ae6ed9c3',1,'Spawner']]],
-  ['getrandomspawnpoint_383',['GetRandomSpawnPoint',['../classUtils.html#a08ef87f83a05787b3a0e35614c6a0e35',1,'Utils.GetRandomSpawnPoint()'],['../classUtils.html#aa9d31b4ccc354f2ecb9796f7a3375bbc',1,'Utils.GetRandomSpawnPoint(Vector3 spawnPoint, float range)']]],
-  ['getscenemanager_384',['GetSceneManager',['../classNetworkRunnerHandler.html#a9adee792bed29bc615080a353f4dcbe6',1,'NetworkRunnerHandler']]],
-  ['gettarget_385',['GetTarget',['../classTargetHandler.html#a869c421c194027d90513a8ec2bbf0d16',1,'TargetHandler']]],
-  ['groundcheck_386',['GroundCheck',['../classNetworkPlayerController.html#aca1d1d27672ffc19823c028405e8f246',1,'NetworkPlayerController']]]
+  ['getaimforwardvector_375',['getAimForwardVector',['../classLocalCameraHandler.html#a9d7cca1c6515ba895389e11b114ce6ea',1,'LocalCameraHandler']]],
+  ['getconnectiontoken_376',['GetConnectionToken',['../classGameManager.html#a0a45f7340a8b6acc2ec88634fd3c1e76',1,'GameManager']]],
+  ['getisaggro_377',['GetIsAggro',['../classTargetHandler.html#ae8adaa465f22131c73488175b6469c49',1,'TargetHandler']]],
+  ['getisdamage_378',['GetIsDamage',['../classEnemyHPHandler.html#a4379ba00c0db8ec7b2831c2bb1477b64',1,'EnemyHPHandler']]],
+  ['getisdead_379',['GetIsDead',['../classEnemyHPHandler.html#afe65962d6ba75e29e8f0eed691adfe56',1,'EnemyHPHandler.GetIsDead()'],['../classHPHandler.html#ae36c90456baff21d761d59786428925f',1,'HPHandler.GetIsDead()']]],
+  ['getishit_380',['getIsHit',['../classHPHandler.html#a3136eeafe53c586cd2642618226d3fac',1,'HPHandler']]],
+  ['getisprint_381',['getIsPrint',['../classStoryTextUIHandler.html#a8b5ef297c0a19ea62163568f029623ed',1,'StoryTextUIHandler']]],
+  ['getmovedir_382',['getMoveDir',['../classLocalCameraHandler.html#aded666e0aa1050629abc3b3e1a2e1d21',1,'LocalCameraHandler']]],
+  ['getnetworkinput_383',['GetNetworkInput',['../classCharacterInputHandler.html#a75a3809382e7479962de868179da50af',1,'CharacterInputHandler']]],
+  ['getplayertoken_384',['GetPlayerToken',['../classSpawner.html#a636c5c8afcb5e593a5c92db2ae6ed9c3',1,'Spawner']]],
+  ['getrandomspawnpoint_385',['GetRandomSpawnPoint',['../classUtils.html#a08ef87f83a05787b3a0e35614c6a0e35',1,'Utils.GetRandomSpawnPoint()'],['../classUtils.html#aa9d31b4ccc354f2ecb9796f7a3375bbc',1,'Utils.GetRandomSpawnPoint(Vector3 spawnPoint, float range)']]],
+  ['getscenemanager_386',['GetSceneManager',['../classNetworkRunnerHandler.html#a9adee792bed29bc615080a353f4dcbe6',1,'NetworkRunnerHandler']]],
+  ['gettarget_387',['GetTarget',['../classTargetHandler.html#a869c421c194027d90513a8ec2bbf0d16',1,'TargetHandler']]],
+  ['groundcheck_388',['GroundCheck',['../classNetworkPlayerController.html#aca1d1d27672ffc19823c028405e8f246',1,'NetworkPlayerController']]]
 ];
