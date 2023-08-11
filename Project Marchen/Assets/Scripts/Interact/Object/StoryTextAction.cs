@@ -10,18 +10,19 @@ public class StoryTextAction : InteractionHandler
     public TextAsset textAsset;
 
     /// @brief 최초 일회 일정한 범위에 들어서면 스토리 텍스트 출력을 요청할 수 있음.
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag != "Player")
             return;
         
         if(!other.transform.root.GetComponent<NetworkObject>().HasInputAuthority)
             return;
-
-        PrintStory();
-
-        // this.GetComponent<SphereCollider>().radius = 3f;
-        this.GetComponent<Collider>().enabled = false;
+        
+        StoryTextUIHandler storyTextUIHandler = LocalCameraHandler.Local.GetComponentInChildren<StoryTextUIHandler>(true);
+        if(storyTextUIHandler != null && storyTextUIHandler.getIsPrint() == false){
+            PrintStory();
+            this.GetComponent<Collider>().enabled = false;
+        }
     }
 
     /// @brief f키를 눌러서 텍스트 출력을 요청할 수 있음.
