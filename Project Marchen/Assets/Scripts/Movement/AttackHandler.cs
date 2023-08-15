@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// @brief 플레이어 공격 관련 클래스
 public class AttackHandler : NetworkBehaviour
 {
-    public enum Type { Hammer, Gun };
+    public enum Type { Hammer, Gun, Tracker};
     
     /// @brief 사용하는 무기 종류
     /// @details default는 해머. networked되어있음. 무기 변경시 OnChangeWeapon() 호출.
@@ -39,18 +39,23 @@ public class AttackHandler : NetworkBehaviour
     /// @brief 무기를 장착.
     void WeaponEquip()
     {
+        foreach(GameObject weapon in weapons){
+            weapon.SetActive(false);
+        }
         switch (weaponType)
         {
             case Type.Hammer:
                 weapons[0].SetActive(true);
-                weapons[1].SetActive(false);
                 weaponHandler = weapons[0].GetComponent<WeaponHandler>();
                 break;
 
             case Type.Gun:
-                weapons[0].SetActive(false);
                 weapons[1].SetActive(true);
                 weaponHandler = weapons[1].GetComponent<WeaponHandler>();
+                break;
+            case Type.Tracker:
+                weapons[2].SetActive(true);
+                weaponHandler = weapons[2].GetComponent<WeaponHandler>();
                 break;
         }
     }

@@ -100,12 +100,18 @@ public class TrackerHandler : WeaponHandler
     /// @param target 찾은 타겟.
     /// @return bool
     private bool SeekTarget(Vector3 aimForwardVector, out Transform target){
-        RaycastHit hit;
-        if(Physics.SphereCast(bulletPos.position, 3.0f, aimForwardVector,out hit, maxDistance, layerMask)){
-            target = hit.transform.root;
+        Debug.Log("start to find target");
+        RaycastHit[] hits = Physics.SphereCastAll(bulletPos.position, 10.0f, aimForwardVector, maxDistance, layerMask);
+        Debug.Log("hits : " + hits.Length);
+        if(hits.Length > 0){
+            Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.green, 5.0f);
+            target = hits[0].transform.root;
+            Debug.Log("finding target sucess");
             return true;
         }else{
+            Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.red, 5.0f);
             target = null;
+            Debug.Log("finding target fail");
             return false;
         }
     }
