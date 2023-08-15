@@ -7,7 +7,7 @@ using Fusion;
 public class WeaponHandler : NetworkBehaviour
 {
     /// @brief 무기 타입의 종류
-    public enum Type { Melee, Range };
+    public enum Type { Melee, Range, Tracker};
     /// @brief 선택한 무기의 타입
     public Type type;
     /// @brief 공격
