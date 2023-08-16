@@ -28,9 +28,9 @@ public class TrackerHandler : WeaponHandler
 
     [Range(0f, 5f)]
     /// @brief 다음번 공격이 나가는데까지 걸리는 시간.
-    public float delay = 0.1f;
+    public float delay = 1.1f;
     /// @brief 재장전하는데 필요한 시간
-    public float reloadTime = 0.8f;
+    public float reloadTime = 1f;
 
     [Range(1, 100)]
     /// @brief 최대 장탄수
@@ -84,8 +84,6 @@ public class TrackerHandler : WeaponHandler
         Transform target;
         if(SeekTarget(aimForwardVector, out target)){
             curAmmo--;
-            RPC_AudioPlay("shot");
-            //RPC_MakeFlame();
             yield return new WaitForSeconds(0.3f);
             Runner.Spawn(trackerBullet, bulletPos.position, Quaternion.LookRotation(launchVector), Object.InputAuthority, (runner, spawnedBullet) =>
             {
@@ -93,6 +91,8 @@ public class TrackerHandler : WeaponHandler
                 trackerBulletHandler.setTarget(target);
                 trackerBulletHandler.Fire(Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
             });
+            RPC_AudioPlay("shot");
+            RPC_MakeFlame();
             yield return new WaitForSeconds(delay);
         }
         networkPlayerController.SetIsAttack(false);
@@ -106,14 +106,14 @@ public class TrackerHandler : WeaponHandler
         RaycastHit[] hits = Physics.SphereCastAll(bulletPos.position, 10.0f, aimForwardVector, maxDistance, layerMask);
         Debug.Log("hits : " + hits.Length);
         if(hits.Length > 0){
-            Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.green, 5.0f);
+            //Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.green, 5.0f);
             target = hits[0].transform.root;
-            Debug.Log("finding target sucess");
+            //Debug.Log("finding target sucess");
             return true;
         }else{
-            Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.red, 5.0f);
+            //Debug.DrawRay(bulletPos.position, aimForwardVector*50.0f, Color.red, 5.0f);
             target = null;
-            Debug.Log("finding target fail");
+            //Debug.Log("finding target fail");
             return false;
         }
     }
@@ -121,6 +121,7 @@ public class TrackerHandler : WeaponHandler
     /// @brief 재장전한다.
     public override void Reload()
     {
+        StopReload();
         RPC_animatonSetTrigger("doReload");
         RPC_AudioPlay("reload");
         networkPlayerController.SetIsReload(true);
@@ -130,6 +131,7 @@ public class TrackerHandler : WeaponHandler
     public override void StopReload()
     {
         StopCoroutine("ReloadOut");
+        //StopAllCoroutines();
         networkPlayerController.SetIsReload(false);
     }
 
