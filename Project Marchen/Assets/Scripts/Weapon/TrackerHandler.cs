@@ -10,10 +10,14 @@ public class TrackerHandler : WeaponHandler
     [SerializeField]
     /// @brief 총알이 발사되는 기준점
     private Transform bulletPos;
+    /// @brief 발사 이팩트가 발생하는 기준점
+    public Transform FlamePos;
+    /// @brief 발사시 시각적인 효과
+    public GameObject FlameParticleSystemPrefab;
 
     [SerializeField]
     /// @brief 발사할 총알
-    private GameObject guidedBullet;
+    private GameObject trackerBullet;
 
     /// @brief 타겟으로 지정할 수 있는 target의 최대 거리
     public float maxDistance = 500;
@@ -69,9 +73,6 @@ public class TrackerHandler : WeaponHandler
 
         networkPlayerController.RPC_LookForward(aimDir);
         RPC_animatonSetTrigger("doShot");
-        RPC_AudioPlay("shot");
-
-        curAmmo--;
         StartCoroutine("Shot");
     }
 
@@ -79,17 +80,18 @@ public class TrackerHandler : WeaponHandler
     IEnumerator Shot()
     {
         Vector3 aimForwardVector = networkPlayerController.aimForwardVector;
+        Vector3 launchVector = new Vector3(aimForwardVector.x * 0.8f, 0.8f,aimForwardVector.z * 0.8f);
         Transform target;
         if(SeekTarget(aimForwardVector, out target)){
+            curAmmo--;
+            RPC_AudioPlay("shot");
+            //RPC_MakeFlame();
             yield return new WaitForSeconds(0.3f);
-            Runner.Spawn(guidedBullet, bulletPos.position, Quaternion.LookRotation(aimForwardVector), Object.InputAuthority, (runner, spawnedBullet) =>
+            Runner.Spawn(trackerBullet, bulletPos.position, Quaternion.LookRotation(launchVector), Object.InputAuthority, (runner, spawnedBullet) =>
             {
-                if(spawnedBullet.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
-                    navMeshAgent.Warp(bulletPos.position);
-
-                GuidedBulletHandler guidedBulletHandler = spawnedBullet.GetComponent<GuidedBulletHandler>();
-                guidedBulletHandler.setTarget(target);
-                guidedBulletHandler.Fire(Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
+                TrackerBulletHandler trackerBulletHandler = spawnedBullet.GetComponent<TrackerBulletHandler>();
+                trackerBulletHandler.setTarget(target);
+                trackerBulletHandler.Fire(Object.InputAuthority, networkObject, networkPlayer.nickName.ToString());
             });
             yield return new WaitForSeconds(delay);
         }
@@ -166,5 +168,10 @@ public class TrackerHandler : WeaponHandler
                 break;
         }
 
+    }
+    [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_MakeFlame()
+    {
+        Instantiate(FlameParticleSystemPrefab, FlamePos.transform.position, Quaternion.LookRotation(transform.forward));
     }
 }
