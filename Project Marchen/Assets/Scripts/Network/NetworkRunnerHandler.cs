@@ -14,7 +14,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     NetworkRunner networkRunner;
 
-    /*추가*/
+    //@brief NetworkRunner중복 방지
     private void Awake()
     {
         NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
@@ -23,6 +23,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             networkRunner = networkRunnerInScene;
 
     }
+
     void Start()
     {
         if(networkRunner == null)
@@ -360,14 +361,4 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     }
 
-    public void OutSession()
-    {
-        NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
-        networkRunnerInScene.Shutdown();
-    }
-
-    public void quitSession()
-    {
-        Application.Quit();
-    }
 }
