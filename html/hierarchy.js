@@ -52,6 +52,7 @@ var hierarchy =
     [ "NetworkRunnerHandler", "classNetworkRunnerHandler.html", null ],
     [ "SeeThrough", "classSeeThrough.html", null ],
     [ "SetSpawnAreaAction", "classSetSpawnAreaAction.html", null ],
+    [ "SoundCube", "classSoundCube.html", null ],
     [ "Spawner", "classSpawner.html", null ],
     [ "SpawnerSpawner", "classSpawnerSpawner.html", null ],
     [ "SpawnHandler", "classSpawnHandler.html", [

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weaponhandler_347',['WeaponHandler',['../classWeaponHandler.html',1,'']]]
+  ['weaponhandler_352',['WeaponHandler',['../classWeaponHandler.html',1,'']]]
 ];

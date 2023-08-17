@@ -11,10 +11,11 @@ var searchData=
   ['isaggro_113',['isAggro',['../classTargetHandler.html#a4cbadd3c616fc4510344e220513c09f8',1,'TargetHandler']]],
   ['isdamage_114',['isDamage',['../classEnemyHPHandler.html#a900789cfd372c9dd53730ca6810b3e1d',1,'EnemyHPHandler.isDamage()'],['../classHPHandler.html#a35b12aa859408c104efb4349fc6ed319',1,'HPHandler.isDamage()']]],
   ['isdead_115',['isDead',['../classEnemyHPHandler.html#a5922bc260a10fc4105122330177dc13a',1,'EnemyHPHandler.isDead()'],['../classHPHandler.html#aa69ef020f22dcaeb4f17203b7e3d8e33',1,'HPHandler.isDead()']]],
-  ['isexplosion_116',['isExplosion',['../classBulletHandler.html#a7666a91d67efe284fcb25baf4b9446c3',1,'BulletHandler']]],
-  ['isgrab_117',['isGrab',['../classGrabAction.html#aee64dee56101400085c1480a2665ef03',1,'GrabAction']]],
-  ['ismove_118',['isMove',['../classCharacterInputHandler.html#a35e1b9a797b70f713e4cf392b8e470e5',1,'CharacterInputHandler.isMove()'],['../structNetworkInputData.html#abe2d0e67a317acddb5c348f4d800597c',1,'NetworkInputData.isMove()']]],
-  ['isrespawnrequested_119',['isRespawnRequested',['../classCharacterRespawnHandler.html#a0acb225697be22bb4a37612e192a9e26',1,'CharacterRespawnHandler']]],
-  ['istyping_120',['isTyping',['../classNetworkInGameMessages.html#a1db9c517c0a47c7b9c46d3b716335895',1,'NetworkInGameMessages']]],
-  ['itemrotate_121',['ItemRotate',['../classItemRotate.html',1,'']]]
+  ['isdestroy_116',['isDestroy',['../classSoundCube.html#a677d5d91bd151a62c8c5f90c2b19f52f',1,'SoundCube']]],
+  ['isexplosion_117',['isExplosion',['../classBulletHandler.html#a7666a91d67efe284fcb25baf4b9446c3',1,'BulletHandler']]],
+  ['isgrab_118',['isGrab',['../classGrabAction.html#aee64dee56101400085c1480a2665ef03',1,'GrabAction']]],
+  ['ismove_119',['isMove',['../classCharacterInputHandler.html#a35e1b9a797b70f713e4cf392b8e470e5',1,'CharacterInputHandler.isMove()'],['../structNetworkInputData.html#abe2d0e67a317acddb5c348f4d800597c',1,'NetworkInputData.isMove()']]],
+  ['isrespawnrequested_120',['isRespawnRequested',['../classCharacterRespawnHandler.html#a0acb225697be22bb4a37612e192a9e26',1,'CharacterRespawnHandler']]],
+  ['istyping_121',['isTyping',['../classNetworkInGameMessages.html#a1db9c517c0a47c7b9c46d3b716335895',1,'NetworkInGameMessages']]],
+  ['itemrotate_122',['ItemRotate',['../classItemRotate.html',1,'']]]
 ];

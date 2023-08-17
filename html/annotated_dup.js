@@ -48,6 +48,7 @@ var annotated_dup =
     [ "SetSpawnAreaAction", "classSetSpawnAreaAction.html", null ],
     [ "SkinnedEnemyHPHandler", "classSkinnedEnemyHPHandler.html", "classSkinnedEnemyHPHandler" ],
     [ "SoldierMissionComplete", "classSoldierMissionComplete.html", "classSoldierMissionComplete" ],
+    [ "SoundCube", "classSoundCube.html", "classSoundCube" ],
     [ "Spawner", "classSpawner.html", "classSpawner" ],
     [ "SpawnerSpawner", "classSpawnerSpawner.html", "classSpawnerSpawner" ],
     [ "SpawnHandler", "classSpawnHandler.html", "classSpawnHandler" ],
