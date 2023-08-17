@@ -4,7 +4,8 @@ var hierarchy =
     [ "AttackHandler", "classAttackHandler.html", null ],
     [ "BillBoard", "classBillBoard.html", null ],
     [ "BulletHandler", "classBulletHandler.html", [
-      [ "AreaBulletHandler", "classAreaBulletHandler.html", null ]
+      [ "AreaBulletHandler", "classAreaBulletHandler.html", null ],
+      [ "TrackerBulletHandler", "classTrackerBulletHandler.html", null ]
     ] ],
     [ "CharacterInputHandler", "classCharacterInputHandler.html", null ],
     [ "CharacterRespawnHandler", "classCharacterRespawnHandler.html", null ],

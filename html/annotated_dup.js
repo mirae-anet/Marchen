@@ -57,6 +57,7 @@ var annotated_dup =
     [ "StoryTextUIHandler", "classStoryTextUIHandler.html", "classStoryTextUIHandler" ],
     [ "StraightBulletHandler", "classStraightBulletHandler.html", "classStraightBulletHandler" ],
     [ "TargetHandler", "classTargetHandler.html", "classTargetHandler" ],
+    [ "TrackerBulletHandler", "classTrackerBulletHandler.html", "classTrackerBulletHandler" ],
     [ "Utils", "classUtils.html", "classUtils" ],
     [ "WeaponHandler", "classWeaponHandler.html", "classWeaponHandler" ]
 ];

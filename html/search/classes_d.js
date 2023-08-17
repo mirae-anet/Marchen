@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['rangeattackhandler_336',['RangeAttackHandler',['../classRangeAttackHandler.html',1,'']]],
-  ['ratmissioncomplete_337',['RatMissionComplete',['../classRatMissionComplete.html',1,'']]]
+  ['rangeattackhandler_338',['RangeAttackHandler',['../classRangeAttackHandler.html',1,'']]],
+  ['ratmissioncomplete_339',['RatMissionComplete',['../classRatMissionComplete.html',1,'']]]
 ];
