@@ -5,7 +5,7 @@ using Fusion;
 using UnityEngine.SceneManagement;
 public class AttackHandler : NetworkBehaviour
 {
-    public enum Type { Hammer, Gun };
+    public enum Type { Hammer, Gun, Tracker};
     
     [Networked(OnChanged = nameof(OnChangeWeapon))]
     public Type weaponType { get; set; }
@@ -32,18 +32,23 @@ public class AttackHandler : NetworkBehaviour
 
     void WeaponEquip()
     {
+        foreach(GameObject weapon in weapons){
+            weapon.SetActive(false);
+        }
         switch (weaponType)
         {
             case Type.Hammer:
                 weapons[0].SetActive(true);
-                weapons[1].SetActive(false);
                 weaponHandler = weapons[0].GetComponent<WeaponHandler>();
                 break;
 
             case Type.Gun:
-                weapons[0].SetActive(false);
                 weapons[1].SetActive(true);
                 weaponHandler = weapons[1].GetComponent<WeaponHandler>();
+                break;
+            case Type.Tracker:
+                weapons[2].SetActive(true);
+                weaponHandler = weapons[2].GetComponent<WeaponHandler>();
                 break;
         }
     }
