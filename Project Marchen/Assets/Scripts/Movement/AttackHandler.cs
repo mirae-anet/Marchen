@@ -60,7 +60,6 @@ public class AttackHandler : NetworkBehaviour
 
     public void DoAttack(Vector3 aimDir)
     {
-        StopReload();
         weaponHandler.Attack(aimDir);
         Debug.Log("DoAttack");
     }
