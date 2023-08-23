@@ -62,11 +62,13 @@ public class GunHandler : WeaponHandler
     {
         if (curAmmo <= 0)
         {
-            networkPlayerController.SetIsAttack(false);
-            Reload();
+            if(!networkPlayerController.GetIsReload()){
+                networkPlayerController.SetIsAttack(false);
+                Reload();
+            }
             return;
         }
-
+        StopReload();
         networkPlayerController.RPC_LookForward(aimDir);
         RPC_animatonSetTrigger("doShot");
         RPC_AudioPlay("shot");

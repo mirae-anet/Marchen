@@ -66,11 +66,12 @@ public class TrackerHandler : WeaponHandler
     {
         if (curAmmo <= 0)
         {
+            if(!networkPlayerController.GetIsReload())
+                Reload();
             networkPlayerController.SetIsAttack(false);
-            Reload();
             return;
         }
-
+        StopReload();
         networkPlayerController.RPC_LookForward(aimDir);
         RPC_animatonSetTrigger("doShot");
         StartCoroutine("Shot");
@@ -121,7 +122,6 @@ public class TrackerHandler : WeaponHandler
     /// @brief 재장전한다.
     public override void Reload()
     {
-        StopReload();
         RPC_animatonSetTrigger("doReload");
         RPC_AudioPlay("reload");
         networkPlayerController.SetIsReload(true);
@@ -131,7 +131,6 @@ public class TrackerHandler : WeaponHandler
     public override void StopReload()
     {
         StopCoroutine("ReloadOut");
-        //StopAllCoroutines();
         networkPlayerController.SetIsReload(false);
     }
 
