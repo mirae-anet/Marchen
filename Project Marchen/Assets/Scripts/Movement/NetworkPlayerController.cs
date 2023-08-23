@@ -280,6 +280,10 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         isReload = bol;
     }
+    public bool GetIsReload()
+    {
+        return isReload;
+    }
     public void SetIsInteract(bool bol)
     {
         isInteract = bol;
