@@ -63,9 +63,9 @@ public class GunHandler : WeaponHandler
         if (curAmmo <= 0)
         {
             if(!networkPlayerController.GetIsReload()){
-                networkPlayerController.SetIsAttack(false);
                 Reload();
             }
+            networkPlayerController.SetIsAttack(false);
             return;
         }
         StopReload();
