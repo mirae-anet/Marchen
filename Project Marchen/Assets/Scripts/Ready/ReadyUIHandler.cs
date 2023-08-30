@@ -204,6 +204,7 @@ public class ReadyUIHandler : NetworkBehaviour
         LeftBtn.SetActive(true);
     }
 
+    //@brief 카메라 컴포넌트 찾기
     private Camera FindLocalCamera()
     {
         if(LocalCameraHandler.Local != null)

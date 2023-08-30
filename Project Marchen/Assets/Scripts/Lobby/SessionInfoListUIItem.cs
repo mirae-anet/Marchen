@@ -17,7 +17,6 @@ public class SessionInfoListUIItem : MonoBehaviour
     public TextMeshProUGUI isPlayMark;
 
     SessionInfo sessionInfo;
-    // @
     public event Action<SessionInfo> onJoinSession;
 
     //@brief 세션의 정보 설정
@@ -33,6 +32,7 @@ public class SessionInfoListUIItem : MonoBehaviour
         //입장 버튼 활성화
         bool isJoinButtonActive = true;
 
+        //입장 가능 수 조절/입장 닫기
         if (sessionInfo.PlayerCount >= MaxPlayer)
             isJoinButtonActive = false;
 

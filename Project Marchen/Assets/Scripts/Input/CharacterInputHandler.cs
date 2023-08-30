@@ -17,8 +17,8 @@ public class CharacterInputHandler : MonoBehaviour
     bool attackInput = false;
     bool reloadInput = false;
     bool interactInput = false;
-    // 설명 추가 부탁
-    bool escEnable = true; 
+    // @brief ESC 메뉴가 꺼져있어 움직일 수 있는 상황인가
+    bool escMoveEnable = true; 
 
     //other components
     LocalCameraHandler localCameraHandler;
@@ -33,6 +33,7 @@ public class CharacterInputHandler : MonoBehaviour
     {
         
     }
+
     /// @brief 각각의 플레이어가 속한 컴퓨터에서 입력을 받는다.
     void Update()
     {
@@ -59,7 +60,7 @@ public class CharacterInputHandler : MonoBehaviour
             dodgeInput = true;
         if(Input.GetButtonDown("Reload"))
             reloadInput = true;
-        if (escEnable == true)
+        if (escMoveEnable == true)
         {
             if (Input.GetButtonDown("Fire1"))
                 attackInput = true;
@@ -109,10 +110,11 @@ public class CharacterInputHandler : MonoBehaviour
         return networkInputData;
     }
 
-    /// @brief 설명 추가 부탁
+    /// @brief ESC 패널의 활성화 여부에 따라 캐릭터의 조작 설정
+    /// /// @see EscHandler
     public void EnableinPut(bool enable)
     {
-        escEnable = enable;
+        escMoveEnable = enable;
     }
 
 }
