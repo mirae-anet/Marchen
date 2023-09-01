@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newtoken_409',['NewToken',['../classConnectionTokenUtils.html#a7419c45358714dd8625b0d8ee9991317',1,'ConnectionTokenUtils']]]
+  ['printstory_257',['PrintStory',['../classStoryTextAction.html#ad5562f38c43b49f56d91524ec5d3619d',1,'StoryTextAction']]]
 ];

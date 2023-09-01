@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['findlocalcamera_380',['FindLocalCamera',['../classBillBoard.html#a7934daf12f2ce43f73e441cf58f8d6b3',1,'BillBoard']]],
-  ['fire_381',['Fire',['../classAreaBulletHandler.html#a3e7d81121700cf7fed5b0d9dfd1d0203',1,'AreaBulletHandler.Fire()'],['../classBulletHandler.html#a0193325bb98fca6fb7d6cb78521eb72f',1,'BulletHandler.Fire()'],['../classGuidedBulletHandler.html#a228b73c71a22832f06eab5beb075e275',1,'GuidedBulletHandler.Fire()'],['../classStraightBulletHandler.html#a4ca5fc03a8bd7c04321d4d2dae5cbc16',1,'StraightBulletHandler.Fire()']]],
-  ['fixedupdatenetwork_382',['FixedUpdateNetwork',['../classNetworkEnemyController.html#a03eb9c915c898f75719c3eb645d4fc80',1,'NetworkEnemyController.FixedUpdateNetwork()'],['../classNetworkPlayerController.html#aa9002b4a63d275404b77077e67c23f81',1,'NetworkPlayerController.FixedUpdateNetwork()'],['../classBulletHandler.html#a202d7f2beada4258c47776fa62799188',1,'BulletHandler.FixedUpdateNetwork()'],['../classGuidedBulletHandler.html#ad548c844774fb707449b065e5c61dd92',1,'GuidedBulletHandler.FixedUpdateNetwork()'],['../classStraightBulletHandler.html#a693040f4a348c325e60ffac5c21db603',1,'StraightBulletHandler.FixedUpdateNetwork()']]]
+  ['getaimforwardvector_221',['getAimForwardVector',['../classLocalCameraHandler.html#a9d7cca1c6515ba895389e11b114ce6ea',1,'LocalCameraHandler']]],
+  ['getisaggro_222',['GetIsAggro',['../classTargetHandler.html#ae8adaa465f22131c73488175b6469c49',1,'TargetHandler']]],
+  ['getisdamage_223',['GetIsDamage',['../classEnemyHPHandler.html#a4379ba00c0db8ec7b2831c2bb1477b64',1,'EnemyHPHandler']]],
+  ['getisdead_224',['GetIsDead',['../classEnemyHPHandler.html#afe65962d6ba75e29e8f0eed691adfe56',1,'EnemyHPHandler.GetIsDead()'],['../classHPHandler.html#ae36c90456baff21d761d59786428925f',1,'HPHandler.GetIsDead()']]],
+  ['getishit_225',['getIsHit',['../classHPHandler.html#a3136eeafe53c586cd2642618226d3fac',1,'HPHandler']]],
+  ['getmovedir_226',['getMoveDir',['../classLocalCameraHandler.html#aded666e0aa1050629abc3b3e1a2e1d21',1,'LocalCameraHandler']]],
+  ['getnetworkinput_227',['GetNetworkInput',['../classCharacterInputHandler.html#a75a3809382e7479962de868179da50af',1,'CharacterInputHandler']]],
+  ['gettarget_228',['GetTarget',['../classTargetHandler.html#a869c421c194027d90513a8ec2bbf0d16',1,'TargetHandler']]]
 ];

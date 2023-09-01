@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['localcameraenable_405',['localCameraEnable',['../classLocalCameraHandler.html#a477573fe5346a8547ec3e300fd7a98f1',1,'LocalCameraHandler']]]
+  ['manageblockingview_234',['ManageBlockingView',['../classSeeThrough.html#a85071ea3cfae62e1959ffe4911e7761c',1,'SeeThrough']]],
+  ['move_235',['Move',['../classTrackerBulletHandler.html#aae4b4680d4ee9c12714ca67a3cb7f257',1,'TrackerBulletHandler']]]
 ];

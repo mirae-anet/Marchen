@@ -30,10 +30,9 @@ var NAVTREE =
       [ "클래스 색인", "classes.html", null ],
       [ "클래스 계통도", "hierarchy.html", "hierarchy" ],
       [ "클래스 멤버", "functions.html", [
-        [ "모두", "functions.html", "functions_dup" ],
-        [ "함수", "functions_func.html", "functions_func" ],
+        [ "모두", "functions.html", null ],
+        [ "함수", "functions_func.html", null ],
         [ "변수", "functions_vars.html", null ],
-        [ "열거형 타입", "functions_enum.html", null ],
         [ "속성", "functions_prop.html", null ]
       ] ]
     ] ]
@@ -42,8 +41,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"classNetworkInGameMessages.html#a7941e9aae9a75b4c5ed9b96ed0599d0f"
+"annotated.html"
 ];
 
 var SYNCONMSG = '패널 동기화를 비활성화하기 위해 클릭하십시오';
