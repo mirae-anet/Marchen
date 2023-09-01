@@ -5,8 +5,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//@brief ESC메뉴를 다루는 스크립트
 public class EscHandler : NetworkBehaviour
 {
+    //@brief ESC패널, 카매라 회전, 입력제어를 위한 변수
     public GameObject escPanel;
     LocalCameraHandler localCameraHandler;
     CharacterInputHandler inputHandler;
@@ -22,33 +24,38 @@ public class EscHandler : NetworkBehaviour
     {
         EscMenu();
     }
+
+    //@brief 방 나가기
     public void ExitRoom()
     {
         Runner.Shutdown();
         SceneManager.LoadScene("Scene_1");
     }
 
+    //@brief 게임 종료
     public void ExitGame()
     {
         Application.Quit();
     }
 
+    //@brief ESC 화면 설정
     public void EscMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //카메라
             readyUIHandler = FindObjectOfType<ReadyUIHandler>();
-            if (escPanel.activeSelf)
+
+            if (escPanel.activeSelf) //ESC 패널이 켜져있으면
             {
 
-                if (readyUIHandler != null) // 다른 UI가 켜져있으면
+                if (readyUIHandler != null)  //READYUI가 켜져있을경우
                 {
                     escPanel.SetActive(false);
                     localCameraHandler.EnableRotationEsc(true);
                     return;
                 }
-                else
+                else // 일반적일 경우
                 {
                     escPanel.SetActive(false);
                     localCameraHandler.EnableRotationEsc(true);
@@ -57,9 +64,9 @@ public class EscHandler : NetworkBehaviour
                     Cursor.visible = false;
                 }
             }
-            else
+            else //ESC 패널이 꺼져있을 경우
             {
-                if (readyUIHandler != null)
+                if (readyUIHandler != null) //READYUI가 켜져있을경우
                 {
                     escPanel.SetActive(true);
                     localCameraHandler.EnableRotationEsc(false);
@@ -73,7 +80,8 @@ public class EscHandler : NetworkBehaviour
             }
         }
     }
-    
+
+    //ESC 패널 활성화 여부 확인
     public bool ActiveEsc()
     {
         return escPanel.activeSelf;

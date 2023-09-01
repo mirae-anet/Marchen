@@ -8,14 +8,13 @@ using Fusion.Sockets;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-/// @brief NetworkRunner의 일부 기능들.
 public class NetworkRunnerHandler : MonoBehaviour
 {
-    /// @brief 생성할 NetworkRunner의 프리팹
     public NetworkRunner networkRunnerPrefab;
 
     NetworkRunner networkRunner;
 
+    //@brief NetworkRunner중복 방지
     private void Awake()
     {
         NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
@@ -27,75 +26,68 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     void Start()
     {
-        if (networkRunner == null)
+        if(networkRunner == null)
         {
             networkRunner = Instantiate(networkRunnerPrefab);
             networkRunner.name = "Network runner";
 
             // 자동으로 방 입장. 호스트, 클라이언트 자동 설정
-            if (SceneManager.GetActiveScene().name != "Scene_1")//추가
+            if(SceneManager.GetActiveScene().name != "Scene_1")//추가
             {
-                var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient, "TestSession", GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
+                var clientTask = InitializeNetworkRunner(networkRunner, GameMode.AutoHostOrClient,"TestSession" ,GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
             }
 
             Debug.Log($"Server NetworkRunner started.");
 
         }
     }
-    /// @brief 호스트마이그레이션 시작 
-    /// @see Spawner.OnHostMigration(), InitializeNetworkRunnerHostMigration()
+
     public void StartHostMigration(HostMigrationToken hostMigrationToken)
     {
         networkRunner = Instantiate(networkRunnerPrefab);
         networkRunner.name = "Network runner - Migrated";
 
-        var clientTask = InitializeNetworkRunnerHostMigration(networkRunner, hostMigrationToken);
+        var clientTask =InitializeNetworkRunnerHostMigration(networkRunner, hostMigrationToken);
         Debug.Log($"Host migration started.");
     }
 
-    /// @brief check if there are any unity objs that we need to consider. 
-    /// @details Handle networked objects that already exits in the scene
     INetworkSceneManager GetSceneManager(NetworkRunner runner)
     {
+        //check if there are any unity objs that we need to consider. 
+        //Handel networked objects that already exits in the scene
         var sceneManager = runner.GetComponents(typeof(MonoBehaviour)).OfType<INetworkSceneManager>().FirstOrDefault();
-        if (sceneManager == null)
+        if(sceneManager == null)
         {
             sceneManager = runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
         }
 
         return sceneManager;
-
+   
     }
 
-    /// @brief NetworkRunner 초기화
-    /// @details connection token을 GameManager로부터 받아와서 NetworkRunner에 입력함.
-    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, String sessionName, byte[] connectionToken, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
+    protected virtual Task InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode,String sessionName, byte[] connectionToken, NetAddress address, SceneRef scene, Action<NetworkRunner> initialized)
     {
         var sceneManager = GetSceneManager(runner);
         runner.ProvideInput = true;
-        return runner.StartGame(new StartGameArgs
-        {
+        return runner.StartGame(new StartGameArgs{
             GameMode = gameMode,
             Address = address,
             Scene = scene,
             SessionName = sessionName,
-            CustomLobbyName = "OurLobbyID",
+            CustomLobbyName ="OurLobbyID",
             Initialized = initialized,
             SceneManager = sceneManager,
             ConnectionToken = connectionToken
-
+            
         });
     }
 
-    /// @brief 호스트마이그레이션 시 NetworkRunner 초기화
-    /// @see HostMigrationResume()
     protected virtual Task InitializeNetworkRunnerHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
         var sceneManager = GetSceneManager(runner);
-
+        
         runner.ProvideInput = true;
-        return runner.StartGame(new StartGameArgs
-        {
+        return runner.StartGame(new StartGameArgs{
             // GameMode = gameMode,
             // Address = address,
             // Scene = scene,
@@ -108,39 +100,38 @@ public class NetworkRunnerHandler : MonoBehaviour
         });
     }
 
-    /// @brief 호스트마이그레이션 시 NetworkObject 복원하는 단계.
-    /// @details CopyStateFrom은 Networked된 변수에만 적용됨.
+    //resume simulation
     void HostMigrationResume(NetworkRunner runner)
     {
         Debug.Log($"HostMigrationResum started");
 
         //Get a reference for for each Network object from the old host
-        foreach (var resumeNetworkObject in runner.GetResumeSnapshotNetworkObjects())
+        foreach(var resumeNetworkObject in runner.GetResumeSnapshotNetworkObjects())
         {
             Debug.Log($"{resumeNetworkObject.name} in list");
             //Grab all the player objects, they have a NetworkRigidBody
-            if (resumeNetworkObject.TryGetBehaviour<NetworkRigidbody>(out var oldRigidBody))
+            if(resumeNetworkObject.TryGetBehaviour<NetworkRigidbody>(out var oldRigidBody))
             {
                 runner.Spawn(resumeNetworkObject, position: oldRigidBody.ReadPosition(), oldRigidBody.ReadRotation(), onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
 
                     //Copy HP state
-                    if (resumeNetworkObject.TryGetBehaviour<HPHandler>(out var oldHPHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<HPHandler>(out var oldHPHandler))
                     {
                         HPHandler newHPHandler = newNetworkObject.GetComponent<HPHandler>();
                         newHPHandler.CopyStateFrom(oldHPHandler);
                         newHPHandler.skipSettingStartValues = true;
                     }
 
-                    if (resumeNetworkObject.TryGetBehaviour<CharacterRespawnHandler>(out var oldRespawnHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<CharacterRespawnHandler>(out var oldRespawnHandler))
                     {
                         CharacterRespawnHandler newRespawnHandler = newNetworkObject.GetComponent<CharacterRespawnHandler>();
                         newRespawnHandler.CopyStateFrom(oldRespawnHandler);
                         newRespawnHandler.skipSettingStartValues = true;
                     }
 
-                    if (resumeNetworkObject.TryGetBehaviour<PlayerActionHandler>(out var oldActionHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<PlayerActionHandler>(out var oldActionHandler))
                     {
                         PlayerActionHandler newActionHandler = newNetworkObject.GetComponent<PlayerActionHandler>();
                         newActionHandler.CopyStateFrom(oldActionHandler);
@@ -148,31 +139,31 @@ public class NetworkRunnerHandler : MonoBehaviour
                     }
 
                     //Map the connection token with the new Network player
-                    if (resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
+                    if(resumeNetworkObject.TryGetBehaviour<NetworkPlayer>(out var oldNetworkPlayer))
                     {
                         //Store Player token for reconnection. Host migration 재접속에 사용할 Dictionary을 새로 작성.
                         FindObjectOfType<Spawner>().SetConnectionTokenMapping(oldNetworkPlayer.token, newNetworkObject.GetComponent<NetworkPlayer>());
 
-
+                        
                     }
 
                 });
             }
             //HeartQueen
-            else if (resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueen))
+            else if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueen))
             {
                 Transform oldTransform = oldHeartQueen.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldTransform.position, oldTransform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy Enemy HP state
-                    if (resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueenHPHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueenHPHandler))
                     {
                         HeartQueenHPHandler newHPHandler = newNetworkObject.GetComponent<HeartQueenHPHandler>();
                         newHPHandler.CopyStateFrom(oldHeartQueenHPHandler);
                         newHPHandler.skipSettingStartValues = true;
                     }
-                    if (resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
                     {
                         TargetHandler newTargetHandler = newNetworkObject.GetComponent<TargetHandler>();
                         newTargetHandler.CopyStateFrom(oldTargetHandler);
@@ -180,27 +171,27 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
             //enemy
-            else if (resumeNetworkObject.TryGetBehaviour<NetworkEnemyController>(out var oldEnemy))
+            else if(resumeNetworkObject.TryGetBehaviour<NetworkEnemyController>(out var oldEnemy))
             {
                 Transform oldTransform = oldEnemy.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldTransform.position, oldTransform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy Enemy HP state
-                    if (resumeNetworkObject.TryGetBehaviour<EnemyHPHandler>(out var oldHPHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<EnemyHPHandler>(out var oldHPHandler))
                     {
                         EnemyHPHandler newHPHandler = newNetworkObject.GetComponent<EnemyHPHandler>();
                         newHPHandler.CopyStateFrom(oldHPHandler);
                         newHPHandler.skipSettingStartValues = true;
                     }
-                    if (resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
                     {
                         TargetHandler newTargetHandler = newNetworkObject.GetComponent<TargetHandler>();
                         newTargetHandler.CopyStateFrom(oldTargetHandler);
                     }
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<CountSpawnHandler>(out var oldCountSpawner))
+            else if(resumeNetworkObject.TryGetBehaviour<CountSpawnHandler>(out var oldCountSpawner))
             {
                 runner.Spawn(resumeNetworkObject, position: oldCountSpawner.transform.position, oldCountSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
@@ -211,7 +202,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newCountSpawner.skipSettingStartValues = true;
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<SpawnHandler>(out var oldSpawner))
+            else if(resumeNetworkObject.TryGetBehaviour<SpawnHandler>(out var oldSpawner))
             {
                 runner.Spawn(resumeNetworkObject, position: oldSpawner.transform.position, oldSpawner.transform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
@@ -222,7 +213,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newSpawner.skipSettingStartValues = true;
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<BulletHandler>(out var oldBullet))
+            else if(resumeNetworkObject.TryGetBehaviour<BulletHandler>(out var oldBullet))
             {
                 Transform oldBull = oldBullet.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldBull.position, oldBull.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -233,7 +224,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newBullet.CopyStateFrom(oldBullet);
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<GrenadeHandler>(out var oldGrenade))
+            else if(resumeNetworkObject.TryGetBehaviour<GrenadeHandler>(out var oldGrenade))
             {
                 Transform oldGren = oldGrenade.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldGren.position, oldGren.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -244,7 +235,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newGrenade.CopyStateFrom(oldGrenade);
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<RocketHandler>(out var oldRocket))
+            else if(resumeNetworkObject.TryGetBehaviour<RocketHandler>(out var oldRocket))
             {
                 Transform oldRoc = oldRocket.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldRoc.position, oldRoc.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -255,7 +246,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newRocket.CopyStateFrom(oldRocket);
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<DoorActionHandler>(out var oldDoor))
+            else if(resumeNetworkObject.TryGetBehaviour<DoorActionHandler>(out var oldDoor))
             {
                 Transform oldDoorTrans = oldDoor.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldDoorTrans.position, oldDoorTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -266,7 +257,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newDoor.skipSettingStartValues = true;
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<ClockActionHandler>(out var oldClock))
+            else if(resumeNetworkObject.TryGetBehaviour<ClockActionHandler>(out var oldClock))
             {
                 Transform oldClockTrans = oldClock.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldClockTrans.position, oldClockTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -277,7 +268,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newClock.skipSettingStartValues = true;
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<ShelfActionHandler>(out var oldShelf))
+            else if(resumeNetworkObject.TryGetBehaviour<ShelfActionHandler>(out var oldShelf))
             {
                 Transform oldShelfTrans = oldShelf.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldShelfTrans.position, oldShelfTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -289,7 +280,7 @@ public class NetworkRunnerHandler : MonoBehaviour
                     newShelf.skipSettingStartValues = true;
                 });
             }
-            else if (resumeNetworkObject.TryGetBehaviour<MovingGroundAction>(out var oldMovingGround))
+            else if(resumeNetworkObject.TryGetBehaviour<MovingGroundAction>(out var oldMovingGround))
             {
                 Transform oldMovingTrans = oldMovingGround.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldMovingTrans.position, oldMovingTrans.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
@@ -317,25 +308,29 @@ public class NetworkRunnerHandler : MonoBehaviour
         Debug.Log($"HostMigrationResum completed");
     }
 
-    /// @brief 호스트마이그레이션 단계에서 3초를 기다린 후 Spawner.OnHostMigrationCleanUp()를 호출함.
-    /// @see Spawner.OnHostMigrationCleanUp()
     IEnumerator CleanUpHostMigrationCO()
     {
         yield return new WaitForSeconds(3.0f);
         FindObjectOfType<Spawner>().OnHostMigrationCleanUp();
     }
+
+    // @brief 비동기적으로 joinLobby실행
     public void OnJoinLobby()
     {
         var clientTask = JoinLobby();
     }
+
+    // @brief 로비에 입장 
     private async Task JoinLobby()
     {
         Debug.Log("JoinLobby started");
 
         string lobbyID = "OurLobbyID";
-
+        
+        //로비 접속 시도
         var result = await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyID);
 
+        //로비 접속 결과 출력 
         if (!result.Ok)
         {
             Debug.LogError($"Unable to join lobby {lobbyID}");
@@ -347,32 +342,23 @@ public class NetworkRunnerHandler : MonoBehaviour
         }
     }
 
+    // @brief 세션 생성 
     public void CreateGame(String sessionName, string sceneName)
     {
         Debug.Log($"Create ssession {sessionName} scene {sceneName} build Index {SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}")}");
 
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Host, sessionName, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}"), null);
-
+        var clientTask = InitializeNetworkRunner(networkRunner,GameMode.Host, sessionName, GameManager.instance.GetConnectionToken(),NetAddress.Any(),SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}"),null);
+        
     }
 
-
+    // @brief 세션 접속
     public void JoinGame(SessionInfo sessionInfo)
     {
-
+        
         Debug.Log($"Join session {sessionInfo.Name}");
-
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex, null);
+        
+        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex,null);
 
     }
 
-    public void OutSession()
-    {
-        NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
-        networkRunnerInScene.Shutdown();
-    }
-
-    public void quitSession()
-    {
-        Application.Quit();
-    }
 }

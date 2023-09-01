@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-/// @brief 게임 메시지를 표시하는 UI(채팅창).
 public class InGameMessagesUIHandler : MonoBehaviour
 {
     public TextMeshProUGUI[] textMeshProUGUIs;
@@ -14,7 +13,6 @@ public class InGameMessagesUIHandler : MonoBehaviour
         
     }
 
-    /// @brief 수신한 게임 메시지를 채팅창에 표시
     public void OnGameMessageReceived(string message) 
     {
         Debug.Log($"InGameMessagesUIHandler {message}");

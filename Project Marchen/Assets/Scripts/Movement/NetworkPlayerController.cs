@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
 
-/// @brief 플레이어 컨트롤
 public class NetworkPlayerController : NetworkBehaviour
 {
 
@@ -25,6 +24,7 @@ public class NetworkPlayerController : NetworkBehaviour
     public Vector3 aimForwardVector;
 
     // 입력값 저장 변수
+    // private Vector2 moveInput;
     private bool walkInput;
     private bool jumpInput;
     private bool dodgeInput;
@@ -36,6 +36,8 @@ public class NetworkPlayerController : NetworkBehaviour
     private Transform playerPF;
     [SerializeField]
     private Transform playerBody;
+    // [SerializeField]
+    // private Transform playerModel;
 
     [Header("설정")]
     // public bool onVelo = true;
@@ -47,8 +49,6 @@ public class NetworkPlayerController : NetworkBehaviour
     public float dodgePower = 50f;
     [Range(0.0f, 1f)]
     public float doubleTapTime = 0.2f;
-    /// @brief 공중에 떠있는지 판정하는 Box의 크기
-    /// @see GroundCheck()
     public Vector3 raySize = new Vector3(1.8f, 0.6f, 1.8f);
     
     //other component
@@ -69,10 +69,6 @@ public class NetworkPlayerController : NetworkBehaviour
         networkInGameMessages = GetComponent<NetworkInGameMessages>();
         playerActionHandler = GetComponent<PlayerActionHandler>();
     }
-
-    /// @brief 프레임마다 실행.
-    /// @details GroundCheck()를 실행, 새로운 NetworkInputData가 있으면 입력값에 따라서 아바타를 움직인다.
-    /// @see NetworkInputData
     public override void FixedUpdateNetwork()
     {
         if (hpHandler.GetIsDead())
@@ -113,8 +109,6 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    /// @brief 공중에 떠있는 상태인지 확인.
-    /// @details OverlapBox를 생성해서 범위내에 Ground layer가 있는지 확인한다.
     public void GroundCheck()
     {
         if (rigid.velocity.y > 0) // 추락이 아닐 때
@@ -138,7 +132,6 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    /// @brief 각각의 플레이어로부터 수신한 NetworkInputData의 입력데이터를 가져와서 저장함.
     public void SetInput(NetworkInputData networkInputData)
     {
         this.isMove = networkInputData.isMove;
@@ -152,8 +145,6 @@ public class NetworkPlayerController : NetworkBehaviour
         this.interactInput = networkInputData.interactInput;
     }
 
-    /// @brief 플레이어 이동과 애니메이션
-    /// @details 애니메이션은 즉각적인 반응을 위해서 클라이언트에서 실행하지만 실질적인 이동은 서버에서 처리함.
     public void PlayerMove()
     {
         if (isDodge && !hpHandler.getIsHit()) // 회피, 피격 중 이동 제한
@@ -180,7 +171,6 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    /// @brief 플레이어 점프
     public void PlayerJump()
     {
         if (jumpInput && !isJump && !isDodge && !isAttack && !hpHandler.getIsHit())
@@ -206,7 +196,6 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    /// @brief 플레이어 구르기
     public void PlayerDodge()
     {
         if (dodgeInput && isMove && !isDodge && !isAttack && !hpHandler.getIsHit())
@@ -226,8 +215,7 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    /// @brief 플레이어 공격
-    /// @see AttackHandler.DoAttack()
+
     private void PlayerAttack()
     {
         if(!Object.HasStateAuthority)
@@ -241,8 +229,6 @@ public class NetworkPlayerController : NetworkBehaviour
             attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
         }
     }
-    /// @brief 플레이어 재장전
-    /// @see AttackHandler.DoReload();
     public void PlayerReload()
     {
         if(!Object.HasStateAuthority)
@@ -257,9 +243,6 @@ public class NetworkPlayerController : NetworkBehaviour
         Debug.Log("PlayerReload()");
         attackHandler.DoReload();
     }
-
-    /// @brief 상호작용 실행
-    /// @see PlayerActionHandler.Interact()
     private void PlayerInteract()
     {
         if(!Object.HasStateAuthority)
@@ -301,15 +284,13 @@ public class NetworkPlayerController : NetworkBehaviour
         yield return new WaitForSeconds(second);
         isDodge = false;
     }
-    /// @brief 아바타가 바라보는 방향을 동기화.
-    /// @details 서버에서 모두에게 지시.  
+    
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_LookForward(Vector3 moveDir)
     {
         playerPF.forward = moveDir;
     }
-    /// @brief 아바타의 애니메이션 동기화.
-    /// @details 캐릭터를 조종하는 클라이언트에서 모두에게 지시
+
     [Rpc (RpcSources.InputAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
     {
@@ -317,8 +298,6 @@ public class NetworkPlayerController : NetworkBehaviour
         // anim.SetTrigger("doJump");
     }
 
-    /// @brief 아바타의 애니메이션 동기화.
-    /// @details 캐릭터를 조종하는 클라이언트에서 모두에게 지시
     [Rpc (RpcSources.InputAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)
     {
