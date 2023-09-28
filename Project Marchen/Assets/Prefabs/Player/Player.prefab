@@ -1047,6 +1047,7 @@ GameObject:
   - component: {fileID: 7244274303372394925}
   - component: {fileID: 7244274303372394926}
   - component: {fileID: 712826196}
+  - component: {fileID: 7096253960822866140}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1136,7 +1137,31 @@ MonoBehaviour:
   weapons:
   - {fileID: 4161920610945938502}
   - {fileID: 4577126054602518738}
+  shotSource: {fileID: 0}
+  shotClip: {fileID: 0}
+  reloadSource: {fileID: 0}
+  reloadClip: {fileID: 0}
+  swingSource: {fileID: 0}
+  swingClip: {fileID: 0}
   weaponType: 1
+--- !u!143 &7096253960822866140
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318821609316634604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5639462940654645468
 GameObject:
   m_ObjectHideFlags: 0
