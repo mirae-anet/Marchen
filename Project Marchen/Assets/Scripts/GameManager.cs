@@ -39,4 +39,19 @@ public class GameManager : MonoBehaviour
     {
         return connectionToken;
     }
+
+    /* -------------- 세이브 관련 -------------- */
+    private bool aliceStageClear = false;
+    private bool desertStageClear = false;
+
+    public bool AliceStageClear
+    {
+        get { return aliceStageClear; }
+        set { aliceStageClear = value; }
+    }
+    public bool DesertStageClear
+    {
+        get { return desertStageClear; }
+        set { desertStageClear = value; }
+    }
 }
