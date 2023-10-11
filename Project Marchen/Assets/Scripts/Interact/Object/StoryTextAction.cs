@@ -7,7 +7,7 @@ using Fusion;
 public class StoryTextAction : InteractionHandler
 {
     /// @brief 출력할 텍스트. txt 파일.
-    public TextAsset textAsset;
+    public TextAsset[] textAsset;
 
     /// @brief 최초 일회 일정한 범위에 들어서면 스토리 텍스트 출력을 요청할 수 있음.
     private void OnTriggerStay(Collider other)
@@ -66,7 +66,12 @@ public class StoryTextAction : InteractionHandler
             {
                 Debug.Log("OnPrintStory");
                 storyTextUIHandler.gameObject.SetActive(true);
-                storyTextUIHandler.StartStory(textAsset);
+
+                // 0:초기, 1:Alice클리어, 2:Desert클리어
+                if (textAsset.Length == 1)
+                    storyTextUIHandler.StartStory(textAsset[0]);
+                else
+                    storyTextUIHandler.StartStory(textAsset[GameManager.instance.ClearStage]);
             }
         }
     }
