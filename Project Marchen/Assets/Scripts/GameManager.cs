@@ -63,11 +63,13 @@ public class GameManager : MonoBehaviour
 
     public void AliceStageClear()
     {
-        ClearStage = 1;
+        if (ClearStage < 1)
+            ClearStage = 1;
     }
 
     public void DesertStageClear()
     {
-        ClearStage = 2;
+        if (ClearStage < 2)
+            ClearStage = 2;
     }
 }

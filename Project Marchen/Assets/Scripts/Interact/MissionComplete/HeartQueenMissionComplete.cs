@@ -15,10 +15,12 @@ public class HeartQueenMissionComplete : MissionComplete
 
         if(Runner != null && Object.HasStateAuthority)
         {
-            //spawn the portal
-            Runner.Spawn(storyTextPrefab, networkObject.transform.position - networkObject.transform.forward.normalized * 2, Quaternion.LookRotation(networkObject.transform.forward));
             //spawn the text
+            Runner.Spawn(storyTextPrefab, networkObject.transform.position - networkObject.transform.forward.normalized * 2, Quaternion.LookRotation(networkObject.transform.forward));
+            //spawn the portal
             Runner.Spawn(potalPrefab, networkObject.transform.position + networkObject.transform.forward.normalized * 2, Quaternion.LookRotation(networkObject.transform.forward));
+
+            GameManager.instance.AliceStageClear();
         }
     }
 }
