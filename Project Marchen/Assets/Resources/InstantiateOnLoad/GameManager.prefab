@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3685232848115976886}
   - component: {fileID: 6005720206768228370}
+  - component: {fileID: 5171134898880499105}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -42,5 +43,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e86ec2cf371434c7d87cab889a49a658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraViewRotation: {x: 0, y: 0, z: 0}
+  playerNickName: 
+--- !u!114 &5171134898880499105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6674516683575594377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c0b8a0390997c4a9267c3f0ffae7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
