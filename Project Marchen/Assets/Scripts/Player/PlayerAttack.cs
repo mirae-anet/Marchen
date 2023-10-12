@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
 
     private float weaponDelay;
 
-    public enum Type { Hammer, Gun };
+    public enum Type { Hammer, Gun, Staff };
 
     [Header("오브젝트 연결")]
     [SerializeField]
@@ -48,13 +48,22 @@ public class PlayerAttack : MonoBehaviour
             case Type.Hammer:
                 weapons[0].SetActive(true);
                 weapons[1].SetActive(false);
+                weapons[2].SetActive(false);
                 weaponMain = weapons[0].GetComponent<WeaponMain>();
                 break;
 
             case Type.Gun:
                 weapons[0].SetActive(false);
                 weapons[1].SetActive(true);
+                weapons[2].SetActive(false);
                 weaponMain = weapons[1].GetComponent<WeaponMain>();
+                break;
+
+            case Type.Staff:
+                weapons[0].SetActive(false);
+                weapons[1].SetActive(false);
+                weapons[2].SetActive(true);
+                weaponMain = weapons[2].GetComponent<WeaponMain>();
                 break;
         }
 

@@ -3306,6 +3306,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066715137}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &118351966154480648 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3086031356885184504, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
+  m_PrefabInstance: {fileID: 3132167054652666864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &788034075140753075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118351966154480648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73e3f95d6328fb41b81437ac7c4b668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeArea: {fileID: 0}
+  trailEffect: {fileID: 0}
+  bulletPos: {fileID: 0}
+  bulletCasePos: {fileID: 0}
+  bullet: {fileID: 0}
+  bulletCase: {fileID: 0}
+  type: 0
+  damage: 25
+  delay: 0.35
+  maxAmmo: 30
+  curAmmo: 30
 --- !u!1001 &1669801026520696327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3456,40 +3484,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: mySfx
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: shotSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: 60a0682fbc82bd244bdae3f3445cfd17, type: 3}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: shotClip
-      value: 
-      objectReference: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: swingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: reloadClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1ce7890406010c443a54576a00835e5a, type: 3}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: shotSource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: weaponType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: swingSource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: reloadSource
-      value: 
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_RootOrder
@@ -3538,18 +3534,6 @@ PrefabInstance:
     - target: {fileID: 5318821609316634604, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7096253960822866140, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7244274303372394925, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: deadClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3876637a55918d84c8848ed7efb2daaf, type: 3}
-    - target: {fileID: 7244274303372394925, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: deadSource
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
