@@ -7,10 +7,8 @@ using System.Linq;
 /// @brief 1 stage의 boss인 HeartQueen의 HP와 관련된 클래스
 public class HeartQueenHPHandler : SkinnedEnemyHPHandler
 {
-    /// @brief 시작 HP
-
-    //const int BossStartHP = 100;
     int BossStartHP;
+
     protected override void Start()
     {
         setBossHPbyPlayerCount();
@@ -82,22 +80,19 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
         if (playerCount == 1)
         {
             BossStartHP = 1000;
-            Debug.Log("1");
         }
         else if (playerCount == 2)
         {
             BossStartHP = 2000;
-            Debug.Log("2");
         }
         else if (playerCount == 3)
         {
             BossStartHP = 3000;
-            Debug.Log("3");
         }
         else if(playerCount == 4)
+        {
             BossStartHP = 4000;
-
-
+        }
     }
 
     private void OnDestroy() {
