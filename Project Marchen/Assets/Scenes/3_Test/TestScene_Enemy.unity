@@ -2019,11 +2019,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228163973}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1310048580 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 391256644843218123, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-  m_PrefabInstance: {fileID: 2046467858}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1389802203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,11 +2347,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401596288}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &1416480670 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 7087001843441059171, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-  m_PrefabInstance: {fileID: 2046467858}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425846334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,6 +3227,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5616715075475959929, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
+      propertyPath: Skinned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1390276149824892, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
       propertyPath: m_Name
       value: Tiger
@@ -3246,24 +3240,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4635908456063474, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3297,30 +3279,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82051094445813220, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 195741365783114180, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
+      propertyPath: m_Radius
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 95710898174003270, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 195741365783114180, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 114372623399879820, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 143354740421953482, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2374113495095910383, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: meleeArea
-      value: 
-      objectReference: {fileID: 1416480670}
-    - target: {fileID: 2374113495095910383, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
-      propertyPath: agrroPulling
-      value: 
-      objectReference: {fileID: 1310048580}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 460b2d3b8b77e36418f4b7a7dacbd254, type: 3}
 --- !u!1 &2066715137
@@ -3453,7 +3419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: weaponType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: swingSource
