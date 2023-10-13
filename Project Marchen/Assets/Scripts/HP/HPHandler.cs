@@ -145,7 +145,7 @@ public class HPHandler : NetworkBehaviour
     IEnumerator ServerReviveCO()
     {
         Debug.Log($"{Time.time} ServerRevive");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(10f);
         characterRespawnHandler.RequestRespawn();
     }
 
