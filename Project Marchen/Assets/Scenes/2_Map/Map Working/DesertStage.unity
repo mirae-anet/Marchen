@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.08032288, g: 0.09971988, b: 0.3011277, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1886,6 +1886,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6434208605310106312, guid: 770d0398012274749816315f14b5f444, type: 3}
   m_PrefabInstance: {fileID: 61300635}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &62873084
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2126772014}
+    m_Modifications:
+    - target: {fileID: 3256948515971248190, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_Name
+      value: Effect_01_StormTornado (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 909.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 43.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -57.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
 --- !u!1 &68014869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5171,6 +5228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352136415}
     m_Modifications:
+    - target: {fileID: 8031961836160237654, guid: 7f464d0b281b6e545a8c02f46e344d98, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6c735d155051a94db7199d45d9c3e1a, type: 2}
     - target: {fileID: 8392386214740418947, guid: 7f464d0b281b6e545a8c02f46e344d98, type: 3}
       propertyPath: m_Name
       value: Terrain_Modular_Tiles_Sand_Dirt_Ramp_Corner_Small_02
@@ -5821,6 +5882,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3176469499861943042, guid: 5fdf54206f43fa5418cb98a8db6b3575, type: 3}
   m_PrefabInstance: {fileID: 167277074}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &170678865
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2126772014}
+    m_Modifications:
+    - target: {fileID: 3256948515971248190, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_Name
+      value: Effect_01_StormTornado
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 289.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 49.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 166
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
 --- !u!1001 &171317602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14383,6 +14501,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4333178896387017548, guid: e5ffe58bb982b2444a02832e95f8751e, type: 3}
   m_PrefabInstance: {fileID: 1422610024}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &385694223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+  m_PrefabInstance: {fileID: 170678865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &388938416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1287673647257751009, guid: b9703f68b2ea63a4e8d88b9bbab54d50, type: 3}
@@ -19772,6 +19895,11 @@ Halo:
     serializedVersion: 2
     rgba: 4280179455
   m_Size: 2
+--- !u!4 &548665861 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3256948515971248191, guid: a66ac8cc7bfe6f7449bdb1d44b77fe3e, type: 3}
+  m_PrefabInstance: {fileID: 62873084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &555987349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22465,6 +22593,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352136415}
     m_Modifications:
+    - target: {fileID: 3221808901718380874, guid: dbecfe1db8427ec47ae4ed3b6bb30dc7, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6c735d155051a94db7199d45d9c3e1a, type: 2}
     - target: {fileID: 4014631758672834719, guid: dbecfe1db8427ec47ae4ed3b6bb30dc7, type: 3}
       propertyPath: m_Name
       value: Terrain_Modular_Tiles_Sand_Dirt_Cliff_Edge_River_Outer_03
@@ -24148,6 +24280,7 @@ Transform:
   - {fileID: 1546676110}
   - {fileID: 200169925}
   - {fileID: 2043182631}
+  - {fileID: 2126772014}
   m_Father: {fileID: 776641226}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37224,7 +37357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9289008
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -37232,7 +37365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.37032878
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -37244,7 +37377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -43.472
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -62744,6 +62877,39 @@ Halo:
     serializedVersion: 2
     rgba: 4280179455
   m_Size: 2
+--- !u!1 &2126772013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126772014}
+  m_Layer: 0
+  m_Name: Tornado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2126772014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126772013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 385694223}
+  - {fileID: 548665861}
+  m_Father: {fileID: 750206217}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130172736
 GameObject:
   m_ObjectHideFlags: 0
