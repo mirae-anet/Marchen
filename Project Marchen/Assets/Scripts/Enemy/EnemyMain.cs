@@ -14,7 +14,7 @@ public class EnemyMain : MonoBehaviour
 
     private bool isDead = false;
 
-    public enum Type { Melee, Range};
+    public enum Type { Melee, Range, Tiger };
 
     [Header("오브젝트 연결")]
     [SerializeField]

@@ -191,6 +191,11 @@ public class EnemyController : MonoBehaviour
                 targetRadius = 0.5f;
                 targetRange = 25f;
                 break;
+
+            case EnemyMain.Type.Tiger:
+                targetRadius = 3f;
+                targetRange = 15f;
+                break;
         }
 
         RaycastHit[] rayHits =
@@ -235,6 +240,16 @@ public class EnemyController : MonoBehaviour
                 instantBullet.GetComponent<BulletMain>().SetParent(transform); // Buller에 발사한 객체 정보 저장
 
                 yield return new WaitForSeconds(2f);
+                break;
+
+            case EnemyMain.Type.Tiger:
+                yield return new WaitForSeconds(0.5f);
+                meleeArea.enabled = true;
+
+                yield return new WaitForSeconds(0.4f);
+                meleeArea.enabled = false;
+
+                yield return new WaitForSeconds(0.5f);
                 break;
         }
 
