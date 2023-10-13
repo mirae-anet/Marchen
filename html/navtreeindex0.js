@@ -98,7 +98,6 @@ var NAVTREEINDEX0 =
 "classHeartQueenAttackHandler.html#ae330398b2d00d32369f0d5da69fa8d83":[0,0,11,0],
 "classHeartQueenHPHandler.html":[0,0,12],
 "classHeartQueenHPHandler.html#a80eef72238ce9e9cbf887744594a9d68":[0,0,12,0],
-"classHeartQueenHPHandler.html#ab412d2befcf21d595caf8fcc8025e0b2":[0,0,12,1],
 "classHeartQueenMissionComplete.html":[0,0,13],
 "classHeartQueenMissionComplete.html#af17712d55a604113a2d594e77587cf6b":[0,0,13,0],
 "classInteractionHandler.html":[0,0,15],
