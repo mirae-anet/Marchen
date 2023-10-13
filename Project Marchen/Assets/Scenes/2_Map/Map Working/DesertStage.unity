@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.08032288, g: 0.09971988, b: 0.3011277, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5171,6 +5171,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352136415}
     m_Modifications:
+    - target: {fileID: 8031961836160237654, guid: 7f464d0b281b6e545a8c02f46e344d98, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6c735d155051a94db7199d45d9c3e1a, type: 2}
     - target: {fileID: 8392386214740418947, guid: 7f464d0b281b6e545a8c02f46e344d98, type: 3}
       propertyPath: m_Name
       value: Terrain_Modular_Tiles_Sand_Dirt_Ramp_Corner_Small_02
@@ -22465,6 +22469,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1352136415}
     m_Modifications:
+    - target: {fileID: 3221808901718380874, guid: dbecfe1db8427ec47ae4ed3b6bb30dc7, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6c735d155051a94db7199d45d9c3e1a, type: 2}
     - target: {fileID: 4014631758672834719, guid: dbecfe1db8427ec47ae4ed3b6bb30dc7, type: 3}
       propertyPath: m_Name
       value: Terrain_Modular_Tiles_Sand_Dirt_Cliff_Edge_River_Outer_03
@@ -37224,7 +37232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9289008
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -37232,7 +37240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.37032878
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -37244,7 +37252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -43.472
       objectReference: {fileID: 0}
     - target: {fileID: 5146507059121383441, guid: 1e12ef8f9d2b6ae4091cf53c35536ae7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
