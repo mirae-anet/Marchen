@@ -3306,34 +3306,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066715137}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &118351966154480648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3086031356885184504, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-  m_PrefabInstance: {fileID: 3132167054652666864}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &788034075140753075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118351966154480648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73e3f95d6328fb41b81437ac7c4b668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeArea: {fileID: 0}
-  trailEffect: {fileID: 0}
-  bulletPos: {fileID: 0}
-  bulletCasePos: {fileID: 0}
-  bullet: {fileID: 0}
-  bulletCase: {fileID: 0}
-  type: 0
-  damage: 25
-  delay: 0.35
-  maxAmmo: 30
-  curAmmo: 30
 --- !u!1001 &1669801026520696327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3483,10 +3455,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 712826196, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
-      propertyPath: weaponType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2577960378990956296, guid: ba857ed119729d84c9cd932a0b6eff5f, type: 3}
       propertyPath: m_RootOrder
       value: 1
