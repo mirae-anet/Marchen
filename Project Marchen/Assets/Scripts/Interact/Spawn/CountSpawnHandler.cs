@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using UnityEngine.AI;
+using System.Linq;
 
 /// @brief 일정한 수만큼만 스폰하는 스포너.
 public class CountSpawnHandler : SpawnHandler
@@ -14,7 +15,7 @@ public class CountSpawnHandler : SpawnHandler
 
     /// @brief 목표 카운트.
     [Header("설정")]
-    public int targetCount;
+    private int targetCount;
 
     /// @brief 스폰할 프리팹의 배열.
     /// @details 한 번에 여러 프리팹을 스폰할 수 있다.
@@ -30,7 +31,7 @@ public class CountSpawnHandler : SpawnHandler
         {
             count = 0;
         }
-
+        setSpawnbyPlayerCount();
         sphereCollider = GetComponent<SphereCollider>();
     }
 
@@ -81,4 +82,27 @@ public class CountSpawnHandler : SpawnHandler
                 GetBehaviour<MissionComplete>().OnMissionComplete(Object);
         }
     }
+
+    private void setSpawnbyPlayerCount()
+    {
+        int playerCount = Runner.ActivePlayers.Count();
+
+        if (playerCount == 1)
+        {
+            targetCount = 10;
+        }
+        else if (playerCount == 2)
+        {
+            targetCount = 20;
+        }
+        else if (playerCount == 3)
+        {
+            targetCount = 30;
+        }
+        else if (playerCount == 4)
+        {
+            targetCount = 40;
+        }
+    }
+
 }
