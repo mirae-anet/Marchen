@@ -71,14 +71,27 @@ public class ReadyUIHandler : NetworkBehaviour
             DontDestroyOnLoad(gameObjectToTransfer);
         }
         //플레이어가 로비일 시
-        if(SceneManager.GetActiveScene().name== "Scene_2")
+        if(SceneManager.GetActiveScene().name== "Scene_2" && gameObject.CompareTag("Alice"))
         {
+            gameObject.tag = "Untagged";
             RPC_SetActiveReadyUI(false);
             isReady = false;
             buttonReadyText.text = "게임시작";
             PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
             potalHandler.gameObject.GetComponent<Collider>().enabled = false;
             Runner.SetActiveScene("Scene_3");
+            Debug.Log("앨리스");
+        }
+        else if(SceneManager.GetActiveScene().name == "Scene_2" && gameObject.CompareTag("Desert"))
+        {
+            gameObject.tag = "Untagged";
+            RPC_SetActiveReadyUI(false);
+            isReady = false;
+            buttonReadyText.text = "게임시작";
+            PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
+            potalHandler.gameObject.GetComponent<Collider>().enabled = false;
+            Runner.SetActiveScene("DesertNet");
+            Debug.Log("사막");
         }
         else
         {
