@@ -33,7 +33,7 @@ public class PortalHandler : InteractionHandler
             //플레이어 위치가 도서관일 경우
             if (readyUIHandler != null && SceneManager.GetActiveScene().name == "Scene_2" )
             {
-                // 1스테이지 클리어시 사막 맵 입장 가능
+                // 1스테이지 클리어시 사막 맵 입장 불가
                 if(GameManager.instance.ClearStage<1 && gameObject.CompareTag("Desert"))
                 {
                     return;

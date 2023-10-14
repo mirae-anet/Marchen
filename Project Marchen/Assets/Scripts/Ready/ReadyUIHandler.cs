@@ -16,6 +16,7 @@ public class ReadyUIHandler : NetworkBehaviour
     public GameObject ReadyUiCanvas;
     public GameObject StartBtn;
     public GameObject LeftBtn;
+    public GameObject RockImage;
 
     /// @brief 시작준비가 되어있는지
     bool isReady = false;
@@ -179,6 +180,10 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
         readyUIHandler.gameObject.SetActive(bol);
+        if (GameManager.instance.ClearStage >= 1)
+        {
+            RockImage.SetActive(false);
+        }
     }
 
     //@brief 마우스 활성화 및 동기화
