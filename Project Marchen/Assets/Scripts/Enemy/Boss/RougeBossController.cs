@@ -152,22 +152,22 @@ public class RougeBossController : MonoBehaviour
             case 0:
 
             case 1:
-                StartCoroutine(AttackSlash()); // 일반 휘두르기
+                StartCoroutine(AttackAround()); // 일반 휘두르기
                 break;
 
             case 2:
 
             case 3:
-                StartCoroutine(AttackShot()); // 뱀 발사
+                StartCoroutine(AttackDash()); // 돌진 휘두르기
                 break;
 
             case 4:
-                StartCoroutine(AttackDash()); // 돌진 휘두르기
+                StartCoroutine(AttackThrow()); // 뱀 발사
                 break;
         }
     }
 
-    IEnumerator AttackSlash()
+    IEnumerator AttackAround()
     {
         isChase = false;
         isAttack = true;
@@ -176,7 +176,7 @@ public class RougeBossController : MonoBehaviour
         anim.SetBool("isAttackAround", true);
         meleeArea.enabled = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         anim.SetBool("isAttackAround", false);
         meleeArea.enabled = false;
 
@@ -184,7 +184,24 @@ public class RougeBossController : MonoBehaviour
         isAttack = false;
     }
 
-    IEnumerator AttackShot()
+    IEnumerator AttackDash()
+    {
+        isChase = false;
+        isAttack = true;
+
+        yield return new WaitForSeconds(0.3f);
+        anim.SetBool("isAttackDash", true);
+        meleeArea.enabled = true;
+
+        yield return new WaitForSeconds(2.5f);
+        anim.SetBool("isAttackDash", false);
+        meleeArea.enabled = false;
+
+        isChase = true;
+        isAttack = false;
+    }
+
+    IEnumerator AttackThrow()
     {
         isChase = false;
         isAttack = true;
@@ -205,23 +222,6 @@ public class RougeBossController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Destroy(instantBullet);
 
-    }
-
-    IEnumerator AttackDash()
-    {
-        isChase = false;
-        isAttack = true;
-
-        yield return new WaitForSeconds(0.3f);
-        anim.SetBool("isAttackDash", true);
-        meleeArea.enabled = true;
-
-        yield return new WaitForSeconds(2.5f);
-        anim.SetBool("isAttackDash", false);
-        meleeArea.enabled = false;
-
-        isChase = true;
-        isAttack = false;
     }
 
     void AttackCancel()
