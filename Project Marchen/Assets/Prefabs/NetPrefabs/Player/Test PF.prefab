@@ -206,7 +206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 866.67993, y: 69.873}
+  m_AnchoredPosition: {x: 895.68, y: 69.873}
   m_SizeDelta: {x: -2460.63, y: 279.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2288635080139887942
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3260f72e5b6eec24587b9132cb1ae0a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d714975e261470e49af2a5abe97efca2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -293,7 +293,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7949235022325293321}
         m_TargetAssemblyTypeName: ReadyUIHandler, Assembly-CSharp
-        m_MethodName: OnChangeWeaponGun
+        m_MethodName: OnChangeWeaponStaff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3049,8 +3049,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 32.045044, y: 74.3975}
-  m_SizeDelta: {x: -2461.13, y: 288.795}
+  m_AnchoredPosition: {x: 4.43396, y: 74.398}
+  m_SizeDelta: {x: -2450.6, y: 288.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8219927099019251405
 CanvasRenderer:
@@ -4473,10 +4473,10 @@ RectTransform:
   m_Father: {fileID: 7949235022625556972}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 870.16187, y: 31.4727}
-  m_SizeDelta: {x: 594.948, y: 374.6455}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 899, y: 28.683}
+  m_SizeDelta: {x: -2374.187, y: 380.2304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5903626936537560733
 CanvasRenderer:
@@ -4553,8 +4553,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 870, y: -110}
-  m_SizeDelta: {x: -2460, y: 80}
+  m_AnchoredPosition: {x: 899.00006, y: -110}
+  m_SizeDelta: {x: -2450, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7472928374055590225
 CanvasRenderer:
@@ -4640,7 +4640,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7949235022325293321}
         m_TargetAssemblyTypeName: ReadyUIHandler, Assembly-CSharp
-        m_MethodName: OnChangeWeaponGun
+        m_MethodName: OnChangeWeaponStaff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5280,8 +5280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 32.611816, y: -110}
-  m_SizeDelta: {x: -2460, y: 80}
+  m_AnchoredPosition: {x: 5, y: -110}
+  m_SizeDelta: {x: -2450, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7949235021814657451
 CanvasRenderer:
@@ -5550,7 +5550,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -869, y: -110}
-  m_SizeDelta: {x: -2458, y: 80}
+  m_SizeDelta: {x: -2450, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7949235022177768307
 CanvasRenderer:
@@ -6166,7 +6166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7949235022867914612
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7017,7 +7017,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCD1D"
+  m_text: "\uC2A4\uD0DC\uD504"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71349d7cac690a840bd7d03d8529a123, type: 2}
   m_sharedMaterial: {fileID: 7866670027494982780, guid: 71349d7cac690a840bd7d03d8529a123, type: 2}

@@ -57,7 +57,7 @@ public class TrackerHandler : WeaponHandler
     }
     private void Start() 
     {
-        type = Type.Tracker;
+        type = Type.Staff;
     }
 
     /// @brief 총을 발사하고, 장전된 총알을 줄인다. 남은 탄환이 없다면 공격 대신 Reload()한다.

@@ -119,6 +119,15 @@ public class ReadyUIHandler : NetworkBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    /// @brief 총으로 무기 변경
+    public void OnChangeWeaponStaff()
+    {
+        if (isReady)
+            return;
+        NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(2);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
     /// @brief 게임시작 클릭시
     public void OnReady()
     {
