@@ -3049,7 +3049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 4.43396, y: 74.398}
+  m_AnchoredPosition: {x: 4.434082, y: 74.398}
   m_SizeDelta: {x: -2450.6, y: 288.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8219927099019251405
@@ -5666,7 +5666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7949235022325293362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5767,7 +5767,7 @@ MonoBehaviour:
   DestroyWhenStateAuthorityLeaves: 0
   AllowStateAuthorityOverride: 1
   AoiPositionSource: {fileID: 0}
-  Flags: 134145
+  Flags: 3073
   NetworkGuid:
     RawGuidValue: 00000000000000000000000000000000
   NestedObjects: []
@@ -6166,7 +6166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7949235022867914612
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9071,9 +9071,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   delay: 1.1
-  reloadTime: 1
-  maxAmmo: 3
-  curAmmo: 3
   shotSource: {fileID: 4473135131826321899, guid: 354a427c48eca3a4cbcc09b05e66a43d, type: 3}
   reloadSource: {fileID: 0}
 --- !u!4 &8853368085607667228 stripped
