@@ -16,6 +16,11 @@ public class AggroPulling : MonoBehaviour
                 gameObject.GetComponentInParent<EnemyController>().SetTarget(player);
                 Debug.Log(gameObject.GetComponentInParent<EnemyMain>().name + " -> " + player);
             }
+            else if (gameObject.GetComponentInParent<RougeBossController>() != null) // 잡몹용
+            {
+                gameObject.GetComponentInParent<RougeBossController>().SetTarget(player);
+                Debug.Log(gameObject.GetComponentInParent<BossMain>().name + " -> " + player);
+            }
             else // 보스용
             {
                 gameObject.GetComponentInParent<BossController>().SetTarget(player);
@@ -25,5 +30,6 @@ public class AggroPulling : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+
     }
 }
