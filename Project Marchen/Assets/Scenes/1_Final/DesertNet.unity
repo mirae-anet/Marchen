@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08040227, g: 0.09979335, b: 0.3011908, a: 1}
+  m_IndirectSpecularColor: {r: 0.080238655, g: 0.09961605, b: 0.3008451, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7818,11 +7818,11 @@ PrefabInstance:
     - target: {fileID: 214267532272512652, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 13e35c2fea750e940b0cced5282929ba, type: 2}
+      objectReference: {fileID: 2100000, guid: 0880a43ad7f594941a380c5f183c8ebe, type: 2}
     - target: {fileID: 214267532272512652, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: aadbd7eaa9da04f49bad53d75773b801, type: 2}
+      objectReference: {fileID: 2100000, guid: 0880a43ad7f594941a380c5f183c8ebe, type: 2}
     - target: {fileID: 1347165574607623651, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -13540,6 +13540,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7029608988560363871, guid: 4aed70cf2ad2e1743aaaefd6be204c6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029608988560363871, guid: 4aed70cf2ad2e1743aaaefd6be204c6a, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 24a9585e59f5c2649aecc46c74d145f9, type: 2}
@@ -17125,6 +17129,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7029608988560363871, guid: 4aed70cf2ad2e1743aaaefd6be204c6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029608988560363871, guid: 4aed70cf2ad2e1743aaaefd6be204c6a, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 24a9585e59f5c2649aecc46c74d145f9, type: 2}
@@ -17549,6 +17557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490508772}
+  - component: {fileID: 490508773}
   m_Layer: 0
   m_Name: Axe Trap (2)
   m_TagString: Untagged
@@ -17573,6 +17582,20 @@ Transform:
   m_Father: {fileID: 174015642}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &490508773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490508771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a635c1f96efb24688edb15947d4a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 120
+  rotatePositive: 1
 --- !u!1001 &492672492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23035,6 +23058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700520527}
+  - component: {fileID: 700520528}
   m_Layer: 0
   m_Name: Axe Trap (3)
   m_TagString: Untagged
@@ -23059,6 +23083,20 @@ Transform:
   m_Father: {fileID: 174015642}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &700520528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700520526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a635c1f96efb24688edb15947d4a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 140
+  rotatePositive: 0
 --- !u!4 &704583422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3296885133757449689, guid: 83a445298e96d4b458930b96f342e2d2, type: 3}
@@ -30126,11 +30164,11 @@ PrefabInstance:
     - target: {fileID: 214267532272512652, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 47bc3ab24acb1914288fb6c445a3a60b, type: 2}
+      objectReference: {fileID: 2100000, guid: 0880a43ad7f594941a380c5f183c8ebe, type: 2}
     - target: {fileID: 214267532272512652, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: aadbd7eaa9da04f49bad53d75773b801, type: 2}
+      objectReference: {fileID: 2100000, guid: 0880a43ad7f594941a380c5f183c8ebe, type: 2}
     - target: {fileID: 1347165574607623651, guid: 879086ce510935d459fc932e509c87c0, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -32593,6 +32631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056854503}
+  - component: {fileID: 1056854504}
   m_Layer: 0
   m_Name: Axe Trap
   m_TagString: Untagged
@@ -32617,6 +32656,20 @@ Transform:
   m_Father: {fileID: 174015642}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056854504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056854502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a635c1f96efb24688edb15947d4a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  rotatePositive: 1
 --- !u!1001 &1060361533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36788,6 +36841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1225040934}
+  - component: {fileID: 1225040935}
   m_Layer: 0
   m_Name: Axe Trap (1)
   m_TagString: Untagged
@@ -36812,6 +36866,20 @@ Transform:
   m_Father: {fileID: 174015642}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1225040935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225040933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a635c1f96efb24688edb15947d4a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 160
+  rotatePositive: 0
 --- !u!1001 &1226809125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61593,6 +61661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080469379}
+  - component: {fileID: 2080469380}
   m_Layer: 0
   m_Name: Axe Trap (4)
   m_TagString: Untagged
@@ -61617,6 +61686,20 @@ Transform:
   m_Father: {fileID: 174015642}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2080469380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080469378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a635c1f96efb24688edb15947d4a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 100
+  rotatePositive: 1
 --- !u!1 &2080688617
 GameObject:
   m_ObjectHideFlags: 0
