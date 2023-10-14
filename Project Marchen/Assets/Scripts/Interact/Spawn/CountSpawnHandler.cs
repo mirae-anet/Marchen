@@ -15,7 +15,7 @@ public class CountSpawnHandler : SpawnHandler
 
     /// @brief 목표 카운트.
     [Header("설정")]
-    private int targetCount;
+    public int targetCount;
 
     /// @brief 스폰할 프리팹의 배열.
     /// @details 한 번에 여러 프리팹을 스폰할 수 있다.
@@ -86,6 +86,11 @@ public class CountSpawnHandler : SpawnHandler
     private void setSpawnbyPlayerCount()
     {
         int playerCount = Runner.ActivePlayers.Count();
+        if (gameObject.CompareTag("Boss"))
+        {
+            targetCount = 1;
+            return;
+        }
 
         if (playerCount == 1)
         {
