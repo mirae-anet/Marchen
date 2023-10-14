@@ -9,7 +9,7 @@ public class AttackHandler : NetworkBehaviour
 {
 
     //@brief 무기 타입 정의
-    public enum Type { Hammer, Gun, Tracker};
+    public enum Type { Hammer, Gun, Staff};
     
     [Networked(OnChanged = nameof(OnChangeWeapon))]
     public Type weaponType { get; set; }
@@ -24,7 +24,7 @@ public class AttackHandler : NetworkBehaviour
     //@brief 기본 무기 설정
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "TestScene(network)_Potal")
+        if (SceneManager.GetActiveScene().name == "Scene_2")
         {
             if (Object.HasStateAuthority)
             {
@@ -52,7 +52,7 @@ public class AttackHandler : NetworkBehaviour
                 weapons[1].SetActive(true);
                 weaponHandler = weapons[1].GetComponent<WeaponHandler>();
                 break;
-            case Type.Tracker:
+            case Type.Staff:
                 weapons[2].SetActive(true);
                 weaponHandler = weapons[2].GetComponent<WeaponHandler>();
                 break;
