@@ -29,16 +29,6 @@ public class StaffHandler : WeaponHandler
     [Range(0f, 5f)]
     /// @brief 다음번 공격이 나가는데까지 걸리는 시간.
     public float delay = 1.1f;
-    /// @brief 재장전하는데 필요한 시간
-    public float reloadTime = 1f;   
-
-    [Range(1, 100)]
-    /// @brief 최대 장탄수
-    public int maxAmmo = 3;
-
-    [Range(0, 100)]
-    /// @brief 현재 잔탄의 수
-    public int curAmmo = 3;
 
     //other compomponet
     Animator anim;
@@ -58,7 +48,7 @@ public class StaffHandler : WeaponHandler
 
     private void Start() 
     {
-        type = Type.Tracker;
+        type = Type.Staff;
     }
 
     /// @brief 총을 발사하고, 장전된 총알을 줄인다. 남은 탄환이 없다면 공격 대신 Reload()한다.
@@ -77,7 +67,6 @@ public class StaffHandler : WeaponHandler
         Vector3 launchVector = new Vector3(aimForwardVector.x * 0.8f, 0.8f,aimForwardVector.z * 0.8f);
         Transform target;
         if(SeekTarget(aimForwardVector, out target)){
-            curAmmo--;
             yield return new WaitForSeconds(0.3f);
             Runner.Spawn(trackerBullet, bulletPos.position, Quaternion.LookRotation(launchVector), Object.InputAuthority, (runner, spawnedBullet) =>
             {
@@ -133,10 +122,6 @@ public class StaffHandler : WeaponHandler
         {
             case "shot":
                 shotSource.Play();
-                break;
-
-            case "reload":
-                reloadSource.Play();
                 break;
         }
 

@@ -16,6 +16,7 @@ public class ReadyUIHandler : NetworkBehaviour
     public GameObject ReadyUiCanvas;
     public GameObject StartBtn;
     public GameObject LeftBtn;
+    public GameObject RockImage;
 
     /// @brief 시작준비가 되어있는지
     bool isReady = false;
@@ -118,6 +119,15 @@ public class ReadyUIHandler : NetworkBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    /// @brief 총으로 무기 변경
+    public void OnChangeWeaponStaff()
+    {
+        if (isReady)
+            return;
+        NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(2);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
     /// @brief 게임시작 클릭시
     public void OnReady()
     {
@@ -179,6 +189,11 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
         readyUIHandler.gameObject.SetActive(bol);
+
+        if (GameManager.instance.ClearStage >= 1)
+        {
+            readyUIHandler.GetComponentInChildren<FindScript>().gameObject.SetActive(false);
+        }
     }
 
     //@brief 마우스 활성화 및 동기화
