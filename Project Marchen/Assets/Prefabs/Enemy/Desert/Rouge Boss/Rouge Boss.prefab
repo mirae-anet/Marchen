@@ -2285,7 +2285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4258312276739343744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0085, y: 9.713, z: 4.56}
+  m_LocalPosition: {x: 0.15, y: 4.5, z: 5.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2388,7 +2388,7 @@ MonoBehaviour:
   attackShotSound: {fileID: 0}
   attackDashSound: {fileID: 0}
   targetRadius: 5
-  targetRange: 5
+  targetRange: 20
   attackCancel: 0
 --- !u!1 &5646787506660176167
 GameObject:
@@ -2458,6 +2458,18 @@ PrefabInstance:
     - target: {fileID: 2306225842717599819, guid: 5f5642e4f8e4b2c49a432202483b0d95, type: 3}
       propertyPath: m_Name
       value: Rouge Boss Hammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006517537731896783, guid: 5f5642e4f8e4b2c49a432202483b0d95, type: 3}
+      propertyPath: m_Size.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006517537731896783, guid: 5f5642e4f8e4b2c49a432202483b0d95, type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006517537731896783, guid: 5f5642e4f8e4b2c49a432202483b0d95, type: 3}
+      propertyPath: m_Size.z
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5036390146848949968, guid: 5f5642e4f8e4b2c49a432202483b0d95, type: 3}
       propertyPath: m_RootOrder
