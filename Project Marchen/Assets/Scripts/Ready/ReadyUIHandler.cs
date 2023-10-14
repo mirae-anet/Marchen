@@ -191,7 +191,7 @@ public class ReadyUIHandler : NetworkBehaviour
         readyUIHandler.gameObject.SetActive(bol);
         if (GameManager.instance.ClearStage >= 1)
         {
-            RockImage.SetActive(false);
+            RockImage.gameObject.SetActive(false);
         }
     }
 
