@@ -2,6 +2,7 @@ var classReadyUIHandler =
 [
     [ "OnChangeWeaponGun", "classReadyUIHandler.html#a18a640d1cd6c1d8f3b2c7b0f75dbd55c", null ],
     [ "OnChangeWeaponHammer", "classReadyUIHandler.html#a79ad8cb3131ef2f3a917925f67810119", null ],
+    [ "OnChangeWeaponStaff", "classReadyUIHandler.html#ae0bf58c6d492c6a16631509240536eea", null ],
     [ "OnReady", "classReadyUIHandler.html#a9a2336e29e3dfc54e5b76f9de5b3376b", null ],
     [ "RPC_SetCountDown", "classReadyUIHandler.html#a930d35ff6591ef43f5e4538d213d2af8", null ],
     [ "Start", "classReadyUIHandler.html#af346569e3eef19ee7f1922eac4aab6d6", null ],
