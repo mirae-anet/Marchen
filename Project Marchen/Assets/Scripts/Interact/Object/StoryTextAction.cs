@@ -69,9 +69,15 @@ public class StoryTextAction : InteractionHandler
 
                 // 0:초기, 1:Alice클리어, 2:Desert클리어
                 if (textAsset.Length == 1)
+                {
                     storyTextUIHandler.StartStory(textAsset[0]);
+
+                }
                 else
+                {
                     storyTextUIHandler.StartStory(textAsset[GameManager.instance.ClearStage]);
+                    Debug.Log(GameManager.instance.ClearStage);
+                }
             }
         }
     }

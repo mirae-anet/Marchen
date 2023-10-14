@@ -189,9 +189,10 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
         readyUIHandler.gameObject.SetActive(bol);
+
         if (GameManager.instance.ClearStage >= 1)
         {
-            RockImage.gameObject.SetActive(false);
+            readyUIHandler.GetComponentInChildren<FindScript>().gameObject.SetActive(false);
         }
     }
 
