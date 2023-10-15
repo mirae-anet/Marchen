@@ -20,7 +20,15 @@ public class HeartQueenMissionComplete : MissionComplete
             //spawn the portal
             Runner.Spawn(potalPrefab, networkObject.transform.position + networkObject.transform.forward.normalized * 2, Quaternion.LookRotation(networkObject.transform.forward));
 
-            GameManager.instance.AliceStageClear();
+            RPC_AliceStageClear();
         }
+
+    }
+
+    //@brief 게임 클리어 정보 전달
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_AliceStageClear()
+    {
+        GameManager.instance.AliceStageClear();
     }
 }
