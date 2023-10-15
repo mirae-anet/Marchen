@@ -20,6 +20,9 @@ public class AxeAction : InteractionHandler
     public bool skipSettingStartValues = false;
     private void Start()
     {
+        if (Random.Range(0, 2) == 0)
+            rotatePositive = false;
+
         if (!skipSettingStartValues)
         {
             if (Object.HasStateAuthority)
@@ -32,7 +35,6 @@ public class AxeAction : InteractionHandler
         }
 
         transform.rotation = Quaternion.Euler(0f, 90f, 180f);
-
     }
 
     public override void FixedUpdateNetwork()
