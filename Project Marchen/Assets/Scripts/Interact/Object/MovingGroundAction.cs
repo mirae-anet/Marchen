@@ -19,6 +19,7 @@ public class MovingGroundAction : InteractionHandler
     /// @details hostmigration 전후를 동일하게 유지하기 위해서 networked함.
     [Networked]
     private Vector3 startPosition{get; set;}
+
     public bool skipSettingStartValues = false;
     private void Start() 
     {
