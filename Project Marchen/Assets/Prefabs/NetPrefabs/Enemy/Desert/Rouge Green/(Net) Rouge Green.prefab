@@ -1332,7 +1332,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 200
+  m_Radius: 1000
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8686591596029794575
 MonoBehaviour:
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  delayTime: 10
+  delayTime: 9999
   prefab: {fileID: -6378440141937634257, guid: 9c0bc241e2c0d184ea33a2bac6bab4d9, type: 3}
   anchorPoint: {fileID: 3769526191511675540}
   skipSettingStartValues: 0
