@@ -8,13 +8,14 @@ using Fusion;
 public class RougeBossAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
-
     /// @brief 에너미의 공격이 취소될 수 있는지 설정. default는 false.
     public bool attackCancel = false;
+    public int stack = 0;
+    public const int stackLimit = 2;
     /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (반지름)
-    public float targetRadius =  5f;
+    private float targetRadius = 5.0f;
     /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (최대 거리)
-    public float targetRange = 5f;
+    private float targetRange;
     /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (가로 세로 높이)
     public Vector3 boxSize = new Vector3(6f, 10f, 8f);
     public Transform detectionPos;
@@ -34,6 +35,7 @@ public class RougeBossAttackHandler : EnemyAttackHandler
     private TargetHandler targetHandler;
     public AudioSource attackSwingSound;
     public AudioSource attackBlowSound;
+    private NavMeshAgent navMeshAgent;
 
     void Start()
     {
@@ -41,6 +43,7 @@ public class RougeBossAttackHandler : EnemyAttackHandler
         anim = GetComponentInChildren<Animator>();
         enemyHPHandler = GetComponent<EnemyHPHandler>();
         targetHandler = GetComponent<TargetHandler>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     /// @brief 타겟을 향해서 공격을 준비.
@@ -49,6 +52,12 @@ public class RougeBossAttackHandler : EnemyAttackHandler
     {
         if(isAttack || enemyHPHandler.GetIsDamage())
             return;
+
+        if(stack >= stackLimit){
+            targetRange = 30.0f;
+        }else{
+            targetRange = 5.0f;
+        }
 
         RaycastHit[] rayhits = Physics.SphereCastAll(detectionPos.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
 
@@ -76,7 +85,14 @@ public class RougeBossAttackHandler : EnemyAttackHandler
         isAttack = true;
 
         yield return new WaitForSeconds(0.5f);
-        int ranAction = Random.Range(0, 5);
+        int ranAction;
+        if(stack >= stackLimit){
+            ranAction = Random.Range(2, 5);
+            stack=0;
+        }else{
+            ranAction = 1;
+            stack++;
+        }
 
         switch (ranAction)
         {
@@ -134,10 +150,13 @@ public class RougeBossAttackHandler : EnemyAttackHandler
     /// @brief 돌진 휘두르기.
     IEnumerator AttackDash()
     {
-        //dash
         yield return new WaitForSeconds(0.1f);
         anim.SetBool("isAttackDash", true);
         RPC_AudioPlay("swing");
+
+        //dash
+        Transform target = targetHandler.GetTarget();
+        if(target != null) navMeshAgent.Warp(target.position);
         //melee area on
         yield return new WaitForSeconds(0.7f);
         List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
