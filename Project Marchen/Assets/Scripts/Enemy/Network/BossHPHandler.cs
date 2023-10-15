@@ -5,7 +5,7 @@ using Fusion;
 using System.Linq;
 
 /// @brief 1 stage의 boss인 HeartQueen의 HP와 관련된 클래스
-public class HeartQueenHPHandler : SkinnedEnemyHPHandler
+public class BossHPHandler : SkinnedEnemyHPHandler
 {
     int BossStartHP;
 
