@@ -91,7 +91,7 @@ public class ReadyUIHandler : NetworkBehaviour
             buttonReadyText.text = "게임시작";
             PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
             potalHandler.gameObject.GetComponent<Collider>().enabled = false;
-            Runner.SetActiveScene("DesertNet");
+            Runner.SetActiveScene("Scene_4");
             Debug.Log("사막");
         }
         else
