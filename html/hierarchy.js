@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "AggroHandler", "classAggroHandler.html", null ],
     [ "CharacterInputHandler", "classCharacterInputHandler.html", null ],
+    [ "DealAreaAction", "classDealAreaAction.html", null ],
     [ "DespawnAction", "classDespawnAction.html", null ],
     [ "EnemyAttackHandler", "classEnemyAttackHandler.html", [
       [ "HeartQueenAttackHandler", "classHeartQueenAttackHandler.html", null ],
@@ -15,6 +16,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "FallCheckAction", "classFallCheckAction.html", null ],
+    [ "HealAreaAction", "classHealAreaAction.html", null ],
     [ "HeartHandler", "classHeartHandler.html", null ],
     [ "HPHandler", "classHPHandler.html", null ],
     [ "InteractionHandler", "classInteractionHandler.html", [
