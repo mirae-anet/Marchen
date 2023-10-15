@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2466127861103183091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8015347466807849482}
+  m_Layer: 0
+  m_Name: RotatePin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8015347466807849482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466127861103183091}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6063753662617259664}
+  m_Father: {fileID: 4050120361776543906}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4050120361776543907
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,10 +41,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4050120361776543906}
-  - component: {fileID: 4050120361776543905}
-  m_Layer: 0
+  - component: {fileID: 793713017428568546}
+  - component: {fileID: 7676748776523945979}
+  - component: {fileID: -2053210483767002120}
+  m_Layer: 9
   m_Name: Rolling Rock
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,11 +63,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6063753662617259664}
+  - {fileID: 8015347466807849482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4050120361776543905
+--- !u!114 &793713017428568546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +76,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 4050120361776543907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ac971b8a077594a9dca0a33d595224, type: 3}
+  m_Script: {fileID: 11500000, guid: d3151362b2d71ca44a960eb6bffde3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSpeed: 100
-  forwardSpeed: 50
+  trapSpeed: 50
+  isRolling: 1
+  rollSpeed: 50
+--- !u!114 &7676748776523945979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050120361776543907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3cb606223af5a4e8c243e4b3670b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 30
+  groundDestroy: 0
+  isMelee: 0
+--- !u!135 &-2053210483767002120
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050120361776543907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 14
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6876178012970603562
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,10 +121,9 @@ GameObject:
   - component: {fileID: 6063753662617259664}
   - component: {fileID: 7172294949206589749}
   - component: {fileID: 4930855589146883583}
-  - component: {fileID: 7454638330625834986}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Body
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,11 +136,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6876178012970603562}
   m_LocalRotation: {x: 6.1232336e-17, y: 6.1232336e-17, z: 6.1232336e-17, w: 1}
-  m_LocalPosition: {x: 0, y: -13.85, z: 0}
+  m_LocalPosition: {x: 0, y: -14.23, z: 0}
   m_LocalScale: {x: 11, y: 11, z: 11}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4050120361776543906}
+  m_Father: {fileID: 8015347466807849482}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7172294949206589749
@@ -131,16 +193,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7454638330625834986
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6876178012970603562}
-  m_Material: {fileID: 13400000, guid: 24a9585e59f5c2649aecc46c74d145f9, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.2975317
-  m_Center: {x: 0.00000047683713, y: 1.2975291, z: 0.0000005960464}
