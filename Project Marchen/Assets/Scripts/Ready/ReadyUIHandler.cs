@@ -189,11 +189,6 @@ public class ReadyUIHandler : NetworkBehaviour
     {
         ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
 
-        if (GameManager.instance.ClearStage >= 1)
-        {
-            readyUIHandler.GetComponentInChildren<FindScript>(true).gameObject.SetActive(false);
-
-        }
         readyUIHandler.gameObject.SetActive(bol);
     }
 
@@ -244,6 +239,19 @@ public class ReadyUIHandler : NetworkBehaviour
         else
         {
             return null;
+        }
+    }
+
+    //@brief ReadyUI창 활성화
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetStaffWeapon()
+    {
+        ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
+
+        if (GameManager.instance.ClearStage >= 1)
+        {
+            readyUIHandler.GetComponentInChildren<FindScript>(true).gameObject.SetActive(false);
+
         }
     }
 

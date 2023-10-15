@@ -91,23 +91,7 @@ public class CountSpawnHandler : SpawnHandler
             targetCount = 1;
             return;
         }
-
-        if (playerCount == 1)
-        {
-            targetCount = 10;
-        }
-        else if (playerCount == 2)
-        {
-            targetCount = 20;
-        }
-        else if (playerCount == 3)
-        {
-            targetCount = 30;
-        }
-        else if (playerCount == 4)
-        {
-            targetCount = 40;
-        }
+        targetCount = playerCount * 10;
     }
 
 }
