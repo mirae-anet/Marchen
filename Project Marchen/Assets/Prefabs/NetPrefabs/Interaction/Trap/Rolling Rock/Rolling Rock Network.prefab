@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4048643694516908383}
-  - component: {fileID: 8651759967993944412}
+  - component: {fileID: 926555253417663417}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888533248706822573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33,18 +33,27 @@ Transform:
   m_Father: {fileID: 4050120361776543906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8651759967993944412
-MonoBehaviour:
+--- !u!95 &926555253417663417
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888533248706822573}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10ada82963e0f46468f73f960e55e3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6123f35107217a4b9f2cd2df47f1679, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4050120361776543907
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,8 +162,8 @@ MonoBehaviour:
     m_Bits: 8192
   isExplosion: 0
   damageAmount: 30
-  checkRadius: 14
-  damageRadius: 14
+  checkRadius: 12
+  damageRadius: 12
   bulletSpeed: 10
 --- !u!1 &6876178012970603562
 GameObject:
