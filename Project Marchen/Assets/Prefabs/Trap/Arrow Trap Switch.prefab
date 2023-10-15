@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1108995226809268775
+--- !u!1 &7103388122876703618
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1108995226809268774}
-  - component: {fileID: 1108995226809268771}
-  - component: {fileID: 1108995226809268768}
-  - component: {fileID: 1108995226809268769}
-  m_Layer: 16
-  m_Name: Launch Rolling Rock
-  m_TagString: Untagged
+  - component: {fileID: 7628989399752714552}
+  - component: {fileID: 6805016986745317021}
+  - component: {fileID: 8760822531518419543}
+  - component: {fileID: 5005479470782427013}
+  - component: {fileID: 7333980492013488964}
+  m_Layer: 3
+  m_Name: Arrow Trap Switch
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &1108995226809268774
+--- !u!4 &7628989399752714552
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108995226809268775}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 7103388122876703618}
+  m_LocalRotation: {x: 0, y: 0, z: 0.026176924, w: 0.99965733}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 50, y: 10, z: 35}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1108995226809268771
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3}
+--- !u!33 &6805016986745317021
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108995226809268775}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1108995226809268768
+  m_GameObject: {fileID: 7103388122876703618}
+  m_Mesh: {fileID: 4739249776188837949, guid: b370598c4bf04df42ba78bc42f7e0c1c, type: 3}
+--- !u!23 &8760822531518419543
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108995226809268775}
+  m_GameObject: {fileID: 7103388122876703618}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 976beeb9e47276f48bc30b486068379d, type: 2}
+  - {fileID: 2100000, guid: e7298fd77405c984f8aebd23f3d48317, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,17 +85,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1108995226809268769
+--- !u!65 &5005479470782427013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103388122876703618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3911125, y: 0.49744374, z: 0.5}
+  m_Center: {x: 0.0046579167, y: 0.77089846, z: 0}
+--- !u!114 &7333980492013488964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108995226809268775}
+  m_GameObject: {fileID: 7103388122876703618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041e939a58aa6134db61b273101e4800, type: 3}
+  m_Script: {fileID: 11500000, guid: c37354500cdc7ad42bd6ae7585f7a205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapPrefab: {fileID: 4050120361776543907, guid: de95d56d1db588449a75297f1ef85b43, type: 3}
-  launchCool: 10
+  trapPrefab: {fileID: 44406876656361653, guid: f2ba71050ee00354b9b13cde21ca9faa, type: 3}
+  trapPorts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
