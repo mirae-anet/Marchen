@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bosshphandler_175',['BossHPHandler',['../classBossHPHandler.html',1,'']]]
+  ['bosshphandler_176',['BossHPHandler',['../classBossHPHandler.html',1,'']]]
 ];

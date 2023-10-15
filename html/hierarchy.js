@@ -30,6 +30,7 @@ var hierarchy =
       [ "StoryTextAction", "classStoryTextAction.html", null ]
     ] ],
     [ "ItemRotate", "classItemRotate.html", null ],
+    [ "LauncherHandler", "classLauncherHandler.html", null ],
     [ "LocalCameraHandler", "classLocalCameraHandler.html", null ],
     [ "MissionComplete", "classMissionComplete.html", [
       [ "HeartQueenMissionComplete", "classHeartQueenMissionComplete.html", null ],

@@ -19,6 +19,7 @@ var annotated_dup =
     [ "HPHandler", "classHPHandler.html", "classHPHandler" ],
     [ "InteractionHandler", "classInteractionHandler.html", "classInteractionHandler" ],
     [ "ItemRotate", "classItemRotate.html", null ],
+    [ "LauncherHandler", "classLauncherHandler.html", "classLauncherHandler" ],
     [ "LocalCameraHandler", "classLocalCameraHandler.html", "classLocalCameraHandler" ],
     [ "MeleeAttackHandler", "classMeleeAttackHandler.html", "classMeleeAttackHandler" ],
     [ "MissionComplete", "classMissionComplete.html", "classMissionComplete" ],

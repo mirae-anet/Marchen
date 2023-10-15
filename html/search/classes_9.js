@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['localcamerahandler_193',['LocalCameraHandler',['../classLocalCameraHandler.html',1,'']]]
+  ['launcherhandler_194',['LauncherHandler',['../classLauncherHandler.html',1,'']]],
+  ['localcamerahandler_195',['LocalCameraHandler',['../classLocalCameraHandler.html',1,'']]]
 ];
