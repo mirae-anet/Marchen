@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "AggroHandler", "classAggroHandler.html", null ],
+    [ "BossHPHandler", "classBossHPHandler.html", "classBossHPHandler" ],
     [ "CharacterInputHandler", "classCharacterInputHandler.html", "classCharacterInputHandler" ],
     [ "ClockActionHandler", "classClockActionHandler.html", "classClockActionHandler" ],
     [ "CountSpawnHandler", "classCountSpawnHandler.html", "classCountSpawnHandler" ],
@@ -12,7 +13,6 @@ var annotated_dup =
     [ "GrabAction", "classGrabAction.html", "classGrabAction" ],
     [ "HeartHandler", "classHeartHandler.html", "classHeartHandler" ],
     [ "HeartQueenAttackHandler", "classHeartQueenAttackHandler.html", "classHeartQueenAttackHandler" ],
-    [ "HeartQueenHPHandler", "classHeartQueenHPHandler.html", "classHeartQueenHPHandler" ],
     [ "HeartQueenMissionComplete", "classHeartQueenMissionComplete.html", "classHeartQueenMissionComplete" ],
     [ "HPHandler", "classHPHandler.html", "classHPHandler" ],
     [ "InteractionHandler", "classInteractionHandler.html", "classInteractionHandler" ],
@@ -28,6 +28,7 @@ var annotated_dup =
     [ "RangeAttackHandler", "classRangeAttackHandler.html", "classRangeAttackHandler" ],
     [ "RatMissionComplete", "classRatMissionComplete.html", "classRatMissionComplete" ],
     [ "ReadyUIHandler", "classReadyUIHandler.html", "classReadyUIHandler" ],
+    [ "RougeBossAttackHandler", "classRougeBossAttackHandler.html", "classRougeBossAttackHandler" ],
     [ "SeeThrough", "classSeeThrough.html", "classSeeThrough" ],
     [ "SetSpawnAreaAction", "classSetSpawnAreaAction.html", null ],
     [ "SkinnedEnemyHPHandler", "classSkinnedEnemyHPHandler.html", "classSkinnedEnemyHPHandler" ],

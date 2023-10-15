@@ -6,11 +6,12 @@ var hierarchy =
     [ "EnemyAttackHandler", "classEnemyAttackHandler.html", [
       [ "HeartQueenAttackHandler", "classHeartQueenAttackHandler.html", null ],
       [ "MeleeAttackHandler", "classMeleeAttackHandler.html", null ],
-      [ "RangeAttackHandler", "classRangeAttackHandler.html", null ]
+      [ "RangeAttackHandler", "classRangeAttackHandler.html", null ],
+      [ "RougeBossAttackHandler", "classRougeBossAttackHandler.html", null ]
     ] ],
     [ "EnemyHPHandler", "classEnemyHPHandler.html", [
       [ "SkinnedEnemyHPHandler", "classSkinnedEnemyHPHandler.html", [
-        [ "HeartQueenHPHandler", "classHeartQueenHPHandler.html", null ]
+        [ "BossHPHandler", "classBossHPHandler.html", null ]
       ] ]
     ] ],
     [ "FallCheckAction", "classFallCheckAction.html", null ],
