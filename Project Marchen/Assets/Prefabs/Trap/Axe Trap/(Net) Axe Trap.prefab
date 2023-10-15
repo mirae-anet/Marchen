@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3072449488367123358}
   - component: {fileID: 4047606830998824093}
-  - component: {fileID: 8394397848948769061}
   - component: {fileID: 3578705854243280827}
   m_Layer: 0
   m_Name: AnchorPoint
@@ -47,19 +46,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 30, z: 30}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &8394397848948769061
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6712755453240275970}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 30, z: 30}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3578705854243280827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +71,6 @@ GameObject:
   - component: {fileID: 3219915210659655724}
   - component: {fileID: -6696563098615647749}
   - component: {fileID: 4220836558672045951}
-  - component: {fileID: 7179796553677608662}
   m_Layer: 0
   m_Name: (Net) Axe Trap
   m_TagString: Untagged
@@ -181,19 +166,6 @@ MonoBehaviour:
   rotationSpeed: 100
   rotatePositive: 1
   skipSettingStartValues: 0
---- !u!65 &7179796553677608662
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6821184004505729441}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6821184003951303213
 PrefabInstance:
   m_ObjectHideFlags: 0
