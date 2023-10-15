@@ -223,7 +223,7 @@ public class NetworkPlayerController : NetworkBehaviour
         if (attackInput && !isAttack && !isDodge && !isInteract && !hpHandler.getIsHit())
         {
             Debug.Log("PlayerAttack");
-            attackHandler.StopReload();
+            //attackHandler.StopReload();
             SetIsAttack(true);
             rigid.velocity = new Vector3(0f, rigid.velocity.y, 0f);
             attackHandler.DoAttack(new Vector3(aimForwardVector.x, 0, aimForwardVector.z));
@@ -262,6 +262,10 @@ public class NetworkPlayerController : NetworkBehaviour
     public void SetIsReload(bool bol)
     {
         isReload = bol;
+    }
+    public bool GetIsReload()
+    {
+        return isReload;
     }
     public void SetIsInteract(bool bol)
     {

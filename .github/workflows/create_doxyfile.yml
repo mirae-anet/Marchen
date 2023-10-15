@@ -1,0 +1,27 @@
+name: Doxygen Install, Generate, and Commit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  doxygen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen
+
+      - name: Generate Doxyfile
+        run: doxygen -g
+        
+      - name: list Doxyfile
+        run: pwd && ls -al
+
+      - name: Commit and push if changes
+        run: |
+          git add .
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+          git commit -m "Generate Doxyfile" && git push

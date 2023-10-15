@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 원거리 공격 에너미의 공격 관련 클래스.
 public class RangeAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
+    /// @brief 에너미의 공격이 취소될 수 있는지 설정. default는 true.
     public bool attackCancel = true;
+    /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (반지름)
     public float targetRadius =  0.5f;
+    /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (최대 거리)
     public float targetRange = 25f;
     public Transform anchorPoint;
     public Transform detectionPos;
@@ -31,13 +35,10 @@ public class RangeAttackHandler : EnemyAttackHandler
         targetHandler = GetComponent<TargetHandler>();
     }
 
+    /// @brief 타겟을 향해서 공격을 준비.
+    /// @details SphereCastAll로 타겟을 탐색. hit 시 AttackCO를 호출.
     public override void Aiming() // 레이캐스트로 플레이어 위치 특정
     {
-        // if(Physics.SphereCast(transform.position, targetRadius, transform.forward, out var hitInfo, targetRange, LayerMask.GetMask("Player")) )
-        // {
-        //     if(!isAttack && !enemyHPHandler.GetIsDamage())
-        //         StartCoroutine("AttackCO");
-        // }
         if(isAttack || enemyHPHandler.GetIsDamage())
             return;
 
@@ -45,7 +46,6 @@ public class RangeAttackHandler : EnemyAttackHandler
 
         if(rayhits.Length > 0)
         {
-            // foreach(RaycastHit rayhit in rayhits) // target 확인
             for(int i = 0; rayhits.Length > i; i++)
             {
                 
@@ -60,6 +60,7 @@ public class RangeAttackHandler : EnemyAttackHandler
         }
     }
 
+    /// @brief 공격 실행.
     IEnumerator AttackCO()
     {
         networkEnemyController.SetIsChase(false);
@@ -82,6 +83,7 @@ public class RangeAttackHandler : EnemyAttackHandler
         RPC_animatonSetBool("isAttack", false);
     }
 
+    /// @brief 공격 취소.
     public override void AttackCancel()
     {
         if (!attackCancel)
@@ -94,17 +96,23 @@ public class RangeAttackHandler : EnemyAttackHandler
         RPC_animatonSetBool("isAttack", false);
     }
 
+    /// @brief 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
     {
         anim.SetBool(action, isDone);
     }
 
+    /// @brief 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)
     {
         anim.SetTrigger(action);
     }
+    /// @brief 효과음 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_AudioPlay(string audioType)
     {

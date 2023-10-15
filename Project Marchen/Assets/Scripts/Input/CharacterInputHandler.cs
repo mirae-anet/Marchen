@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// @brief 플레이어의 마우스, 키보드 입력을 받아서 전달.
 public class CharacterInputHandler : MonoBehaviour
 {
+    /// @brief 키보드 상하좌우 입력
     Vector2 moveInputVector = Vector2.zero;
+    /// @brief 마우스 상하좌우 입력
     Vector2 viewInputVector = Vector2.zero;
+    /// @brief 움직임과 관련된 입력이 있는지.
     bool isMove = false;
     bool walkInput = false;
     bool jumpInput = false;
@@ -13,9 +17,9 @@ public class CharacterInputHandler : MonoBehaviour
     bool attackInput = false;
     bool reloadInput = false;
     bool interactInput = false;
+    // @brief ESC 메뉴가 꺼져있어 움직일 수 있는 상황인가
+    bool escMoveEnable = true; 
 
-    //esc
-    bool escEnable = true;
     //other components
     LocalCameraHandler localCameraHandler;
     NetworkPlayerController networkPlayerController;
@@ -29,7 +33,8 @@ public class CharacterInputHandler : MonoBehaviour
     {
         
     }
-    // Update is called once per frame
+
+    /// @brief 각각의 플레이어가 속한 컴퓨터에서 입력을 받는다.
     void Update()
     {
         //호스트에서는 실행x
@@ -55,7 +60,7 @@ public class CharacterInputHandler : MonoBehaviour
             dodgeInput = true;
         if(Input.GetButtonDown("Reload"))
             reloadInput = true;
-        if (escEnable == true)
+        if (escMoveEnable == true)
         {
             if (Input.GetButtonDown("Fire1"))
                 attackInput = true;
@@ -66,8 +71,10 @@ public class CharacterInputHandler : MonoBehaviour
         //Set view
         localCameraHandler.SetViewInputVector(viewInputVector);
 
-
     }
+    /// @brief 각각의 플레이어가 속한 컴퓨터에서 입력값을 서버로 보낸다.
+    /// @details NetworkInputData의 데이터 구조체로 보낸다. 보낸 후 입력값을 초기화 한다. localCamraHandler에서 이동방향과 3차원 조준 방향을 받아온다.
+    /// @see NetworkInputData
     public NetworkInputData GetNetworkInput()
     {
         NetworkInputData networkInputData = new NetworkInputData();
@@ -103,9 +110,11 @@ public class CharacterInputHandler : MonoBehaviour
         return networkInputData;
     }
 
+    /// @brief ESC 패널의 활성화 여부에 따라 캐릭터의 조작 설정
+    /// /// @see EscHandler
     public void EnableinPut(bool enable)
     {
-        escEnable = enable;
+        escMoveEnable = enable;
     }
 
 }

@@ -39,7 +39,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     public override void Spawned()
     {
         bool Library = SceneManager.GetActiveScene().name == "Scene_2";
-        
+
         //본인 
         if (Object.HasInputAuthority) //플레이어 본인
         {

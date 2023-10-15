@@ -1,0 +1,1469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FusionGraph" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UwgCBQwAhgRCBUgIQBEARCARADIkAGAItEJCIEjAQqQ=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionGraphBase" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCLgIEAABjESQAAQAEQAAAAABJAAAAAAEAQAIBRgAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionGraphBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FusionStatsBillboard" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAGAIIAAAAAAAAAAAAAIAABAAAIAAEIABAAAAAACEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionStatsBillboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionStatsMeterBar" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIQAABAAhAAwAAAAEAIIAAAFAAAMBAgEBABAABCIA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionStatsMeterBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionStatsObjectIds" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAiaAOCgAAAQQAQAMAABAAAAAAAgAGQQABAAAEAQAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionStatsObjectIds.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FusionStats" Collapsed="true">
+    <Position X="30" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wBr94JazhDpMZZ09shNzcjU0ar2dH1AxhZcs4KPmjOE=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAOIPrototype">
+    <Position X="105" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\AreaOfInterest\PlayerAOIPrototype.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerPrototype">
+    <Position X="94" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAQAAAAAAAAACAAAAABAwBACAAAAEgAAACAAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\ControllerPrototype.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputBehaviourPrototype" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="32.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AMAFAACAAAAAAAQgAQAAACAgkAAAAAAAAAQAAAACABA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\InputBehaviourPrototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FusionPrototypeMaterials" Collapsed="true">
+    <Position X="251.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BhAGACAEAgAAIgoAADAAIAAACgIAAAAAIAQAAjgAAAI=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Materials\FusionPrototypeMaterials.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionPrototypingTextures" Collapsed="true">
+    <Position X="248.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Materials\FusionPrototypingTextures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkCharacterControllerPrototype" Collapsed="true">
+    <Position X="251.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgQA4AACQQAAAAAAAAAAAAAIAQAAgBACAAEAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkCharacterControllerPrototype.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkDebugStart" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAABAhAAgzCABIBgSQhAASAEAQgQAQgAQwCCUIyECBA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkDebugStart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkDebugStartGUI" Collapsed="true">
+    <Position X="24.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QISAAAABACAABAAECAEIAAgAAAAAAIAgAAGAGAEBAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkDebugStartGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSpawnerPrototype">
+    <Position X="0.5" Y="10.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\PlayerSpawnerPrototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FusionPrototypingPrefabs" Collapsed="true">
+    <Position X="246.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAggAAAAAAAACAQAAAgAQAAAACAAAIAAAAAAAGA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Prefabs\FusionPrototypingPrefabs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSpawnPointManagerPrototype" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\PlayerSpawnPointManagerPrototype.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSpawnPointPrototype" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="246.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAIAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\PlayerSpawnPointPrototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SpawnerPrototype&lt;T&gt;">
+    <Position X="1" Y="4.5" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="SpawnerPrototype&lt;T&gt;.SpawnMethods" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\SpawnerPrototypeT.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="SpawnerPrototype&lt;T&gt;.AuthorityOptions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\SpawnerPrototypeT.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAAACQAIAMACAAAICEEAAAAAQAAABAAAAABAACAEQ=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\SpawnerPrototypeT.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SpawnPointManagerPrototype&lt;T&gt;" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAAAIAABAAACBAAAAAAAAAAAAoEAAIAAAAEQAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\SpawnPointManagerPrototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ToggleRunnerProvideInput" Collapsed="true">
+    <Position X="21.5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\ToggleRunnerProvideInput.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToggleRunnerVisibility" Collapsed="true">
+    <Position X="27.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\ToggleRunnerVisibility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionScalableIMGUI" Collapsed="true">
+    <Position X="251.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAACAEAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Utilities\FusionScalableIMGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LocalCameraHandler">
+    <Position X="198.75" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AYABQQIggCBAAAAAAQARIAEABABgAAAAEAAAgEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\LocalCameraHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeeThrough">
+    <Position X="128" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CgAAAAAAAQAAAAQCAAAAIAAgAAAAAAABAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\SeeThrough.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AggroPulling">
+    <Position X="50.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\AggroPulling.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossController">
+    <Position X="169.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAgGAJEgAAIAAEICCBgIgEAIACIBIABwEAEhAwQEY=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Boss\BossController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BossMain">
+    <Position X="182.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAIAIAAAAABAAQAgAAAABAAAAAIRQAACJAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Boss\BossMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrowingBullet">
+    <Position X="14.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAIAAAAAAABAQAAAEAABAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Boss\GrowingBullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuidedBullet">
+    <Position X="17" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAggAAAgAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Boss\GuidedBullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController">
+    <Position X="52.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MCAAgAApGiAAIAAAIACAIIkAAIACIAIABRQIsAAQAEI=</HashCode>
+      <FileName>Assets\Scripts\Enemy\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyMain">
+    <Position X="67.5" Y="9" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="EnemyMain.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Enemy\EnemyMain.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIABAAIAKAAAABBAAQAAAAAAJAABCAIRQBACJAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\EnemyMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MissileRotate">
+    <Position X="69.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\MissileRotate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AggroHandler">
+    <Position X="68.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\AggroHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyAttackHandler">
+    <Position X="8.75" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\EnemyAttackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyHPHandler">
+    <Position X="54.75" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABACEABKQgABCBAAQSEIAIQBIAAAAFEQAAMAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\EnemyHPHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartQueenAttackHandler">
+    <Position X="8.75" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAACARACAAIAAEACCBkAAEAAwAYBAAAwEAAhAgEAQ=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\HeartQueenAttackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartQueenHPHandler">
+    <Position X="54.75" Y="30.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABACAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\HeartQueenHPHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeleeAttackHandler">
+    <Position X="11.5" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAzACAAKAAAAACAEAAAAAwAcAAAAQAAABEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\MeleeAttackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkEnemyController">
+    <Position X="102.25" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>MAAIgAAQECAAAAAAAEQAMAAIAAgCQAAAAQACAAAQAEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\NetworkEnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RangeAttackHandler">
+    <Position X="6" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAzACAAKAAAAACAEAAEAAwAYAAAAwAAABAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\RangeAttackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkinnedEnemyHPHandler">
+    <Position X="54.75" Y="27.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEE=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\SkinnedEnemyHPHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TargetHandler">
+    <Position X="99.5" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>oAQAAAAYACAAAAAAIACAAAgAAAgAAAAAAQAAEAAAAEI=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Network\TargetHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="212.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAAQAAAAAAAAAAEABAAAAAAEAAEAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HPHandler">
+    <Position X="88.5" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABCEIRKAgIBLBQAACgIAIQBpAIACNEQAAMAwABEA=</HashCode>
+      <FileName>Assets\Scripts\HP\HPHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterInputHandler">
+    <Position X="54.75" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQGAAIIgCAACAAAAAAAKAAAAAAAAAABAAgAwAIAAEA=</HashCode>
+      <FileName>Assets\Scripts\Input\CharacterInputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractionHandler">
+    <Position X="41.25" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\InteractionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartQueenMissionComplete">
+    <Position X="57.5" Y="22" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAABAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\MissionComplete\HeartQueenMissionComplete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MissionComplete">
+    <Position X="60.25" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\MissionComplete\MissionComplete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RatMissionComplete">
+    <Position X="60.5" Y="22" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\MissionComplete\RatMissionComplete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoldierMissionComplete">
+    <Position X="63" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\MissionComplete\SoldierMissionComplete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClockActionHandler">
+    <Position X="49.25" Y="22" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AYAGBAQAACAAAACAAAAEAAAgAAAAAEAAAAAAIBCAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\ClockActionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DespawnAction">
+    <Position X="215.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\DespawnAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoorActionHandler">
+    <Position X="30.5" Y="22" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAACAAAASAAAAAAAAgAAEAAAEIAAAAIAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\DoorActionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FallCheckAction">
+    <Position X="105.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\FallCheckAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrabAction">
+    <Position X="33.75" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAABAAAIAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\GrabAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MovingGroundAction">
+    <Position X="36" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAIAAAIECAAABCAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\MovingGroundAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PickUpAction">
+    <Position X="38.75" Y="22" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="PickUpAction.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Interact\Object\PickUpAction.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAQAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\PickUpAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetSpawnAreaAction">
+    <Position X="201.5" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\SetSpawnAreaAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShelfActionHandler">
+    <Position X="41" Y="22" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CIIABAAAACAAAACAAAAAAAAgEAAABAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\ShelfActionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StoryTextAction">
+    <Position X="44.25" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAABAAAAAEAAgAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Object\StoryTextAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerActionHandler">
+    <Position X="46.5" Y="22" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAIABAQoAiAEAASAAAAAAAAAMAcABAEAGAAAAEEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Player\PlayerActionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CountSpawnHandler">
+    <Position X="22.75" Y="24" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAABEEAAAAAACAAAAAAAAAAAAAABAE=</HashCode>
+      <FileName>Assets\Scripts\Interact\Spawn\CountSpawnHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnerSpawner">
+    <Position X="107.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAQAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Spawn\SpawnerSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnHandler">
+    <Position X="22.75" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAgACAAABCAAAlAAAIAAACAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Interact\Spawn\SpawnHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartHandler">
+    <Position X="80.5" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAQAAAAAAAAAAAAAAAAAACAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Item\HeartHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item">
+    <Position X="150.5" Y="9" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Item.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Item\Item.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAACAAAAAAAAAAAQABACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Item\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemRotate">
+    <Position X="171.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Item\ItemRotate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReadyHandler">
+    <Position X="227" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\ReadyHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SessionInfoListUIItem">
+    <Position X="174" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEgAAAAAAAAAAEQACAAgAAAAAAAAAAACAAAI=</HashCode>
+      <FileName>Assets\Scripts\Lobby\SessionInfoListUIItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SessionListUIHandler">
+    <Position X="184.75" Y="9" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>QAIAAAAAAABAAAAAAAAAAgAEQAAAIAAAAEAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Lobby\SessionListUIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttackHandler">
+    <Position X="82.75" Y="20" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="AttackHandler.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Movement\AttackHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgASAAAAACAAAAAAAAACAACAAAAAAAAAAAABEAIEAAQ=</HashCode>
+      <FileName>Assets\Scripts\Movement\AttackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterRespawnHandler">
+    <Position X="85.75" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACAARACAAAAAAAARBAAAAAAAAgAAAAQAAEA=</HashCode>
+      <FileName>Assets\Scripts\Movement\CharacterRespawnHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkPlayerController">
+    <Position X="71" Y="20" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IUAIAgIx2FABDEgAgQCwICAAAAhIIFAABTgAgAYQEEQ=</HashCode>
+      <FileName>Assets\Scripts\Movement\NetworkPlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectionTokenUtils" Collapsed="true">
+    <Position X="246.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Network\ConnectionTokenUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkInGameMessages">
+    <Position X="108" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQIBgAEACAAAAAAACAAAAAAAAAAAAgAAgAAAAEQAFA=</HashCode>
+      <FileName>Assets\Scripts\Network\NetworkInGameMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetworkPlayer" BaseTypeListCollapsed="true">
+    <Position X="111" Y="20" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAQAKAAABACAAAQCAAAAwBAIAAAIAAAAQAACNQ=</HashCode>
+      <FileName>Assets\Scripts\Network\NetworkPlayer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NetworkRunnerHandler">
+    <Position X="72" Y="9" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AABCAEAAACAAAAAAIAACAAAAAAAAcAAAAQAAAIAGAEA=</HashCode>
+      <FileName>Assets\Scripts\Network\NetworkRunnerHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spawner" BaseTypeListCollapsed="true">
+    <Position X="86.25" Y="9" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AMAFAACAhCAAAAQgAQAAACQglAAAACAAIAQAAAACCFA=</HashCode>
+      <FileName>Assets\Scripts\Network\Spawner.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BoxManPlayerMain">
+    <Position X="217.5" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAACAAAAAAAAAAAAAAABAAAAAIQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\BoxMan\BoxManPlayerMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TPSCharacterController">
+    <Position X="229.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>JARAEAIAArAAAAACAgAAAAAABABAAAAAgAAAiAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\BoxMan\TPSCharacterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraController">
+    <Position X="232" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAQAAQiAhCAAAgAgACgAAAAEAAAAAAAAAAAAhGAEAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\CameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAttack">
+    <Position X="234.5" Y="9" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="PlayerAttack.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Player\PlayerAttack.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IiCQAAAAEADAAACACAACBIFAAAAAAAAAAQBIEAIEAEA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController">
+    <Position X="57.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQQAAgoBmFAACAgAwQAQIABAAQBAKAgIBSgAgAYCAEQ=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerGroundCheck">
+    <Position X="75.5" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerGroundCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerMain">
+    <Position X="89.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAEIAIAAAAABAAAAAAAAABBAAAAIQQAACAAAAEw=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AreaBulletHandler">
+    <Position X="25.5" Y="25.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\AreaBulletHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletHandler">
+    <Position X="26.25" Y="20" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BIAIAAAABIAAAABAAAAAAAAQAAwGEAgEGAIAABAAAAg=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\BulletHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrenadeHandler">
+    <Position X="114.75" Y="20" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BIAIAAAAAAAAQAAAAIABAAAAAEwAEAgAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\GrenadeHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GuidedBulletHandler">
+    <Position X="74.25" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIggAACKAAAAAAIAAAAAAQAAwGEAAACAIAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\GuidedBulletHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RocketHandler">
+    <Position X="77.25" Y="20" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BKAIAAAAAAAAAAAAAAAAAAAQAAwEEAgACAIAABCAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\RocketHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StraightBulletHandler">
+    <Position X="96.5" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAIIAAAgAAAAAAAAAAAAAAAQAAwGEAAACAMAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\StraightBulletHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackerBulletHandler">
+    <Position X="28" Y="25.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAIAAAAAAIAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\TrackerBulletHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PortalHandler">
+    <Position X="52.5" Y="22" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ready\PortalHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReadyUIHandler">
+    <Position X="65.75" Y="20" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CAYAAAAAECDICBAgACQAGQEAAAAIAAQAwAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Ready\ReadyUIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundCube">
+    <Position X="78" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAQBAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Sound\SoundCube.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BillBoard">
+    <Position X="152.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\BillBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscHandler">
+    <Position X="91.5" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQEAAAAAIACAAAAAAAAAAAAAEACAACEEA=</HashCode>
+      <FileName>Assets\Scripts\UI\EscHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeartBar">
+    <Position X="59.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\HeartBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InGameMessagesUIHandler">
+    <Position X="109.75" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\UI\InGameMessagesUIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuUIHandler">
+    <Position X="236.75" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADAwgAAASAAAAEAAAAAAgAgAAAAQAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\MainMenuUIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StoryTextUIHandler">
+    <Position X="155" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAACAAAAAAgAJAAAAAACAAAAAAgAAAAAAAAAIAAAE=</HashCode>
+      <FileName>Assets\Scripts\UI\StoryTextUIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestroyGameObject">
+    <Position X="239.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\DestroyGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshCombine">
+    <Position X="40.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\MeshCombine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Startup" Collapsed="true">
+    <Position X="250" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Utils" Collapsed="true">
+    <Position X="244.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utils\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletMain">
+    <Position X="15.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAgAAAAIAAAAAAAAAAAAAIQFAAAAQAABA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\BulletMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GunHandler">
+    <Position X="20" Y="23" Width="2" />
+    <TypeIdentifier>
+      <HashCode>JCAAAAAYACBAAAAgAIAAAAhQAIyIAAIACRAEAAQEAEA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\GunHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HammerHandler">
+    <Position X="14.25" Y="23" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BCAAAAA4ACAAAAAAAAAAAAgAAIwAEAAAAQAAAAUkAMA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\HammerHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrackerHandler">
+    <Position X="17" Y="23" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>JCBAAQAYACBAAAAgAAAAAAhAAJyIAAIACQAAAEQEAEQ=</HashCode>
+      <FileName>Assets\Scripts\Weapon\TrackerHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponHandler">
+    <Position X="17.25" Y="20" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="WeaponHandler.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Weapon\WeaponHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIABAAAACAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\WeaponHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponMain">
+    <Position X="157.5" Y="9" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="WeaponMain.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Weapon\WeaponMain.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAggAKAAIAgAAICJAAAAgBAEgAAEAIA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\WeaponMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenShotHelper">
+    <Position X="92" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAAAAAAAAAAAgCAAAAEAAIAAAEAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\ScreenShotHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TransformExtensions" Collapsed="true">
+    <Position X="251.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\ScreenShotHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChangeSizeColor">
+    <Position X="43" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQQAEAAkEQAAAAAIAQAAAAAAAQACACQAAAAAAAAAQA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ChangeSizeColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DelayActive">
+    <Position X="159.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\DelayActive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestroyObject">
+    <Position X="45.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAIAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\DestroyObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="_ObjectsMakeBase">
+    <Position X="12" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\_ObjectsMakeBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookAtTarget">
+    <Position X="220" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\LookAtTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultipleObjectsMake">
+    <Position X="12" Y="12" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EBQADAAQACAABAAAAAAAAAABAAAAAUAEACAAAAQAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\MultipleObjectsMake.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectMove">
+    <Position X="162" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABABAQAQACAAABAAQQAAIQAAAAAAAAEEAAARAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectMoveDestroy">
+    <Position X="176.5" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIABAQAQACAAABAIQAAKIABACAAACBIBQAABEIAAAAQ=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMoveDestroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShieldActivate">
+    <Position X="222.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACQBBACAACAAAABAAAAAAAAAAAQAAAAAAAAACAAABAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ForEffects\ShieldActivate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewMaterialChange">
+    <Position X="95.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AJEAgAgAAAAAQAAAAAAEIAIACEAAAAAAAAADCAAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\NewMaterialChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScaleFactorApplyToMaterial">
+    <Position X="80.5" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAQAAAAACAgAAAAACAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\ScaleFactorApplyToMaterial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariousEffectsScene">
+    <Position X="83.5" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAQAAMAQBAAAAEAAAAABCAAAAAAACgAAAAAAAAAJAEA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\VariousEffectsScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariousMouseOrbit">
+    <Position X="98" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAICEBAEAAAkAAIABgAABEAAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\VariousMouseOrbit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariousRotateObject">
+    <Position X="112.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAQAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\VariousRotateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariousTranslateMove">
+    <Position X="130.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAACAAAEAAAAAAAAABAAAACAAAAAAQACAAIAA=</HashCode>
+      <FileName>Assets\Store Assets\Effect\SpecialSkillsEffectsPack\Scripts\VariousTranslateMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelCustomizer">
+    <Position X="100.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAANAAAABAAAQABAAAAAAAACAAAAABAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Brick Houses\BrokenVector\LowPolyBrickHouses\Scripts\ModelCustomizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DepthTextureEnable">
+    <Position X="204" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAACAA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Collection\Stylized Water BIR\Scripts\DepthTextureEnable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseCamLook">
+    <Position X="115.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Dungeon\BrokenVector\LowPolyDungeon\Demo Scenes\MouseCamLook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerMovement">
+    <Position X="117.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAACAAAAEAAAAAIAAAAAAAEAAAAAQAQAAAAIA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Dungeon\BrokenVector\LowPolyDungeon\Demo Scenes\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenshotMaker">
+    <Position X="119.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Dungeon\BrokenVector\LowPolyDungeon\Demo Scenes\ScreenshotMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Demo">
+    <Position X="188.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAwAAEACAgEAAAAAACCAgQGAAAAAAAACgAABBAQAA=</HashCode>
+      <FileName>Assets\Store Assets\Quirky Series Hedgehog\_Scripts\Demo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.FusionRuntimeCheck" Collapsed="true">
+    <Position X="250" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionRuntimeCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.FusionUnityLogger" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="248.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAAAAQAAAQAAAggAgAgCAAiAAABACAAACAE=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionUnityLogger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Fusion.NetworkRunnerExtensions" Collapsed="true">
+    <Position X="244.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkRunnerExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.NetworkSceneManagerBase" Collapsed="true">
+    <Position X="2" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAgCADAAATAQACAABEIQABIBAAAQAIAAAAQIABCgA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkSceneManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Fusion.NetworkSceneManagerDefault" Collapsed="true">
+    <Position X="2" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAQAAAEAAAAAAAAAAAIgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\NetworkSceneManagerDefault.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.FusionUnitySceneManagerUtils" Collapsed="true">
+    <Position X="250" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Utilities\FusionUnitySceneManagerUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.StatsInternal.FusionStatsUtilities" Collapsed="true">
+    <Position X="246.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGAQAFYASCICApBQAADAFAAAkTAggDAAARIhAQiEUA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionStatsUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.Assistants.FusionAssistants" Collapsed="true">
+    <Position X="248.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAAgAAAAAQAAABAAAAAAAAAAAEAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Assistants\FusionAssistants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.Assistants.FusionSceneSetupAssistants" Collapsed="true">
+    <Position X="244.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAEAAAAAAAAAAAAAAAABQAAAAAEAAAOBA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Assistants\FusionSceneSetupAssistants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FusionPrototypingInternal.FusionPrototypingAssetUtils" Collapsed="true">
+    <Position X="244.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\Utilities\FusionPrototypingAssetUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.Editor.BoundsTools" Collapsed="true">
+    <Position X="244.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAACAAAAAkAAAAAAAIAAAAAgAAEEAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Utilities\BoundsTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fusion.Editor.FusionEditorUtilitiesExternal" Collapsed="true">
+    <Position X="250" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Utilities\FusionEditorUtilitiesExternal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.BewerageMaker">
+    <Position X="133.25" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQEQgEUCAAQIAAAACAAAACBEAIIAgBAAgAFABCIBY=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\BewerageMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.CookableProduct">
+    <Position X="19.25" Y="12.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEgQQAAEACAAAIIAAAAAAAACAAACAIAAIAAAAAAACEA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\CookableProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.CookingGameObject">
+    <Position X="30.75" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABEgAgEACDAAAAAAAQAAAACAAAAIAAAoABACIAAIEA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\CookingGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.CreateProductOnPlaceHolder">
+    <Position X="136.25" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\CreateProductOnPlaceHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.DeleteProductOnSlot" BaseTypeListCollapsed="true">
+    <Position X="179.75" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEiQAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAE=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\DeleteProductOnSlot.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PW.DrinkableProduct">
+    <Position X="24.5" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\DrinkableProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.FillCupHelper">
+    <Position X="139.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEAEAAIAAAgAAAAAAAAABIAgAAIAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\FillCupHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.HeatableProduct">
+    <Position X="27" Y="12.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAQAAAEACAAIAAAgAAAAAACAAAAAAAAIAAAAAAACEI=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\HeatableProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.Microwave">
+    <Position X="62" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIgAAGCgAAAAAAAAAAAAAggAIAIAoAAgAAAAYAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Microwave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.OnClickCoverHelper">
+    <Position X="191.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAgAAAIAAAQAAACAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\OnClickCoverHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.OrderGenerator">
+    <Position X="206.5" Y="9" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IEAEAAAAACACAAAAAAgACAgAIAEAAAgIAAAAAAEACAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\OrderGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.PanGameObject">
+    <Position X="32.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\PanGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.PlayerSlots">
+    <Position X="141.75" Y="9" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAACAABAAAAAAAAAAgAAAAAGAAAAAAIQAAAAAACCAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\PlayerSlots.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.Product" Collapsed="true">
+    <Position X="248.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAACEAQAAAAAACAAAACAAAAAAAAAAAAEAhAAQAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ProductGameObject">
+    <Position X="23" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAQAAAAAAIAAAAAAAAAAAAAAKAQEAAAAQAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ProductGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ProductManager">
+    <Position X="193.75" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAIAAAAAAEAAAAIQAAAAAAACAQ=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ProductManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ProductWithCover">
+    <Position X="210" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAIAQAAAAAACAAAAAAAAIAAAQCEACAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ProductWithCover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ProgressHelper">
+    <Position X="224.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ProgressHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ReadyToServe">
+    <Position X="22" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAEAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ReadyToServe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.ServeOrder">
+    <Position X="164.25" Y="9" Width="2" />
+    <TypeIdentifier>
+      <HashCode>kAQAAAAAQAEhEAAAAAAAAAAACAAAAABAGAAQAABAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ServeOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.StoveGameObject">
+    <Position X="29.75" Y="14.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAABAAAAAAAggAAgAAIABAAAAAABA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\StoveGameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.BasicCameraControl">
+    <Position X="102.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAAAAAAAAIAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicCameraControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.BasicGameEvents">
+    <Position X="122" Y="9" Width="2.5" />
+    <NestedTypes>
+      <Delegate Name="PW.BasicGameEvents.OnOrderCancelled" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="PW.BasicGameEvents.OnOrderCompleted" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="PW.BasicGameEvents.OnProductAddedToSlot" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="PW.BasicGameEvents.OnProductDeletedFromSlot" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="PW.BasicGameEvents.OnPlaceHolderRequired" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACAAABAAAAAAAEACEAAAQQAEEQAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\BasicGameEvents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PW.SliceHelper">
+    <Position X="65.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\Utilities\SliceHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.FloatingSway">
+    <Position X="167" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAgIAAAAAAAAABAAAAAAAAAAAIAAAAYAE=</HashCode>
+      <FileName>Assets\Store Assets\Ignore Assets\Off Axis Studios\Polyworks\Effects\Scripts\FloatingSway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.LightFlicker">
+    <Position X="196.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAAACAABAgAAAAAAAAAACIAAAAAAAQAIAAAAEg=</HashCode>
+      <FileName>Assets\Store Assets\Ignore Assets\Off Axis Studios\Polyworks\Effects\Scripts\LightFlicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.SimpleBounceRot">
+    <Position X="242.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Store Assets\Ignore Assets\Off Axis Studios\Polyworks\Effects\Scripts\SimpleBounceRot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.SimpleRotateObject">
+    <Position X="38.25" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAABAAAAAAAAAAAAAIAAAAAAAAAYAE=</HashCode>
+      <FileName>Assets\Store Assets\Ignore Assets\Off Axis Studios\Polyworks\Effects\Scripts\SimpleRotateObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.OASCamObjectHighlighter">
+    <Position X="125.25" Y="9" Width="2" />
+    <NestedTypes>
+      <Enum Name="OffAxisStudios.OASCamObjectHighlighter.HighlightType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\OASCamObjectHighlighter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="OffAxisStudios.OASCamObjectHighlighter.SortingType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\OASCamObjectHighlighter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="OffAxisStudios.OASCamObjectHighlighter.FillType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\OASCamObjectHighlighter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="OffAxisStudios.OASCamObjectHighlighter.RTResolution" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\OASCamObjectHighlighter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAgCAAAgADAEAABAAACAIAgAAAgAAEACAAABACBgEQ=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\OASCamObjectHighlighter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.OASHologramGlitch">
+    <Position X="145.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAABAAAEAAAAABAAAAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\OASHologramGlitch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.ImageEffects.OASBlurOptimized">
+    <Position X="35.25" Y="13.75" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="OffAxisStudios.ImageEffects.OASBlurOptimized.BlurType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\PostEffectsPortable\OASBlurOptimized.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAEJEBAEAAgQAAA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\PostEffectsPortable\OASBlurOptimized.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OffAxisStudios.ImageEffects.OASPostEffectsBase">
+    <Position X="35" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAAAIDAAAAAIAAAQIACAAAAAAAAQABAABAAgCAA=</HashCode>
+      <FileName>Assets\Store Assets\Low Poly Collection\Shaders\Builtin\CamObjHighlight\PostEffectsPortable\OASPostEffectsBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="litttle_Dog_scripits.MouseLook">
+    <Position X="148.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAgAAAAAAAAAAQAAAAAEAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Store Assets\studio apartment\scripits\MouseLook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="litttle_Dog_scripits.PlayerController">
+    <Position X="47.75" Y="9" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAgAAAAAAAAAABQAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Store Assets\studio apartment\scripits\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour">
+    <Position X="126.5" Y="4.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fusion.NetworkBehaviour" Collapsed="true">
+    <Position X="60.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.Behaviour" Collapsed="true">
+    <Position X="127" Y="3.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.Component" Collapsed="true">
+    <Position X="127" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.Object" Collapsed="true">
+    <Position X="127" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Fusion.Behaviour" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Struct Name="NetworkInputPrototype" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="246.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UIAQCQAAAEAgBEMAAABEAAAAAAAAAAgAAAFAACAACEA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\InputBehaviourPrototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Struct Name="NetworkInputData" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="244.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQAAAAIAgAAACAAAAAAAIAAAAAAAAAABAAgAgAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Network\NetworkInputData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Interface Name="ISpawnPointManagerPrototype&lt;T&gt;" Collapsed="true">
+    <Position X="246.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\ISpawnPointManagerPrototypeT.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ISpawnPointPrototype" Collapsed="true">
+    <Position X="248.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\Prototyping\SpawnPoints\ISpawnPointPrototype.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Fusion.StatsInternal.IFusionStatsView" Collapsed="true">
+    <Position X="244.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAQAAAAAAAAAAABAEAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\Fusion\Scripts\FusionStats\FusionStatsUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ProductType" Collapsed="true">
+    <Position X="244.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAABAAAAAAAAAAAAAAACAAAAAAAAAAAkAAAA=</HashCode>
+      <FileName>Assets\Store Assets\CoffeeShopStarterPack\Scripts\ProductType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

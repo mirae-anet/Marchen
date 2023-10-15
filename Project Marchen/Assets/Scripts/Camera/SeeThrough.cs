@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// @brief 지형, 지물에 의해 시야가 가려지는 것을 방지.
+/// @details 아바타와 카메라 사이의 지형, 지물을 투명화한다. colider가 있는 지형, 지물에 한하여 동작.
 public class SeeThrough : MonoBehaviour
 {
     public Transform player;
     public Vector3 offest;
+    /// @brief 투명화할 레이어 정보
     public LayerMask layerMask;
     private List<Transform> ObjectToHide = new List<Transform>();
     private List<Transform> ObjectToShow = new List<Transform>();
@@ -29,6 +32,7 @@ public class SeeThrough : MonoBehaviour
         }
     }
 
+    /// @brief 투명화할 지형, 지물을 관리한다. 추가 혹은 제외.
     private void ManageBlockingView()
     {
         Vector3 playerPosition = player.transform.position + offest;
@@ -62,6 +66,8 @@ public class SeeThrough : MonoBehaviour
             ObjectToHide.Clear();
         }
     }
+
+    /// @brief 방해물을 투명화한다.
     private void HideObstruction(Transform obstruction)
     {
         if(obstruction != null)
@@ -71,7 +77,9 @@ public class SeeThrough : MonoBehaviour
         // MeshRenderer meshRenderer = obstruction.GetComponentInChildren<MeshRenderer>();
         // if(meshRenderer != null)
         //     meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-}
+    }
+
+    /// @brief 더이상 방해물이 아닌 경우 투명화를 해제한다.
     private void ShowObstruction(Transform obstruction)
     {
         if(obstruction != null)

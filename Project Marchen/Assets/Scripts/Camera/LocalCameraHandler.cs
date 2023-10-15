@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+* @brief 로컬 카메라 관련 클래스
+*/
 public class LocalCameraHandler : MonoBehaviour
 {
+    /// @brief 로컬 플레이어 각자의 카메라. static 변수.  
     static public LocalCameraHandler Local;
 
     [Header("설정")]
@@ -16,8 +20,13 @@ public class LocalCameraHandler : MonoBehaviour
     public Transform BulletPos;
 
     [Header("Layer for the aim raycast")]
+    /// @brief 조준할 수 있는 레이어
     public LayerMask layerMask;
+
+    /// @brief 조준할 수 있는 최대 거리
     public float maxDistance;
+
+    /// @brief 조준 방향
     Vector3 aimForwardVector;
 
     //Input
@@ -28,8 +37,6 @@ public class LocalCameraHandler : MonoBehaviour
     float cameraRotationY = 0;
 
     //other component
-    CharacterRespawnHandler characterRespawnHandler;
-
     [SerializeField]
     private Camera localCamera;
     //ESC MENU
@@ -37,7 +44,6 @@ public class LocalCameraHandler : MonoBehaviour
     //READYUI
     private bool ReadyRotationEnabled = true;
 
-    // Start is called before the first frame update
     void Start()
     {
         transform.forward = GameManager.instance.cameraViewRotation;
@@ -50,6 +56,7 @@ public class LocalCameraHandler : MonoBehaviour
         setAimForwardVector();
     }
 
+    /// @brief 카메라 회전, 이동
     private void CamControl()
     {
         if(!localCamera.enabled)
@@ -80,7 +87,7 @@ public class LocalCameraHandler : MonoBehaviour
         transform.position = cameraAnchorPoint.position;
     }
 
-    //3차원에서 보는 바라보는 곳으로 aimForwardVector 갱신
+    /// @brief 조준점 계산. 3차원에서 보는 바라보는 곳으로 aimForwardVector 갱신
     private void setAimForwardVector()
     {
         if(Local != null)
@@ -106,16 +113,24 @@ public class LocalCameraHandler : MonoBehaviour
         aimForwardVector = aimForwardVector.normalized;
     }
 
+    /// @brief 마우스 이동에 관한 입력을 받아옴.
+    /// @see CharacterInputHanlder
     public void SetViewInputVector(Vector2 viewInput)
     {
         this.viewInput = viewInput;
     }
 
+    /// @brief 조준점을 반환한다.
+    /// @return Vector3 aimForwardVector
+    /// @see CharacterInputHandler.GetNetworkInput()
     public Vector3 getAimForwardVector()
     {
         return aimForwardVector;
     }
 
+    /// @brief 아바타의 이동에 관한 정보를 반환한다.
+    /// @return Vector3 moveDir
+    /// @see CharacterInputHandler.GetNetworkInput()
     public Vector3 getMoveDir(Vector2 moveInputVector)
     {
         Vector3 lookForward = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized; // 정면 방향 저장
@@ -126,21 +141,26 @@ public class LocalCameraHandler : MonoBehaviour
         return moveDir;
     }
 
+    /// @brief 연결된 카메라를 끄고 껸다.
     public void localCameraEnable(bool able)
     {
         localCamera.enabled = able;       
     }
 
+    /// @brief ESC 메뉴의 활성화 여부에 따른 카메라 회전의 가능 여부를 갱신한다.
     public void EnableRotationEsc(bool enable)
     {
         EscRotationEnabled = enable;
     }
 
+    /// @brief Ready 메뉴의 활성화 여부에 따른 카메라 회전의 가능 여부를 갱신한다.
     public void EnableRotationReady(bool enable)
     {
         ReadyRotationEnabled = enable;
     }
 
+    /// @brief 카메라 파괴 시 바라보는 방향을 게임 매니저에 저장.
+    /// @details 호스트마이그레이션 시에 저장된 정보를 바탕으로 바라보는 방향을 복원.
     private void OnDestroy()
     {
         //when localCamera was disabled

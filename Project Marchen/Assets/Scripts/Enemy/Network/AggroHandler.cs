@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/// @brief 일정한 범위 안에 플레이어가 있으면 타겟으로 설정.
+/// @see TargetHanlder
 public class AggroHandler : NetworkBehaviour
 {
     private void OnTriggerEnter(Collider target)
     {
-        NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-        if(!networkRunner.IsServer)
+        if(!Runner.IsServer)
             return;
 
         if (target.tag == "Player")

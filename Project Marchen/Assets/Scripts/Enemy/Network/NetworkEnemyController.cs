@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.AI;
 using Fusion;
 
+/// @brief 에너미 움직임에 관한 클래스.
+/// @details 어그로가 끌리지 않은 상태, 어그로가 끌린 상태에서 이동을 담당.
 public class NetworkEnemyController : NetworkBehaviour
 {
     private bool isThinking = false;
     private int isMove = 0;
-    // private bool isAggro = false;
     private bool isChase = false;
 
     [Header("설정")]
+    /// @brief 어그로가 끌리지 않은 상태에서 이동 거리.
     public float moveDis = 3f;
+    /// @brief 에너미 움직임 속도.
     public float moveSpeed = 5f;
-    public bool attackCancel = true;
 
     private int moveDir = 0;
 
@@ -39,7 +41,7 @@ public class NetworkEnemyController : NetworkBehaviour
         //     StartCoroutine("Think", (Random.Range(0.5f, 4f))); // 논어그로
     }
 
-
+    /// @brief 어그로가 끌렸는지 확인 후 다음 행동을 선택.
     public override void FixedUpdateNetwork() 
     {
         if(!Object.HasStateAuthority)
@@ -72,14 +74,15 @@ public class NetworkEnemyController : NetworkBehaviour
         }
     }
 
-
-    void EnemyWander() // 어그로 아닐 때 이동
+    /// @brief 어그로 아닐 때 이동
+    void EnemyWander() 
     {
         // transform.position += transform.forward* moveSpeed * isMove * Runner.DeltaTime;
         nav.Move(transform.forward * moveSpeed * isMove * Runner.DeltaTime);
     }
-
-    IEnumerator ThinkCO(float worry) // 어그로 아닐 때 이동 결정하는 함수
+    /// @brief 어그로 아닐 때 주변을 배회하도록 이동 방향을 설정.
+    /// @param worry 멈춰서 고민하는 시간.
+    IEnumerator ThinkCO(float worry) 
     {
         yield return new WaitForSeconds(worry);     // 고민
         moveDir = Random.Range(0, 360);             // 랜덤 방향 이동
@@ -104,6 +107,7 @@ public class NetworkEnemyController : NetworkBehaviour
         isThinking = false;
     }
 
+    /// @brief 타겟을 향해서 이동.
     void EnemyChase()
     {
         if (!nav.enabled)
@@ -131,11 +135,15 @@ public class NetworkEnemyController : NetworkBehaviour
         nav.enabled = bol;
     }
     */
+
+    /// @brief isChase을 변경. 현재 에너미가 타겟을 추격 중인지 표시.
     public void SetIsChase(bool bol)
     {
         isChase = bol;
     }
 
+    /// @brief 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetBool(string action, bool isDone)
     {
@@ -143,6 +151,8 @@ public class NetworkEnemyController : NetworkBehaviour
         // anim.SetTrigger("doJump");
     }
 
+    /// @brief 애니메이션 동기화.
+    /// @details 서버가 모든 컴퓨터에서 실행하도록 지시. 
     [Rpc (RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_animatonSetTrigger(string action)
     {

@@ -14,7 +14,7 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     NetworkRunner networkRunner;
 
-    /*추가*/
+    //@brief NetworkRunner중복 방지
     private void Awake()
     {
         NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
@@ -23,6 +23,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             networkRunner = networkRunnerInScene;
 
     }
+
     void Start()
     {
         if(networkRunner == null)
@@ -149,17 +150,17 @@ public class NetworkRunnerHandler : MonoBehaviour
                 });
             }
             //HeartQueen
-            else if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueen))
+            else if(resumeNetworkObject.TryGetBehaviour<BossHPHandler>(out var oldBoss))
             {
-                Transform oldTransform = oldHeartQueen.gameObject.transform;
+                Transform oldTransform = oldBoss.gameObject.transform;
                 runner.Spawn(resumeNetworkObject, position: oldTransform.position, oldTransform.rotation, onBeforeSpawned: (runner, newNetworkObject) =>
                 {
                     newNetworkObject.CopyStateFrom(resumeNetworkObject);
                     //Copy Enemy HP state
-                    if(resumeNetworkObject.TryGetBehaviour<HeartQueenHPHandler>(out var oldHeartQueenHPHandler))
+                    if(resumeNetworkObject.TryGetBehaviour<BossHPHandler>(out var oldBossHPHandler))
                     {
-                        HeartQueenHPHandler newHPHandler = newNetworkObject.GetComponent<HeartQueenHPHandler>();
-                        newHPHandler.CopyStateFrom(oldHeartQueenHPHandler);
+                        BossHPHandler newHPHandler = newNetworkObject.GetComponent<BossHPHandler>();
+                        newHPHandler.CopyStateFrom(oldBossHPHandler);
                         newHPHandler.skipSettingStartValues = true;
                     }
                     if(resumeNetworkObject.TryGetBehaviour<TargetHandler>(out var oldTargetHandler))
@@ -312,18 +313,24 @@ public class NetworkRunnerHandler : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         FindObjectOfType<Spawner>().OnHostMigrationCleanUp();
     }
+
+    // @brief 비동기적으로 joinLobby실행
     public void OnJoinLobby()
     {
         var clientTask = JoinLobby();
     }
+
+    // @brief 로비에 입장 
     private async Task JoinLobby()
     {
         Debug.Log("JoinLobby started");
 
         string lobbyID = "OurLobbyID";
-
+        
+        //로비 접속 시도
         var result = await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyID);
 
+        //로비 접속 결과 출력 
         if (!result.Ok)
         {
             Debug.LogError($"Unable to join lobby {lobbyID}");
@@ -335,6 +342,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         }
     }
 
+    // @brief 세션 생성 
     public void CreateGame(String sessionName, string sceneName)
     {
         Debug.Log($"Create ssession {sessionName} scene {sceneName} build Index {SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}")}");
@@ -343,24 +351,14 @@ public class NetworkRunnerHandler : MonoBehaviour
         
     }
 
-
+    // @brief 세션 접속
     public void JoinGame(SessionInfo sessionInfo)
     {
         
         Debug.Log($"Join session {sessionInfo.Name}");
-
+        
         var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, sessionInfo.Name, GameManager.instance.GetConnectionToken(), NetAddress.Any(), SceneManager.GetActiveScene().buildIndex,null);
 
     }
 
-    public void OutSession()
-    {
-        NetworkRunner networkRunnerInScene = FindObjectOfType<NetworkRunner>();
-        networkRunnerInScene.Shutdown();
-    }
-
-    public void quitSession()
-    {
-        Application.Quit();
-    }
 }

@@ -6,31 +6,39 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// @brief 로비의 무기교체/던전 입장 UI에 관한 클래스
 public class ReadyUIHandler : NetworkBehaviour
 {
+    /// @brief UI들
     [Header("UI")]
     public TextMeshProUGUI buttonReadyText;
     public TextMeshProUGUI countDownText;
     public GameObject ReadyUiCanvas;
     public GameObject StartBtn;
     public GameObject LeftBtn;
+    public GameObject RockImage;
 
+    /// @brief 시작준비가 되어있는지
     bool isReady = false;
 
-    //countdown
+    /// @brief 시작전 카운트 다운 변수
     TickTimer countdownTickTimer = TickTimer.None;
 
     static byte countDown = 0;
     static byte previousCount = 0;
+
+    /// @brief 카운트 다운 텍스트 초기화
     void Start()
     {
         countDownText.text = "";
     }
 
+    /// @brief 게임 시작 조건
     void Update()
     {
         if (Object.HasStateAuthority)
         {
+            // 카운트 다운이 완료시 게임 시작
             if (countdownTickTimer.Expired(Runner))
             {
                 startGame();
@@ -38,7 +46,7 @@ public class ReadyUIHandler : NetworkBehaviour
                 countdownTickTimer = TickTimer.None;
                 if(Object.HasStateAuthority)
                     LeftUI();
-            }
+            }// 카운트 다운 진행
             else if(countdownTickTimer.IsRunning)
             {
                 countDown = (byte)countdownTickTimer.RemainingTime(Runner);
@@ -51,8 +59,10 @@ public class ReadyUIHandler : NetworkBehaviour
         }
     }
 
+    /// @brief 던전으로 이동
     public void startGame()
     {
+        //추가 입장이 불가능하도록 방 닫기
         Runner.SessionInfo.IsOpen = false;
 
         GameObject[] gameObjectsToTransfer = GameObject.FindGameObjectsWithTag("Player");
@@ -60,15 +70,29 @@ public class ReadyUIHandler : NetworkBehaviour
         foreach (GameObject gameObjectToTransfer in gameObjectsToTransfer)
         {
             DontDestroyOnLoad(gameObjectToTransfer);
-        }//시작
-        if(SceneManager.GetActiveScene().name== "Scene_2")
+        }
+        //플레이어가 로비일 시
+        if(SceneManager.GetActiveScene().name== "Scene_2" && gameObject.CompareTag("Alice"))
         {
+            gameObject.tag = "Untagged";
             RPC_SetActiveReadyUI(false);
             isReady = false;
             buttonReadyText.text = "게임시작";
             PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
             potalHandler.gameObject.GetComponent<Collider>().enabled = false;
             Runner.SetActiveScene("Scene_3");
+            Debug.Log("앨리스");
+        }
+        else if(SceneManager.GetActiveScene().name == "Scene_2" && gameObject.CompareTag("Desert"))
+        {
+            gameObject.tag = "Untagged";
+            RPC_SetActiveReadyUI(false);
+            isReady = false;
+            buttonReadyText.text = "게임시작";
+            PortalHandler potalHandler = FindObjectOfType<PortalHandler>();
+            potalHandler.gameObject.GetComponent<Collider>().enabled = false;
+            Runner.SetActiveScene("Scene_4");
+            Debug.Log("사막");
         }
         else
         {
@@ -76,6 +100,8 @@ public class ReadyUIHandler : NetworkBehaviour
             Runner.SetActiveScene("Scene_2");
         }
     }
+
+    /// @brief 해머로 무기변경
     public void OnChangeWeaponHammer()
     {
         if (isReady)
@@ -83,6 +109,8 @@ public class ReadyUIHandler : NetworkBehaviour
         NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(0);
         EventSystem.current.SetSelectedGameObject(null);
     }
+
+    /// @brief 총으로 무기 변경
     public void OnChangeWeaponGun()
     {
         if (isReady)
@@ -91,6 +119,16 @@ public class ReadyUIHandler : NetworkBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    /// @brief 총으로 무기 변경
+    public void OnChangeWeaponStaff()
+    {
+        if (isReady)
+            return;
+        NetworkPlayer.Local.GetComponent<AttackHandler>().ChangeWeapon(2);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    /// @brief 게임시작 클릭시
     public void OnReady()
     {
         if (isReady)
@@ -99,14 +137,14 @@ public class ReadyUIHandler : NetworkBehaviour
 
         if(Runner.IsServer)
         {
-            //startGame();
+            //준비 완료시 카운트다운시작
             if (isReady)
             {
                 countdownTickTimer = TickTimer.CreateFromSeconds(Runner, 5);
                 buttonReadyText.text = "취소";
                 LeftBtn.SetActive(false);
             }
-            else
+            else //준비 취소
             {
                 countdownTickTimer = TickTimer.None;
                 countDown = 0;
@@ -118,7 +156,7 @@ public class ReadyUIHandler : NetworkBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-
+    /// @brief 카운트 다운 메시지 동기화
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_SetCountDown(byte NewcountDown)
     {
@@ -129,6 +167,7 @@ public class ReadyUIHandler : NetworkBehaviour
         else LocalcountDownText.text = $"Game start in {countDown}";
     }
 
+    //@brief ReadyUI 창 종료
     public void LeftUI()
     { 
         // escHandler = FindObjectOfType<EscHandler>();
@@ -144,14 +183,16 @@ public class ReadyUIHandler : NetworkBehaviour
         RPC_RotateCamera(true);
     }
 
+    //@brief ReadyUI창 활성화
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_SetActiveReadyUI(bool bol)
     {
         ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
+
         readyUIHandler.gameObject.SetActive(bol);
     }
 
-    //마우스잠금
+    //@brief 마우스 활성화 및 동기화
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_MouseSet(bool set)
     {
@@ -171,6 +212,7 @@ public class ReadyUIHandler : NetworkBehaviour
   
     }
 
+    //@brief 카메라 고정 설정 및 동기화
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     public void RPC_RotateCamera(bool enable)
     {
@@ -178,11 +220,15 @@ public class ReadyUIHandler : NetworkBehaviour
         LocalCameraHandler camerahandler = localCamera.GetComponentInParent<LocalCameraHandler>();
         camerahandler.EnableRotationReady(enable);
     }
+
+    //@brief UI 스타트/나가기 버튼 활성화
     public void SetActive()
     {
         StartBtn.SetActive(true);
         LeftBtn.SetActive(true);
     }
+
+    //@brief 카메라 컴포넌트 찾기
     private Camera FindLocalCamera()
     {
         if(LocalCameraHandler.Local != null)
@@ -193,6 +239,19 @@ public class ReadyUIHandler : NetworkBehaviour
         else
         {
             return null;
+        }
+    }
+
+    //@brief ReadyUI창 활성화
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public void RPC_SetStaffWeapon()
+    {
+        ReadyUIHandler readyUIHandler = LocalCameraHandler.Local.GetComponentInChildren<ReadyUIHandler>(true);
+
+        if (GameManager.instance.ClearStage >= 1)
+        {
+            readyUIHandler.GetComponentInChildren<FindScript>(true).gameObject.SetActive(false);
+
         }
     }
 

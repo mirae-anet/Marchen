@@ -58,4 +58,10 @@ public class StoryTextUIHandler : MonoBehaviour
         this.gameObject.SetActive(false);
         isPrint = false;
     }
+
+    /// @brief 현재 출력 중인지 확인
+    /// @see StoryTextAction.OnTriggerStay()
+    public bool getIsPrint(){
+        return this.isPrint;
+    }
 }
