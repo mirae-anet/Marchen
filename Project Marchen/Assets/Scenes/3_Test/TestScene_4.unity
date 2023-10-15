@@ -1517,6 +1517,7 @@ Transform:
   - {fileID: 7985216721936189393}
   - {fileID: 7878089350429980317}
   - {fileID: 6082496394788664300}
+  - {fileID: 4523519353501966576}
   m_Father: {fileID: 1194387407}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3073,6 +3074,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3544497263469732848, guid: c451c43d75927384ebee978d080077f3, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8228742031185118241, guid: c451c43d75927384ebee978d080077f3, type: 3}
       propertyPath: m_Name
       value: Rogue Attack Sound
@@ -3209,7 +3214,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27ae5ceec0dea2143bbebad69d17b0f1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
@@ -3708,6 +3713,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue Boss Dead Sound
       objectReference: {fileID: 0}
+    - target: {fileID: 7904814576918035658, guid: ca947a11a5e118043b5ebadd195955f2, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8652363854277465661, guid: ca947a11a5e118043b5ebadd195955f2, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3808,6 +3817,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 407138012417381528, guid: 63cfeb0c83ca8d64a8348b107f0d47a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630727480378666831, guid: 63cfeb0c83ca8d64a8348b107f0d47a1, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8727285497140887844, guid: 63cfeb0c83ca8d64a8348b107f0d47a1, type: 3}
@@ -4162,6 +4175,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 798278454}
     m_Modifications:
+    - target: {fileID: 2448207746038234392, guid: c634c68d026166c48a86ceaa702f44a0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3275139489922393971, guid: c634c68d026166c48a86ceaa702f44a0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4217,6 +4234,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3275139489922393971, guid: c634c68d026166c48a86ceaa702f44a0, type: 3}
   m_PrefabInstance: {fileID: 4358178897195249256}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4523519353501966575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 798278454}
+    m_Modifications:
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813247412530592628, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+      propertyPath: m_Name
+      value: Snake Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+--- !u!4 &4523519353501966576 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 376735439093253351, guid: 8903316ac969e1d4888dab1cb11fa2d1, type: 3}
+  m_PrefabInstance: {fileID: 4523519353501966575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5163307116837456270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4268,6 +4347,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2582204755971319431, guid: 40185020fc2e31940a25c006909f671b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3041100113537881961, guid: 40185020fc2e31940a25c006909f671b, type: 3}
       propertyPath: m_Name
       value: Desert 1 Sector Sound
@@ -4286,6 +4369,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032699697}
     m_Modifications:
+    - target: {fileID: 2517003435390575138, guid: a7ac2cb5d75782545a286f0269329295, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3032138436458022777, guid: a7ac2cb5d75782545a286f0269329295, type: 3}
       propertyPath: m_Name
       value: Desert 4 Sector Sound
@@ -4351,6 +4438,10 @@ PrefabInstance:
     - target: {fileID: 5178465838873061028, guid: 04276918a20574247ac8931814c3ff27, type: 3}
       propertyPath: m_Name
       value: Desert 3 Sector Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439888069720877693, guid: 04276918a20574247ac8931814c3ff27, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9211051469486155263, guid: 04276918a20574247ac8931814c3ff27, type: 3}
       propertyPath: m_RootOrder
@@ -4457,6 +4548,10 @@ PrefabInstance:
     - target: {fileID: 554705804843857396, guid: 1d291c375e4acf8479311958a7298c0f, type: 3}
       propertyPath: m_Name
       value: Tiger Dead Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982371246034418522, guid: 1d291c375e4acf8479311958a7298c0f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d291c375e4acf8479311958a7298c0f, type: 3}
@@ -4590,6 +4685,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1417378123747934427, guid: 834b5396541734b44a2699a042664fe6, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 834b5396541734b44a2699a042664fe6, type: 3}
 --- !u!4 &7878089350429980317 stripped
@@ -4670,6 +4769,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 798278454}
     m_Modifications:
+    - target: {fileID: 1038655593349223526, guid: 152cde011f8de7848b46f6602c1d1f60, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2950927886681524589, guid: 152cde011f8de7848b46f6602c1d1f60, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4732,6 +4835,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032699697}
     m_Modifications:
+    - target: {fileID: 1211806146456280901, guid: e9c0249b4eb15f049b78b556ebe9395d, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3779126492844844572, guid: e9c0249b4eb15f049b78b556ebe9395d, type: 3}
       propertyPath: m_Name
       value: Desert 2 Sector Sound
