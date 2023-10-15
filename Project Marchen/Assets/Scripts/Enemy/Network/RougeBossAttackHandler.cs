@@ -5,36 +5,35 @@ using UnityEngine.AI;
 using Fusion;
 
 /// @brief 1 stage의 boss인 HeartQueen의 공격과 관련된 클래스
-public class RougeBoosAttackHandler : EnemyAttackHandler
+public class RougeBossAttackHandler : EnemyAttackHandler
 {
     private bool isAttack = false;
 
     /// @brief 에너미의 공격이 취소될 수 있는지 설정. default는 false.
     public bool attackCancel = false;
     /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (반지름)
-    public float targetRadius =  3f;
+    public float targetRadius =  5f;
     /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (최대 거리)
-    public float targetRange = 30f;
+    public float targetRange = 5f;
+    /// @brief 타겟이 해당 범위에 들어오면 공격을 수행. (가로 세로 높이)
+    public Vector3 boxSize = new Vector3(6f, 10f, 8f);
     public Transform detectionPos;
+    /// @brief 입히는 피해량
+    public int damageAmount = 50;
     private Vector3 aimVec;
     
     [Header("오브젝트 연결")]
-    // public BulletHandler bulletPrefab;
-    public GuidedBulletHandler guidedBullet; // 유도탄
-    public StraightBulletHandler straightBullet;
-    public BulletHandler areaBullet;
-    public Transform gBulletPortL;
-    public Transform gBulletPortR;
-    public Transform sBulletPort;
+    public Transform BulletPort;
+    public Transform anchorPoint;
+    public BulletHandler SnakePrefab;
 
     //other component
     NetworkEnemyController networkEnemyController;
     private Animator anim;
     private EnemyHPHandler enemyHPHandler;
     private TargetHandler targetHandler;
-    public AudioSource attackGuidedSound;
-    public AudioSource attackStraightSound;
-    public AudioSource attackAreaSound;
+    public AudioSource attackSwingSound;
+    public AudioSource attackBlowSound;
 
     void Start()
     {
@@ -58,7 +57,6 @@ public class RougeBoosAttackHandler : EnemyAttackHandler
             // foreach(RaycastHit rayhit in rayhits) // target 확인
             for(int i = 0; rayhits.Length > i; i++)
             {
-                
                 Transform player = rayhits[i].collider.transform.root.transform;
                 if(targetHandler.GetTarget() == player)
                 {
@@ -71,7 +69,7 @@ public class RougeBoosAttackHandler : EnemyAttackHandler
     }
 
     /// @brief 공격 패턴을 선택.
-    /// @details 유도 공격 40%, 직선 공격 40%, 전방향 공격 20% 확률. 
+    /// @details 일반 휘두르기 40%, 돌진 휘두르기 40%, 뱀 발사 20% 확률. 
     IEnumerator AttackThink()
     {
         networkEnemyController.SetIsChase(false);
@@ -85,105 +83,103 @@ public class RougeBoosAttackHandler : EnemyAttackHandler
             case 0:
 
             case 1:
-                StartCoroutine(AttackGuided()); // 유도탄 발사
+                StartCoroutine(AttackAround()); // 일반 휘두르기 
                 break;
 
             case 2:
 
             case 3:
-                StartCoroutine(AttackStraight()); // 차지(직선)탄 발사
+                StartCoroutine(AttackDash()); // 돌진 휘두르기 
                 break;
 
             case 4:
-                StartCoroutine(AttackArea()); // 전체 공격(16개)
+                StartCoroutine(AttackThrow()); // 뱀 발사 
                 break;
         }
     }
 
-    /// @brief 유도 공격.
-    /// @see GuidedBulletHandler
-    IEnumerator AttackGuided()
-    {
-        yield return new WaitForSeconds(0.3f);
-        RPC_animatonSetBool("isAttackGuided", true);
+    /// @brief 일반 휘두르기 공격.
+    IEnumerator AttackAround(){
+        yield return new WaitForSeconds(0.1f);
+        RPC_animatonSetBool("isAttackAround", true);
+        RPC_AudioPlay("swing");
 
-        yield return new WaitForSeconds(0.3f);
-        Runner.Spawn(guidedBullet, gBulletPortL.position, gBulletPortL.rotation, Object.StateAuthority, (runner, spawnedBulletL) =>
+        yield return new WaitForSeconds(0.7f);
+        List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
+        float endTime = Time.time + 1.0f;
+        while (Time.time < endTime)
         {
-            if(spawnedBulletL.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
-                navMeshAgent.Warp(gBulletPortL.position);
+            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.LookRotation(anchorPoint.transform.forward), Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
+            if(hitCount > 0)
+            {
+                for(int i = 0; i < hitCount; i++)
+                {
+                    HPHandler hpHandler = hits[i].Hitbox.Root.GetComponent<HPHandler>();
 
-            GuidedBulletHandler guidedBulletHandler = spawnedBulletL.GetComponent<GuidedBulletHandler>();
-            guidedBulletHandler.Fire(Object.StateAuthority, Object, transform.name);
-            guidedBulletHandler.setTarget(targetHandler.GetTarget());
+                    if(hpHandler != null)
+                        hpHandler.OnTakeDamage(transform.name, damageAmount, transform.position);
+                }
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+        RPC_AudioPlay("blow");
+
+        yield return new WaitForSeconds(0.3f);
+        RPC_animatonSetBool("isAttackAround", false);
+
+        networkEnemyController.SetIsChase(true);
+        isAttack = false;
+    }
+
+    /// @brief 돌진 휘두르기.
+    IEnumerator AttackDash()
+    {
+        //dash
+        yield return new WaitForSeconds(0.1f);
+        anim.SetBool("isAttackDash", true);
+        RPC_AudioPlay("swing");
+        //melee area on
+        yield return new WaitForSeconds(0.7f);
+        List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
+        float endTime = Time.time + 1.5f;
+        while (Time.time < endTime)
+        {
+            int hitCount = Runner.LagCompensation.OverlapBox(anchorPoint.position, boxSize/2, Quaternion.LookRotation(anchorPoint.transform.forward), Object.StateAuthority, hits, LayerMask.GetMask("PlayerHitBox"));
+            if(hitCount > 0)
+            {
+                for(int i = 0; i < hitCount; i++)
+                {
+                    HPHandler hpHandler = hits[i].Hitbox.Root.GetComponent<HPHandler>();
+
+                    if(hpHandler != null)
+                        hpHandler.OnTakeDamage(transform.name, damageAmount, transform.position);
+                }
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+        RPC_AudioPlay("blow");
+
+        yield return new WaitForSeconds(0.3f);
+        RPC_animatonSetBool("isAttackDash", false);
+
+        networkEnemyController.SetIsChase(true);
+        isAttack = false;
+    }
+
+    /// @brief 뱀 투척.
+    IEnumerator AttackThrow()
+    {
+        RPC_animatonSetBool("isAttackThrow", true);
+
+        yield return new WaitForSeconds(1f);
+        // spawn snake
+        Runner.Spawn(SnakePrefab, anchorPoint.position, Quaternion.LookRotation(aimVec.normalized), Object.StateAuthority, (runner, spawnedBullet) =>
+        {
+            spawnedBullet.GetComponent<BulletHandler>().Fire(Object.StateAuthority, Object, transform.name);
         });
-        RPC_AudioPlay("guided");
 
         yield return new WaitForSeconds(0.5f);
-        RPC_animatonSetBool("isAttackGuided2", true);
-
-        yield return new WaitForSeconds(0.3f);
-        Runner.Spawn(guidedBullet, gBulletPortR.position, gBulletPortR.rotation, Object.StateAuthority, (runner, spawnedBulletR) =>
-        {
-            if(spawnedBulletR.TryGetComponent<NavMeshAgent>(out NavMeshAgent navMeshAgent))
-                navMeshAgent.Warp(gBulletPortR.position);
-
-            GuidedBulletHandler guidedBulletHandler = spawnedBulletR.GetComponent<GuidedBulletHandler>();
-            guidedBulletHandler.Fire(Object.StateAuthority, Object, transform.name);
-            guidedBulletHandler.setTarget(targetHandler.GetTarget());
-        });
-        RPC_AudioPlay("guided");
-
-        yield return new WaitForSeconds(1f);
-        RPC_animatonSetBool("isAttackGuided", false);
-        RPC_animatonSetBool("isAttackGuided2", false);
-
-        networkEnemyController.SetIsChase(true);
-        isAttack = false;
-    }
-
-    /// @brief 직선 공격.
-    /// @see StraightBulletHandler
-    IEnumerator AttackStraight()
-    {
-        RPC_animatonSetBool("isAttackStraight", true);
-
-        yield return new WaitForSeconds(0.8f);
-        // GameObject instantBullet = Instantiate(straightBullet, sBulletPort.position, sBulletPort.rotation);
-        Runner.Spawn(straightBullet, sBulletPort.position, sBulletPort.rotation, Object.StateAuthority, (runner, spawnedBullet) =>
-        {
-            StraightBulletHandler straightBulletHandler = spawnedBullet.GetComponent<StraightBulletHandler>();
-            straightBulletHandler.Fire(Object.StateAuthority, Object, transform.name);
-        });
-        RPC_AudioPlay("straight");
-
-        yield return new WaitForSeconds(1.5f);
-
-        RPC_animatonSetBool("isAttackStraight", false);
-
-        networkEnemyController.SetIsChase(true);
-        isAttack = false;
-    }
-
-    /// @brief 전방향 공격.
-    /// @see AreaBulletHandler
-    IEnumerator AttackArea()
-    {
-        RPC_animatonSetBool("isAttackArea", true);
-
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 17; i++)
-        {
-            Runner.Spawn(areaBullet, transform.position, Quaternion.Euler(0f, 22.5f * i, 0f), Object.StateAuthority, (runner, spawnedBullet) =>
-            {
-                BulletHandler areaBulletHandler = spawnedBullet.GetComponent<BulletHandler>();
-                areaBulletHandler.Fire(Object.StateAuthority, Object, transform.name);
-            });
-        }
-        RPC_AudioPlay("area");
-
-        yield return new WaitForSeconds(1f);
-        RPC_animatonSetBool("isAttackArea", false);
+        RPC_animatonSetBool("isAttackThrow", false);
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
@@ -198,10 +194,9 @@ public class RougeBoosAttackHandler : EnemyAttackHandler
 
         networkEnemyController.SetIsChase(true);
         isAttack = false;
-        RPC_animatonSetBool("isAttackGuided", false);
-        RPC_animatonSetBool("isAttackGuided2", false);
-        RPC_animatonSetBool("isAttackStraight", false);
-        RPC_animatonSetBool("isAttackArea", false);
+        RPC_animatonSetBool("isAttackSlash", false);
+        RPC_animatonSetBool("isAttackShot", false);
+        RPC_animatonSetBool("isAttackDash", false);
     }
 
     /// @brief 애니메이션 동기화.
@@ -227,16 +222,12 @@ public class RougeBoosAttackHandler : EnemyAttackHandler
     {
         switch (audioType)
         {
-            case "guided":
-                attackGuidedSound.Play();
+            case "swing":
+                attackSwingSound.Play();
                 break;
 
-            case "straight":
-                attackStraightSound.Play();
-                break;
-
-            case "area":
-                attackAreaSound.Play();
+            case "blow":
+                attackBlowSound.Play();
                 break;
         }
     }
