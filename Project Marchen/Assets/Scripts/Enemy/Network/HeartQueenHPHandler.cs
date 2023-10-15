@@ -77,22 +77,7 @@ public class HeartQueenHPHandler : SkinnedEnemyHPHandler
     {
         int playerCount = Runner.ActivePlayers.Count();
 
-        if (playerCount == 1)
-        {
-            BossStartHP = 1000;
-        }
-        else if (playerCount == 2)
-        {
-            BossStartHP = 2000;
-        }
-        else if (playerCount == 3)
-        {
-            BossStartHP = 3000;
-        }
-        else if(playerCount == 4)
-        {
-            BossStartHP = 4000;
-        }
+        BossStartHP = playerCount * 1000;
     }
 
     private void OnDestroy() {

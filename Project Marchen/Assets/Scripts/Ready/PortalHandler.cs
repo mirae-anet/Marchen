@@ -40,6 +40,7 @@ public class PortalHandler : InteractionHandler
                 }
                 Debug.Log("On PortalHandler trigger");
                 readyUIHandler.RPC_SetActiveReadyUI(true);
+                readyUIHandler.RPC_SetStaffWeapon();
                 readyUIHandler.RPC_MouseSet(true);
                 readyUIHandler.RPC_RotateCamera(false);
                 readyUIHandler.SetActive();
